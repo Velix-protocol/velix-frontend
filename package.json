@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "branch-name-check": "./branch-name-check.sh",
     "prepare": "npx husky install && chmod +x .husky/* && chmod +x ./branch-name-check.sh"
   },
   "dependencies": {
