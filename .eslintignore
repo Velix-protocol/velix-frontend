@@ -1,0 +1,7 @@
+build
+node_modules
+.github
+.eslintrc.js
+ios/
+android/
+*.config.mjs
