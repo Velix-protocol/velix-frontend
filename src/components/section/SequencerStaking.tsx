@@ -14,7 +14,7 @@ export default function SequencerStaking() {
           <h2 className="font-space-grotesk font-bold text-4xl flex flex-col">
             Sequencer staking
             <span className="text-velix-gray text-base font-normal mt-8 max-w-[24.9375rem]">
-              Find the VeMETIS & VL token on the most reputable and respected
+              Find the veMETIS & VL token on the most reputable and respected
               names in decentralised finance.
             </span>
           </h2>

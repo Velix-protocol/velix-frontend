@@ -19,7 +19,7 @@ export default function Home() {
         <meta property="og:description" content="Liquidity staking protocol" />
         <meta
           name="keywords"
-          content="LSD, liquidity, staking, platform, Africa, blockchain, METIS, Velix, lix, val, VeMetis"
+          content="LSD, liquidity, staking, platform, Africa, blockchain, METIS, Velix, lix, val, veMetis"
         />
       </Head>
 
