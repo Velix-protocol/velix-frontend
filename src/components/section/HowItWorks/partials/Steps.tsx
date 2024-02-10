@@ -13,7 +13,7 @@ const STEPS = [
     icon: <Wallet />
   },
   {
-    title: "Receive VeMETIS",
+    title: "Receive veMETIS",
     description:
       "Receive liquid VeMETIS and start to receive rewards in Real-time",
     icon: <VelixFilledLogo />
