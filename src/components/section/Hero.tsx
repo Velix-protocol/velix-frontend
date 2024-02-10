@@ -11,9 +11,10 @@ export default function Hero() {
       <div className="lg:grid grid-cols-2 justify-between py-10">
         <div className="font-space-grotesk md:mt-20 flex flex-col">
           <h2 className="font-bold max-sm:text-5xl text-[4rem] sm:leading-[5rem] text-white">
-            Simplified liquid staking on METIS
+            Stake your METIS, earn rewards.
           </h2>
-          <Button className="bg-velix-primary px-10 w-fit mt-9">
+          <p className="text-white mt-2">Simplified liquid staking on METIS</p>
+          <Button className="bg-velix-primary px-10 w-fit mt-16">
             Stake now
           </Button>
         </div>

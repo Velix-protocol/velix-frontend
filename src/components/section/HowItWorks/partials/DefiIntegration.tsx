@@ -58,7 +58,7 @@ export default function DefiIntegration() {
                 </span>
 
                 {!!defi.status && (
-                  <span className="font-space-grotesk font-medium text-[8px] bg-velix-slate-green/20 py-1 text-velix-slate-green w-full left-0 right-0 text-center absolute bottom-0">
+                  <span className="font-space-grotesk font-medium text-[8px] bg-velix-slate-green/20 py-1.5 text-velix-slate-green w-full left-0 right-0 text-center absolute bottom-0">
                     {defi.status}
                   </span>
                 )}
