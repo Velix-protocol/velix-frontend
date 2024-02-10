@@ -15,7 +15,11 @@ export default function Footer() {
           <div>
             <VelixBlackLogo />
             <p className="text-velix-primary font-space-grotesk text-xl mt-5">
-              Simplified <b className="font-bold">staking on METIS</b>
+              Simplified{" "}
+              <b className="font-bold">
+                staking
+                <br /> on METIS
+              </b>
             </p>
           </div>
           <div className="flex flex-col gap-6">
@@ -31,10 +35,10 @@ export default function Footer() {
 
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-xl">
-              Node staking
+              Sequencer staking
             </h2>
             <ul className="font-space-grotesk text-velix-gray text-xl">
-              <li className="cursor-pointer">What’s node staking</li>
+              <li className="cursor-pointer">What’s sequencer staking</li>
               <li className="cursor-pointer">What can i earn</li>
               <li className="cursor-pointer">What are the costs</li>
             </ul>
