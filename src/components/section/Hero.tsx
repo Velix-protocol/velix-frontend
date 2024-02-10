@@ -10,7 +10,7 @@ export default function Hero() {
       <Header />
       <div className="lg:grid grid-cols-2 py-20">
         <div className="font-space-grotesk flex flex-col">
-          <h2 className="font-bold max-sm:text-5xl text-[64px] sm:leading-[80px] text-white">
+          <h2 className="font-bold max-sm:text-5xl text-[4rem] sm:leading-[5rem] text-white">
             Simplified liquid staking on METIS
           </h2>
           <Button className="bg-velix-yellow px-10 w-fit mt-9">

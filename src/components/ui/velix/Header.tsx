@@ -12,7 +12,7 @@ export default function Header() {
       <header ref={ref} className="flex justify-between items-center py-14">
         <VelixLogo />
         <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
-          Lunch
+          Launch
         </Button>
       </header>
 
