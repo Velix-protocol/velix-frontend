@@ -11,7 +11,7 @@ export default function Footer() {
       <Section className="bg-velix-slate-blue relative mt-28">
         <VelixBlueLogo className="w-32 h-32 bg-white p-5 rounded-full absolute left-0 right-0 mx-auto -mt-16" />
 
-        <div className="grid grid-cols-4 py-24">
+        <div className="grid md:grid-cols-2 md:justify-center px-5 gap-10 xl:grid-cols-4 py-24">
           <div>
             <VelixBlackLogo />
             <p className="text-velix-primary font-space-grotesk text-xl mt-5">
@@ -53,7 +53,7 @@ export default function Footer() {
         </div>
       </Section>
       <Section className="bg-velix-primary">
-        <div className=" w-full flex justify-between items-center py-5">
+        <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white font-space-grotesk">
             © 2023 - 2024 Velix
           </span>
