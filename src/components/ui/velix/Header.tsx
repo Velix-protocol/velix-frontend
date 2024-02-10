@@ -24,7 +24,7 @@ export default function Header() {
         <div className="flex justify-between w-full max-w-5xl xl:max-w-7xl mx-auto relative">
           <VelixLogo />
           <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
-            Lunch
+            Launch
           </Button>
         </div>
       </header>

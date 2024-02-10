@@ -20,9 +20,7 @@ export default function SequencerStaking() {
           </h2>
           <div className="mt-10 font-space-grotesk">
             <p className="flex items-end gap-4">
-              <span className="font-bold text-5xl text-velix-primary">
-                =6.87 %
-              </span>
+              <span className="font-bold text-5xl text-velix-primary">N/A</span>
               <span className="font-medium text-velix-gray">APR</span>
             </p>
             <p className="font-bold text-base pt-2 flex flex-col mt-10">
