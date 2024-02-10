@@ -15,13 +15,13 @@ const STEPS = [
   {
     title: "Receive veMETIS",
     description:
-      "Receive liquid VeMETIS and start to receive rewards in Real-time",
+      "Receive liquid veMETIS and start to receive rewards in Real-time",
     icon: <VelixFilledLogo />
   },
   {
     title: "Use Defi",
     description:
-      "Use your VeMETIS across DeFi to compound more to your daily staked rewards",
+      "Use your veMETIS across DeFi to compound more to your daily staked rewards",
     icon: <World />
   }
 ];
