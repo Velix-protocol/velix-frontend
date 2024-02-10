@@ -23,7 +23,7 @@ export default function Header() {
       </header>
 
       <header
-        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-20 items-center py-5 bg-velix-primary ${
+        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-[999] items-center py-5 bg-velix-primary ${
           !inView ? "!top-0 !translate-y-0 transition-all duration-200" : ""
         }`}
       >
