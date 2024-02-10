@@ -43,7 +43,10 @@ export default function VelixProperties() {
           decentralization
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-16">
+      <div className="grid grid-cols-1 relative sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-16">
+        <p className="absolute -top-5 lg:top-[unset] text-xs lg:-bottom-5 text-velix-slate-green bg-velix-slate-green/20 z-50 right-0 left-0 font-space-grotesk px-10 rounded-[15px] mx-auto py-2 w-fit">
+          Coming Soon
+        </p>
         {PROPERTIES.map((property) => {
           return (
             <VelixCard
