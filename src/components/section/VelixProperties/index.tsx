@@ -59,7 +59,7 @@ export default function VelixProperties() {
         })}
         <div className="bg-velix-primary text-white font-space-grotesk flex flex-col justify-center rounded-[15px] p-9">
           <p className="flex items-end gap-4">
-            <span className="font-bold text-5xl">=3.13 %</span>
+            <span className="font-bold text-5xl">=20 %</span>
             <span className="font-medium">APR</span>
           </p>
           <p className="font-light text-base pt-2">Based on 7 days average</p>

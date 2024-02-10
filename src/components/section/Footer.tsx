@@ -15,39 +15,37 @@ export default function Footer() {
           <div>
             <VelixBlackLogo />
             <p className="text-velix-primary font-space-grotesk text-xl mt-5">
-              Simplified <b className="font-bold">staking</b>
+              Simplified <b className="font-bold">staking on METIS</b>
             </p>
           </div>
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-xl">
-              Help & Support
+              Liquid staking
             </h2>
             <ul className="font-space-grotesk text-velix-gray text-xl">
-              <li className="cursor-pointer">Help & Support</li>
-              <li className="cursor-pointer">Safety & Security</li>
-              <li className="cursor-pointer">Trustiffy Foundation</li>
+              <li className="cursor-pointer">What’s liquid staking</li>
+              <li className="cursor-pointer">What can i earn</li>
+              <li className="cursor-pointer">What are the risks</li>
             </ul>
           </div>
 
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-xl">
-              Help & Support
+              Node staking
             </h2>
             <ul className="font-space-grotesk text-velix-gray text-xl">
-              <li className="cursor-pointer">Help & Support</li>
-              <li className="cursor-pointer">Safety & Security</li>
-              <li className="cursor-pointer">Trustiffy Foundation</li>
+              <li className="cursor-pointer">What’s node staking</li>
+              <li className="cursor-pointer">What can i earn</li>
+              <li className="cursor-pointer">What are the costs</li>
             </ul>
           </div>
 
           <div className="flex flex-col gap-6">
-            <h2 className="font-bold font-space-grotesk text-xl">
-              Help & Support
-            </h2>
+            <h2 className="font-bold font-space-grotesk text-xl">Protocol</h2>
             <ul className="font-space-grotesk text-velix-gray text-xl">
-              <li className="cursor-pointer">Help & Support</li>
-              <li className="cursor-pointer">Safety & Security</li>
-              <li className="cursor-pointer">Trustiffy Foundation</li>
+              <li className="cursor-pointer">About the protocol</li>
+              <li className="cursor-pointer">Why Velix?</li>
+              <li className="cursor-pointer">Security</li>
             </ul>
           </div>
         </div>
