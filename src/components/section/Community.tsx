@@ -17,7 +17,7 @@ export default function Community() {
         <div className="bg-velix-slate-blue flex justify-between items-center lg:p-20 p-10 rounded-[15px] mt-16">
           <div>
             <p className="text-velix-primary font-bold font-space-grotesk text-4xl flex items-center gap-3">
-              Velix in discord
+              Velix on discord
             </p>
             <p className="text-velix-gray font-space-grotesk mt-5 font-light">
               Join the community and ask question
