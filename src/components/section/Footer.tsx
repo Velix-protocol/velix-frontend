@@ -1,12 +1,75 @@
-import VelixCoin from "@/components/svg/Velixcoin.svg";
+import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg";
+import Section from "../layouts/Section";
+import VelixBlueLogo from "../ui/VelixBlueLogo";
+import XIcon from "../ui/XIcon";
+import Discord from "../ui/Discord";
+import Telegram from "../ui/Telegram";
 
 export default function Footer() {
   return (
-    <div className="relative max-md:h-[26rem] h-[48.5rem] max-md:mt-20 mt-16">
-      <div className="absolute flex justify-center bg-velix-slate-blue top-0 left-0 right-0 w-full bottom-0 clipped" />
-      <div className="absolute top-0 flex justify-center right-0 left-0">
-        <VelixCoin className="max-md:mt-0  mt-24" />
-      </div>
+    <div>
+      <Section className="bg-velix-slate-blue relative mt-28">
+        <VelixBlueLogo className="w-32 h-32 bg-white p-5 rounded-full absolute left-0 right-0 mx-auto -mt-16" />
+
+        <div className="grid grid-cols-4 py-24">
+          <div>
+            <VelixBlackLogo />
+            <p className="text-velix-primary font-space-grotesk text-xl mt-5">
+              Simplified <b className="font-bold">staking</b>
+            </p>
+          </div>
+          <div className="flex flex-col gap-6">
+            <h2 className="font-bold font-space-grotesk text-xl">
+              Help & Support
+            </h2>
+            <ul className="font-space-grotesk text-velix-gray text-xl">
+              <li className="cursor-pointer">Help & Support</li>
+              <li className="cursor-pointer">Safety & Security</li>
+              <li className="cursor-pointer">Trustiffy Foundation</li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <h2 className="font-bold font-space-grotesk text-xl">
+              Help & Support
+            </h2>
+            <ul className="font-space-grotesk text-velix-gray text-xl">
+              <li className="cursor-pointer">Help & Support</li>
+              <li className="cursor-pointer">Safety & Security</li>
+              <li className="cursor-pointer">Trustiffy Foundation</li>
+            </ul>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <h2 className="font-bold font-space-grotesk text-xl">
+              Help & Support
+            </h2>
+            <ul className="font-space-grotesk text-velix-gray text-xl">
+              <li className="cursor-pointer">Help & Support</li>
+              <li className="cursor-pointer">Safety & Security</li>
+              <li className="cursor-pointer">Trustiffy Foundation</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+      <Section className="bg-velix-primary">
+        <div className=" w-full flex justify-between items-center py-5">
+          <span className="text-white font-space-grotesk">
+            © 2023 - 2024 Velix
+          </span>
+          <ul className="flex items-center gap-3">
+            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+              <XIcon className="w-6 h-6" />
+            </li>
+            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+              <Discord className="w-6 h-6" />
+            </li>
+            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+              <Telegram className="w-6 h-6" />
+            </li>
+          </ul>
+        </div>
+      </Section>
     </div>
   );
 }
