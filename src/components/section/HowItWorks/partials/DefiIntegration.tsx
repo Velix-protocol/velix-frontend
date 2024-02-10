@@ -43,7 +43,7 @@ export default function DefiIntegration() {
         <h2 className="font-space-grotesk font-bold text-4xl flex flex-col w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8 max-w-80">
-            Find veMetis and VL tokens on popular DeFi platforms on Metis
+            Find veMETIS and VL tokens on popular DeFi platforms on METIS
           </span>
         </h2>
         <div className="grid max-[380px]:grid-cols-2 grid-cols-3 gap-3 mt-16">

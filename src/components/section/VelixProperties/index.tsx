@@ -9,12 +9,12 @@ const PROPERTIES = [
   {
     icon: <Cancel />,
     title: "Any amount",
-    description: "Earn yield on any amount of Metis staked"
+    description: "Earn yield on any amount of METIS staked"
   },
   {
     icon: <OfflineBolt />,
     title: "Earn rewards",
-    description: "veMetis earns rewards over time, increasing it's value"
+    description: "veMETIS earns rewards over time, increasing it's value"
   },
   {
     icon: <OutBond />,
@@ -28,7 +28,7 @@ const PROPERTIES = [
   },
   {
     icon: <OfflineBolt />,
-    title: "Restaking veMetis",
+    title: "Restaking veMETIS",
     description: "Restake any amount of veMETIS earns rewards"
   }
 ];
@@ -39,7 +39,7 @@ export default function VelixProperties() {
       <div className="font-space-grotesk flex flex-col justify-center items-center">
         <h2 className="text-4xl font-bold">Velix LSD</h2>
         <p className="text-velix-gray mt-5 text-center">
-          Stake Metis, earn rewards with veMetis, while contributing to Metis
+          Stake METIS, earn rewards with veMETIS, while contributing to METIS
           decentralization
         </p>
       </div>
