@@ -1,5 +1,5 @@
 import React from "react";
-import Hand from "@/components/svg/hand.svg";
+import DefiIntegrationImage from "@/components/svg/Defi-integration.svg";
 import Metamask from "@/components/svg/matamask.svg";
 import ThreeD from "@/components/svg/3d.svg";
 import VM from "@/components/svg/vm.svg";
@@ -38,7 +38,7 @@ const DEFIs = [
 export default function DefiIntegration() {
   return (
     <div className="mt-24 lg:grid grid-cols-2">
-      <Hand className="hidden lg:block scale-75 xl:scale-100" />
+      <DefiIntegrationImage className="hidden lg:block scale-75 xl:scale-100" />
       <div className="max-w-sm- lg:max-w-[21rem] max-w-[23rem] max-lg:mx-auto lg:ml-auto">
         <h2 className="font-space-grotesk font-bold text-4xl flex flex-col w-fit">
           Defi Integration
