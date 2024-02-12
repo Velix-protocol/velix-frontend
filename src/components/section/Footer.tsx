@@ -1,9 +1,9 @@
 import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg";
 import Section from "../layouts/Section";
-import VelixBlueLogo from "../ui/VelixBlueLogo";
-import XIcon from "../ui/XIcon";
-import Discord from "../ui/Discord";
-import Telegram from "../ui/Telegram";
+import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
+import XIcon from "../ui/velix/icons/XIcon";
+import Discord from "../ui/velix/icons/Discord";
+import Telegram from "../ui/velix/icons/Telegram";
 
 export default function Footer() {
   return (

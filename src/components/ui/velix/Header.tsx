@@ -3,6 +3,7 @@ import VelixLogo from "@/components/svg/velix-logo-group.svg";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useInView } from "react-intersection-observer";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Button } from "../button";
 
 export default function Header() {
@@ -10,6 +11,7 @@ export default function Header() {
     threshold: 0.2,
     initialInView: true
   });
+  const router = useRouter();
 
   return (
     <div>
@@ -17,7 +19,12 @@ export default function Header() {
         <Link href="/">
           <VelixLogo />
         </Link>
-        <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
+        <Button
+          onClick={() => {
+            return router.push("/app");
+          }}
+          className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+        >
           Launch
         </Button>
       </header>

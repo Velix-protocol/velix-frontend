@@ -8,7 +8,7 @@ export default function VelixBlueLogo(props: ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_114_263)">
+      <g clipPath="url(#clip0_114_263)">
         <path
           d="M15.9994 31.9989C24.8357 31.9989 31.9989 24.8357 31.9989 15.9994C31.9989 7.16319 24.8357 0 15.9994 0C7.16319 0 0 7.16319 0 15.9994C0 24.8357 7.16319 31.9989 15.9994 31.9989Z"
           fill="#0000FE"
