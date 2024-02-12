@@ -3,7 +3,7 @@ import AppHeader from "@/components/ui/velix/AppHeader";
 
 export default function app() {
   return (
-    <div className="bg-velix-slate-blue h-screen">
+    <div className="bg-velix-slate-blue h-screen overflow-y-auto">
       <AppHeader />
       <Stake />
     </div>
