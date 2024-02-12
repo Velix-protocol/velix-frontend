@@ -38,7 +38,12 @@ export default function Header() {
           <Link href="/">
             <VelixLogo />
           </Link>
-          <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
+          <Button
+            onClick={() => {
+              return router.push("/app");
+            }}
+            className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+          >
             Launch
           </Button>
         </div>
