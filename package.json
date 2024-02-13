@@ -22,7 +22,8 @@
     "react-dom": "^18",
     "react-intersection-observer": "^9.8.0",
     "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "wagmi": "^2.5.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",

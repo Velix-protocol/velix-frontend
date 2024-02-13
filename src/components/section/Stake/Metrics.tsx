@@ -6,7 +6,7 @@ import MetricsCard from "./_partials/MetricsCard";
 
 export default function Metrics() {
   return (
-    <div className="bg-white rounded-xl flex flex-col gap-3 mt-20 p-11">
+    <div className="bg-white rounded-xl flex flex-col gap-3 mt-10 lg:mt-20 p-5 lg:p-11">
       <MetricsCard
         icon={<PlusMinusTable className="fill-velix-primary h-6 w-6" />}
         description="Annual percentage rate"
