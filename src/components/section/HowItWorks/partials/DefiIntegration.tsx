@@ -1,11 +1,10 @@
-import React from "react";
-import DefiIntegrationImage from "@/components/svg/Defi-integration.svg";
-import Metamask from "@/components/svg/matamask.svg";
-import ThreeD from "@/components/svg/3d.svg";
-import VM from "@/components/svg/vm.svg";
-import Stack from "@/components/svg/stack.svg";
-import Uniswap from "@/components/svg/uniswap.svg";
-import MIcon from "@/components/svg/Micon.svg";
+import DefiIntegrationImage from "@/components/svg/Defi-integration.svg?react";
+import Metamask from "@/components/svg/matamask.svg?react";
+import ThreeD from "@/components/svg/3d.svg?react";
+import VM from "@/components/svg/vm.svg?react";
+import Stack from "@/components/svg/stack.svg?react";
+import Uniswap from "@/components/svg/uniswap.svg?react";
+import MIcon from "@/components/svg/Micon.svg?react";
 import { Button } from "@/components/ui/button";
 
 const DEFIs = [

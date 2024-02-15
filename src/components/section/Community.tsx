@@ -1,5 +1,4 @@
-import React from "react";
-import DiscordImage from "@/components/svg/discord-image.svg";
+import DiscordImage from "@/components/svg/discord-image.svg?react";
 import Section from "../layouts/Section";
 import { Button } from "../ui/button";
 

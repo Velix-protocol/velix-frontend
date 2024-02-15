@@ -1,5 +1,4 @@
 import React from "react";
-import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg";
 import WalletIcon from "./icons/WalletIcon";
 import UnstakeIcon from "./icons/UnstakeIcon";
 import TwigLightIcon from "./icons/TwigLightIcon";
@@ -7,32 +6,39 @@ import DownloadIcon from "./icons/DownloadIcon";
 
 export default function BottomBar() {
   return (
-    <div className="flex items-center space-x-10 text-base">
-      <VelixBlackLogo />
-      <p className="flex items-center font-space-grotesk">
+    <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
+      <p className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
         <span>
-          <WalletIcon className="fill-velix-primary w-11 h-11" />
+          <WalletIcon className="fill-velix-primary w-5 h-5" />
         </span>
-        <span className="text-velix-gray font-bold text-base">Stake</span>
+        <span className="text-velix-gray lg:font-bold text-[0.625rem] lg:text-base">
+          Stake
+        </span>
       </p>
-      <p className="flex items-center gap-3 font-space-grotesk">
+      <p className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
         <span>
-          <UnstakeIcon className="fill-velix-gray w-7 h-7" />
+          <UnstakeIcon className="fill-velix-gray w-5 h-5" />
         </span>
-        <span className="text-velix-gray font-bold text-base">Unstake</span>
+        <span className="text-velix-gray lg:font-bold text-[0.625rem] lg:text-base">
+          Unstake
+        </span>
       </p>
-      <p className="flex items-center gap-3 font-space-grotesk">
+      <p className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
         <span>
-          <TwigLightIcon className="fill-velix-gray w-7 h-7" />
+          <TwigLightIcon className="fill-velix-gray w-5 h-5" />
         </span>
-        <span className="text-velix-gray font-bold text-base">Mint</span>
+        <span className="text-velix-gray lg:font-bold text-[0.625rem] lg:text-base">
+          Mint
+        </span>
       </p>
-      <p className="flex items-center gap-3 font-space-grotesk">
+      <p className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
         <span>
-          <DownloadIcon className="fill-velix-gray w-7 h-7" />
+          <DownloadIcon className="fill-velix-gray w-5 h-5" />
         </span>
-        <span className="text-velix-gray font-bold text-base">Mint</span>
-        <span className="bg-velix-slate-green/10 text-velix-slate-green text-[10px] font-space-grotesk px-2 rounded-md">
+        <span className="text-velix-gray flex flex-col items-center lg:font-bold text-[0.625rem] lg:text-base">
+          Mint
+        </span>
+        <span className="bg-velix-slate-green/10 hidden lg:block text-velix-slate-green text-[10px] font-space-grotesk px-2 rounded-md">
           Coming soon
         </span>
       </p>

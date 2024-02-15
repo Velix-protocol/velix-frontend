@@ -1,4 +1,4 @@
-import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg";
+import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg?react";
 import Section from "../layouts/Section";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import XIcon from "../ui/velix/icons/XIcon";
@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
         </div>
       </Section>
-      <Section className="bg-velix-primary">
+      <Section className="bg-velix-primary mb-2">
         <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white font-space-grotesk">
             © 2023 - 2024 Velix

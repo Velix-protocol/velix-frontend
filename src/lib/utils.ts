@@ -15,3 +15,9 @@ export const truncateString = (
     address.length - endingCharacters
   )}`;
 };
+
+export const converGweiToEth = (value: bigint, maxLength = 6) => {
+  return (Number(value.toString()) / 1000000000000000000)
+    .toString()
+    .substring(0, maxLength);
+};

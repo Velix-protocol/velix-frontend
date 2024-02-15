@@ -8,14 +8,22 @@ import {
   SelectTrigger,
   SelectValue
 } from "@/components/ui/select";
-import React from "react";
 import { Button } from "@/components/ui/button";
 import Balance from "./Balance";
+import { useAccount } from "wagmi";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 export default function StakingOperations() {
+  const { open } = useWeb3Modal();
+  const { isConnected } = useAccount();
+
+  const onConnectToWalletClick = async () => {
+    await open();
+  };
+
   return (
     <div className="mt-10 lg:mt-20 bg-velix-primary rounded-2xl">
-      <Balance isConnected />
+      <Balance isConnected={isConnected} />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2 -mb-5 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
@@ -30,7 +38,7 @@ export default function StakingOperations() {
               <span className="text-[0.625rem] lg:text-base">METIS Amount</span>
             </p>
           </div>
-          <Outbond className="fill-velix-primary rotate-[45deg] w-8 h-8 mx-auto" />
+          <Outbond className="fill-velix-primary rotate-[45deg] lg:w-8 lg:h-8 w-6 h-6 mx-auto" />
           <div className="flex justify-between items-center gap-2 -mt-5 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
             <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
               <span>
@@ -86,8 +94,11 @@ export default function StakingOperations() {
             </p>
           </div>
         </div>
-        <Button className="py-7 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary">
-          Connect Wallet
+        <Button
+          onClick={() => (!isConnected ? onConnectToWalletClick : () => null)}
+          className="lg:py-7 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
+        >
+          {isConnected ? "Stake now" : "Connect Wallet"}
         </Button>
       </div>
     </div>

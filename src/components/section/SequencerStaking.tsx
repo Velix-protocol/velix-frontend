@@ -1,5 +1,4 @@
-import React from "react";
-import Hap from "@/components/svg/wallet-image.svg";
+import Hap from "@/components/svg/wallet-image.svg?react";
 import Section from "../layouts/Section";
 import { Button } from "../ui/button";
 
