@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
     svgr({
-      include: ["**/*.svg?react"", `**/*.svg`]
+      include: ["**/*.svg?react"]
     })
   ]
 });

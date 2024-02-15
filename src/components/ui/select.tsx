@@ -1,5 +1,4 @@
 import * as React from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
