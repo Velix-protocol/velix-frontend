@@ -33,7 +33,7 @@ export default function AppHeader() {
         {!isConnected ? (
           <Button
             onClick={onConnectToWalletClick}
-            className="bg-velix-primary lg:px-10 lg:py-7 font-bold font-space-grotesk text-sm"
+            className="bg-velix-primary lg:px-10 lg:py-7 hover:bg-velix-primary font-bold font-space-grotesk text-sm"
           >
             Connect Wallet
           </Button>
