@@ -1,6 +1,6 @@
-import Wallet from "@/components/svg/wallet-icon.svg?react";
-import VelixFilledLogo from "@/components/svg/velix.svg?react";
-import World from "@/components/svg/world-icon.svg?react";
+import Wallet from "@/components/svg/WalletIcon";
+import VelixFilledLogo from "@/components/svg/Velix";
+import World from "@/components/svg/WorldIcon";
 import VelixCard from "@/components/ui/velix/cards/VelixCard";
 
 const STEPS = [

@@ -1,4 +1,4 @@
-import VelixLogo from "@/components/svg/velix-logo-group.svg?react";
+import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "../button";
 import { Link, useNavigate } from "react-router-dom";

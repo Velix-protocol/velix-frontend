@@ -1,9 +1,9 @@
 import Section from "@/components/layouts/Section";
-import Cancel from "@/components/svg/cancel.svg?react";
+import Cancel from "@/components/ui/velix/icons/Cancel";
 import VelixCard from "@/components/ui/velix/cards/VelixCard";
-import OfflineBolt from "@/components/svg/offlineBolt.svg?react";
-import OutBond from "@/components/svg/outbond.svg?react";
-import World from "@/components/svg/world-icon.svg?react";
+import OfflineBolt from "@/components/svg/OfflineBolt";
+import OutBond from "@/components/svg/Outbond";
+import World from "@/components/svg/WorldIcon";
 
 const PROPERTIES = [
   {

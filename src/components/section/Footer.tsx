@@ -1,4 +1,4 @@
-import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg?react";
+import VelixBlackLogo from "@/components/svg/VelixPrimaryLogoBlack";
 import Section from "../layouts/Section";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import XIcon from "../ui/velix/icons/XIcon";

@@ -1,4 +1,3 @@
-import HeroIcon from "@/components/svg/Hero.svg?react";
 import Section from "../layouts/Section";
 import Header from "../ui/velix/Header";
 import { Button } from "../ui/button";
@@ -13,11 +12,15 @@ export default function Hero() {
             Stake your METIS, earn rewards.
           </h2>
           <p className="text-white mt-2">Simplified liquid staking on METIS</p>
-          <Button className="bg-velix-yellow px-10 w-fit mt-16">
+          <Button className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-16">
             Stake now
           </Button>
         </div>
-        <HeroIcon className="hidden lg:block scale-75 xl:scale-100 ml-auto transition-transform" />
+        <img
+          src="/svg/hero-image.svg"
+          alt="hero image"
+          className="hidden lg:block scale-75 xl:scale-100 ml-auto transition-transform"
+        />
       </div>
     </Section>
   );
