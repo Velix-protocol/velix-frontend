@@ -1,4 +1,3 @@
-import React from "react";
 import WalletIcon from "./icons/WalletIcon";
 import UnstakeIcon from "./icons/UnstakeIcon";
 import TwigLightIcon from "./icons/TwigLightIcon";

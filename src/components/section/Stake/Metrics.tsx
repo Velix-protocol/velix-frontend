@@ -1,4 +1,3 @@
-import React from "react";
 import PlusMinusTable from "@/components/ui/velix/icons/PlusMinusTable";
 import ChatIcon from "@/components/ui/velix/icons/ChatIcon";
 import Copy from "@/components/ui/velix/icons/Copy";
