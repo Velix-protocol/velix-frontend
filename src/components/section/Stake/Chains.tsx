@@ -4,7 +4,7 @@ import { truncateString } from "@/lib/utils";
 import { useChains } from "wagmi";
 import { metis } from "wagmi/chains";
 
-export const address = truncateString(
+const address = truncateString(
   "0xdBc8997C1273bD8bc5af15f16df26C4FA03c0852",
   4,
   10
