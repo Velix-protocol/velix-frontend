@@ -18,13 +18,13 @@ export default function AppHeader() {
   };
 
   return (
-    <Section
-      className={`px-5 fixed top-0 left-0 right-0 bg-velix-slate-blue z-50 ${
-        isConnected ? "py-8" : "py-5"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-10 text-base">
+    <Section className="px-5 fixed top-0 left-0 right-0 bg-velix-slate-blue z-50">
+      <div
+        className={`flex items-center justify-between border-b-[0.5px] border-neutral-300  ${
+          isConnected ? "py-8" : "py-5"
+        }`}
+      >
+        <div className="flex items-center justify-betwee space-x-32 text-base">
           <VelixPrimaryBlackLogo className="fill-black w-[4.25rem] h-4" />
           <div className="hidden lg:block">
             <BottomBar />
@@ -33,7 +33,7 @@ export default function AppHeader() {
         {!isConnected ? (
           <Button
             onClick={onConnectToWalletClick}
-            className="bg-velix-primary lg:px-10 lg:py-7 hover:bg-velix-primary font-bold font-space-grotesk text-sm"
+            className="bg-velix-primary lg:px-8 py-7 hover:bg-velix-primary font-bold font-space-grotesk text-sm"
           >
             Connect Wallet
           </Button>

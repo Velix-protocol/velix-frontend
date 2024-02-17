@@ -62,14 +62,14 @@ export default function Footer() {
           <ul className="flex items-center gap-3">
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
-                <XIcon className="w-6 h-6" />
+                <XIcon className="w-6 h-6 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Discord className="w-6 h-6" />
+              <Discord className="w-6 h-6 fill-velix-primary" />
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Telegram className="w-6 h-6" />
+              <Telegram className="w-6 h-6 fill-velix-primary" />
             </li>
           </ul>
         </div>
