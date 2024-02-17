@@ -23,7 +23,7 @@ export default function BottomBar() {
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
       <NavLink
         relative="path"
-        to=".."
+        to="."
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
@@ -40,6 +40,7 @@ export default function BottomBar() {
         </span>
       </NavLink>
       <NavLink
+        relative="path"
         to="unstake"
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
@@ -57,6 +58,7 @@ export default function BottomBar() {
         </span>
       </NavLink>
       <NavLink
+        relative="path"
         to="mint"
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
@@ -74,6 +76,7 @@ export default function BottomBar() {
         </span>
       </NavLink>
       <NavLink
+        relative="path"
         to="dashboard"
         className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >

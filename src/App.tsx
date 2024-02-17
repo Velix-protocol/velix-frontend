@@ -5,6 +5,7 @@ import MintPage from "./pages/Mint";
 import UnstakePage from "./pages/Unskate";
 import StakePage from "./pages/Staking";
 import DashboardPage from "./pages/Dashboard";
+import Page from "./components/layouts/Page";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/app">
+          <Route path="/app" element={<Page />}>
             <Route index element={<StakePage />} />
             <Route path="unstake" element={<UnstakePage />} />
             <Route path="mint" element={<MintPage />} />
