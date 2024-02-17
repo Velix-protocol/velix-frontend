@@ -40,7 +40,7 @@ export default function BottomBar() {
         </span>
       </NavLink>
       <NavLink
-        to="./unstake"
+        to="unstake"
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
@@ -73,7 +73,10 @@ export default function BottomBar() {
           Mint
         </span>
       </NavLink>
-      <p className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
+      <NavLink
+        to="dashboard"
+        className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
+      >
         <span>
           <AnalyticsIcon
             className={applyActiveStyles("dashboard", { className: "w-5 h-5" })}
@@ -86,7 +89,7 @@ export default function BottomBar() {
         >
           Dashboard
         </span>
-      </p>
+      </NavLink>
     </div>
   );
 }

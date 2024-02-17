@@ -18,7 +18,7 @@ export default function StakingForm({ isStaking }: { isStaking: boolean }) {
         {isStaking ? (
           <Input
             type="number"
-            placeholder="0"
+            placeholder="0.00 METIS"
             className="bg-transparent h-5 lg:h-max border-none placeholder:text-sm focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
           />
         ) : (
