@@ -16,14 +16,14 @@ export default function Stake() {
           <div className="lg:row-span-2 h-fit">
             <Title
               name="Stake METIS"
-              subtitle="Stake METIS and receive VeMETIS"
+              subtitle="Stake METIS and receive veMETIS"
             />
             <StakingOperations />
           </div>
           <div className="mt-16 lg:mt-0">
             <Title
               name="Velix statistics"
-              subtitle="View your  VeMETIS statistics."
+              subtitle="View your  veMETIS statistics."
             />
             <Metrics />
           </div>
