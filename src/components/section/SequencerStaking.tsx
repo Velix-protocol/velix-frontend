@@ -1,5 +1,3 @@
-import React from "react";
-import Hap from "@/components/svg/wallet-image.svg";
 import Section from "../layouts/Section";
 import { Button } from "../ui/button";
 
@@ -8,7 +6,11 @@ export default function SequencerStaking() {
     <Section className="mt-24 px-5">
       <div className="mt-24 grid lg:grid-cols-2">
         <div className="hidden lg:block">
-          <Hap className="lg:scale-100 scale-75" />
+          <img
+            src="/svg/wallet-image.svg"
+            alt="hap"
+            className="lg:scale-100 scale-75"
+          />
         </div>
         <div className="flex flex-col justify-center lg:ml-20">
           <h2 className="font-space-grotesk font-bold text-4xl flex flex-col">

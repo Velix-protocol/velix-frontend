@@ -1,8 +1,6 @@
-/* eslint-disable react/no-array-index-key */
-import React from "react";
-import Wallet from "@/components/svg/wallet-icon.svg";
-import VelixFilledLogo from "@/components/svg/velix.svg";
-import World from "@/components/svg/world-icon.svg";
+import Wallet from "@/components/svg/WalletIcon";
+import VelixFilledLogo from "@/components/svg/Velix";
+import World from "@/components/svg/WorldIcon";
 import VelixCard from "@/components/ui/velix/cards/VelixCard";
 
 const STEPS = [

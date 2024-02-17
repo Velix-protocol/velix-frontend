@@ -1,4 +1,3 @@
-import React from "react";
 import Section from "../../layouts/Section";
 import Steps from "./partials/Steps";
 import DefiIntegration from "./partials/DefiIntegration";

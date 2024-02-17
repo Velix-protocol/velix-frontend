@@ -1,36 +1,28 @@
-import React from "react";
-import DefiIntegrationImage from "@/components/svg/Defi-integration.svg";
-import Metamask from "@/components/svg/matamask.svg";
-import ThreeD from "@/components/svg/3d.svg";
-import VM from "@/components/svg/vm.svg";
-import Stack from "@/components/svg/stack.svg";
-import Uniswap from "@/components/svg/uniswap.svg";
-import MIcon from "@/components/svg/Micon.svg";
 import { Button } from "@/components/ui/button";
 
 const DEFIs = [
   {
-    icon: <Metamask />,
+    icon: <img src="/svg/metamask.svg" alt="metamask" />,
     status: ""
   },
   {
-    icon: <ThreeD />,
+    icon: <img src="/svg/3d.svg" alt="3d" />,
     status: "Coming soon"
   },
   {
-    icon: <VM />,
+    icon: <img src="/svg/vm.svg" alt="vm" />,
     status: "Coming soon"
   },
   {
-    icon: <Stack />,
+    icon: <img src="/svg/stack.svg" alt="stack" />,
     status: "Coming soon"
   },
   {
-    icon: <Uniswap />,
+    icon: <img src="/svg/uniswap.svg" alt="uniswap" />,
     status: "Coming soon"
   },
   {
-    icon: <MIcon />,
+    icon: <img src="/svg/micon.svg" alt="micon" />,
     status: "Coming soon"
   }
 ];
@@ -38,8 +30,12 @@ const DEFIs = [
 export default function DefiIntegration() {
   return (
     <div className="mt-24 lg:grid grid-cols-2">
-      <DefiIntegrationImage className="hidden lg:block scale-75 xl:scale-100" />
-      <div className="max-w-sm- lg:max-w-[21rem] max-w-[23rem] max-lg:mx-auto lg:ml-auto">
+      <img
+        src="/svg/defi-integration.svg"
+        alt="defi integration"
+        className="hidden lg:block scale-75 xl:scale-100"
+      />
+      <div className="max-w-sm- lg:max-w-[21rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
         <h2 className="font-space-grotesk font-bold text-4xl flex flex-col w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8 max-w-80">
@@ -53,7 +49,11 @@ export default function DefiIntegration() {
                 key={`defi-${defi.status}`}
                 className="bg-velix-slate-blue w-full flex flex-col items-center justify-center p-3 rounded-[15px] overflow-hidden relative"
               >
-                <span className="h-20 w-20 mx-auto flex justify-center items-center">
+                <span
+                  className={`h-20 w-20 mx-auto flex justify-center items-center ${
+                    !!defi.status && "-mt-3"
+                  }`}
+                >
                   {defi.icon}
                 </span>
 

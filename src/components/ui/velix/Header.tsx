@@ -1,23 +1,27 @@
-import React from "react";
-import VelixLogo from "@/components/svg/velix-logo-group.svg";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
-import Link from "next/link";
 import { Button } from "../button";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const { ref, inView } = useInView({
     threshold: 0.2,
     initialInView: true
   });
+  const navigate = useNavigate();
 
   return (
     <div>
       <header ref={ref} className="flex justify-between items-center py-14">
-        <Link href="/">
+        <Link to="/">
           <VelixLogo />
         </Link>
-        <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
+        <Button
+          onClick={() => {
+            return navigate("/app");
+          }}
+          className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+        >
           Launch
         </Button>
       </header>
@@ -28,10 +32,15 @@ export default function Header() {
         }`}
       >
         <div className="flex justify-between w-full max-w-5xl xl:max-w-7xl mx-auto relative">
-          <Link href="/">
+          <Link to="/">
             <VelixLogo />
           </Link>
-          <Button className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow">
+          <Button
+            onClick={() => {
+              return navigate("/app");
+            }}
+            className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+          >
             Launch
           </Button>
         </div>
