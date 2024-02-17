@@ -1,9 +1,9 @@
-import VelixBlackLogo from "@/components/svg/Velix-primary-logo-black.svg";
+import VelixBlackLogo from "@/components/svg/VelixPrimaryLogoBlack";
 import Section from "../layouts/Section";
-import VelixBlueLogo from "../ui/VelixBlueLogo";
-import XIcon from "../ui/XIcon";
-import Discord from "../ui/Discord";
-import Telegram from "../ui/Telegram";
+import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
+import XIcon from "../ui/velix/icons/XIcon";
+import Discord from "../ui/velix/icons/Discord";
+import Telegram from "../ui/velix/icons/Telegram";
 
 export default function Footer() {
   return (
@@ -54,7 +54,7 @@ export default function Footer() {
           </div>
         </div>
       </Section>
-      <Section className="bg-velix-primary">
+      <Section className="bg-velix-primary mb-2">
         <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white font-space-grotesk">
             © 2023 - 2024 Velix
@@ -62,14 +62,14 @@ export default function Footer() {
           <ul className="flex items-center gap-3">
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
-                <XIcon className="w-6 h-6" />
+                <XIcon className="w-6 h-6 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Discord className="w-6 h-6" />
+              <Discord className="w-6 h-6 fill-velix-primary" />
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Telegram className="w-6 h-6" />
+              <Telegram className="w-6 h-6 fill-velix-primary" />
             </li>
           </ul>
         </div>

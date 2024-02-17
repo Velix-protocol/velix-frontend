@@ -1,5 +1,5 @@
 import StepLink from "@/components/section/HowItWorks/partials/StepLink";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 type VelixCardProps = {
   icon: ReactElement;
