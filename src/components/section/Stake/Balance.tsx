@@ -24,15 +24,19 @@ export default function Balance({ isConnected }: { isConnected: boolean }) {
           {truncateString(address, 4, 10)}
         </p>
       </div>
-      <div className="flex gap-5 max-sm:flex-col lg:gap-10 justify-center items-center">
-        <div className="bg-white/25 p-5 lg:p-7 rounded-lg h-full w-full space-y-2">
-          <p className="text-xs lg:text-base">METIS Balance</p>
+      <div className="flex gap-2 md:gap-5 max-md:flex-col lg:gap-10 md:justify-center md:items-center">
+        <div className="bg-white/25 p-3 gap-4 md:p-5 flex flex-row md:flex-col w-fit items-center md:items-start lg:p-7 rounded-lg h-full md:w-full md:space-y-2">
+          <p className="text-xs lg:text-base flex">
+            METIS Balance <span className="block md:hidden">:</span>
+          </p>
           <p className="font-bold text-base lg:text-xl">
             {renderBalance()} METIS
           </p>
         </div>
-        <div className="bg-white/25 p-5 lg:p-7 rounded-lg h-full w-full space-y-2">
-          <p className="text-xs lg:text-base">Staked Balance</p>
+        <div className="bg-white/25 p-3 gap-4 md:p-5 flex flex-row md:flex-col w-fit items-center md:items-start lg:p-7 rounded-lg h-full md:w-full md:space-y-2">
+          <p className="text-xs lg:text-base flex">
+            Staked Balance<span className="block md:hidden">:</span>
+          </p>
           <p className="font-bold text-base lg:text-xl">0.0 veMETIS</p>
         </div>
       </div>
