@@ -55,7 +55,7 @@ export default function StakingOperations() {
             }
           />
         </div>
-        <StakingFormButtom isStaking={isStaking} />
+        <StakingFormButtom role="stake" />
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import WagmiProvider from "./context/WagmiProvider";
-import Staking from "./pages/Staking";
-import Unskate from "./pages/Unskate";
+import MintPage from "./pages/Mint";
+import UnstakePage from "./pages/Unskate";
+import StakePage from "./pages/Staking";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/app">
-            <Route index element={<Staking />} />
-            <Route path="unstake" element={<Unskate />} />
+            <Route index element={<StakePage />} />
+            <Route path="unstake" element={<UnstakePage />} />
+            <Route path="mint" element={<MintPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

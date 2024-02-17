@@ -3,31 +3,37 @@ import { useAccount } from "wagmi";
 import { Button } from "../button";
 
 export default function StakingFormButtom({
-  isStaking
+  role
 }: {
-  isStaking: boolean;
+  role: "stake" | "mint" | "unstake";
 }) {
   const { open } = useWeb3Modal();
   const { isConnected } = useAccount();
 
   const onStakeOperationClick = async () => {
-    if (isStaking && isConnected) {
-      // TODO: Should be replaced by the staking function
-      return () => null;
-    }
-    if (!isConnected && !isStaking) {
+    if (!isConnected) {
       return await open();
     }
 
-    if (isConnected && !isStaking) {
+    if (role === "stake") {
+      // TODO: Should be replaced by the staking function
+      return () => null;
+    }
+
+    if (role === "unstake") {
       // TODO: Should be replaced by the unstaking function
+      return () => null;
+    }
+
+    if (role === "mint") {
       return () => null;
     }
   };
   const renderStakeOperationButtonTitle = () => {
     if (!isConnected) return "Connect wallet";
-    if (isStaking && isConnected) return "Stake now";
-    if (isConnected && !isStaking) return "Unstake now";
+    if (role === "stake") return "Stake now";
+    if (role === "unstake") return "Unstake now";
+    if (role === "mint") return "Mint now";
   };
 
   return (

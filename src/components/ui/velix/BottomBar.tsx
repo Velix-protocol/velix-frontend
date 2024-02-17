@@ -22,6 +22,7 @@ export default function BottomBar() {
   return (
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
       <NavLink
+        relative="path"
         to=".."
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
@@ -55,7 +56,10 @@ export default function BottomBar() {
           Unstake
         </span>
       </NavLink>
-      <p className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
+      <NavLink
+        to="mint"
+        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
+      >
         <span>
           <TwigLightIcon
             className={applyActiveStyles("mint", { className: "w-5 h-5" })}
@@ -68,7 +72,7 @@ export default function BottomBar() {
         >
           Mint
         </span>
-      </p>
+      </NavLink>
       <p className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk">
         <span>
           <AnalyticsIcon

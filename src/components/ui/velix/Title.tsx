@@ -1,9 +1,11 @@
+import { ReactNode } from "react";
+
 export default function Title({
   name,
   subtitle
 }: {
   name: string;
-  subtitle: string;
+  subtitle: string | ReactNode;
 }) {
   return (
     <div className="flex flex-col font-space-grotesk gap-4">
