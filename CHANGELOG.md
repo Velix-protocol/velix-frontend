@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.1.0...v1.2.0) (2024-02-19)
+
+
+### Features
+
+* add copyrigh symbol in the lunch page ([4eb7701](https://github.com/Velix-protocol/velix-frontend/commit/4eb7701a5c1932e6262d0cd5b737f1055fc20842))
+
 ## [1.1.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.0.0...v1.1.0) (2024-02-17)
 
 
