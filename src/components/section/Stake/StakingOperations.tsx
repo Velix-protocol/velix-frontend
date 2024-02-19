@@ -1,10 +1,3 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select";
 import Balance from "./Balance";
 import { useAccount } from "wagmi";
 import { useStakingStore } from "@/store/stakingState";
