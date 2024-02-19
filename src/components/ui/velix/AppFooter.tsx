@@ -15,14 +15,14 @@ export default function AppFooter() {
         <ul className="flex items-center gap-3">
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
             <a href="https://twitter.com/velixprotocol" target="_blank">
-              <XIcon className="w-6 h-6 fill-white" />
+              <XIcon className="w-4 h-4 fill-white" />
             </a>
           </li>
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
-            <Discord className="w-6 h-6 fill-white" />
+            <Discord className="w-4 h-4 fill-white" />
           </li>
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
-            <Telegram className="w-6 h-6 fill-white" />
+            <Telegram className="w-4 h-4 fill-white" />
           </li>
         </ul>
       </div>

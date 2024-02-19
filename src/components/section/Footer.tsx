@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 md:justify-center px-5 gap-10 xl:grid-cols-4 py-24">
           <div>
             <VelixBlackLogo />
-            <p className="text-velix-primary font-space-grotesk text-xl mt-5">
+            <p className="text-velix-primary font-space-grotesk text-[1rem] mt-5">
               Simplified{" "}
               <b className="font-bold">
                 staking
@@ -23,10 +23,10 @@ export default function Footer() {
             </p>
           </div>
           <div className="flex flex-col gap-6">
-            <h2 className="font-bold font-space-grotesk text-xl">
+            <h2 className="font-bold font-space-grotesk text-[1rem]">
               Liquid staking
             </h2>
-            <ul className="font-space-grotesk text-velix-gray text-xl">
+            <ul className="font-space-grotesk text-velix-gray text-[1rem]">
               <li className="cursor-pointer">What’s liquid staking</li>
               <li className="cursor-pointer">What can i earn</li>
               <li className="cursor-pointer">What are the risks</li>
@@ -34,10 +34,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <h2 className="font-bold font-space-grotesk text-xl">
+            <h2 className="font-bold font-space-grotesk text-[1rem]">
               Sequencer staking
             </h2>
-            <ul className="font-space-grotesk text-velix-gray text-xl">
+            <ul className="font-space-grotesk text-velix-gray text-[1rem]">
               <li className="cursor-pointer">What’s sequencer staking</li>
               <li className="cursor-pointer">What can i earn</li>
               <li className="cursor-pointer">What are the costs</li>
@@ -45,8 +45,10 @@ export default function Footer() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <h2 className="font-bold font-space-grotesk text-xl">Protocol</h2>
-            <ul className="font-space-grotesk text-velix-gray text-xl">
+            <h2 className="font-bold font-space-grotesk text-[1rem]">
+              Protocol
+            </h2>
+            <ul className="font-space-grotesk text-velix-gray text-[1rem]">
               <li className="cursor-pointer">About the protocol</li>
               <li className="cursor-pointer">Why Velix?</li>
               <li className="cursor-pointer">Security</li>
@@ -62,14 +64,14 @@ export default function Footer() {
           <ul className="flex items-center gap-3">
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
-                <XIcon className="w-6 h-6 fill-velix-primary" />
+                <XIcon className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Discord className="w-6 h-6 fill-velix-primary" />
+              <Discord className="w-4 h-4 fill-velix-primary" />
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Telegram className="w-6 h-6 fill-velix-primary" />
+              <Telegram className="w-4 h-4 fill-velix-primary" />
             </li>
           </ul>
         </div>
