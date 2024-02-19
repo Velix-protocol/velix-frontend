@@ -23,9 +23,7 @@ export default function Stake() {
             />
             <Metrics />
           </div>
-          {/* <div> */}
           <Chains />
-          {/* </div> */}
         </div>
       </Section>
     </div>
