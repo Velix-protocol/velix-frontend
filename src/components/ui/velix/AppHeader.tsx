@@ -5,6 +5,7 @@ import BottomBar from "./BottomBar";
 import VelixPrimaryBlackLogo from "./icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 export default function AppHeader() {
   const { open } = useWeb3Modal();
@@ -25,7 +26,9 @@ export default function AppHeader() {
         }`}
       >
         <div className="flex items-center justify-betwee space-x-32 text-base">
-          <VelixPrimaryBlackLogo className="fill-black w-[4.25rem] h-4" />
+          <Link to="/">
+            <VelixPrimaryBlackLogo className="fill-black w-[4.25rem] h-4" />
+          </Link>
           <div className="hidden lg:block">
             <BottomBar />
           </div>

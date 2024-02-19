@@ -1,8 +1,10 @@
 import Section from "../layouts/Section";
 import Header from "../ui/velix/Header";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <Section className="bg-velix-primary to-[#E8B94E]/90 px-5">
       <Header />
@@ -12,7 +14,10 @@ export default function Hero() {
             Stake your METIS, earn rewards.
           </h2>
           <p className="text-white mt-2">Simplified liquid staking on METIS</p>
-          <Button className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-16">
+          <Button
+            onClick={() => navigate("/app")}
+            className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-16"
+          >
             Stake now
           </Button>
         </div>
