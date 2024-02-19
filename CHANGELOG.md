@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.3.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.2.0...v1.3.0) (2024-02-19)
+
+
+### Features
+
+* add click action to stake now from the home page ([ce130de](https://github.com/Velix-protocol/velix-frontend/commit/ce130deb14c56e9dbcbb002411f400b93fb985c7))
+* add protocol description ([6332093](https://github.com/Velix-protocol/velix-frontend/commit/63320936ae11208d190ea906f364ffb81f2ed643))
+* **app header logo:** add link to the landing page to the logo ([09a3227](https://github.com/Velix-protocol/velix-frontend/commit/09a32279ce7e6b251ddde6b30406460d90ffb756))
+* **dashboard:** add chart bar variant ([6d3464b](https://github.com/Velix-protocol/velix-frontend/commit/6d3464b90c8657b8ffabfa0b83750ab60fafe954))
+
 ## [1.2.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.1.0...v1.2.0) (2024-02-19)
 
 
