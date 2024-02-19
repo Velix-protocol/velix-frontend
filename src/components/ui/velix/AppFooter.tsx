@@ -10,7 +10,7 @@ export default function AppFooter() {
       <div className="flex justify-between items-center border-t-[0.5px] border-neutral-300 py-7">
         <div className="flex gap-5 items-center text-velix-gray font-space-grotesk">
           <VelixPrimaryBlackLogo className="fill-velix-gray w-[4.25rem] h-4" />
-          <p>{new Date().getFullYear()} All rights reserved</p>
+          <p>© {new Date().getFullYear()} All rights reserved</p>
         </div>
         <ul className="flex items-center gap-3">
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
