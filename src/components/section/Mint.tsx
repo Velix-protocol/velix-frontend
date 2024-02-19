@@ -28,7 +28,7 @@ export default function Mint() {
               }
             />
             <div className="bg-white p-5 lg:p-11 rounded-xl h-full mt-16">
-              <StakingForm isStaking />
+              <StakingForm isStaking showSwapIcon={false} />
               <div className="mt-9 flex flex-col gap-7">
                 <StakingDetails
                   title="Exchange Rate"

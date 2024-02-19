@@ -4,7 +4,13 @@ import MetisIcon from "./icons/MetisIcon";
 import SwapIcon from "./icons/SwapIcon";
 import VelixBlueLogo from "./icons/VelixBlueLogo";
 
-export default function StakingForm({ isStaking }: { isStaking: boolean }) {
+export default function StakingForm({
+  isStaking,
+  showSwapIcon = true
+}: {
+  isStaking: boolean;
+  showSwapIcon?: boolean;
+}) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -33,14 +39,16 @@ export default function StakingForm({ isStaking }: { isStaking: boolean }) {
           <span className="text-[0.625rem] lg:text-base">METIS Amount</span>
         </p>
       </div>
-      <button
-        onClick={() =>
-          navigate(pathname.includes("unstake") ? ".." : "unstake")
-        }
-        className="absolute mx-auto left-0 right-0 top-1/2 -translate-y-1/2"
-      >
-        <SwapIcon className="fill-velix-primary rotate-180 lg:w-8 lg:h-8 w-6 h-6 mx-auto" />
-      </button>
+      {showSwapIcon && (
+        <button
+          onClick={() =>
+            navigate(pathname.includes("unstake") ? ".." : "unstake")
+          }
+          className="absolute mx-auto left-0 right-0 top-1/2 -translate-y-1/2"
+        >
+          <SwapIcon className="fill-velix-primary rotate-180 lg:w-8 lg:h-8 w-6 h-6 mx-auto" />
+        </button>
+      )}
       <div className="flex justify-between items-center gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
         <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
           <span>
