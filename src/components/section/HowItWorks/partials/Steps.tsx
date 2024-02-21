@@ -1,47 +1,37 @@
-import Wallet from "@/components/svg/WalletIcon";
-import VelixFilledLogo from "@/components/svg/Velix";
-import World from "@/components/svg/WorldIcon";
-import StepLink from "./StepLink";
-import TwigLightIcon from "@/components/ui/velix/icons/TwigLightIcon";
-
 const STEPS = [
   {
-    title: "Mint",
+    title: "1. Mint",
     description:
-      "Mint VeMETIS with METIS to participate in liquid staking VeMETIS is a liquid staking derivative of METIS.",
-    icon: (
-      <TwigLightIcon className="w-8 h-8 fill-black bg-white p-2 rounded-full" />
-    )
+      "Mint VeMETIS with METIS to participate in liquid staking VeMETIS is a liquid staking derivative of METIS."
   },
   {
-    title: "Do More with veMetis",
+    title: "2. Do More with veMetis",
     description:
-      "Stake any amount of your tokens to access daily staking rewards",
-    icon: <World className="w-8 h-8 fill-black bg-white p-1 rounded-full" />
+      "Stake any amount of your tokens to access daily staking rewards"
   },
   {
-    title: "Receive veMETIS",
+    title: "3. Receive veMETIS",
     description:
-      "Receive liquid veMETIS and start to receive rewards in Real-time",
-    icon: <VelixFilledLogo className="fill-white" />
+      "Receive liquid veMETIS and start to receive rewards in Real-time"
   },
   {
-    title: "Stake",
+    title: "4. Stake",
     description:
-      "Stake any amount of your tokens to access daily staking rewards",
-    icon: <Wallet className="fill-black" />
+      "Stake any amount of your tokens to access daily staking rewards"
   }
 ];
 
 export default function Steps() {
   return (
-    <div className="flex flex-col justify-center items-center gap-10 mt-16">
-      {STEPS.map((step, index, steps) => {
+    <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 justify-center items-center gap-5 mt-5 md:mt-16">
+      {STEPS.map((step, index) => {
         return (
-          <div key={`stpes-${index}`} className="relative w-full h-full">
-            {steps.length - 1 !== index && <StepLink />}
-            <div className="font-space-grotesk w-full h-full flex gap-7 lg:gap-9 rounded-[0.9375rem]">
-              <span className="w-fit h-fit">{step.icon}</span>
+          <div
+            key={`stpes-${index}`}
+            className="relative w-full h-full bg-[#D9D9D9]/10 p-10 rounded-md"
+          >
+            {/* {steps.length - 1 !== index && <StepLink />} */}
+            <div className="font-space-grotesk w-full h-full rounded-[0.9375rem]">
               <div className="flex flex-col justify-start max-w-[26.8125rem]">
                 <h3 className="font-bold text-[1.25rem] lg:text-2xl">
                   {step.title}

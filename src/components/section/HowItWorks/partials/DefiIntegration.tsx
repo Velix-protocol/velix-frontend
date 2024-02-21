@@ -1,27 +1,27 @@
 const DEFIs = [
   {
-    icon: <img src="/svg/metamask.svg" alt="metamask" />,
-    status: ""
+    icon: <img src="/svg/defi1.svg" alt="defi1" />,
+    color: "rgba(0, 0, 254, 0.1)"
   },
   {
-    icon: <img src="/svg/3d.svg" alt="3d" />,
-    status: "Coming soon"
+    icon: <img src="/svg/wagmi.svg" alt="wagmi" />,
+    color: "rgba(225, 220, 212, 0.2)"
   },
   {
-    icon: <img src="/svg/vm.svg" alt="vm" />,
-    status: "Coming soon"
+    icon: <img src="/svg/pinkHead.svg" alt="pinkHead" />,
+    color: "rgba(247, 209, 239, 0.5)"
   },
   {
-    icon: <img src="/svg/stack.svg" alt="stack" />,
-    status: "Coming soon"
+    icon: <img src="/svg/tettys1.svg" alt="stack" />,
+    color: "rgba(199, 173, 113, 0.2)"
   },
   {
-    icon: <img src="/svg/uniswap.svg" alt="uniswap" />,
-    status: "Coming soon"
+    icon: <img src="/svg/chocolateTree.svg" alt="chocolateTree" />,
+    color: "rgba(30, 30, 30, 0.6)"
   },
   {
-    icon: <img src="/svg/micon.svg" alt="micon" />,
-    status: "Coming soon"
+    icon: <img src="/svg/defi-velix.svg" alt="defi-velix" />,
+    color: "rgba(252, 187, 76, 0.2)"
   }
 ];
 
@@ -41,25 +41,18 @@ export default function DefiIntegration() {
           </span>
         </h2>
         <div className="grid max-[380px]:grid-cols-3 grid-cols-3 gap-3 mt-16">
-          {DEFIs.map((defi) => {
+          {DEFIs.map((defi, index) => {
             return (
               <div
-                key={`defi-${defi.status}`}
-                className="bg-velix-slate-blue w-full flex flex-col items-center justify-center p-3 rounded-[15px] overflow-hidden relative"
+                key={`defi-${defi.color}-${index}`}
+                style={{
+                  background: defi.color
+                }}
+                className=" w-full flex flex-col items-center justify-center p-3 rounded-[15px] overflow-hidden relative"
               >
-                <span
-                  className={`h-20 w-20 mx-auto flex justify-center items-center ${
-                    !!defi.status && "-mt-3"
-                  }`}
-                >
+                <span className="h-20 w-20 mx-auto flex justify-center items-center">
                   {defi.icon}
                 </span>
-
-                {!!defi.status && (
-                  <span className="font-space-grotesk font-medium text-[8px] bg-velix-slate-green/20 py-1.5 text-velix-slate-green w-full left-0 right-0 text-center absolute bottom-0">
-                    {defi.status}
-                  </span>
-                )}
               </div>
             );
           })}

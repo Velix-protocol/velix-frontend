@@ -17,7 +17,7 @@ const PROPERTIES = [
     description: "veMETIS earns rewards over time, increasing it's value"
   },
   {
-    icon: <OutBond />,
+    icon: <OutBond className="rotate-[222deg]" />,
     title: "Easily unstake",
     description: "Unstake at any time with no minimum lock up periods"
   },
@@ -27,7 +27,7 @@ const PROPERTIES = [
     description: "Trade on exchanges, provide liquidity use as collateral"
   },
   {
-    icon: <OfflineBolt />,
+    icon: <OutBond className="rotate-45" />,
     title: "Restaking veMETIS",
     description: "Restake any amount of veMETIS earns rewards"
   }
