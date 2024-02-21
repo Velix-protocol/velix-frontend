@@ -6,8 +6,12 @@ import StakingFormButtom from "../ui/velix/StakingFormButtom";
 import Title from "../ui/velix/Title";
 import Chains from "./Stake/Chains";
 import Metrics from "./Stake/Metrics";
+import Balance from "./Stake/Balance";
+import { useAccount } from "wagmi";
 
 export default function Mint() {
+  const { isConnected } = useAccount();
+
   return (
     <div>
       <Section className="px-5 pb-16 lg:pb-0">
@@ -27,23 +31,26 @@ export default function Mint() {
                 </p>
               }
             />
-            <div className="bg-white p-5 lg:p-11 rounded-xl h-full mt-16">
-              <StakingForm isStaking showSwapIcon={false} />
-              <div className="mt-9 flex flex-col gap-7">
-                <StakingDetails
-                  title="Exchange Rate"
-                  value="1 METIS = 1 veMETIS"
-                />
-                <StakingDetails
-                  title="Average return"
-                  value={
-                    <span className="text-xs lg:text-base">
-                      =3.13 <span className="font-bold">APR</span>
-                    </span>
-                  }
-                />
+            <div className="mt-10 lg:mt-20 bg-velix-primary rounded-2xl">
+              <Balance isConnected={isConnected} />
+              <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
+                <StakingForm isStaking showSwapIcon={false} />
+                <div className="mt-9 flex flex-col gap-7">
+                  <StakingDetails
+                    title="Exchange Rate"
+                    value="1 METIS = 1 veMETIS"
+                  />
+                  <StakingDetails
+                    title="Average return"
+                    value={
+                      <span className="text-xs lg:text-base">
+                        =3.13 <span className="font-bold">APR</span>
+                      </span>
+                    }
+                  />
+                </div>
+                <StakingFormButtom role="mint" />
               </div>
-              <StakingFormButtom role="mint" />
             </div>
           </div>
           <div className="mt-16 lg:mt-0 flex flex-col gap-5">
