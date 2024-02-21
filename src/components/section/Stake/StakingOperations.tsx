@@ -29,7 +29,7 @@ export default function StakingOperations() {
               className="flex items-center text-velix-gray justify-between font-space-grotesk"
             >
               <span className="text-xs lg:text-base">Routing</span>
-              <span className="flex items-center bg-velix-slate-blue px-5 py-1 rounded-lg cursor-pointer">
+              <span className="flex items-center bg-velix-slate-blue px-5 py-1 text-sm rounded-lg cursor-pointer">
                 Protocol
                 <ArrowDropDownIcon
                   className={`fill-velix-gray w-5 h-5 transition-all duration-150 ease-in-out ${
@@ -55,14 +55,14 @@ export default function StakingOperations() {
               </span>
             }
           />
-          <StakingDetails
+          {/* <StakingDetails
             title="Transaction cost"
             value={
               <span className="text-xs lg:text-base">
                 0.03650 METIS (≈$91.94USD)
               </span>
             }
-          />
+          /> */}
         </div>
         <StakingFormButtom role="stake" />
       </div>

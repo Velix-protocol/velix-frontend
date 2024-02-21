@@ -25,7 +25,7 @@ export default function StakingForm({
           <Input
             type="number"
             placeholder="0.00 METIS"
-            className="bg-transparent h-5 lg:h-max border-none placeholder:text-sm focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
+            className="bg-transparent placeholder:text-[0.625rem] placeholder:lg:text-sm h-5 lg:h-max border-none placeholder:text-sm focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
           />
         ) : (
           <p className="text-velix-primary font-bold text-[0.625rem] lg:text-sm mr-3">
