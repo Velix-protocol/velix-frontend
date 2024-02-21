@@ -54,7 +54,7 @@ export default function Mint() {
                 }
               />
             </div>
-            <StakeLayout isStaking={false}>
+            <StakeLayout showSwapIcon={false} isStaking={false}>
               <div className="mt-9 flex flex-col gap-7">
                 <StakingDetails
                   title="Exchange Rate"
