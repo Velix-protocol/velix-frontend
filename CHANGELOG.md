@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.3.1...v1.4.0) (2024-02-21)
+
+
+### Features
+
+* add balance to the mint page ([c90601f](https://github.com/Velix-protocol/velix-frontend/commit/c90601faf663b4ea1f4ccb31db5967500d510214))
+* update the landing page ([a0ad396](https://github.com/Velix-protocol/velix-frontend/commit/a0ad3960babaa9f6aaa869cfe4700569449b692c))
+
+
+### Bug Fixes
+
+* fix stake ([8eff54d](https://github.com/Velix-protocol/velix-frontend/commit/8eff54ddd032397d2f6a2bcd2d065705f47eab30))
+* fix the stake-unstake button ([35d003a](https://github.com/Velix-protocol/velix-frontend/commit/35d003a096bc57ec8d30ec449c2c239da0bb6573))
+* hide the swap icon on the mint page ([804581e](https://github.com/Velix-protocol/velix-frontend/commit/804581e441f71fc124b84b87f26bef3c8e1fd6c2))
+
 ## [1.3.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.3.0...v1.3.1) (2024-02-21)
 
 
