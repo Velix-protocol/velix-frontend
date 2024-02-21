@@ -12,7 +12,10 @@ export default function Header() {
 
   return (
     <div>
-      <header ref={ref} className="flex justify-between items-center py-14">
+      <header
+        ref={ref}
+        className="flex justify-between items-center py-5 lg:py-14"
+      >
         <Link to="/">
           <VelixLogo />
         </Link>
@@ -32,7 +35,7 @@ export default function Header() {
         }`}
       >
         <div className="flex justify-between w-full max-w-5xl xl:max-w-7xl mx-auto relative">
-          <Link to="/">
+          <Link to="/" className="mt-2">
             <VelixLogo />
           </Link>
           <Button
