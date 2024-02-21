@@ -1,30 +1,48 @@
 import Section from "@/components/layouts/Section";
 import Title from "../../ui/velix/Title";
 import StakingOperations from "./StakingOperations";
-import Metrics from "./Metrics";
-import Chains from "./Chains";
+import AppContent from "@/components/layouts/AppContent";
+import Statitics from "../Statitics";
+import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
 
 export default function Stake() {
   return (
     <div>
-      <Section className="px-5 pb-16 lg:pb-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-start pt-28 lg:pt-40 pb-20 h-fit">
-          <div className="lg:row-span-2 h-fit mt-[1.3rem]">
+      <Section className="px-5 pb-32 lg:pb-16">
+        <StakeTitleWrapper>
+          <div className="w-full">
             <Title
               name="Stake METIS"
               subtitle="Stake METIS and receive veMETIS"
             />
-            <StakingOperations />
           </div>
-          <div className="mt-16 lg:mt-0 flex flex-col gap-5">
+          <div className="w-full">
             <Title
               name="Velix statistics"
               subtitle="View your  veMETIS statistics."
             />
-            <Metrics />
-            <Chains />
           </div>
-        </div>
+        </StakeTitleWrapper>
+        <AppContent>
+          <div className="w-full h-fit">
+            <div className="w-full block lg:hidden mt-32">
+              <Title
+                name="Stake METIS"
+                subtitle="Stake METIS and receive veMETIS"
+              />
+            </div>
+            <StakingOperations />
+          </div>
+          <div className="w-full">
+            <div className="w-full block lg:hidden mt-10">
+              <Title
+                name="Velix statistics"
+                subtitle="View your  veMETIS statistics."
+              />
+            </div>
+            <Statitics />
+          </div>
+        </AppContent>
       </Section>
     </div>
   );

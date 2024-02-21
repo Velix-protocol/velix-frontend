@@ -10,7 +10,7 @@ export default function VelixPrimaryLogoBlack(props: ComponentProps<"svg">) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_202_190)">
+      <g clipPath="url(#clip0_202_190)">
         <path
           d="M26.2002 22.5618L20.7802 0.443604H24.9138L29.4187 19.8743H29.8458L34.3506 0.443604H38.4893L33.0744 22.5618H26.2002Z"
           fill="#090928"

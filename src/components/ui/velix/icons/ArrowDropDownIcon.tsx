@@ -8,7 +8,7 @@ export default function ArrowDropDownIcon(props: ComponentProps<"svg">) {
       viewBox="0 0 20 20"
       fill="currentColor"
     >
-      <g clip-path="url(#clip0_315_729)">
+      <g clipPath="url(#clip0_315_729)">
         <path d="M5.83301 8.33331L9.99967 12.5L14.1663 8.33331H5.83301Z" />
       </g>
       <defs>

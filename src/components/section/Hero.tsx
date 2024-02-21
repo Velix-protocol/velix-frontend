@@ -26,7 +26,7 @@ export default function Hero() {
         <img
           src="/svg/hero-image-rotated.png"
           alt="hero image"
-          className="max-md:w-40 max-md:h-40 xl:scale-75 lg:ml-auto transition-transform"
+          className="max-md:w-80 max-md:h-80 xl:scale-75 lg:ml-auto transition-transform"
         />
       </div>
     </Section>
