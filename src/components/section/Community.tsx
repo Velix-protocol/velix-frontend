@@ -20,7 +20,7 @@ export default function Community() {
             <p className="text-velix-gray font-space-grotesk mt-5 font-light">
               Join our community and participate in discussions
             </p>
-            <div className="flex max-lg:gap-5 mt-5 max-lg:flex-col">
+            <div className="flex gap-3 lg:gap-5 mt-5 max-lg:flex-col">
               <Button className="font-space-grotesk  px-10 py-6 bg-velix-primary hover:bg-velix-primary">
                 Join the discord
               </Button>
