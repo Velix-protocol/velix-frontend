@@ -47,7 +47,7 @@ export default function AppHeader() {
             className="bg-white inline-flex items-center gap-2 hover:bg-white text-black text-[0.625rem] p-2 rounded-md font-space-grotesk"
           >
             {data && (
-              <span>
+              <span className="font-bold">
                 {converGweiToEth(data.value)} {data?.symbol}
               </span>
             )}
