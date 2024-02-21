@@ -8,23 +8,25 @@ export default function Hero() {
   return (
     <Section className="bg-velix-primary to-[#E8B94E]/90 px-5">
       <Header />
-      <div className="lg:grid grid-cols-2 justify-between py-10">
-        <div className="font-space-grotesk md:mt-20 flex flex-col">
-          <h2 className="font-bold max-sm:text-5xl text-[4rem] sm:leading-[5rem] text-white">
+      <div className="flex flex-col items-center lg:grid lg:-mt-28 h-fit lg:grid-cols-2 justify-between pb-10 max-lg:mt-8">
+        <div className="font-space-grotesk lg:mt-20 flex flex-col max-lg:items-center max-lg:px-5">
+          <h2 className="font-bold max-sm:text-3xl max-lg:text-center text-[4rem] lg:leading-[5rem] text-white">
             Stake your METIS, earn rewards.
           </h2>
-          <p className="text-white mt-2">Simplified liquid staking on METIS</p>
+          <p className="text-white max-lg:text-xs max-lg:text-center mt-2">
+            Simplified liquid staking on METIS
+          </p>
           <Button
             onClick={() => navigate("/app")}
-            className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-16"
+            className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-4 lg:mt-16"
           >
             Stake now
           </Button>
         </div>
         <img
-          src="/svg/hero-image.svg"
+          src="/svg/hero-image-rotated.png"
           alt="hero image"
-          className="hidden lg:block scale-75 xl:scale-100 ml-auto transition-transform"
+          className="max-md:w-40 max-md:h-40 xl:scale-75 lg:ml-auto transition-transform"
         />
       </div>
     </Section>

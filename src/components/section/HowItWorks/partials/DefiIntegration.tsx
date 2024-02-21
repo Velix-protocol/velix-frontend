@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-
 const DEFIs = [
   {
     icon: <img src="/svg/metamask.svg" alt="metamask" />,
@@ -29,20 +27,20 @@ const DEFIs = [
 
 export default function DefiIntegration() {
   return (
-    <div className="mt-24 lg:grid grid-cols-2">
+    <div className="mt-24 flex flex-col lg:grid grid-cols-2">
       <img
         src="/svg/defi-integration.svg"
         alt="defi integration"
-        className="hidden lg:block scale-75 xl:scale-100"
+        className="scale-75 xl:scale-100"
       />
       <div className="max-w-sm- lg:max-w-[21rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
-        <h2 className="font-space-grotesk font-bold text-4xl flex flex-col w-fit">
+        <h2 className="font-space-grotesk font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8 max-w-80">
             Find veMETIS and VL tokens on popular DeFi platforms on METIS
           </span>
         </h2>
-        <div className="grid max-[380px]:grid-cols-2 grid-cols-3 gap-3 mt-16">
+        <div className="grid max-[380px]:grid-cols-3 grid-cols-3 gap-3 mt-16">
           {DEFIs.map((defi) => {
             return (
               <div
@@ -65,12 +63,6 @@ export default function DefiIntegration() {
               </div>
             );
           })}
-          <Button
-            variant="outline"
-            className="border-black !border-[0.5px] mt-10 px-10 font-bold text-base"
-          >
-            Find more
-          </Button>
         </div>
       </div>
     </div>
