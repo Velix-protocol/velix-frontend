@@ -8,7 +8,7 @@ export default function Stake() {
   return (
     <div>
       <Section className="px-5 pb-16 lg:pb-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-5 justify-between items-start pt-28 lg:pt-40 pb-20 h-fit">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-start pt-28 lg:pt-40 pb-20 h-fit">
           <div className="lg:row-span-2 h-fit mt-[1.3rem]">
             <Title
               name="Stake METIS"

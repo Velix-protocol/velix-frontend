@@ -10,7 +10,7 @@ export default function Unstake() {
   return (
     <div>
       <Section className="px-5 pb-16 lg:pb-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-5 justify-between items-start pt-28 lg:pt-40 pb-20 h-fit">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 justify-between items-start pt-28 lg:pt-40 pb-20 h-fit">
           <div className="lg:row-span-2 h-fit">
             <Title name="Unstake METIS" subtitle="Request your veMETIS" />
             <div className="bg-white p-5 lg:p-11 rounded-xl h-full mt-20">
@@ -41,9 +41,9 @@ export default function Unstake() {
                 subtitle="View your  veMETIS statistics."
               />
               <Metrics />
+              <Chains />
             </div>
           </div>
-          <Chains />
         </div>
       </Section>
     </div>
