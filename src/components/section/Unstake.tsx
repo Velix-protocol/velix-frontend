@@ -35,7 +35,7 @@ export default function Unstake() {
             </div>
           </div>
           <div className="mt-16 lg:mt-0 flex flex-col gap-5">
-            <div>
+            <div className="flex flex-col gap-5">
               <Title
                 name="Velix statistics"
                 subtitle="View your  veMETIS statistics."

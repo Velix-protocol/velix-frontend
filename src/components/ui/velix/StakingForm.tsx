@@ -42,7 +42,12 @@ export default function StakingForm({
       {showSwapIcon && (
         <button
           onClick={() =>
-            navigate(pathname.includes("unstake") ? ".." : "unstake")
+            navigate(
+              pathname.includes("unstake") ? "/app/stake" : "/app/unstake",
+              {
+                relative: "path"
+              }
+            )
           }
           className="absolute mx-auto left-0 right-0 top-1/2 -translate-y-1/2"
         >
