@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.3.0...v1.3.1) (2024-02-21)
+
+
+### Bug Fixes
+
+* protocol description ([6b21040](https://github.com/Velix-protocol/velix-frontend/commit/6b21040a7c1156e2e13d18ad553f1901fb182493))
+
 ## [1.3.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.2.0...v1.3.0) (2024-02-19)
 
 
