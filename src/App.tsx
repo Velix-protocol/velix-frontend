@@ -14,9 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/app" element={<Page />}>
-            <Route index element={<StakePage />} />
+            <Route index path="mint" element={<MintPage />} />
             <Route path="unstake" element={<UnstakePage />} />
-            <Route path="mint" element={<MintPage />} />
+            <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />
           </Route>
         </Routes>

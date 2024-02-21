@@ -14,14 +14,14 @@ export default function Header() {
     <div>
       <header
         ref={ref}
-        className="flex justify-between items-center py-5 lg:py-14"
+        className="flex justify-between items-center py-5 lg:py-14 z-50"
       >
         <Link to="/">
           <VelixLogo />
         </Link>
         <Button
           onClick={() => {
-            return navigate("/app");
+            return navigate("/app/mint");
           }}
           className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
         >
@@ -40,7 +40,7 @@ export default function Header() {
           </Link>
           <Button
             onClick={() => {
-              return navigate("/app");
+              return navigate("/app/mint");
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >

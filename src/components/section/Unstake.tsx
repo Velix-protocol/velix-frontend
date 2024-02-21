@@ -3,6 +3,8 @@ import StakingDetails from "../ui/velix/StakingDetails";
 import StakingForm from "../ui/velix/StakingForm";
 import StakingFormButtom from "../ui/velix/StakingFormButtom";
 import Title from "../ui/velix/Title";
+import Chains from "./Stake/Chains";
+import Metrics from "./Stake/Metrics";
 
 export default function Unstake() {
   return (
@@ -32,6 +34,16 @@ export default function Unstake() {
               </div>
             </div>
           </div>
+          <div className="mt-16 lg:mt-0 flex flex-col gap-5">
+            <div>
+              <Title
+                name="Velix statistics"
+                subtitle="View your  veMETIS statistics."
+              />
+              <Metrics />
+            </div>
+          </div>
+          <Chains />
         </div>
       </Section>
     </div>

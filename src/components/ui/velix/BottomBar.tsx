@@ -23,16 +23,35 @@ export default function BottomBar() {
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
       <NavLink
         relative="path"
-        to="."
+        to="mint"
+        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
+      >
+        <span>
+          <TwigLightIcon
+            className={applyActiveStyles("mint", { className: "w-5 h-5" })}
+          />
+        </span>
+        <span
+          className={applyActiveStyles("mint", {
+            className: "lg:font-bold text-[0.625rem] lg:text-base"
+          })}
+        >
+          Mint
+        </span>
+      </NavLink>
+
+      <NavLink
+        relative="path"
+        to="stake"
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
           <WalletIcon
-            className={applyActiveStyles("app", { className: "w-5 h-5" })}
+            className={applyActiveStyles("stake", { className: "w-5 h-5" })}
           />
         </span>
         <span
-          className={applyActiveStyles("app", {
+          className={applyActiveStyles("stake", {
             className: "lg:font-bold text-[0.625rem] lg:text-base"
           })}
         >
@@ -55,24 +74,6 @@ export default function BottomBar() {
           })}
         >
           Unstake
-        </span>
-      </NavLink>
-      <NavLink
-        relative="path"
-        to="mint"
-        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
-      >
-        <span>
-          <TwigLightIcon
-            className={applyActiveStyles("mint", { className: "w-5 h-5" })}
-          />
-        </span>
-        <span
-          className={applyActiveStyles("mint", {
-            className: "lg:font-bold text-[0.625rem] lg:text-base"
-          })}
-        >
-          Mint
         </span>
       </NavLink>
       <NavLink
