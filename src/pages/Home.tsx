@@ -2,7 +2,6 @@ import Community from "@/components/section/Community";
 import Footer from "@/components/section/Footer";
 import Hero from "@/components/section/Hero";
 import HowItWorks from "@/components/section/HowItWorks";
-import SequencerStaking from "@/components/section/SequencerStaking";
 import VelixProperties from "@/components/section/VelixProperties";
 
 export default function Home() {

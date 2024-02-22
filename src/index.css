@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
 @font-face {
   font-family: "space-grotesk";
   src: url("./fonts/SpaceGrotesk-Light.ttf");

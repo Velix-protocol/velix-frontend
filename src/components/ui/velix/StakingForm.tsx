@@ -28,7 +28,7 @@ export default function StakingForm({
             className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
           />
         ) : (
-          <p className="text-velix-primary font-bold text-base mr-3">
+          <p className="text-velix-primary font-bold text-base ml-2 mr-3">
             0.0 METIS
           </p>
         )}
@@ -63,7 +63,7 @@ export default function StakingForm({
         </p>
         <div>
           {isStaking ? (
-            <p className="text-velix-primary font-bold text-base mr-3">
+            <p className="text-velix-primary font-bold text-base ml-2 mr-3">
               0.0 METIS
             </p>
           ) : (
