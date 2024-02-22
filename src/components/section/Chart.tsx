@@ -1,139 +1,85 @@
-import { ResponsiveLine } from "@nivo/line";
-import { ResponsiveBar } from "@nivo/bar";
 import { ComponentProps } from "react";
+import { ResponsiveBoxPlot } from "@nivo/boxplot";
+import { chartData } from "@/mocks/chartdata";
 
-function BarChart(props: ComponentProps<"div">) {
+export default function Chart(props: ComponentProps<"div">) {
   return (
     <div {...props}>
-      <ResponsiveBar
-        data={[
-          { name: "Jan", count: 111 },
-          { name: "Feb", count: 157 },
-          { name: "Mar", count: 129 },
-          { name: "Apr", count: 150 },
-          { name: "May", count: 119 },
-          { name: "Jun", count: 72 }
-        ]}
-        keys={["count"]}
-        indexBy="name"
-        margin={{ top: 0, right: 0, bottom: 40, left: 40 }}
-        padding={0.2}
-        colors={["#0000FE"]}
-        axisBottom={{
-          tickSize: 0,
-          tickPadding: 16
-        }}
-        axisLeft={{
-          tickSize: 0,
-          tickValues: 4,
-          tickPadding: 16
-        }}
-        gridYValues={4}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: "9999px"
-            },
-            container: {
-              fontSize: "12px",
-              textTransform: "capitalize",
-              borderRadius: "6px"
-            }
-          },
-          grid: {
-            line: {
-              stroke: "#f3f4f6"
-            }
-          }
-        }}
-        tooltipLabel={({ id }) => `${id}`}
-        enableLabel={false}
-        role="application"
-        ariaLabel="A bar chart showing data"
-      />
-    </div>
-  );
-}
-
-function LineChart(props: ComponentProps<"div">) {
-  return (
-    <div {...props}>
-      <ResponsiveLine
-        data={[
-          {
-            id: "Desktop",
-            data: [
-              { x: "Jan", y: 43 },
-              { x: "Feb", y: 137 },
-              { x: "Mar", y: 61 },
-              { x: "Apr", y: 145 },
-              { x: "May", y: 26 },
-              { x: "Jun", y: 154 }
-            ]
-          },
-          {
-            id: "Mobile",
-            data: [
-              { x: "Jan", y: 60 },
-              { x: "Feb", y: 48 },
-              { x: "Mar", y: 177 },
-              { x: "Apr", y: 78 },
-              { x: "May", y: 96 },
-              { x: "Jun", y: 204 }
-            ]
-          }
-        ]}
-        margin={{ top: 10, right: 10, bottom: 40, left: 40 }}
-        xScale={{
-          type: "point"
-        }}
-        yScale={{
-          type: "linear",
-          min: 0,
-          max: "auto"
-        }}
-        curve="monotoneX"
+      <ResponsiveBoxPlot
+        data={chartData}
+        margin={{ top: 60, right: 140, bottom: 60, left: 60 }}
+        minValue={0}
+        maxValue={10}
+        subGroupBy="subgroup"
+        quantiles={[0.1, 0.25, 0.5, 0.75, 0.9]}
+        padding={0.12}
+        enableGridY={false}
         axisTop={null}
-        axisRight={null}
+        axisRight={{
+          tickSize: 7,
+          tickPadding: 10,
+          tickRotation: 0,
+          legend: "",
+          legendOffset: 0,
+          truncateTickAt: 0
+        }}
         axisBottom={{
-          tickSize: 0,
-          tickPadding: 16
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "group",
+          legendPosition: "middle",
+          legendOffset: 32,
+          truncateTickAt: 0
         }}
         axisLeft={{
-          tickSize: 0,
-          tickValues: 5,
-          tickPadding: 16
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "value",
+          legendPosition: "middle",
+          legendOffset: -40,
+          truncateTickAt: 0
         }}
-        colors={["#0000FE", "#e11d48"]}
-        pointSize={6}
-        useMesh={true}
-        gridYValues={6}
-        theme={{
-          tooltip: {
-            chip: {
-              borderRadius: "9999px"
-            },
-            container: {
-              fontSize: "12px",
-              textTransform: "capitalize",
-              borderRadius: "6px"
-            }
-          },
-          grid: {
-            line: {
-              stroke: "#f3f4f6"
-            }
+        colors={{ scheme: "set1" }}
+        borderColor={{ theme: "background" }}
+        medianWidth={0}
+        medianColor={{
+          from: "color",
+          modifiers: [["darker", 0]]
+        }}
+        whiskerWidth={1}
+        whiskerEndSize={0.25}
+        whiskerColor={{
+          from: "color",
+          modifiers: [["darker", 0.6]]
+        }}
+        motionConfig="stiff"
+        legends={[
+          {
+            anchor: "right",
+            direction: "column",
+            justify: false,
+            translateX: 100,
+            translateY: 158,
+            itemWidth: 63,
+            itemHeight: 21,
+            itemsSpacing: 3,
+            itemTextColor: "#999",
+            itemDirection: "left-to-right",
+            symbolSize: 20,
+            symbolShape: "square",
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemTextColor: "#000"
+                }
+              }
+            ]
           }
-        }}
-        role="application"
+        ]}
       />
     </div>
   );
-}
-
-export default function Chart(
-  props: ComponentProps<"div"> & { type: "bar" | "line" }
-) {
-  const { type, ...rest } = props;
-  return type === "line" ? <LineChart {...rest} /> : <BarChart {...rest} />;
 }

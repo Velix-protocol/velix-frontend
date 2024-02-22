@@ -11,8 +11,7 @@
     "prepare": "npx husky install && chmod +x .husky/* && chmod +x ./branch-name-check.sh"
   },
   "dependencies": {
-    "@nivo/bar": "^0.84.0",
-    "@nivo/line": "^0.84.0",
+    "@nivo/boxplot": "^0.84.0",
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.0.2",
     "@svgr/webpack": "^8.1.0",

@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 export default function Community() {
   return (
-    <Section className="mt-16 px-5">
+    <Section className="mt-20 px-5">
       <div className="relative">
         <div className="font-space-grotesk hidden lg:block">
           <h2 className="text-4xl font-bold text-center">Join our community</h2>

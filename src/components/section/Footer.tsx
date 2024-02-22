@@ -11,7 +11,7 @@ export default function Footer() {
       <Section className="bg-velix-slate-blue relative mt-28">
         <VelixBlueLogo className="w-32 h-32 bg-white p-5 rounded-full absolute left-0 right-0 mx-auto -mt-16" />
 
-        <div className="grid md:grid-cols-2 md:justify-center px-5 gap-10 xl:grid-cols-4 py-24">
+        <div className="grid md:grid-cols-2 md:justify-center px-5 gap-10 xl:grid-cols-3 py-24">
           <div>
             <VelixBlackLogo />
             <p className="text-velix-primary font-space-grotesk text-[1rem] mt-5">
@@ -33,16 +33,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <h2 className="font-bold font-space-grotesk text-[1rem]">
-              Sequencer staking
-            </h2>
-            <ul className="font-space-grotesk text-velix-gray text-[1rem]">
-              <li className="cursor-pointer">What’s sequencer staking</li>
-              <li className="cursor-pointer">What can i earn</li>
-              <li className="cursor-pointer">What are the costs</li>
-            </ul>
-          </div>
+          {/*<div className="flex flex-col gap-6">*/}
+          {/*  <h2 className="font-bold font-space-grotesk text-[1rem]">*/}
+          {/*    Sequencer staking*/}
+          {/*  </h2>*/}
+          {/*  <ul className="font-space-grotesk text-velix-gray text-[1rem]">*/}
+          {/*    <li className="cursor-pointer">What’s sequencer staking</li>*/}
+          {/*    <li className="cursor-pointer">What can i earn</li>*/}
+          {/*    <li className="cursor-pointer">What are the costs</li>*/}
+          {/*  </ul>*/}
+          {/*</div>*/}
 
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-[1rem]">

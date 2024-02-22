@@ -13,7 +13,7 @@ export const chartData = [
     mu: 5,
     sd: 1,
     n: 20,
-    value: 4.600993715809739
+    value: 20
   },
   {
     group: "Alpha",

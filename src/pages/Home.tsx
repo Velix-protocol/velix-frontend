@@ -12,7 +12,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <VelixProperties />
-        <SequencerStaking />
+        {/*<SequencerStaking />*/}
         <Community />
         <Footer />
       </div>

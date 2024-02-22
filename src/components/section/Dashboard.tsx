@@ -2,17 +2,8 @@ import { CardContent, Card } from "@/components/ui/DashboardCard";
 import { Button } from "@/components/ui/button";
 import Chart from "./Chart";
 import Section from "../layouts/Section";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "../ui/select";
-import { useState } from "react";
 
 export default function Dashboard() {
-  const [chartType, setChartType] = useState<"line" | "bar">("line");
   return (
     <Section className="mt-28 px-5 pb-28">
       <div className="py-8 flex-col flex gap-8">
@@ -41,20 +32,9 @@ export default function Dashboard() {
               <Button className="text-velix-gray bg-transparent hover:bg-transparent">
                 Month
               </Button>
-              <Select
-                onValueChange={(value) => setChartType(value as "line" | "bar")}
-              >
-                <SelectTrigger className="lg:w-24 focus:ring-0 focus-visible:ring-0 ring-offset-0 focus:ring-offset-0">
-                  <SelectValue placeholder="Type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="line">Line</SelectItem>
-                  <SelectItem value="bar">Bar</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
           </div>
-          <Chart type={chartType} className="w-full h-[300px]" />
+          <Chart className="w-full h-[300px]" />
         </div>
       </div>
     </Section>
