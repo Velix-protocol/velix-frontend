@@ -24,7 +24,7 @@ export default function SequencerStaking() {
               <span className="font-bold text-5xl text-velix-primary">N/A</span>
               <span className="font-medium text-velix-gray">APR</span>
             </p>
-            <p className="font-bold text-base pt-2 flex lg:flex-col mt-10">
+            <p className="font-bold text-base pt-2 flex flex-col max-lg:items-center mt-10">
               Based on 7 days average
               <span className="font-light">+ VL rewards</span>
             </p>
