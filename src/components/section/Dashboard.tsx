@@ -20,9 +20,9 @@ export default function Dashboard() {
           {Array.from(Array(4).keys()).map((index) => (
             <Card key={index} className="bg-velix-slate-blue">
               <CardContent className="p-7 space-y-2">
-                <div className="text-sm text-velix-gray">VeMETIS balance</div>
+                <div className="text-sm text-velix-gray">veMETIS balance</div>
                 <div className="text-lg font-semibold text-velix-primary">
-                  0.0 VeMETIS
+                  0.0 veMETIS
                 </div>
               </CardContent>
             </Card>
