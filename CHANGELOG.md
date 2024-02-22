@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.4.0...v1.4.1) (2024-02-22)
+
+
+### Bug Fixes
+
+* improve  the dashboard ui ([8ce6f50](https://github.com/Velix-protocol/velix-frontend/commit/8ce6f500a5e92c4fe1ee5d7ddb91ab4deaae1832))
+* **type:** update veMETIS ([b16e148](https://github.com/Velix-protocol/velix-frontend/commit/b16e148b12c51449df941c8452baf3e87e6ba270))
+
 ## [1.4.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.3.1...v1.4.0) (2024-02-21)
 
 
