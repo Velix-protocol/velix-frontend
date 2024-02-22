@@ -17,7 +17,7 @@ export default function Header() {
         className="flex justify-between items-center py-5 lg:py-14 z-50"
       >
         <Link to="/">
-          <VelixLogo />
+          <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
         </Link>
         <Button
           onClick={() => {
@@ -34,9 +34,9 @@ export default function Header() {
           !inView ? "!top-0 !translate-y-0 transition-all duration-200" : ""
         }`}
       >
-        <div className="flex justify-between w-full max-w-5xl xl:max-w-7xl mx-auto relative">
-          <Link to="/" className="mt-2">
-            <VelixLogo />
+        <div className="flex justify-between items-center w-full max-w-5xl xl:max-w-7xl mx-auto relative">
+          <Link to="/">
+            <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
           </Link>
           <Button
             onClick={() => {

@@ -4,8 +4,6 @@ export default function VelixLogoGroup(props: ComponentProps<"svg">) {
   return (
     <svg
       {...props}
-      width="99"
-      height="25"
       viewBox="0 0 99 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
