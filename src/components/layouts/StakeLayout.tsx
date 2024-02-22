@@ -15,7 +15,11 @@ const StakeLayout = ({
   const { isConnected } = useAccount();
 
   return (
-    <div className="mt-10 lg:mt-20 bg-velix-primary rounded-2xl">
+    <div
+      className={`mt-10 lg:mt-20 ${
+        isConnected && "bg-velix-primary"
+      } rounded-2xl`}
+    >
       <Balance isConnected={isConnected} />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
         <StakingForm isStaking={isStaking} showSwapIcon={showSwapIcon} />

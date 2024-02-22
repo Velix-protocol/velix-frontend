@@ -23,7 +23,7 @@ export default function StakingOperations() {
             className="flex items-center text-velix-gray justify-between font-space-grotesk"
           >
             <span className="text-xs lg:text-base">Routing</span>
-            <span className="flex items-center bg-velix-slate-blue px-5 py-1 text-sm rounded-lg cursor-pointer">
+            <span className="flex items-center bg-velix-slate-blue px-5 py-1 text-[0.625rem] rounded-lg cursor-pointer">
               Protocol
               <ArrowDropDownIcon
                 className={`fill-velix-gray w-5 h-5 transition-all duration-150 ease-in-out ${
