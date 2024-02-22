@@ -25,10 +25,10 @@ export default function StakingForm({
           <Input
             type="number"
             placeholder="0.00 METIS"
-            className="bg-transparent placeholder:text-[0.625rem] placeholder:lg:text-sm h-5 lg:h-max border-none placeholder:text-sm focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
+            className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
           />
         ) : (
-          <p className="text-velix-primary font-bold text-[0.625rem] lg:text-sm mr-3">
+          <p className="text-velix-primary font-bold text-base mr-3">
             0.0 METIS
           </p>
         )}
@@ -63,14 +63,14 @@ export default function StakingForm({
         </p>
         <div>
           {isStaking ? (
-            <p className="text-velix-primary font-bold text-[0.625rem] lg:text-sm mr-3">
+            <p className="text-velix-primary font-bold text-base mr-3">
               0.0 METIS
             </p>
           ) : (
             <Input
               type="number"
               placeholder="0"
-              className="bg-transparent text-right h-5 lg:h-max border-none placeholder:text-sm focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
+              className="bg-transparent text-right h-5 lg:h-max border-none text-base focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
             />
           )}
         </div>
