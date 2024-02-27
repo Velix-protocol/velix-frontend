@@ -4,6 +4,7 @@ import VelixCard from "@/components/ui/velix/cards/VelixCard";
 import OfflineBolt from "@/components/svg/OfflineBolt";
 import OutBond from "@/components/svg/Outbond";
 import World from "@/components/svg/WorldIcon";
+import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 
 const PROPERTIES = [
   {
@@ -57,12 +58,15 @@ export default function VelixProperties() {
             />
           );
         })}
-        <div className="bg-velix-primary text-white font-space-grotesk flex flex-col justify-center rounded-[15px] p-9">
-          <p className="flex items-end gap-4">
+        <div className="bg-velix-primary relative overflow-hidden text-white font-space-grotesk flex flex-col justify-center rounded-[15px] p-9">
+          <VelixEclips className="absolute -top-72 -right-56" />
+          <p className="flex items-end gap-4 z-20">
             <span className="font-bold text-5xl">=20 %</span>
             <span className="font-medium">APR</span>
           </p>
-          <p className="font-light text-base pt-2">Based on 7 days average</p>
+          <p className="font-light text-base pt-2 z-20">
+            Based on 7 days average
+          </p>
         </div>
       </div>
     </Section>

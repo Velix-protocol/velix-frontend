@@ -23,7 +23,7 @@ const STEPS = [
 
 export default function Steps() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 justify-center items-center gap-5 mt-5 md:mt-16">
+    <div className="grid z-20 grid-cols-1 md:grid-cols-2 md:grid-rows-2 justify-center items-center gap-5 mt-5 md:mt-16">
       {STEPS.map((step, index) => {
         return (
           <div

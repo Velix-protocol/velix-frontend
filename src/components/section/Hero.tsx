@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <Section className="bg-velix-primary to-[#E8B94E]/90 px-5">
       <Header />
-      <div className="flex flex-col items-center lg:grid lg:-mt-28 h-fit lg:grid-cols-2 justify-between pb-10 max-lg:mt-8">
+      <div className="flex flex-col items-center lg:grid lg:-mt-28 h-fit lg:grid-cols-2 justify-between lg:py-28 max-lg:mt-8">
         <div className="font-space-grotesk lg:mt-20 flex flex-col max-lg:items-center max-lg:px-5">
           <h2 className="font-bold max-sm:text-3xl max-lg:text-center text-[4rem] lg:leading-[5rem] text-white">
             Stake your METIS, earn rewards.
@@ -24,9 +24,9 @@ export default function Hero() {
           </Button>
         </div>
         <img
-          src="/svg/hero-image-rotated.png"
+          src="/svg/hero-image.svg"
           alt="hero image"
-          className="max-md:w-80 max-md:h-80 xl:scale-75 lg:ml-auto transition-transform"
+          className="max-md:w-96 max-md:h-96 xl:scale-100 lg:ml-auto transition-transform"
         />
       </div>
     </Section>
