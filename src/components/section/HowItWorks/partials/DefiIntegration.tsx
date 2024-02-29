@@ -27,11 +27,11 @@ const DEFIs = [
 
 export default function DefiIntegration() {
   return (
-    <div className="mt-24 flex flex-col lg:grid grid-cols-2">
+    <div className="lg:mt-20 flex flex-col lg:grid grid-cols-2 justify-center items-center">
       <img
         src="/svg/defi-integration.svg"
         alt="defi integration"
-        className="scale-75 xl:scale-100"
+        className="scale-75 xl:scale-90"
       />
       <div className="max-w-sm- lg:max-w-[21rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
         <h2 className="font-space-grotesk font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
