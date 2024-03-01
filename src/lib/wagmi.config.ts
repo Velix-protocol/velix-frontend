@@ -50,7 +50,6 @@ export const config = defaultWagmiConfig({
   storage: createStorage({
     storage: cookieStorage
   }),
-
   enableWalletConnect: true,
   enableInjected: true,
   enableEIP6963: true,
