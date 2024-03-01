@@ -68,10 +68,14 @@ export default function Footer() {
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Discord className="w-4 h-4 fill-velix-primary" />
+              <a href="https://discord.gg/4BZV7W5P">
+                <Discord className="w-4 h-4 fill-velix-primary" />
+              </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <Telegram className="w-4 h-4 fill-velix-primary" />
+              <a href="https://t.me/velixprotocol">
+                <Telegram className="w-4 h-4 fill-velix-primary" />
+              </a>
             </li>
           </ul>
         </div>

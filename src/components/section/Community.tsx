@@ -25,13 +25,17 @@ export default function Community() {
             </p>
             <div className="flex gap-3 lg:gap-5 mt-5 max-lg:flex-col">
               <Button className="font-space-grotesk text-velix-black  px-10 py-6 bg-white hover:bg-white">
-                Join the discord
+                <a href="https://discord.gg/4BZV7W5P" target="_blank">
+                  Join the discord
+                </a>
               </Button>
               <Button
                 variant="outline"
                 className="font-space-grotesk  px-10 bg-transparent border-white text-white hover:text-white hover:bg-transparent py-6"
               >
-                Join Telegram
+                <a href="https://t.me/velixprotocol" target="_blank">
+                  Join Telegram
+                </a>
               </Button>
             </div>
           </div>
