@@ -9,9 +9,7 @@ export default function Community() {
         <div className="font-space-grotesk hidden lg:block">
           <h2 className="text-4xl font-bold text-center">Join our community</h2>
           <p className="text-velix-gray mt-5 text-center max-w-[28.5625rem] mx-auto">
-            Discover more about Velix, engage in conversation with us, and
-            contribute your insights towards shaping the future of the Velix
-            ecosystem.
+            Explore Velix, engage with us, and shape our ecosystem's future.
           </p>
         </div>
         <div className="bg-velix-black relative overflow-hidden flex justify-between items-center lg:py-10 lg:px-14 p-10 rounded-[15px] mt-16">
