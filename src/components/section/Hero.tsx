@@ -17,7 +17,7 @@ export default function Hero() {
             Simplifying liquid staking on Metis
           </p>
           <Button
-            onClick={() => navigate("/app/stake")}
+            onClick={() => navigate("/")}
             className="bg-velix-yellow hover:bg-velix-yellow px-10 w-fit mt-4 lg:mt-16"
           >
             Stake now
