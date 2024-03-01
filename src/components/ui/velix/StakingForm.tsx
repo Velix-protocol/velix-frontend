@@ -16,9 +16,8 @@ export default function StakingForm({
 
   return (
     <div
-      className={`flex flex-col relative gap-3 ${
-        isStaking ? "flex-col" : "flex-col-reverse"
-      }`}
+      className={`flex flex-col relative gap-3 ${isStaking ? "flex-col" : "flex-col-reverse"
+        }`}
     >
       <div className="flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
         {isStaking ? (

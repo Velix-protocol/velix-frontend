@@ -87,7 +87,7 @@
 * setup the app as SPA ([d74b1aa](https://github.com/Velix-protocol/velix-frontend/commit/d74b1aa9317089abd108d2fbe7eaf9b8a08e7a3d))
 * status tage index ([a46c09d](https://github.com/Velix-protocol/velix-frontend/commit/a46c09d94c5c50ea1a693823586900de89d32035))
 * status tage index ([3816d97](https://github.com/Velix-protocol/velix-frontend/commit/3816d97c96dcdf7f91c3f01362ab11ee8dc6f943))
-* typo in VeMetis ([2403c6e](https://github.com/Velix-protocol/velix-frontend/commit/2403c6eb377e06dc70c351421dcd269d493fbb8e))
+* typo in veMETIS ([2403c6e](https://github.com/Velix-protocol/velix-frontend/commit/2403c6eb377e06dc70c351421dcd269d493fbb8e))
 * typos ([bcd9d82](https://github.com/Velix-protocol/velix-frontend/commit/bcd9d8242e42536dfcd7325f563086f5782b32af))
 
 ## 1.0.0 (2024-02-17)
@@ -129,5 +129,5 @@
 * resolve build warning ([a821f50](https://github.com/Velix-protocol/velix-frontend/commit/a821f5065f2441c501356f3b3a2dc8f2ffa2101e))
 * status tage index ([a46c09d](https://github.com/Velix-protocol/velix-frontend/commit/a46c09d94c5c50ea1a693823586900de89d32035))
 * status tage index ([3816d97](https://github.com/Velix-protocol/velix-frontend/commit/3816d97c96dcdf7f91c3f01362ab11ee8dc6f943))
-* typo in VeMetis ([2403c6e](https://github.com/Velix-protocol/velix-frontend/commit/2403c6eb377e06dc70c351421dcd269d493fbb8e))
+* typo in veMETIS ([2403c6e](https://github.com/Velix-protocol/velix-frontend/commit/2403c6eb377e06dc70c351421dcd269d493fbb8e))
 * typos ([bcd9d82](https://github.com/Velix-protocol/velix-frontend/commit/bcd9d8242e42536dfcd7325f563086f5782b32af))

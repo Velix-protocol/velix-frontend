@@ -2,24 +2,26 @@ const STEPS = [
   {
     title: "1. Mint",
     description:
-      "Mint veMETIS by depositing Metis. veMETIS is your liquid staked token that can be sued across defi platforms on METIS"
+      "Mint veMETIS by depositing METIS tokens. veMETIS  represents a liquid staking derivative of METIS."
   },
   {
     title: "2. Do More with veMETIS",
     description:
-      "Stake veMETIS by locking your StMetis, a ticket to the Velix world  accumulating  staking rewards in real time denominated in veMETIS"
+      "Stake veMetis to receive sveMETIS, accumulating staking rewards denominated in veMETIS."
+
   },
   {
     title: "3. Receive veMETIS",
     description:
-      "Earn  yield, liquidity pool rewards and protocol fees by staking your veMETIS while your original Metis earns rewards."
-  },
+      "Earn yield, liquidity pool rewards and protocol fees by deploying your veMetis while your original METIS earns rewards."
+  }, 
   {
     title: "4. Stake",
     description:
-      "Stake any amount of Metis and view your daily staking rewards."
-  }
-];
+      "Use veMETIS across various DeFi protocols in the Metis ecosystem to maximize your rewards."
+  }                           
+];  
+
 
 export default function Steps() {
   return (
