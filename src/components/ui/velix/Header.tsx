@@ -8,7 +8,7 @@ export default function Header() {
     threshold: 0.2,
     initialInView: true
   });
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div>
