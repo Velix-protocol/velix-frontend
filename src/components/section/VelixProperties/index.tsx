@@ -42,7 +42,7 @@ export default function VelixProperties() {
       <div className="font-space-grotesk flex flex-col justify-center items-center">
         <h2 className="text-[1.25rem] lg:text-4xl font-bold">Velix LSD</h2>
         <p className="text-velix-gray mt-5 text-center">
-          Stake METIS, earn rewards with veMETIS, while contributing to METIS
+          Stake Metis ,earn rewards in VeMetis while contributing to METIS
           decentralization
         </p>
       </div>
