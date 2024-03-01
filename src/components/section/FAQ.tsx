@@ -28,7 +28,7 @@ const FAQs = [
       <span>
         - METIS is a token of the Metis Network. <br />- veMETIS is a liquid
         staking derivative of METIS, which is tradeable on decentralized
-        exchanges and can be swapped back into METIS. <br />- stMETIS is a
+        exchanges and can be swapped back into METIS. <br />- sveMETIS is a
         staked veMETIS that accumulates and automatically compounds staking
         rewards in the form of veMETIS.
       </span>
