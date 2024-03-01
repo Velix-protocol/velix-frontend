@@ -1,7 +1,7 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "../button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default function Header() {
   const { ref, inView } = useInView({
