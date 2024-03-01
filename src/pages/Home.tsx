@@ -1,8 +1,8 @@
 import Community from "@/components/section/Community";
+import FAQ from "@/components/section/FAQ";
 import Footer from "@/components/section/Footer";
 import Hero from "@/components/section/Hero";
 import HowItWorks from "@/components/section/HowItWorks";
-import VelixProperties from "@/components/section/VelixProperties";
 
 export default function Home() {
   return (
@@ -10,7 +10,8 @@ export default function Home() {
       <div>
         <Hero />
         <HowItWorks />
-        <VelixProperties />
+        {/* <VelixProperties /> */}
+        <FAQ />
         {/*<SequencerStaking />*/}
         <Community />
         <Footer />
