@@ -25,7 +25,7 @@ export default function Header() {
           }}
           className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
         >
-          Launch
+          Launch app
         </Button>
       </header>
 
@@ -44,7 +44,7 @@ export default function Header() {
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
-            Launch
+            Launch app
           </Button>
         </div>
       </header>

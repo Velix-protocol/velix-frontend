@@ -44,7 +44,7 @@ export default function AppHeader() {
           <div
             role="button"
             onClick={onConnectToWalletClick}
-            className="bg-white inline-flex items-center gap-2 hover:bg-white text-black text-[0.625rem] p-2 rounded-md font-space-grotesk"
+            className="bg-white inline-flex items-center text-sm gap-2 hover:bg-white text-black text-[0.625rem] p-2 rounded-md font-space-grotesk"
           >
             {data && (
               <span className="font-bold">
