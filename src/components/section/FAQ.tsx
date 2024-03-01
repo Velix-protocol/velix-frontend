@@ -8,31 +8,43 @@ import {
 
 const FAQs = [
   {
-    question: "What’s liquid staking?",
-    answer: "Explore Velix, engage with us, and shape our ecosystem's future."
+    question: "What is liquid staking?",
+    answer:
+      "Liquid staking protocols allow users to earn staking rewards without locking assets or maintaining staking infrastructure. Users can deposit tokens and receive tradable liquid tokens in return."
   },
   {
-    question: "What’s liquid staking?",
-    answer: "Explore Velix, engage with us, and shape our ecosystem's future."
+    question: "How to participate in liquid staking and earn staking rewards?",
+    answer: (
+      <span>
+        - Mint veMETIS from METIS using the 'Mint' tab. <br />- Stake veMETIS
+        using the 'Stake' tab Staking rewards are automatically compounded
+        during the staking period and become a part of your stake.
+      </span>
+    )
   },
   {
-    question: "What’s liquid staking?",
-    answer: "Explore Velix, engage with us, and shape our ecosystem's future."
+    question: "What is the difference between METIS, veMETIS, and sveMETIS?",
+    answer: (
+      <span>
+        - METIS is a token of the Metis Network. <br />- veMETIS is a liquid
+        staking derivative of METIS, which is tradeable on decentralized
+        exchanges and can be swapped back into METIS. <br />- stMETIS is a
+        staked veMETIS that accumulates and automatically compounds staking
+        rewards in the form of veMETIS.
+      </span>
+    )
   },
   {
-    question: "What’s liquid staking?",
-    answer: "Explore Velix, engage with us, and shape our ecosystem's future."
-  },
-  {
-    question: "What’s liquid staking?",
-    answer: "Explore Velix, engage with us, and shape our ecosystem's future."
+    question: "How to get veMETIS?",
+    answer:
+      "Mint veMETIS from METIS using the 'Mint' form above. Buy veMETIS on decentralized exchanges."
   }
 ];
 
 export default function FAQ() {
   return (
     <div>
-      <Section className="mt-10 max-lg:px-5">
+      <Section className="mt-20 max-lg:px-5">
         <div className="font-space-grotesk flex flex-col justify-center items-center">
           <h2 className="text-[1.25rem] lg:text-4xl font-bold">
             Frequently asked questions.
@@ -41,16 +53,16 @@ export default function FAQ() {
             Everything you need to know about velix
           </p>
         </div>
-        <div className="bg-velix-slate-blue p-5 lg:p-16 mt-20 rounded-lg grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="bg-velix-slate-blue p-5 lg:p-16 mt-20 rounded-lg grid grid-cols-1 gap-5">
           {FAQs.map((faq, index) => {
             return (
               <Accordion
                 key={`velix-faq-${index}`}
                 type="single"
-                className="bg-white h-fit px-10 py-3 rounded-lg font-space-grotesk text-[#54616B]"
+                className="bg-white px-10 py-3 rounded-lg font-space-grotesk text-[#54616B]"
                 collapsible
               >
-                <AccordionItem value={faq.answer}>
+                <AccordionItem value={faq.question}>
                   <AccordionTrigger className="no-underline hover:no-underline text-base font-bold">
                     {faq.question}
                   </AccordionTrigger>
