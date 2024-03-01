@@ -4,6 +4,7 @@ import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import XIcon from "../ui/velix/icons/XIcon";
 import Discord from "../ui/velix/icons/Discord";
 import Telegram from "../ui/velix/icons/Telegram";
+import { FaMedium } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -65,6 +66,11 @@ export default function Footer() {
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
                 <XIcon className="w-4 h-4 fill-velix-primary" />
+              </a>
+            </li>
+            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+              <a href="https://velixonmetis.medium.com" target="_blank">
+                <FaMedium className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">

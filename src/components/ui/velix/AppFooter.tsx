@@ -3,6 +3,7 @@ import Discord from "./icons/Discord";
 import Telegram from "./icons/Telegram";
 import VelixPrimaryBlackLogo from "./icons/VelixPrimaryBlackLogo";
 import XIcon from "./icons/XIcon";
+import { FaMedium } from "react-icons/fa6";
 
 export default function AppFooter() {
   return (
@@ -16,6 +17,11 @@ export default function AppFooter() {
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
             <a href="https://twitter.com/velixprotocol" target="_blank">
               <XIcon className="w-4 h-4 fill-white" />
+            </a>
+          </li>
+          <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
+            <a href="https://velixonmetis.medium.com" target="_blank">
+              <FaMedium className="w-4 h-4 fill-white" />
             </a>
           </li>
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
