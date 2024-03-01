@@ -53,17 +53,17 @@ export default function FAQ() {
             Everything you need to know about velix
           </p>
         </div>
-        <div className="bg-velix-slate-blue p-5 lg:p-16 mt-20 rounded-lg grid grid-cols-1 gap-5">
+        <div className="bg-velix-slate-blue p-5 lg:p-16 mt-20 rounded-lg grid grid-cols-1 gap-5 justify-start items-start">
           {FAQs.map((faq, index) => {
             return (
               <Accordion
                 key={`velix-faq-${index}`}
                 type="single"
-                className="bg-white px-10 py-3 rounded-lg font-space-grotesk text-[#54616B]"
+                className="bg-white px-5 lg:px-10 py-3 rounded-lg font-space-grotesk text-[#54616B]"
                 collapsible
               >
                 <AccordionItem value={faq.question}>
-                  <AccordionTrigger className="no-underline hover:no-underline text-base font-bold">
+                  <AccordionTrigger className="no-underline hover:no-underline text-base font-bold text-start">
                     {faq.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-base">
