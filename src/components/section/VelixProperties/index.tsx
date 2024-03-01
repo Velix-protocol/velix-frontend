@@ -10,12 +10,13 @@ const PROPERTIES = [
   {
     icon: <Cancel />,
     title: "Any amount",
-    description: "Earn yield on any amount of METIS staked"
+    description: "Earn yield on any amount of veMetis staked"
   },
   {
     icon: <OfflineBolt />,
     title: "Earn rewards",
-    description: "veMETIS earns rewards over time, increasing it's value"
+    description:
+      "Watch your veMETIS grow in value over time as it earns rewards"
   },
   {
     icon: <OutBond className="rotate-[222deg]" />,
@@ -25,12 +26,13 @@ const PROPERTIES = [
   {
     icon: <World className="fill-white bg-velix-primary p-1 rounded-full" />,
     title: "Use in Defi",
-    description: "Trade on exchanges, provide liquidity use as collateral"
+    description:
+      "Trade your veMETIS on Defi platforms and boost your liquidity rewards"
   },
   {
     icon: <OutBond className="rotate-45" />,
     title: "Restaking veMETIS",
-    description: "Restake any amount of veMETIS earns rewards"
+    description: "COMING SOON"
   }
 ];
 
