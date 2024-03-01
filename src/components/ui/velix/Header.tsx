@@ -21,7 +21,7 @@ export default function Header() {
         </Link>
         <Button
           onClick={() => {
-            return navigate("/app/mint");
+            // return navigate("/app/mint");
           }}
           className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
         >
@@ -40,7 +40,7 @@ export default function Header() {
           </Link>
           <Button
             onClick={() => {
-              return navigate("/app/mint");
+              // return navigate("/app/mint");
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
