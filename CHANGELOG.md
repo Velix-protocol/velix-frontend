@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.5.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.4.1...v1.5.0) (2024-03-01)
+
+
+### Features
+
+* add FAQ ([046d76e](https://github.com/Velix-protocol/velix-frontend/commit/046d76e198004cb3e350e6e92d24277ae8c9c6fe))
+* add FAQ data ([f555dcd](https://github.com/Velix-protocol/velix-frontend/commit/f555dcd048cbc151a38aa6d5d563c1dd6e379fe4))
+* add medium link ([cfee05b](https://github.com/Velix-protocol/velix-frontend/commit/cfee05bf40d8097054b7d40d41c9b0d1dacc4236))
+* add social medias ([e5c86f5](https://github.com/Velix-protocol/velix-frontend/commit/e5c86f57f5be5b469ff3f2db37d2de67aea60938))
+
 ## [1.4.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.4.0...v1.4.1) (2024-02-22)
 
 
