@@ -5,9 +5,10 @@ const STEPS = [
       "Mint veMETIS by depositing METIS tokens. veMETIS  represents a liquid staking derivative of METIS."
   },
   {
-    title: "2. Do More with veMetis",
+    title: "2. Do More with veMETIS",
     description:
       "Stake veMetis to receive sveMETIS, accumulating staking rewards denominated in veMETIS."
+
   },
   {
     title: "3. Receive veMETIS",
@@ -20,6 +21,7 @@ const STEPS = [
       "Use veMETIS across various DeFi protocols in the Metis ecosystem to maximize your rewards."
   }                           
 ];  
+
 
 export default function Steps() {
   return (

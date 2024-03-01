@@ -15,7 +15,7 @@ export default function Mint() {
         <StakeTitleWrapper>
           <div className="w-full">
             <Title
-              name="Mint METIS"
+              name="Mint"
               subtitle={
                 <p className="flex items-start justify-start gap-4">
                   <span>
@@ -40,7 +40,7 @@ export default function Mint() {
           <div className="w-full h-fit">
             <div className="w-full block lg:hidden mt-32">
               <Title
-                name="Mint METIS"
+                name="Mint"
                 subtitle={
                   <p className="flex items-start justify-start gap-4">
                     <span>

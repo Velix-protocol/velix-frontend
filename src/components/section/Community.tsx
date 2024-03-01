@@ -9,8 +9,9 @@ export default function Community() {
         <div className="font-space-grotesk hidden lg:block">
           <h2 className="text-4xl font-bold text-center">Join our community</h2>
           <p className="text-velix-gray mt-5 text-center max-w-[28.5625rem] mx-auto">
-            Learn more about Velix, chat with us and have your say in the future
-            of the Velix ecosystem
+            Discover more about Velix, engage in conversation with us, and
+            contribute your insights towards shaping the future of the Velix
+            ecosystem.
           </p>
         </div>
         <div className="bg-velix-black relative overflow-hidden flex justify-between items-center lg:py-10 lg:px-14 p-10 rounded-[15px] mt-16">
@@ -24,13 +25,17 @@ export default function Community() {
             </p>
             <div className="flex gap-3 lg:gap-5 mt-5 max-lg:flex-col">
               <Button className="font-space-grotesk text-velix-black  px-10 py-6 bg-white hover:bg-white">
-                Join the discord
+                <a href="https://discord.gg/4BZV7W5P" target="_blank">
+                  Join the discord
+                </a>
               </Button>
               <Button
                 variant="outline"
                 className="font-space-grotesk  px-10 bg-transparent border-white text-white hover:text-white hover:bg-transparent py-6"
               >
-                Join Telegram
+                <a href="https://t.me/velixprotocol" target="_blank">
+                  Join Telegram
+                </a>
               </Button>
             </div>
           </div>

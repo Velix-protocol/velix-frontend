@@ -14,7 +14,7 @@ export default function Hero() {
             Stake your METIS, earn rewards.
           </h2>
           <p className="text-white max-lg:text-xs max-lg:text-center mt-2">
-            Simplified liquid staking on METIS
+            Simplifying liquid staking on Metis
           </p>
           <Button
             onClick={() => navigate("/app/stake")}

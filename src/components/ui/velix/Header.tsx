@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "../button";
 import { Link} from "react-router-dom";
 
+
 export default function Header() {
   const { ref, inView } = useInView({
     threshold: 0.2,
@@ -25,7 +26,7 @@ export default function Header() {
           }}
           className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
         >
-          Launch
+          Launch app
         </Button>
       </header>
 
@@ -44,7 +45,7 @@ export default function Header() {
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
-            Launch
+            Launch app
           </Button>
         </div>
       </header>
