@@ -19,12 +19,12 @@ export default function AppFooter() {
             </a>
           </li>
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
-            <a href="https://discord.gg/4BZV7W5P">
+            <a href="https://discord.gg/4BZV7W5P" target="_blank">
               <Discord className="w-4 h-4 fill-white" />
             </a>
           </li>
           <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
-            <a href="https://t.me/velixprotocol">
+            <a href="https://t.me/velixprotocol" target="_blank">
               <Telegram className="w-4 h-4 fill-white" />
             </a>
           </li>
