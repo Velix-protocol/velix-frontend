@@ -26,11 +26,11 @@ const FAQs = [
     question: "What is the difference between METIS, veMETIS, and sveMETIS?",
     answer: (
       <span>
-        - METIS is a token of the Metis Network. <br />- veMETIS is a liquid
-        staking derivative of METIS, which is tradeable on decentralized
-        exchanges and can be swapped back into METIS. <br />- sveMETIS is a
-        staked veMETIS that accumulates and automatically compounds staking
-        rewards in the form of veMETIS.
+        - <b>METIS</b> is a token of the Metis Network. <br />- <b>veMETIS</b>{" "}
+        is a liquid staking derivative of METIS, which is tradeable on
+        decentralized exchanges and can be swapped back into METIS. <br />-
+        <b> sveMETIS</b> is a staked veMETIS that accumulates and automatically
+        compounds staking rewards in the form of veMETIS.
       </span>
     )
   },

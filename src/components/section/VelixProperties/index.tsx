@@ -67,7 +67,7 @@ export default function VelixProperties() {
             <span className="font-medium">APR</span>
           </p>
           <p className="font-light text-base pt-2 z-20">
-            Based on 7 days average
+            Based on one year average
           </p>
         </div>
       </div>
