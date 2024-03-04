@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.5.0...v1.5.1) (2024-03-04)
+
+
+### Bug Fixes
+
+* remove the double meti ([ce8365d](https://github.com/Velix-protocol/velix-frontend/commit/ce8365d3bead516e6f3ba34e99a5e0a567b98b3c))
+* **typo:** fix some typo on the landing page ([9121c5a](https://github.com/Velix-protocol/velix-frontend/commit/9121c5af9a2c29425baee600bb2f8582dc3032d4))
+
 ## [1.5.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.4.1...v1.5.0) (2024-03-01)
 
 
