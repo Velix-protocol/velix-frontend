@@ -25,7 +25,7 @@ const FAQs = [
     question: "What is the difference between METIS, veMETIS, and sveMETIS?",
     answer: (
       <span>
-        - <b>METIS</b> METIS is the native token of the Metis Network. <br />-{" "}
+        - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
         <b>veMETIS</b> is a liquid staking derivative of METIS, tradable on
         decentralized exchanges, and can be swapped back into METIS. <br />-
         <b> sveMETIS</b> is staked veMETIS that automatically accumulates and
