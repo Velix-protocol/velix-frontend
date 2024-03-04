@@ -10,15 +10,14 @@ const FAQs = [
   {
     question: "What is liquid staking?",
     answer:
-      "Liquid staking protocols allow users to earn staking rewards without locking assets or maintaining staking infrastructure. Users can deposit tokens and receive tradable liquid tokens in return."
+      "Liquid staking protocols enable users to earn staking rewards without locking assets or managing/maintaining staking infrastructure. Users can deposit tokens and receive tradable liquid tokens in return"
   },
   {
     question: "How to participate in liquid staking and earn staking rewards?",
     answer: (
       <span>
-        - Mint veMETIS from METIS using the 'Mint' tab. <br />- Stake veMETIS
-        using the 'Stake' tab Staking rewards are automatically compounded
-        during the staking period and become a part of your stake.
+        Stake veMETIS using the 'Stake' tab. Staking rewards are automatically
+        compounded during the staking period, enhancing your stake.
       </span>
     )
   },
@@ -26,10 +25,10 @@ const FAQs = [
     question: "What is the difference between METIS, veMETIS, and sveMETIS?",
     answer: (
       <span>
-        - <b>METIS</b> is a token of the Metis Network. <br />- <b>veMETIS</b>{" "}
-        is a liquid staking derivative of METIS, which is tradeable on
-        decentralized exchanges and can be swapped back into METIS. <br />-
-        <b> sveMETIS</b> is a staked veMETIS that accumulates and automatically
+        - <b>METIS</b> METIS is the native token of the Metis Network. <br />-{" "}
+        <b>veMETIS</b> is a liquid staking derivative of METIS, tradable on
+        decentralized exchanges, and can be swapped back into METIS. <br />-
+        <b> sveMETIS</b> is staked veMETIS that automatically accumulates and
         compounds staking rewards in the form of veMETIS.
       </span>
     )
@@ -37,7 +36,7 @@ const FAQs = [
   {
     question: "How to get veMETIS?",
     answer:
-      "Mint veMETIS from METIS using the 'Mint' form above. Buy veMETIS on decentralized exchanges."
+      "Mint veMETIS from METIS using the 'Mint' form above or buy veMETIS on decentralized exchanges."
   }
 ];
 
