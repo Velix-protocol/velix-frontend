@@ -7,8 +7,23 @@ import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
 import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
+import { ChangeEvent, useState } from "react";
+// import { useApproveMinting } from "@/hooks/use-contract";
 
 export default function Mint() {
+  const [amountToMint, setAmountToMint] = useState("");
+  // const  = useApproveMinting()
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmountToMint(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onMint = () => {
+    if (!amountToMint || !amountToMint.trim()) return;
+    console.log("mint");
+  };
+
   return (
     <div>
       <Section className="px-5 pb-32 lg:pb-16">
@@ -54,7 +69,11 @@ export default function Mint() {
                 }
               />
             </div>
-            <StakeLayout showSwapIcon={false} isStaking={false}>
+            <StakeLayout
+              onFromValueChange={onChange}
+              showSwapIcon={false}
+              isStaking={false}
+            >
               <div className="mt-9 flex flex-col gap-7">
                 <StakingDetails
                   title="Exchange Rate"
@@ -69,7 +88,7 @@ export default function Mint() {
                   }
                 />
               </div>
-              <StakingFormButtom role="mint" />
+              <StakingFormButtom onMint={onMint} role="mint" />
             </StakeLayout>
           </div>
           <div className="w-full">

@@ -3,25 +3,30 @@ import { Input } from "../input";
 import MetisIcon from "./icons/MetisIcon";
 import SwapIcon from "./icons/SwapIcon";
 import VelixBlueLogo from "./icons/VelixBlueLogo";
+import { ChangeEvent } from "react";
 
 export default function StakingForm({
   isStaking,
-  showSwapIcon = true
+  showSwapIcon = true,
+  onChange
 }: {
   isStaking: boolean;
   showSwapIcon?: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
   return (
     <div
-      className={`flex flex-col relative gap-3 ${isStaking ? "flex-col" : "flex-col-reverse"
-        }`}
+      className={`flex flex-col relative gap-3 ${
+        isStaking ? "flex-col" : "flex-col-reverse"
+      }`}
     >
       <div className="flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
         {isStaking ? (
           <Input
+            onChange={onChange}
             type="number"
             placeholder="0.00 METIS"
             className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
@@ -67,6 +72,7 @@ export default function StakingForm({
             </p>
           ) : (
             <Input
+              onChange={onChange}
               type="number"
               placeholder="0"
               className="bg-transparent text-right h-5 lg:h-max border-none text-base focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"

@@ -141,7 +141,7 @@ export const useUnstake = () => {
       return await writeContractAsync({
         abi: SVMETIS_CONTRACT_ABI,
         address: SVEMETIS_CONTRACT_ADDRESS,
-        functionName: "withdraw",
+        functionName: "redeem",
         args: [BigInt(amount), walletAddress, walletAddress]
       });
     },

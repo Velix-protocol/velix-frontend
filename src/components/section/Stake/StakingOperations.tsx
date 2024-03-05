@@ -14,7 +14,7 @@ export default function StakingOperations() {
     setIsProtocolDisclaimerOpened((prev) => !prev);
 
   return (
-    <StakeLayout isStaking={isStaking}>
+    <StakeLayout onFromValueChange={() => null} isStaking={isStaking}>
       <div className="flex flex-col space-y-5 mt-10">
         <div>
           <p
@@ -26,8 +26,9 @@ export default function StakingOperations() {
             <span className="flex items-center bg-velix-slate-blue px-5 py-1 text-xs max-sm:text-[0.625rem] rounded-lg cursor-pointer">
               Protocol
               <ArrowDropDownIcon
-                className={`fill-velix-gray w-5 h-5 transition-all duration-150 ease-in-out ${isProtocolDisclaimerOpened && "rotate-180"
-                  }`}
+                className={`fill-velix-gray w-5 h-5 transition-all duration-150 ease-in-out ${
+                  isProtocolDisclaimerOpened && "rotate-180"
+                }`}
               />
             </span>
           </p>
