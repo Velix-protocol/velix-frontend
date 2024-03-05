@@ -7,7 +7,7 @@ import {
 import { truncateString } from "@/lib/utils";
 import { metis } from "wagmi/chains";
 
-const avalabledChains = [
+const avalableChains = [
   {
     address: metis.contracts.multicall3.address,
     symbol: metis.nativeCurrency.symbol,
@@ -49,7 +49,7 @@ export default function Chains() {
 
   return (
     <div className="bg-white rounded-xl flex flex-col gap-3 h-max p-5 lg:p-11">
-      {avalabledChains.map((chain) => {
+      {avalableChains.map((chain) => {
         return (
           <div
             key={chain.address}
