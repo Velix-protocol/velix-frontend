@@ -74,7 +74,7 @@ export default function Footer() {
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
-              <a href="https://discord.gg/4BZV7W5P" target="_blank">
+              <a href="https://discord.gg/v594pjBw5u" target="_blank">
                 <Discord className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>

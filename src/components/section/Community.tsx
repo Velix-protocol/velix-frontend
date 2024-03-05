@@ -23,7 +23,7 @@ export default function Community() {
             </p>
             <div className="flex gap-3 lg:gap-5 mt-5 max-lg:flex-col">
               <Button className="font-space-grotesk text-velix-black  px-10 py-6 bg-white hover:bg-white">
-                <a href="https://discord.gg/4BZV7W5P" target="_blank">
+                <a href="https://discord.gg/v594pjBw5u" target="_blank">
                   Join the discord
                 </a>
               </Button>
