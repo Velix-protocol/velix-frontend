@@ -127,3 +127,26 @@ export const useApproveUnstaking = () => {
 
   return { ...rest, approveUnstaking };
 };
+
+/**
+ * Unstake hook
+ * Should be called after approving the unstaking process
+ * @returns
+ */
+export const useUnstake = () => {
+  const { writeContractAsync, ...rest } = useWriteContract();
+
+  const approveUnstaking = useCallback(
+    async (amount: number, walletAddress: `0x0${string}`) => {
+      return await writeContractAsync({
+        abi: SVMETIS_CONTRACT_ABI,
+        address: SVEMETIS_CONTRACT_ADDRESS,
+        functionName: "withdraw",
+        args: [BigInt(amount), walletAddress, walletAddress]
+      });
+    },
+    [writeContractAsync]
+  );
+
+  return { ...rest, approveUnstaking };
+};
