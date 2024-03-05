@@ -7,7 +7,7 @@ import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
 import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Modal from "../ui/velix/Modal";
 import ClockIcon from "../ui/velix/icons/ClockIcon";
 // import { useApproveMinting } from "@/hooks/use-contract";
@@ -29,10 +29,18 @@ export default function Mint() {
     console.log("mint");
   };
 
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showModal]);
+
   return (
     <>
       {showModal && (
-        <Modal isOpened={showModal} onClose={() => setShowModal(false)}>
+        <Modal onClose={() => setShowModal(false)}>
           <div className="flex flex-col gap-3 items-center">
             <ClockIcon className="w-10 h-10 mb-6" />
             <p className="font-bold text-center text-2xl lg:text-4xl">

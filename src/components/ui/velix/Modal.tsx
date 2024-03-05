@@ -1,23 +1,13 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import CancelIcon from "./icons/CancelIcon";
 
 export default function Modal({
   children,
-  onClose,
-  isOpened
+  onClose
 }: {
   children: ReactNode;
-  isOpened: boolean;
   onClose: () => void;
 }) {
-  useEffect(() => {
-    if (isOpened) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-  }, [isOpened]);
-
   return (
     <div className="fixed z-50 px-5 bg-velix-primary/20 inset-0 font-space-grotesk">
       <div className="bg-white max-w-screen-md mx-auto flex justify-center items-center mt-64 relative p-10 lg:p-20 rounded-lg">
