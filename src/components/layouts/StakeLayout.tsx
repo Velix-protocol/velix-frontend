@@ -4,13 +4,11 @@ import StakingForm from "../ui/velix/StakingForm";
 import { ChangeEvent, ReactNode } from "react";
 
 const StakeLayout = ({
-  isStaking,
   children,
   showSwapIcon = true,
   onFromValueChange,
   role
 }: {
-  isStaking: boolean;
   children: ReactNode;
   showSwapIcon?: boolean;
   onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -29,7 +27,6 @@ const StakeLayout = ({
         <StakingForm
           role={role}
           onChange={onFromValueChange}
-          isStaking={isStaking}
           showSwapIcon={showSwapIcon}
         />
         {children}

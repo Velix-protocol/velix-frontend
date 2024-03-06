@@ -154,11 +154,7 @@ export default function Unstake() {
               <div className="w-full block lg:hidden mt-32">
                 <Title name="Unstake METIS" subtitle="Request your veMETIS" />
               </div>
-              <StakeLayout
-                role="unstake"
-                onFromValueChange={onChange}
-                isStaking={false}
-              >
+              <StakeLayout role="unstake" onFromValueChange={onChange}>
                 <div className="mt-9 flex flex-col gap-7">
                   <StakingDetails
                     title="Max unlock cost"

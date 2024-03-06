@@ -185,7 +185,6 @@ export default function Mint() {
                 role="mint"
                 onFromValueChange={onChange}
                 showSwapIcon={false}
-                isStaking={false}
               >
                 <div className="mt-9 flex flex-col gap-7">
                   <StakingDetails

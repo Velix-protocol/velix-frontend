@@ -1,4 +1,3 @@
-import { useStakingStore } from "@/store/stakingState";
 import StakingFormButtom from "@/components/ui/velix/StakingFormButtom";
 import StakingDetails from "@/components/ui/velix/StakingDetails";
 import ArrowDropDownIcon from "@/components/ui/velix/icons/ArrowDropDownIcon";
@@ -12,7 +11,6 @@ import ClockIcon from "@/components/ui/velix/icons/ClockIcon";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 
 export default function StakingOperations() {
-  const { isStaking } = useStakingStore();
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
 
@@ -139,11 +137,7 @@ export default function StakingOperations() {
           </div>
         </Modal>
       )}
-      <StakeLayout
-        role="stake"
-        onFromValueChange={onChange}
-        isStaking={isStaking}
-      >
+      <StakeLayout role="stake" onFromValueChange={onChange}>
         <div className="flex flex-col space-y-5 mt-10">
           <div>
             <p
