@@ -95,6 +95,7 @@ export default function StakingOperations() {
   );
 
   const onCloseModal = () => {
+    if (isPending || stakePending) return;
     setShowModal(false);
     setStakeBrigde(false);
     setVestment(false);
@@ -241,7 +242,11 @@ export default function StakingOperations() {
             }
           />
         </div>
-        <StakingFormButtom onStake={onStartStaking} role="stake" />
+        <StakingFormButtom
+          isLoading={isPending || stakePending}
+          onStake={onStartStaking}
+          role="stake"
+        />
       </StakeLayout>
     </>
   );

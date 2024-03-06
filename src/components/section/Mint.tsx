@@ -1,4 +1,4 @@
-import { InfoIcon } from "lucide-react";
+import { InfoIcon, Loader } from "lucide-react";
 import Section from "../layouts/Section";
 import StakingDetails from "../ui/velix/StakingDetails";
 import StakingFormButtom from "../ui/velix/StakingFormButtom";
@@ -108,6 +108,7 @@ export default function Mint() {
   );
 
   const onClose = () => {
+    if (isPending || mintPending) return;
     setShowModal(false);
     resetApproveState();
     resetMintState();
@@ -119,7 +120,7 @@ export default function Mint() {
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
-              <ClockIcon className="w-10 h-10 mb-6" />
+              <Loader className="w-10 h-10 mb-6 animate-spin" />
             )}
             {isMinted && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
@@ -140,6 +141,7 @@ export default function Mint() {
 
             {currentStep === 2 && !isMinted && (
               <StakingFormButtom
+                isLoading={mintPending}
                 disabled={mintPending}
                 role="mint"
                 onMint={onMint}
@@ -218,6 +220,7 @@ export default function Mint() {
                   />
                 </div>
                 <StakingFormButtom
+                  isLoading={isPending || mintPending}
                   disabled={isPending || mintPending}
                   onMint={onStartMinting}
                   role="mint"

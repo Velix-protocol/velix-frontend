@@ -11,8 +11,8 @@ import { useApproveUnstaking, useUnstake } from "@/hooks/use-contract";
 import classnames from "classnames";
 import { useAccount } from "wagmi";
 import SuccessIcon from "../ui/velix/icons/SuccessIcon";
-import ClockIcon from "../ui/velix/icons/ClockIcon";
 import Modal from "../ui/velix/Modal";
+import { Loader } from "lucide-react";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -106,6 +106,7 @@ export default function Unstake() {
   );
 
   const onClose = () => {
+    if (isPending || unstakePending) return;
     setShowModal(false);
     resetApproveState();
     resetUnstakeState();
@@ -117,7 +118,7 @@ export default function Unstake() {
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
-              <ClockIcon className="w-10 h-10 mb-6" />
+              <Loader className="w-10 h-10 mb-6 animate-spin" />
             )}
             {isunStaked && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
@@ -138,6 +139,7 @@ export default function Unstake() {
 
             {currentStep === 2 && !isunStaked && (
               <StakingFormButtom
+                isLoading={unstakePending}
                 disabled={unstakePending}
                 role="unstake"
                 onUnstake={onUnstake}
@@ -190,6 +192,7 @@ export default function Unstake() {
                     value="1 veMETIS = 1 METIS"
                   />
                   <StakingFormButtom
+                    isLoading={isPending || unstakePending}
                     onUnstake={onStartUnstaking}
                     role="unstake"
                   />

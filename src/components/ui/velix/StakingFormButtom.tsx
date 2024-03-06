@@ -1,15 +1,18 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { Button } from "../button";
+import { Loader } from "lucide-react";
 
 export default function StakingFormButtom({
   role,
   onMint,
   onStake,
   onUnstake,
-  disabled
+  disabled,
+  isLoading
 }: {
   role: "stake" | "mint" | "unstake";
+  isLoading: boolean;
   disabled?: boolean;
   onMint?: () => void;
   onStake?: () => void;
@@ -49,7 +52,11 @@ export default function StakingFormButtom({
       onClick={onStakeOperationClick}
       className="lg:py-7 disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
     >
-      {renderStakeOperationButtonTitle()}
+      {isLoading ? (
+        <Loader className="animate-spin" />
+      ) : (
+        renderStakeOperationButtonTitle()
+      )}
     </Button>
   );
 }
