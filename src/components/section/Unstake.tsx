@@ -1,3 +1,4 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import AppContent from "../layouts/AppContent";
 import Section from "../layouts/Section";
 import StakeLayout from "../layouts/StakeLayout";
@@ -6,58 +7,192 @@ import StakingDetails from "../ui/velix/StakingDetails";
 import StakingFormButtom from "../ui/velix/StakingFormButtom";
 import Title from "../ui/velix/Title";
 import Statitics from "./Statitics";
+import { useApproveUnstaking, useUnstake } from "@/hooks/use-contract";
+import classnames from "classnames";
+import { useAccount } from "wagmi";
+import SuccessIcon from "../ui/velix/icons/SuccessIcon";
+import ClockIcon from "../ui/velix/icons/ClockIcon";
+import Modal from "../ui/velix/Modal";
 
 export default function Unstake() {
+  const [amountToUnstake, setAmountToUnstake] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
+  const { approveUnstaking, isPending, isSuccess, error } =
+    useApproveUnstaking();
+  const {
+    unstake,
+    isPending: unstakePending,
+    isSuccess: isunStaked,
+    error: unstakeError
+  } = useUnstake();
+  const { address: walletAddress } = useAccount();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setCurrentStep(2);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showModal]);
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmountToUnstake(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onStartUnstaking = async () => {
+    if (!amountToUnstake || !amountToUnstake.trim()) return;
+    setShowModal(true);
+    await approveUnstaking(amountToUnstake);
+  };
+
+  const onUnstake = async () => {
+    if (!amountToUnstake || !amountToUnstake.trim() || !walletAddress) return;
+    await unstake(amountToUnstake, walletAddress);
+  };
+
+  const renderModalTitle = () => {
+    if (currentStep === 1 && !error) return "Waiting for Approval.";
+    if (currentStep === 1 && error) return "Approval failed.";
+    if (currentStep === 2 && !unstakeError && !isunStaked)
+      return "Approved, you can now unStake.";
+    if (currentStep === 2 && unstakeError) return "Failed to unstake.";
+    if (currentStep === 2 && isunStaked) return "Successfully unstaked.";
+  };
+
+  const renderErrorMessage = () => {
+    if (error) return error.message.split(".")[0];
+    if (unstakeError) return unstakeError.message.split(".")[0];
+  };
+
+  const step1Classnames = classnames(
+    "text-white  h-8 w-8 flex justify-center items-center rounded-full",
+    {
+      "bg-red-600": error,
+      "bg-velix-primary": !error
+    }
+  );
+
+  const stepsLinkClassnames = classnames("h-1 w-32 bg-gradient-to-r", {
+    "from-velix-primary to-velix-gray/20": currentStep === 1 && !error,
+    "from-red-600 to-velix-gray/20": currentStep === 1 && error,
+    "from-velix-primary to-red-600": currentStep === 2 && unstakeError,
+    "from-velix-primary to-velix-primary": currentStep === 2 && !unstakeError
+  });
+
+  const step2Classnames = classnames(
+    "h-8 w-8 flex justify-center items-center p-2 rounded-full",
+    {
+      "bg-red-600 text-white": currentStep === 2 && unstakeError,
+      "text-white bg-velix-primary": currentStep === 2 && !unstakeError,
+      "bg-velix-gray/20 text-velix-primary": currentStep === 1 && !unstakeError
+    }
+  );
+
   return (
-    <div>
-      <Section className="px-5 pb-32 lg:pb-16">
-        <StakeTitleWrapper>
-          <div className="w-full">
-            <Title name="Unstake METIS" subtitle="Request your veMETIS" />
+    <>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <div className="flex flex-col gap-3 items-center">
+            {isPending && currentStep === 1 && (
+              <ClockIcon className="w-10 h-10 mb-6" />
+            )}
+            {isunStaked && <SuccessIcon className="w-10 h-10 mb-6" />}
+            <p className="font-bold text-center text-2xl lg:text-4xl">
+              {renderModalTitle()}
+            </p>
+            {!error && !unstakeError && !isunStaked && (
+              <p className="text-velix-gray text-center text-base">
+                {currentStep === 1
+                  ? "Confirm this transaction in your wallet."
+                  : "unstake sveMETIS"}
+              </p>
+            )}
+            {(error || unstakeError) && (
+              <p className="text-red-600 text-center text-base">
+                {renderErrorMessage()}
+              </p>
+            )}
+
+            {currentStep === 2 && !isunStaked && (
+              <StakingFormButtom
+                disabled={unstakePending}
+                role="unstake"
+                onUnstake={onUnstake}
+              />
+            )}
+            <div className="flex gap-0 items-center w-fit h-fit mt-8">
+              <p className={step1Classnames}>1</p>
+              <div className={stepsLinkClassnames} />
+              <p className={step2Classnames}>2</p>
+            </div>
           </div>
-          <div className="w-full">
-            <Title
-              name="Velix statistics"
-              subtitle="View your  veMETIS statistics."
-            />
-          </div>
-        </StakeTitleWrapper>
-        <AppContent>
-          <div className="w-full h-fit">
-            <div className="w-full block lg:hidden mt-32">
+        </Modal>
+      )}
+      <div>
+        <Section className="px-5 pb-32 lg:pb-16">
+          <StakeTitleWrapper>
+            <div className="w-full">
               <Title name="Unstake METIS" subtitle="Request your veMETIS" />
             </div>
-            <StakeLayout onFromValueChange={() => null} isStaking={false}>
-              <div className="mt-9 flex flex-col gap-7">
-                <StakingDetails
-                  title="Max unlock cost"
-                  value={
-                    <p className="bg-velix-slate-green/20 text-velix-slate-green p-2 rounded-lg text-xs uppercase">
-                      Free
-                    </p>
-                  }
-                />
-                <StakingDetails title="Max transaction cost" value="$82.47" />
-                <StakingDetails title="Allowance" value="0.0 veMETIS" />
-                <StakingDetails
-                  title="Exchange rate"
-                  value="1 veMETIS = 1 METIS"
-                />
-                <StakingFormButtom role="unstake" />
-              </div>
-            </StakeLayout>
-          </div>
-          <div className="w-full">
-            <div className="w-full block lg:hidden mt-10">
+            <div className="w-full">
               <Title
                 name="Velix statistics"
                 subtitle="View your  veMETIS statistics."
               />
             </div>
-            <Statitics />
-          </div>
-        </AppContent>
-      </Section>
-    </div>
+          </StakeTitleWrapper>
+          <AppContent>
+            <div className="w-full h-fit">
+              <div className="w-full block lg:hidden mt-32">
+                <Title name="Unstake METIS" subtitle="Request your veMETIS" />
+              </div>
+              <StakeLayout
+                role="unstake"
+                onFromValueChange={onChange}
+                isStaking={false}
+              >
+                <div className="mt-9 flex flex-col gap-7">
+                  <StakingDetails
+                    title="Max unlock cost"
+                    value={
+                      <p className="bg-velix-slate-green/20 text-velix-slate-green p-2 rounded-lg text-xs uppercase">
+                        Free
+                      </p>
+                    }
+                  />
+                  <StakingDetails title="Max transaction cost" value="$82.47" />
+                  <StakingDetails title="Allowance" value="0.0 veMETIS" />
+                  <StakingDetails
+                    title="Exchange rate"
+                    value="1 veMETIS = 1 METIS"
+                  />
+                  <StakingFormButtom
+                    onUnstake={onStartUnstaking}
+                    role="unstake"
+                  />
+                </div>
+              </StakeLayout>
+            </div>
+            <div className="w-full">
+              <div className="w-full block lg:hidden mt-10">
+                <Title
+                  name="Velix statistics"
+                  subtitle="View your  veMETIS statistics."
+                />
+              </div>
+              <Statitics />
+            </div>
+          </AppContent>
+        </Section>
+      </div>
+    </>
   );
 }

@@ -6,9 +6,11 @@ export default function StakingFormButtom({
   role,
   onMint,
   onStake,
-  onUnstake
+  onUnstake,
+  disabled
 }: {
   role: "stake" | "mint" | "unstake";
+  disabled?: boolean;
   onMint?: () => void;
   onStake?: () => void;
   onUnstake?: () => void;
@@ -43,8 +45,9 @@ export default function StakingFormButtom({
 
   return (
     <Button
+      disabled={disabled}
       onClick={onStakeOperationClick}
-      className="lg:py-7 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
+      className="lg:py-7 disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
     >
       {renderStakeOperationButtonTitle()}
     </Button>

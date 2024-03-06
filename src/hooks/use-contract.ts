@@ -1,4 +1,4 @@
-import { useWriteContract } from "wagmi";
+import { useReadContract, useWriteContract } from "wagmi";
 import { useCallback } from "react";
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
 import {
@@ -10,6 +10,7 @@ import {
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
+import { parseUnits } from "ethers";
 
 /**
  * useApproveMinting approves the minting proess
@@ -20,19 +21,19 @@ import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
 export const useApproveMinting = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
-  const ApproveMinting = useCallback(
-    async (veMetisMInter: `0x0${string}`, amount: number) => {
+  const approveMinting = useCallback(
+    async (amount: string) => {
       return await writeContractAsync({
         abi: METIS_TOKEN_CONTRACT_ABI,
         address: METIS_TOKEN_CONTRACT_ADDRESS,
         functionName: "approve",
-        args: [veMetisMInter, BigInt(amount)]
+        args: [VEMETIS_MINTER_CONTRACT_ADDRESS, parseUnits(amount)]
       });
     },
     [writeContractAsync]
   );
 
-  return { ...rest, ApproveMinting };
+  return { ...rest, approveMinting };
 };
 
 /**
@@ -46,12 +47,12 @@ export const useMint = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
   const mint = useCallback(
-    async (veMetisMInter: `0x0${string}`, amount: number) => {
+    async (walletAddress: `0x${string}`, amount: string) => {
       return await writeContractAsync({
         abi: VEMETIS_MINTER_CONTRACT_ABI,
         address: VEMETIS_MINTER_CONTRACT_ADDRESS,
         functionName: "mint",
-        args: [veMetisMInter, BigInt(amount)]
+        args: [walletAddress, parseUnits(amount)]
       });
     },
     [writeContractAsync]
@@ -70,12 +71,12 @@ export const useApproveStaking = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
   const approveStaking = useCallback(
-    async (veMetisMInter: `0x0${string}`, amount: number) => {
+    async (amountToStake: string) => {
       return await writeContractAsync({
         abi: VEMETIS_CONTRACT_ABI,
         address: VEMITIS_CONTRACT_ADDRESS,
         functionName: "approve",
-        args: [veMetisMInter, BigInt(amount)]
+        args: [SVEMETIS_CONTRACT_ADDRESS, parseUnits(amountToStake)]
       });
     },
     [writeContractAsync]
@@ -92,12 +93,12 @@ export const useStaking = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
   const stake = useCallback(
-    async (walletAddress: `0x0${string}`, amount: number) => {
+    async (walletAddress: `0x${string}`, amount: string) => {
       return await writeContractAsync({
         abi: SVMETIS_CONTRACT_ABI,
         address: SVEMETIS_CONTRACT_ADDRESS,
         functionName: "deposit",
-        args: [BigInt(amount), walletAddress]
+        args: [parseUnits(amount), walletAddress]
       });
     },
     [writeContractAsync]
@@ -114,12 +115,12 @@ export const useApproveUnstaking = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
   const approveUnstaking = useCallback(
-    async (amount: number) => {
+    async (amount: string) => {
       return await writeContractAsync({
         abi: SVMETIS_CONTRACT_ABI,
         address: SVEMETIS_CONTRACT_ADDRESS,
         functionName: "approve",
-        args: [SVEMETIS_CONTRACT_ADDRESS, BigInt(amount)]
+        args: [SVEMETIS_CONTRACT_ADDRESS, parseUnits(amount)]
       });
     },
     [writeContractAsync]
@@ -136,17 +137,26 @@ export const useApproveUnstaking = () => {
 export const useUnstake = () => {
   const { writeContractAsync, ...rest } = useWriteContract();
 
-  const approveUnstaking = useCallback(
-    async (amount: number, walletAddress: `0x0${string}`) => {
+  const unstake = useCallback(
+    async (amount: string, walletAddress: `0x${string}`) => {
       return await writeContractAsync({
         abi: SVMETIS_CONTRACT_ABI,
         address: SVEMETIS_CONTRACT_ADDRESS,
         functionName: "redeem",
-        args: [BigInt(amount), walletAddress, walletAddress]
+        args: [parseUnits(amount), walletAddress, walletAddress]
       });
     },
     [writeContractAsync]
   );
 
-  return { ...rest, approveUnstaking };
+  return { ...rest, unstake };
+};
+
+export const useVeMetisBalance = (walletAddress: `0x${string}`) => {
+  return useReadContract({
+    abi: VEMETIS_CONTRACT_ABI,
+    address: VEMITIS_CONTRACT_ADDRESS,
+    functionName: "balanceOf",
+    args: [walletAddress]
+  });
 };

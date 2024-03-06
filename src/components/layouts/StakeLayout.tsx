@@ -7,12 +7,14 @@ const StakeLayout = ({
   isStaking,
   children,
   showSwapIcon = true,
-  onFromValueChange
+  onFromValueChange,
+  role
 }: {
   isStaking: boolean;
   children: ReactNode;
   showSwapIcon?: boolean;
   onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  role: "mint" | "stake" | "unstake";
 }) => {
   const { isConnected } = useAccount();
 
@@ -22,9 +24,10 @@ const StakeLayout = ({
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
     >
-      <Balance isConnected={isConnected} />
+      <Balance role={role} isConnected={isConnected} />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
         <StakingForm
+          role={role}
           onChange={onFromValueChange}
           isStaking={isStaking}
           showSwapIcon={showSwapIcon}

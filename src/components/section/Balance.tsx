@@ -1,11 +1,19 @@
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/lib/utils";
+import { useVeMetisBalance } from "@/hooks/use-contract";
 
-export default function Balance({ isConnected }: { isConnected: boolean }) {
+export default function Balance({
+  isConnected,
+  role
+}: {
+  isConnected: boolean;
+  role: "mint" | "stake" | "unstake";
+}) {
   const { address } = useAccount();
   const { data } = useBalance({
     address
   });
+  const { data: veMetisBalance } = useVeMetisBalance(address ?? "0x0");
 
   const renderBalance = () => {
     if (data) {
@@ -14,6 +22,32 @@ export default function Balance({ isConnected }: { isConnected: boolean }) {
         : "0.0";
     }
     return "0.0";
+  };
+
+  const renderBalanceTitle = () => {
+    switch (role) {
+      case "mint":
+        return "Minted";
+      case "stake":
+        return "Staked";
+      case "unstake":
+        return "Unstaked";
+      default:
+        "";
+    }
+  };
+
+  const renderVelixProtocolBalance = () => {
+    switch (role) {
+      case "mint":
+        return veMetisBalance?.toString().substring(0, 4) ?? 0;
+      case "stake":
+        return 0;
+      case "unstake":
+        return 0;
+      default:
+        "";
+    }
   };
 
   if (!isConnected) return <>{""}</>;
@@ -35,9 +69,12 @@ export default function Balance({ isConnected }: { isConnected: boolean }) {
         </div>
         <div className="bg-white/25 p-3 gap-4 md:p-5 flex flex-row md:flex-col w-fit items-center md:items-start lg:p-7 rounded-lg h-full md:w-full md:space-y-2">
           <p className="text-xs lg:text-base flex">
-            Staked Balance<span className="block md:hidden">:</span>
+            {renderBalanceTitle()} Balance
+            <span className="block md:hidden">:</span>
           </p>
-          <p className="font-bold text-base lg:text-xl">0.0 veMETIS</p>
+          <p className="font-bold text-base lg:text-xl">
+            {renderVelixProtocolBalance()} veMETIS
+          </p>
         </div>
       </div>
     </div>

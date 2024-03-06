@@ -10,24 +10,29 @@ import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
 import { ChangeEvent, useEffect, useState } from "react";
 import Modal from "../ui/velix/Modal";
 import ClockIcon from "../ui/velix/icons/ClockIcon";
-// import { useApproveMinting } from "@/hooks/use-contract";
+import { useApproveMinting, useMint } from "@/hooks/use-contract";
+import { useAccount } from "wagmi";
+import classnames from "classnames";
+import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentStep] = useState<1 | 2>(1);
-  // const  = useApproveMinting()
+  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
+  const { approveMinting, isPending, isSuccess, error } = useApproveMinting();
+  const {
+    mint,
+    isPending: mintPending,
+    isSuccess: isMinted,
+    error: mintError
+  } = useMint();
+  const { address: walletAddress } = useAccount();
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToMint(e.target.value);
-    console.log(e.target.value);
-  };
-
-  const onMint = () => {
-    if (!amountToMint || !amountToMint.trim()) return;
-    setShowModal(true);
-    console.log("mint");
-  };
+  useEffect(() => {
+    if (isSuccess) {
+      setCurrentStep(2);
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     if (showModal) {
@@ -37,42 +42,97 @@ export default function Mint() {
     }
   }, [showModal]);
 
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmountToMint(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onStartMinting = async () => {
+    if (!amountToMint || !amountToMint.trim()) return;
+    setShowModal(true);
+    await approveMinting(amountToMint);
+    console.log("mint");
+  };
+
+  const onMint = async () => {
+    if (!amountToMint || !amountToMint.trim() || !walletAddress) return;
+    await mint(walletAddress, amountToMint);
+  };
+
+  const renderModalTitle = () => {
+    if (currentStep === 1 && !error) return "Waiting for Approval.";
+    if (currentStep === 1 && error) return "Approval failed.";
+    if (currentStep === 2 && !mintError && !isMinted)
+      return "Approved, you can now mint.";
+    if (currentStep === 2 && mintError) return "Failed to mint.";
+    if (currentStep === 2 && isMinted) return "Successfully Minted.";
+  };
+
+  const renderErrorMessage = () => {
+    if (error) return error.message.split(".")[0];
+    if (mintError) return mintError.message.split(".")[0];
+  };
+
+  const step1Classnames = classnames(
+    "text-white  h-8 w-8 flex justify-center items-center rounded-full",
+    {
+      "bg-red-600": error,
+      "bg-velix-primary": !error
+    }
+  );
+
+  const stepsLinkClassnames = classnames("h-1 w-32 bg-gradient-to-r", {
+    "from-velix-primary to-velix-gray/20": currentStep === 1 && !error,
+    "from-red-600 to-velix-gray/20": currentStep === 1 && error,
+    "from-velix-primary to-red-600": currentStep === 2 && mintError,
+    "from-velix-primary to-velix-primary": currentStep === 2 && !mintError
+  });
+
+  const step2Classnames = classnames(
+    "h-8 w-8 flex justify-center items-center p-2 rounded-full",
+    {
+      "bg-red-600 text-white": currentStep === 2 && mintError,
+      "text-white bg-velix-primary": currentStep === 2 && !mintError,
+      "bg-velix-gray/20 text-velix-primary": currentStep === 1 && !mintError
+    }
+  );
+
   return (
     <>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <div className="flex flex-col gap-3 items-center">
-            <ClockIcon className="w-10 h-10 mb-6" />
+            {isPending && currentStep === 1 && (
+              <ClockIcon className="w-10 h-10 mb-6" />
+            )}
+            {isMinted && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
-              Waiting for Approval
+              {renderModalTitle()}
             </p>
-            <p className="text-velix-gray text-center text-base">
-              Confirm this transaction in your wallet.
-            </p>
+            {!error && !mintError && !isMinted && (
+              <p className="text-velix-gray text-center text-base">
+                {currentStep === 1
+                  ? "Confirm this transaction in your wallet."
+                  : "Mint METIS"}
+              </p>
+            )}
+            {(error || mintError) && (
+              <p className="text-red-600 text-center text-base">
+                {renderErrorMessage()}
+              </p>
+            )}
 
-            {currentStep === 2 && (
-              <StakingFormButtom role="mint" onMint={() => null} />
+            {currentStep === 2 && !isMinted && (
+              <StakingFormButtom
+                disabled={mintPending}
+                role="mint"
+                onMint={onMint}
+              />
             )}
             <div className="flex gap-0 items-center w-fit h-fit mt-8">
-              <p className="text-white bg-velix-primary h-8 w-8 flex justify-center items-center rounded-full">
-                1
-              </p>
-              <div
-                className={`h-1 w-32 ${
-                  currentStep === 1
-                    ? "bg-gradient-to-r from-velix-primary to-velix-gray/20"
-                    : "bg-velix-primary"
-                }`}
-              />
-              <p
-                className={`h-8 w-8 flex justify-center items-center p-2 rounded-full ${
-                  currentStep === 2
-                    ? "text-white bg-velix-primary"
-                    : "bg-velix-gray/20 text-velix-primary"
-                }`}
-              >
-                2
-              </p>
+              <p className={step1Classnames}>1</p>
+              <div className={stepsLinkClassnames} />
+              <p className={step2Classnames}>2</p>
             </div>
           </div>
         </Modal>
@@ -122,6 +182,7 @@ export default function Mint() {
                 />
               </div>
               <StakeLayout
+                role="mint"
                 onFromValueChange={onChange}
                 showSwapIcon={false}
                 isStaking={false}
@@ -140,7 +201,11 @@ export default function Mint() {
                     }
                   />
                 </div>
-                <StakingFormButtom onMint={onMint} role="mint" />
+                <StakingFormButtom
+                  disabled={isPending || mintPending}
+                  onMint={onStartMinting}
+                  role="mint"
+                />
               </StakeLayout>
             </div>
             <div className="w-full">
