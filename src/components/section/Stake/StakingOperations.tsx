@@ -46,6 +46,7 @@ export default function StakingOperations() {
       resetApproveState();
       resetStakeState();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
 
   useEffect(() => {
