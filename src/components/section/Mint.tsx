@@ -9,7 +9,6 @@ import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
 import { ChangeEvent, useEffect, useState } from "react";
 import Modal from "../ui/velix/Modal";
-import ClockIcon from "../ui/velix/icons/ClockIcon";
 import { useApproveMinting, useMint } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
 import classnames from "classnames";
