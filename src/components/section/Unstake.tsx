@@ -18,13 +18,19 @@ export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const { approveUnstaking, isPending, isSuccess, error } =
-    useApproveUnstaking();
+  const {
+    approveUnstaking,
+    isPending,
+    isSuccess,
+    error,
+    reset: resetApproveState
+  } = useApproveUnstaking();
   const {
     unstake,
     isPending: unstakePending,
     isSuccess: isunStaked,
-    error: unstakeError
+    error: unstakeError,
+    reset: resetUnstakeState
   } = useUnstake();
   const { address: walletAddress } = useAccount();
 
@@ -99,10 +105,16 @@ export default function Unstake() {
     }
   );
 
+  const onClose = () => {
+    setShowModal(false);
+    resetApproveState();
+    resetUnstakeState();
+  };
+
   return (
     <>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
               <ClockIcon className="w-10 h-10 mb-6" />

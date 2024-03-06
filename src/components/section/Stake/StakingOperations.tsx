@@ -1,37 +1,50 @@
 import StakingFormButtom from "@/components/ui/velix/StakingFormButtom";
 import StakingDetails from "@/components/ui/velix/StakingDetails";
 import ArrowDropDownIcon from "@/components/ui/velix/icons/ArrowDropDownIcon";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
 import { useApproveStaking, useStaking } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
-import classnames from "classnames";
 import Modal from "@/components/ui/velix/Modal";
-import ClockIcon from "@/components/ui/velix/icons/ClockIcon";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
+import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
+import { CheckCircle2, Clock4, Loader } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
-
+  const [stakebridge, setStakeBrigde] = useState(false);
+  const [vestment, setVestment] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const { approveStaking, isPending, isSuccess, error } = useApproveStaking();
+  const {
+    approveStaking,
+    isPending,
+    isSuccess,
+    error,
+    reset: resetApproveState
+  } = useApproveStaking();
   const {
     stake,
     isPending: stakePending,
     isSuccess: isStaked,
-    error: stakeError
+    error: stakeError,
+    reset: resetStakeState
   } = useStaking();
   const { address: walletAddress } = useAccount();
 
   useEffect(() => {
     if (isSuccess) {
       setCurrentStep(2);
+      resetApproveState();
     }
     if (isStaked) {
       setAmountToStake("");
+      resetApproveState();
+      resetStakeState();
     }
   }, [isStaked, isSuccess]);
 
@@ -45,7 +58,6 @@ export default function StakingOperations() {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToStake(e.target.value);
-    console.log(e.target.value);
   };
 
   const onOpenProtocolDisclaimer = () =>
@@ -54,6 +66,10 @@ export default function StakingOperations() {
   const onStartStaking = async () => {
     if (!amountToStake || !amountToStake.trim()) return;
     setShowModal(true);
+  };
+
+  const onApproveStaking = async () => {
+    if (!amountToStake || !amountToStake.trim()) return;
     await approveStaking(amountToStake);
   };
 
@@ -63,10 +79,6 @@ export default function StakingOperations() {
   };
 
   const renderModalTitle = () => {
-    if (currentStep === 1 && !error) return "Waiting for Approval.";
-    if (currentStep === 1 && error) return "Approval failed.";
-    if (currentStep === 2 && !stakeError && !isStaked)
-      return "Approved, you can now stake.";
     if (currentStep === 2 && stakeError) return "Failed to stake.";
     if (currentStep === 2 && isStaked) return "Successfully staked.";
   };
@@ -76,48 +88,71 @@ export default function StakingOperations() {
     if (stakeError) return stakeError.message.split(".")[0];
   };
 
-  const step1Classnames = classnames(
-    "text-white  h-8 w-8 flex justify-center items-center rounded-full",
-    {
-      "bg-red-600": error,
-      "bg-velix-primary": !error
-    }
+  const isAllChecked = useMemo(
+    () => stakebridge && vestment,
+    [stakebridge, vestment]
   );
 
-  const stepsLinkClassnames = classnames("h-1 w-32 bg-gradient-to-r", {
-    "from-velix-primary to-velix-gray/20": currentStep === 1 && !error,
-    "from-red-600 to-velix-gray/20": currentStep === 1 && error,
-    "from-velix-primary to-red-600": currentStep === 2 && stakeError,
-    "from-velix-primary to-velix-primary": currentStep === 2 && !stakeError
-  });
-
-  const step2Classnames = classnames(
-    "h-8 w-8 flex justify-center items-center p-2 rounded-full",
-    {
-      "bg-red-600 text-white": currentStep === 2 && stakeError,
-      "text-white bg-velix-primary": currentStep === 2 && !stakeError,
-      "bg-velix-gray/20 text-velix-primary": currentStep === 1 && !stakeError
-    }
-  );
+  const onCloseModal = () => {
+    setShowModal(false);
+    setStakeBrigde(false);
+    setVestment(false);
+    resetApproveState();
+    resetStakeState();
+  };
 
   return (
     <>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <div className="flex flex-col gap-3 items-center">
-            {isPending && currentStep === 1 && (
-              <ClockIcon className="w-10 h-10 mb-6" />
-            )}
+        <Modal onClose={onCloseModal}>
+          <div className="flex flex-col gap-3 w-full items-center">
             {isStaked && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
               {renderModalTitle()}
             </p>
-            {!error && !stakeError && !isStaked && (
-              <p className="text-velix-gray text-center text-base">
-                {currentStep === 1
-                  ? "Confirm this transaction in your wallet."
-                  : "Stake veMETIS"}
-              </p>
+            {!isStaked && (
+              <>
+                <div className="flex flex-col gap-5 w-full">
+                  <div className="bg-velix-slate-blue p-5 text-velix-gray flex gap-2 items-center rounded-lg">
+                    <MetisIcon className="w-6 h-6 fill-velix-primary" />
+                    Receive {amountToStake} veMETIS
+                  </div>
+                  <div className="flex max-sm:flex-col gap-5 text-velix-gray">
+                    <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg">
+                      <Clock4 className="fill-velix-primary w-7 h-7 stroke-white" />
+                      Wait 7 days
+                    </p>
+                    <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
+                      <CheckCircle2 className="fill-velix-primary w-8 h-8 stroke-white" />
+                      Wait 7 days
+                    </p>
+                  </div>
+                </div>
+                <div className="space-y-10 mt-10">
+                  <div className="flex gap-6 text-velix-gray justify-start items-start ">
+                    <Checkbox
+                      onClick={() => setStakeBrigde(!stakebridge)}
+                      className="w-5 h-5 accent-velix-primary"
+                    />
+                    <p className="-mt-1">
+                      I understand that due to the 7-days bridging process from
+                      L2 to L1, staking rewards will start after 7 days
+                    </p>
+                  </div>
+                  <div className="flex gap-6 text-velix-gray justify-start items-start ">
+                    <Checkbox
+                      onClick={() => setVestment(!vestment)}
+                      className="w-5 h-5 checked:accent-velix-primary"
+                    />
+                    <p className="-mt-1">
+                      I understand that 70% of the veMETIS rewards earned from
+                      veMETIS staking will be converted upon redeeming veMETIS.
+                      the remaining 30% of the rewards will be vested and can be
+                      released by staking Velix within 365 days
+                    </p>
+                  </div>
+                </div>
+              </>
             )}
             {(error || stakeError) && (
               <p className="text-red-600 text-center text-base">
@@ -125,18 +160,43 @@ export default function StakingOperations() {
               </p>
             )}
 
-            {currentStep === 2 && !isStaked && (
-              <StakingFormButtom
-                disabled={stakePending}
-                role="stake"
-                onStake={onStake}
-              />
+            {!isStaked && (
+              <div className="flex items-center w-full gap-5">
+                <Button
+                  onClick={onApproveStaking}
+                  disabled={
+                    isPending ||
+                    stakePending ||
+                    currentStep === 2 ||
+                    !isAllChecked
+                  }
+                  className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
+                >
+                  {isPending ? (
+                    <Loader className="animate-spin text-white" />
+                  ) : (
+                    "Approve"
+                  )}
+                </Button>
+                <Button
+                  onClick={onStake}
+                  disabled={
+                    isPending ||
+                    stakePending ||
+                    currentStep !== 2 ||
+                    !isAllChecked
+                  }
+                  variant="outline"
+                  className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
+                >
+                  {stakePending ? (
+                    <Loader className="animate-spin text-velix-primary" />
+                  ) : (
+                    "Stake"
+                  )}
+                </Button>
+              </div>
             )}
-            <div className="flex gap-0 items-center w-fit h-fit mt-8">
-              <p className={step1Classnames}>1</p>
-              <div className={stepsLinkClassnames} />
-              <p className={step2Classnames}>2</p>
-            </div>
           </div>
         </Modal>
       )}

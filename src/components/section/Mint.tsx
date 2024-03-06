@@ -19,12 +19,19 @@ export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
-  const { approveMinting, isPending, isSuccess, error } = useApproveMinting();
+  const {
+    approveMinting,
+    isPending,
+    isSuccess,
+    error,
+    reset: resetApproveState
+  } = useApproveMinting();
   const {
     mint,
     isPending: mintPending,
     isSuccess: isMinted,
-    error: mintError
+    error: mintError,
+    reset: resetMintState
   } = useMint();
   const { address: walletAddress } = useAccount();
 
@@ -100,10 +107,16 @@ export default function Mint() {
     }
   );
 
+  const onClose = () => {
+    setShowModal(false);
+    resetApproveState();
+    resetMintState();
+  };
+
   return (
     <>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
               <ClockIcon className="w-10 h-10 mb-6" />
