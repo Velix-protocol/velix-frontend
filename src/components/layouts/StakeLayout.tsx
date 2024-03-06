@@ -7,11 +7,13 @@ const StakeLayout = ({
   children,
   showSwapIcon = true,
   onFromValueChange,
+  value,
   role
 }: {
   children: ReactNode;
   showSwapIcon?: boolean;
   onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   role: "mint" | "stake" | "unstake";
 }) => {
   const { isConnected } = useAccount();
@@ -25,6 +27,7 @@ const StakeLayout = ({
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
         <StakingForm
+          value={value}
           role={role}
           onChange={onFromValueChange}
           showSwapIcon={showSwapIcon}

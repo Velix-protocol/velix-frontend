@@ -30,7 +30,10 @@ export default function StakingOperations() {
     if (isSuccess) {
       setCurrentStep(2);
     }
-  }, [isSuccess]);
+    if (isStaked) {
+      setAmountToStake("");
+    }
+  }, [isStaked, isSuccess]);
 
   useEffect(() => {
     if (showModal) {
@@ -137,7 +140,11 @@ export default function StakingOperations() {
           </div>
         </Modal>
       )}
-      <StakeLayout role="stake" onFromValueChange={onChange}>
+      <StakeLayout
+        value={amountToStake}
+        role="stake"
+        onFromValueChange={onChange}
+      >
         <div className="flex flex-col space-y-5 mt-10">
           <div>
             <p

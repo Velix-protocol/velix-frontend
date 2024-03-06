@@ -8,10 +8,12 @@ import { ChangeEvent } from "react";
 export default function StakingForm({
   showSwapIcon = true,
   onChange,
-  role
+  role,
+  value
 }: {
   showSwapIcon?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
   role: "mint" | "stake" | "unstake";
 }) {
   const navigate = useNavigate();
@@ -43,10 +45,25 @@ export default function StakingForm({
     }
   };
 
+  const renderConvertedValue = () => {
+    if (!value) return "0.0";
+    switch (role) {
+      case "mint":
+        return Number(value) * 1;
+      case "stake":
+        return Number(value) * 1;
+      case "unstake":
+        return Number(value) * 1;
+      default:
+        return 0;
+    }
+  };
+
   return (
     <div className="flex flex-col relative gap-3">
       <div className="flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
         <Input
+          value={value}
           onChange={onChange}
           type="number"
           placeholder={`0.00 ${renderFromTitles()}`}
@@ -87,7 +104,7 @@ export default function StakingForm({
         </p>
         <div>
           <p className="text-velix-primary font-bold text-base ml-2 mr-3">
-            0.0 {renderToTitles()}
+            {renderConvertedValue()} {renderToTitles()}
           </p>
         </div>
       </div>

@@ -32,7 +32,10 @@ export default function Mint() {
     if (isSuccess) {
       setCurrentStep(2);
     }
-  }, [isSuccess]);
+    if (isMinted) {
+      setAmountToMint("");
+    }
+  }, [isMinted, isSuccess]);
 
   useEffect(() => {
     if (showModal) {
@@ -182,6 +185,7 @@ export default function Mint() {
                 />
               </div>
               <StakeLayout
+                value={amountToMint}
                 role="mint"
                 onFromValueChange={onChange}
                 showSwapIcon={false}
