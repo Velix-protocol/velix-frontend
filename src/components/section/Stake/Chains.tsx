@@ -1,5 +1,7 @@
 import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
+import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
+import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import {
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS
@@ -12,13 +14,15 @@ const avalableChains = [
     address: metis.contracts.multicall3.address,
     symbol: metis.nativeCurrency.symbol,
     decimals: metis.nativeCurrency.decimals,
-    name: metis.name
+    name: metis.name,
+    logo: <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
   },
   {
     address: VEMETIS_CONTRACT_ADDRESS,
     symbol: "veMETIS",
     decimal: 18,
     name: "veMETIS",
+    logo: <VelixBlueLogo className="w-6 h-6" />,
     image:
       "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
   },
@@ -27,6 +31,7 @@ const avalableChains = [
     symbol: "sveMETIS",
     decimal: 18,
     name: "sveMETIS",
+    logo: <SveMETIS className="w-8 h-8" />,
     image:
       "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Sve%404x.png?alt=media&token=678c31d7-c9d2-4c51-b5e7-3eac25e31482"
   }
@@ -56,15 +61,16 @@ export default function Chains() {
             className="bg-velix-slate-blue flex justify-between items-center p-2 rounded-lg"
           >
             <div className="bg-velix-primary/5 px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
-              {chain.image ? (
+              {/* {chain.image ? (
                 <img
                   src={chain.image}
                   alt={chain.name}
                   className="w-5 h-5 object-cover"
                 />
               ) : (
-                <MetisIcon className="w-5 h-5  fill-velix-primary" />
-              )}
+                <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
+              )} */}
+              {chain.logo}
               <p className="lg:text-sm text-[0.625rem] font-bold">
                 {chain.name}
               </p>

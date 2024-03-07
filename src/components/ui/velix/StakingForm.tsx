@@ -4,6 +4,7 @@ import MetisIcon from "./icons/MetisIcon";
 import SwapIcon from "./icons/SwapIcon";
 import VelixBlueLogo from "./icons/VelixBlueLogo";
 import { ChangeEvent } from "react";
+import SveMETIS from "./icons/SveMETIS";
 
 export default function StakingForm({
   showSwapIcon = true,
@@ -59,6 +60,12 @@ export default function StakingForm({
     }
   };
 
+  const icons = {
+    sveMETIS: <SveMETIS className="w-8 h-8" />,
+    veMETIS: <VelixBlueLogo className="w-6 h-6" />,
+    METIS: <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
+  };
+
   return (
     <div className="flex flex-col relative gap-3">
       <div className="flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
@@ -71,9 +78,7 @@ export default function StakingForm({
           className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
         />
         <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
-          <span>
-            <MetisIcon className="lg:w-6 lg:h-6 w-4 h-4 fill-black" />
-          </span>
+          <span>{icons?.[renderFromTitles() as never]}</span>
           <span className="text-[0.625rem] lg:text-base">
             {renderFromTitles()} Amount
           </span>
@@ -96,9 +101,7 @@ export default function StakingForm({
       )}
       <div className="flex justify-between items-center gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
         <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
-          <span>
-            <VelixBlueLogo className="lg:w-6 lg:h-6 h-4 w-4 fill-velix-primary" />
-          </span>
+          <span>{icons?.[renderToTitles() as never]}</span>
           <span className="text-[0.625rem] lg:text-base">
             {renderToTitles()} Amount
           </span>
