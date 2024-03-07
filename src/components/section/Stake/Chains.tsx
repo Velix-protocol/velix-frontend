@@ -28,7 +28,7 @@ const avalableChains = [
     decimal: 18,
     name: "sveMETIS",
     image:
-      "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
+      "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Sve%404x.png?alt=media&token=678c31d7-c9d2-4c51-b5e7-3eac25e31482"
   }
 ];
 
@@ -56,7 +56,15 @@ export default function Chains() {
             className="bg-velix-slate-blue flex justify-between items-center p-2 rounded-lg"
           >
             <div className="bg-velix-primary/5 px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
-              <MetisIcon className="lg:w-7 lg:-7 w-4 h-4 fill-velix-primary" />
+              {chain.image ? (
+                <img
+                  src={chain.image}
+                  alt={chain.name}
+                  className="w-5 h-5 object-cover"
+                />
+              ) : (
+                <MetisIcon className="w-5 h-5  fill-velix-primary" />
+              )}
               <p className="lg:text-sm text-[0.625rem] font-bold">
                 {chain.name}
               </p>
