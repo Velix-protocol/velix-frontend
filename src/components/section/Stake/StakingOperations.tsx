@@ -233,7 +233,10 @@ export default function StakingOperations() {
               value="Be aware of both minting   and deposit  fee that will be deducted when the transaction is done."
             />
           )}
-          <StakingDetails title="Exchange Rate" value="1 METIS = 1 veMETIS" />
+          <StakingDetails
+            title="Exchange Rate"
+            value="1 veMETIS = 1 sveMETIS"
+          />
           <StakingDetails
             title="Average return"
             value={

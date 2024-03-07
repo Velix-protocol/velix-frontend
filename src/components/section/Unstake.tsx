@@ -190,7 +190,7 @@ export default function Unstake() {
                   <StakingDetails title="Allowance" value="0.0 veMETIS" />
                   <StakingDetails
                     title="Exchange rate"
-                    value="1 veMETIS = 1 METIS"
+                    value="1 sveMETIS = 1 veMETIS"
                   />
                   <StakingFormButtom
                     isLoading={isPending || unstakePending}
