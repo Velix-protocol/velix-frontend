@@ -1,11 +1,22 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { Button } from "../button";
+import { Loader } from "lucide-react";
 
 export default function StakingFormButtom({
-  role
+  role,
+  onMint,
+  onStake,
+  onUnstake,
+  disabled,
+  isLoading
 }: {
   role: "stake" | "mint" | "unstake";
+  isLoading: boolean;
+  disabled?: boolean;
+  onMint?: () => void;
+  onStake?: () => void;
+  onUnstake?: () => void;
 }) {
   const { open } = useWeb3Modal();
   const { isConnected } = useAccount();
@@ -16,19 +27,18 @@ export default function StakingFormButtom({
     }
 
     if (role === "stake") {
-      // TODO: Should be replaced by the staking function
-      return () => null;
+      return onStake?.();
     }
 
     if (role === "unstake") {
-      // TODO: Should be replaced by the unstaking function
-      return () => null;
+      return onUnstake?.();
     }
 
     if (role === "mint") {
-      return () => null;
+      return onMint?.();
     }
   };
+
   const renderStakeOperationButtonTitle = () => {
     if (!isConnected) return "Connect wallet";
     if (role === "stake") return "Stake now";
@@ -38,10 +48,15 @@ export default function StakingFormButtom({
 
   return (
     <Button
+      disabled={disabled}
       onClick={onStakeOperationClick}
-      className="lg:py-7 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
+      className="lg:py-7 disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
     >
-      {renderStakeOperationButtonTitle()}
+      {isLoading ? (
+        <Loader className="animate-spin" />
+      ) : (
+        renderStakeOperationButtonTitle()
+      )}
     </Button>
   );
 }
