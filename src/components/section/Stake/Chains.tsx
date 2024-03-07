@@ -2,7 +2,7 @@ import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import {
   SVEMETIS_CONTRACT_ADDRESS,
-  VEMITIS_CONTRACT_ADDRESS
+  VEMETIS_CONTRACT_ADDRESS
 } from "@/lib/constant";
 import { truncateString } from "@/lib/utils";
 import { metis } from "wagmi/chains";
@@ -15,7 +15,7 @@ const avalableChains = [
     name: metis.name
   },
   {
-    address: VEMITIS_CONTRACT_ADDRESS,
+    address: VEMETIS_CONTRACT_ADDRESS,
     symbol: "veMETIS",
     decimal: 18,
     name: "veMETIS",

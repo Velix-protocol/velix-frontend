@@ -203,6 +203,7 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
+        operationsDone={isStaked}
         value={amountToStake}
         role="stake"
         onFromValueChange={onChange}

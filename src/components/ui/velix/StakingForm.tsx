@@ -66,6 +66,7 @@ export default function StakingForm({
           value={value}
           onChange={onChange}
           type="number"
+          min={0}
           placeholder={`0.00 ${renderFromTitles()}`}
           className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
         />

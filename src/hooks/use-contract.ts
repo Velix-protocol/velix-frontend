@@ -1,16 +1,18 @@
-import { useReadContract, useWriteContract } from "wagmi";
-import { useCallback } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
 import {
   METIS_TOKEN_CONTRACT_ADDRESS,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMITIS_CONTRACT_ADDRESS
+  VEMETIS_CONTRACT_ADDRESS,
+  CONFIRMATION_BLOCKS_NUMBER
 } from "@/lib/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
-import { parseUnits } from "ethers";
+import { ethers, formatEther, parseUnits } from "ethers";
 
 /**
  * useApproveMinting approves the minting proess
@@ -19,7 +21,13 @@ import { parseUnits } from "ethers";
  * @returns {*}
  */
 export const useApproveMinting = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const approveMinting = useCallback(
     async (amount: string) => {
@@ -33,7 +41,20 @@ export const useApproveMinting = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, approveMinting };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    approveMinting,
+    error
+  };
 };
 
 /**
@@ -44,7 +65,13 @@ export const useApproveMinting = () => {
  * @returns {*}
  */
 export const useMint = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const mint = useCallback(
     async (walletAddress: `0x${string}`, amount: string) => {
@@ -58,7 +85,20 @@ export const useMint = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, mint };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    mint,
+    error
+  };
 };
 
 /**
@@ -68,13 +108,19 @@ export const useMint = () => {
  * @returns {*}
  */
 export const useApproveStaking = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
       return await writeContractAsync({
         abi: VEMETIS_CONTRACT_ABI,
-        address: VEMITIS_CONTRACT_ADDRESS,
+        address: VEMETIS_CONTRACT_ADDRESS,
         functionName: "approve",
         args: [SVEMETIS_CONTRACT_ADDRESS, parseUnits(amountToStake)]
       });
@@ -82,7 +128,20 @@ export const useApproveStaking = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, approveStaking };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    approveStaking,
+    error
+  };
 };
 
 /**
@@ -90,7 +149,13 @@ export const useApproveStaking = () => {
  *  staking
  */
 export const useStaking = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const stake = useCallback(
     async (walletAddress: `0x${string}`, amount: string) => {
@@ -104,7 +169,20 @@ export const useStaking = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, stake };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    stake,
+    error
+  };
 };
 
 /**
@@ -112,7 +190,13 @@ export const useStaking = () => {
  * @returns
  */
 export const useApproveUnstaking = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
@@ -126,7 +210,20 @@ export const useApproveUnstaking = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, approveUnstaking };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    approveUnstaking,
+    error
+  };
 };
 
 /**
@@ -135,7 +232,13 @@ export const useApproveUnstaking = () => {
  * @returns
  */
 export const useUnstake = () => {
-  const { writeContractAsync, ...rest } = useWriteContract();
+  const {
+    writeContractAsync,
+    data: hash,
+    reset,
+    error,
+    isPending: writePending
+  } = useWriteContract();
 
   const unstake = useCallback(
     async (amount: string, walletAddress: `0x${string}`) => {
@@ -149,14 +252,68 @@ export const useUnstake = () => {
     [writeContractAsync]
   );
 
-  return { ...rest, unstake };
+  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
+    {
+      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      hash
+    }
+  );
+
+  return {
+    isPending: writePending || receiptPending,
+    isSuccess,
+    reset,
+    unstake,
+    error
+  };
 };
 
-export const useVeMetisBalance = (walletAddress: `0x${string}`) => {
-  return useReadContract({
-    abi: VEMETIS_CONTRACT_ABI,
-    address: VEMITIS_CONTRACT_ADDRESS,
-    functionName: "balanceOf",
-    args: [walletAddress]
-  });
+export const useMetisBalance = (
+  address: string,
+  opts?: { operationsDone?: boolean }
+) => {
+  const [veMetisbalance, setveMetisBalance] = useState("0.0");
+  const [sveMetisBalance, setsveMetisBalance] = useState("0.0");
+
+  const provider = useMemo(
+    () => new ethers.JsonRpcProvider("https://sepolia.rpc.metisdevops.link/"),
+    []
+  );
+
+  const contractsDetails = useMemo(
+    () => [
+      [VEMETIS_CONTRACT_ADDRESS, VEMETIS_CONTRACT_ABI, provider] as any,
+      [SVEMETIS_CONTRACT_ADDRESS, SVMETIS_CONTRACT_ABI, provider] as any
+    ],
+    [provider]
+  );
+
+  const contracts = useMemo(
+    () =>
+      contractsDetails.map(
+        (contractArgs) =>
+          new ethers.Contract(contractArgs[0], contractArgs[1], contractArgs[2])
+      ),
+    [contractsDetails]
+  );
+
+  const getBalances = useCallback(
+    async (address: string) => {
+      return await Promise.all([
+        contracts[0].balanceOf(address),
+        contracts[1].balanceOf(address)
+      ]);
+    },
+    [contracts]
+  );
+
+  useEffect(() => {
+    (async () => {
+      const balances = await getBalances(address);
+      setsveMetisBalance(formatEther(balances[1]));
+      setveMetisBalance(formatEther(balances[0]));
+    })();
+  }, [address, getBalances, opts?.operationsDone]);
+
+  return { veMetisbalance, sveMetisBalance };
 };
