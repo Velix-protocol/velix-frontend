@@ -1,16 +1,22 @@
 import { useAccount } from "wagmi";
 import Balance from "../section/Balance";
 import StakingForm from "../ui/velix/StakingForm";
-import { ReactNode } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 const StakeLayout = ({
-  isStaking,
   children,
-  showSwapIcon = true
+  showSwapIcon = true,
+  onFromValueChange,
+  value,
+  role,
+  operationsDone
 }: {
-  isStaking: boolean;
   children: ReactNode;
   showSwapIcon?: boolean;
+  onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  role: "mint" | "stake" | "unstake";
+  operationsDone: boolean;
 }) => {
   const { isConnected } = useAccount();
 
@@ -20,9 +26,18 @@ const StakeLayout = ({
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
     >
-      <Balance isConnected={isConnected} />
+      <Balance
+        operationsDone={operationsDone}
+        role={role}
+        isConnected={isConnected}
+      />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
-        <StakingForm isStaking={isStaking} showSwapIcon={showSwapIcon} />
+        <StakingForm
+          value={value}
+          role={role}
+          onChange={onFromValueChange}
+          showSwapIcon={showSwapIcon}
+        />
         {children}
       </div>
     </div>

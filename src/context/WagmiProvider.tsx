@@ -9,6 +9,7 @@ const queryClient = new QueryClient();
 if (!projectId) throw new Error("Project ID is not defined");
 
 createWeb3Modal({
+  themeMode: "light",
   wagmiConfig: config,
   projectId
 });

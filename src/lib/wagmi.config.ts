@@ -1,6 +1,6 @@
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { cookieStorage, createStorage } from "wagmi";
-import { PROJECT_ID } from "./ constant";
+import { PROJECT_ID } from "./constant";
 import { defineChain } from "viem";
 
 // Get projectId at https://cloud.walletconnect.com
