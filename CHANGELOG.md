@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.6.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.5.1...v1.6.0) (2024-03-07)
+
+
+### Features
+
+* add all the velix operating ERC-20 ([524ccdb](https://github.com/Velix-protocol/velix-frontend/commit/524ccdbf710ff6fa8905f1d530285be5914a5918))
+* add change function to the form: ([d3accad](https://github.com/Velix-protocol/velix-frontend/commit/d3accad1052a535e33d2a8554a08287faa9c77ad))
+* add loader to all the buttons ([cd2f87c](https://github.com/Velix-protocol/velix-frontend/commit/cd2f87c6b89f9725363deaa3203391a72c8766d1))
+* add mint functions ([b6d9bc9](https://github.com/Velix-protocol/velix-frontend/commit/b6d9bc91b0ecba134603e1204380587ff6373ef2))
+* add mint steps modal ([6378df6](https://github.com/Velix-protocol/velix-frontend/commit/6378df6367be31babc6c20ef819e2349ac1bb5b8))
+* add staking and unstaking functions ([965a0be](https://github.com/Velix-protocol/velix-frontend/commit/965a0bee226c200cdd840b07aad040123c076f5f))
+* add unstake hook ([a68fbd7](https://github.com/Velix-protocol/velix-frontend/commit/a68fbd712d3d3e6a5c1bf92711f36d73c96fc490))
+* clean up and add realime convertion ([a001ad9](https://github.com/Velix-protocol/velix-frontend/commit/a001ad972350f127e447367ad117db8df48e7c6c))
+* display the balances and match the block validation ([2370115](https://github.com/Velix-protocol/velix-frontend/commit/237011599a13c61776628853134b5887b5df2da3))
+* stake, mint and unstake feature ([028d5df](https://github.com/Velix-protocol/velix-frontend/commit/028d5dff6baf39df63391bf4a27f229aa4caac60))
+* update staking modal ([ff129d5](https://github.com/Velix-protocol/velix-frontend/commit/ff129d5cc8d62e689521cafbb5f260916237a35c))
+
+
+### Bug Fixes
+
+* body scrolling ([187a5ac](https://github.com/Velix-protocol/velix-frontend/commit/187a5ac66504b503e628ee37315dcc401aff6937))
+* improve the exchange rate ([cfce35a](https://github.com/Velix-protocol/velix-frontend/commit/cfce35a556b7b4fd2c061afb19a0ce6a3a08ef10))
+* remove broken discord link ([fdcf64b](https://github.com/Velix-protocol/velix-frontend/commit/fdcf64b7523dbd7e4e7b084a5386d8e9f59a121e))
+* remove lint issues ([6cc6d16](https://github.com/Velix-protocol/velix-frontend/commit/6cc6d16ddbaa547af602333783191d2a2ea05ca6))
+* remove unnused props ([0428d6b](https://github.com/Velix-protocol/velix-frontend/commit/0428d6bd155fae6a46f1d29b1ad662598cf4ed4e))
+* remove wagmi provider to the home page ([7c4e64c](https://github.com/Velix-protocol/velix-frontend/commit/7c4e64c91242aa50c753395e3bf229bc1903331a))
+
 ## [1.5.1](https://github.com/Velix-protocol/velix-frontend/compare/v1.5.0...v1.5.1) (2024-03-04)
 
 
