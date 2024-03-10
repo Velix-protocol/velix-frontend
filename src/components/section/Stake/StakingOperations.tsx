@@ -3,7 +3,11 @@ import StakingDetails from "@/components/ui/velix/StakingDetails";
 import ArrowDropDownIcon from "@/components/ui/velix/icons/ArrowDropDownIcon";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
-import { useApproveStaking, useStaking } from "@/hooks/use-contract";
+import {
+  useApproveStaking,
+  useMetisBalance,
+  useStaking
+} from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
@@ -11,6 +15,7 @@ import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { CheckCircle2, Clock4, Loader } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { useBalanceStore } from "@/store/balanceState";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -35,6 +40,8 @@ export default function StakingOperations() {
     reset: resetStakeState
   } = useStaking();
   const { address: walletAddress } = useAccount();
+  useMetisBalance();
+  const { veMETISBalance } = useBalanceStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -102,6 +109,16 @@ export default function StakingOperations() {
     resetApproveState();
     resetStakeState();
   };
+
+  const disabled = useMemo(() => {
+    return (
+      isPending ||
+      stakePending ||
+      !amountToStake ||
+      !Number(amountToStake) ||
+      Number(amountToStake) > Number(veMETISBalance)
+    );
+  }, [amountToStake, isPending, stakePending, veMETISBalance]);
 
   return (
     <>
@@ -237,17 +254,11 @@ export default function StakingOperations() {
             title="Exchange Rate"
             value="1 veMETIS = 1 sveMETIS"
           />
-          <StakingDetails
-            title="Average return"
-            value={
-              <span className="text-xs lg:text-base">
-                =3.13 <span className="font-bold">APR</span>
-              </span>
-            }
-          />
+          <StakingDetails title="Average return" value={"--"} />
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}
+          disabled={disabled}
           onStake={onStartStaking}
           role="stake"
         />

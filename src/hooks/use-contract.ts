@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  useAccount,
+  useBalance,
+  useWaitForTransactionReceipt,
+  useWriteContract
+} from "wagmi";
+import { useCallback, useEffect, useMemo } from "react";
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
 import {
   METIS_TOKEN_CONTRACT_ADDRESS,
@@ -13,6 +18,7 @@ import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
 import { ethers, formatEther, parseUnits } from "ethers";
+import { useBalanceStore } from "@/store/balanceState";
 
 /**
  * useApproveMinting approves the minting proess
@@ -268,12 +274,13 @@ export const useUnstake = () => {
   };
 };
 
-export const useMetisBalance = (
-  address: string,
-  opts?: { operationsDone?: boolean }
-) => {
-  const [veMetisbalance, setveMetisBalance] = useState("0.0");
-  const [sveMetisBalance, setsveMetisBalance] = useState("0.0");
+export const useMetisBalance = () => {
+  const { address } = useAccount();
+  const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
+    useBalanceStore();
+  const { data } = useBalance({
+    address: address as `0x${string}`
+  });
 
   const provider = useMemo(
     () => new ethers.JsonRpcProvider("https://sepolia.rpc.metisdevops.link/"),
@@ -308,12 +315,18 @@ export const useMetisBalance = (
   );
 
   useEffect(() => {
-    (async () => {
-      const balances = await getBalances(address);
-      setsveMetisBalance(formatEther(balances[1]));
-      setveMetisBalance(formatEther(balances[0]));
-    })();
-  }, [address, getBalances, opts?.operationsDone]);
+    if (data) return setMETISBalance(formatEther(data.value));
+  }, [data, setMETISBalance]);
 
-  return { veMetisbalance, sveMetisBalance };
+  useEffect(() => {
+    (async () => {
+      try {
+        const balances = await getBalances(address as string);
+        setsveMETISBalance(formatEther(balances[1]));
+        setveMETISBalance(formatEther(balances[0]));
+      } catch (err) {
+        console.warn(err);
+      }
+    })();
+  }, [address, getBalances, setsveMETISBalance, setveMETISBalance]);
 };
