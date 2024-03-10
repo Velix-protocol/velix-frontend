@@ -7,7 +7,7 @@ import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
 import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Modal from "../ui/velix/Modal";
 import {
   useApproveMinting,
@@ -18,6 +18,8 @@ import { useAccount } from "wagmi";
 import classnames from "classnames";
 import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import { useBalanceStore } from "@/store/balanceState";
+import { toast } from "sonner";
+import { EXPLORER_TX_URL } from "@/lib/constant";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -35,7 +37,8 @@ export default function Mint() {
     isPending: mintPending,
     isSuccess: isMinted,
     error: mintError,
-    reset: resetMintState
+    reset: resetMintState,
+    txhash
   } = useMint();
   const { address: walletAddress } = useAccount();
   const { getBalances } = useMetisBalance();
@@ -52,8 +55,16 @@ export default function Mint() {
     if (isMinted) {
       setAmountToMint("");
       getBalances();
+      toast("Mint completed", {
+        description: `${txhash?.substring(0, 10)}...`,
+        position: "top-right",
+        action: {
+          label: "view",
+          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
+        }
+      });
     }
-  }, [getBalances, isMinted, isSuccess]);
+  }, [getBalances, isMinted, isSuccess, txhash]);
 
   useEffect(() => {
     if (showModal) {
@@ -71,7 +82,6 @@ export default function Mint() {
     if (!amountToMint || !amountToMint.trim()) return;
     setShowModal(true);
     await approveMinting(amountToMint);
-    console.log("mint");
   };
 
   const onMint = async () => {
@@ -117,12 +127,16 @@ export default function Mint() {
     }
   );
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     if (isPending || mintPending) return;
     setShowModal(false);
     resetApproveState();
     resetMintState();
-  };
+  }, [isPending, mintPending, resetApproveState, resetMintState]);
+
+  useEffect(() => {
+    if (isMinted) setTimeout(onClose, 5000);
+  }, [isMinted, onClose]);
 
   const disabled = useMemo(() => {
     return (

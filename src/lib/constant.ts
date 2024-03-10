@@ -11,3 +11,5 @@ export const SVEMETIS_CONTRACT_ADDRESS =
   "0xc9D0D4a8F290FccAAaF6390455ab10A3a64128Ad" as const;
 
 export const CONFIRMATION_BLOCKS_NUMBER = 8;
+
+export const EXPLORER_TX_URL = "https://sepolia.explorer.metisdevops.link/tx/";

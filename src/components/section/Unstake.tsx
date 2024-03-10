@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import AppContent from "../layouts/AppContent";
 import Section from "../layouts/Section";
 import StakeLayout from "../layouts/StakeLayout";
@@ -18,6 +18,8 @@ import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import Modal from "../ui/velix/Modal";
 import { Loader } from "lucide-react";
 import { useBalanceStore } from "@/store/balanceState";
+import { EXPLORER_TX_URL } from "@/lib/constant";
+import { toast } from "sonner";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -35,7 +37,8 @@ export default function Unstake() {
     isPending: unstakePending,
     isSuccess: isunStaked,
     error: unstakeError,
-    reset: resetUnstakeState
+    reset: resetUnstakeState,
+    txhash
   } = useUnstake();
   const { address: walletAddress } = useAccount();
   const { getBalances } = useMetisBalance();
@@ -48,8 +51,16 @@ export default function Unstake() {
     if (isunStaked) {
       setAmountToUnstake("");
       getBalances();
+      toast("Unstake completed", {
+        description: `${txhash?.substring(0, 10)}...`,
+        position: "top-right",
+        action: {
+          label: "view",
+          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
+        }
+      });
     }
-  }, [getBalances, isSuccess, isunStaked]);
+  }, [getBalances, isSuccess, isunStaked, txhash]);
 
   useEffect(() => {
     if (showModal) {
@@ -112,12 +123,16 @@ export default function Unstake() {
     }
   );
 
-  const onClose = () => {
+  const onClose = useCallback(() => {
     if (isPending || unstakePending) return;
     setShowModal(false);
     resetApproveState();
     resetUnstakeState();
-  };
+  }, [isPending, resetApproveState, resetUnstakeState, unstakePending]);
+
+  useEffect(() => {
+    if (isunStaked) setTimeout(onClose, 5000);
+  }, [isunStaked, onClose]);
 
   const disabled = useMemo(() => {
     return (

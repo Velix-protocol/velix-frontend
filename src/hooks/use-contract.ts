@@ -91,19 +91,22 @@ export const useMint = () => {
     [writeContractAsync]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
-      hash
-    }
-  );
+  const {
+    isLoading: receiptPending,
+    isSuccess,
+    data
+  } = useWaitForTransactionReceipt({
+    confirmations: CONFIRMATION_BLOCKS_NUMBER,
+    hash
+  });
 
   return {
     isPending: writePending || receiptPending,
     isSuccess,
     reset,
     mint,
-    error
+    error,
+    txhash: data?.transactionHash
   };
 };
 
@@ -175,19 +178,22 @@ export const useStaking = () => {
     [writeContractAsync]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
-      hash
-    }
-  );
+  const {
+    isLoading: receiptPending,
+    isSuccess,
+    data
+  } = useWaitForTransactionReceipt({
+    confirmations: CONFIRMATION_BLOCKS_NUMBER,
+    hash
+  });
 
   return {
     isPending: writePending || receiptPending,
     isSuccess,
     reset,
     stake,
-    error
+    error,
+    txhash: data?.transactionHash
   };
 };
 
@@ -258,19 +264,22 @@ export const useUnstake = () => {
     [writeContractAsync]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
-      hash
-    }
-  );
+  const {
+    isLoading: receiptPending,
+    isSuccess,
+    data
+  } = useWaitForTransactionReceipt({
+    confirmations: CONFIRMATION_BLOCKS_NUMBER,
+    hash
+  });
 
   return {
     isPending: writePending || receiptPending,
     isSuccess,
     reset,
     unstake,
-    error
+    error,
+    txhash: data?.transactionHash
   };
 };
 

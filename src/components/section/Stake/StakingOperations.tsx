@@ -16,6 +16,8 @@ import { CheckCircle2, Clock4, Loader } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useBalanceStore } from "@/store/balanceState";
+import { EXPLORER_TX_URL } from "@/lib/constant";
+import { toast } from "sonner";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -37,7 +39,8 @@ export default function StakingOperations() {
     isPending: stakePending,
     isSuccess: isStaked,
     error: stakeError,
-    reset: resetStakeState
+    reset: resetStakeState,
+    txhash
   } = useStaking();
   const { address: walletAddress } = useAccount();
   const { getBalances } = useMetisBalance();
@@ -55,6 +58,14 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       getBalances();
+      toast("Stake completed", {
+        description: `${txhash?.substring(0, 10)}...`,
+        position: "top-right",
+        action: {
+          label: "view",
+          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
+        }
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
