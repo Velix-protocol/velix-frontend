@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
@@ -7,6 +8,8 @@ import {
   VEMETIS_CONTRACT_ADDRESS
 } from "@/lib/constant";
 import { truncateString } from "@/lib/utils";
+import { Loader } from "lucide-react";
+import { useState } from "react";
 import { metis } from "wagmi/chains";
 
 const avalableChains = [
@@ -20,7 +23,7 @@ const avalableChains = [
   {
     address: VEMETIS_CONTRACT_ADDRESS,
     symbol: "veMETIS",
-    decimal: 18,
+    decimals: 18,
     name: "veMETIS",
     logo: <VelixBlueLogo className="w-6 h-6" />,
     image:
@@ -29,7 +32,7 @@ const avalableChains = [
   {
     address: SVEMETIS_CONTRACT_ADDRESS,
     symbol: "sveMETIS",
-    decimal: 18,
+    decimals: 18,
     name: "sveMETIS",
     logo: <SveMETIS className="w-8 h-8" />,
     image:
@@ -38,17 +41,36 @@ const avalableChains = [
 ];
 
 export default function Chains() {
-  const addMetisToMetamaskBrowserWallet = async (options: unknown) => {
+  const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =
+    useState(false);
+  const [chainToAdd, setChainToAdd] = useState<
+    (typeof avalableChains)[0] | null
+  >(null);
+
+  const addMetisToMetamaskBrowserWallet = async (
+    options: (typeof avalableChains)[0]
+  ) => {
     try {
+      setChainToAdd(options);
+      setIsAddingAChaintoMetamask(true);
       await window?.ethereum.request({
         method: "wallet_watchAsset",
         params: {
           type: "ERC20",
-          options
+          options: {
+            address: options.address,
+            symbol: options.symbol,
+            decimals: options.decimals,
+            name: options.name,
+            image: options.image
+          }
         }
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsAddingAChaintoMetamask(false);
+      setChainToAdd(null);
     }
   };
 
@@ -61,15 +83,6 @@ export default function Chains() {
             className="bg-velix-slate-blue flex justify-between items-center p-2 rounded-lg"
           >
             <div className="bg-velix-primary/5 px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
-              {/* {chain.image ? (
-                <img
-                  src={chain.image}
-                  alt={chain.name}
-                  className="w-5 h-5 object-cover"
-                />
-              ) : (
-                <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
-              )} */}
               {chain.logo}
               <p className="lg:text-sm text-[0.625rem] font-bold">
                 {chain.name}
@@ -78,10 +91,17 @@ export default function Chains() {
                 {truncateString(chain.address)}
               </p>
             </div>
-            <AddBoxIcon
-              onClick={() => addMetisToMetamaskBrowserWallet(chain)}
-              className="w-7 h-7 fill-velix-primary mr-5 cursor-pointer"
-            />
+            {chainToAdd?.address.toLowerCase() ===
+              chain.address.toLowerCase() && isAddingAChaintoMetamask ? (
+              <>
+                <Loader className="w-7 h-7 animate-spin mr-5 text-velix-primary" />
+              </>
+            ) : (
+              <AddBoxIcon
+                onClick={() => addMetisToMetamaskBrowserWallet(chain)}
+                className="w-7 h-7 fill-velix-primary mr-5 cursor-pointer"
+              />
+            )}
           </div>
         );
       })}
