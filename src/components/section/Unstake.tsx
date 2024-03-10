@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import AppContent from "../layouts/AppContent";
 import Section from "../layouts/Section";
 import StakeLayout from "../layouts/StakeLayout";
@@ -7,12 +7,17 @@ import StakingDetails from "../ui/velix/StakingDetails";
 import StakingFormButtom from "../ui/velix/StakingFormButtom";
 import Title from "../ui/velix/Title";
 import Statitics from "./Statitics";
-import { useApproveUnstaking, useUnstake } from "@/hooks/use-contract";
+import {
+  useApproveUnstaking,
+  useMetisBalance,
+  useUnstake
+} from "@/hooks/use-contract";
 import classnames from "classnames";
 import { useAccount } from "wagmi";
 import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import Modal from "../ui/velix/Modal";
 import { Loader } from "lucide-react";
+import { useBalanceStore } from "@/store/balanceState";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -33,6 +38,8 @@ export default function Unstake() {
     reset: resetUnstakeState
   } = useUnstake();
   const { address: walletAddress } = useAccount();
+  useMetisBalance();
+  const { sveMETISBalance } = useBalanceStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -53,7 +60,6 @@ export default function Unstake() {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToUnstake(e.target.value);
-    console.log(e.target.value);
   };
 
   const onStartUnstaking = async () => {
@@ -111,6 +117,16 @@ export default function Unstake() {
     resetApproveState();
     resetUnstakeState();
   };
+
+  const disabled = useMemo(() => {
+    return (
+      isPending ||
+      unstakePending ||
+      !amountToUnstake ||
+      !Number(amountToUnstake) ||
+      Number(amountToUnstake) > Number(sveMETISBalance)
+    );
+  }, [amountToUnstake, isPending, sveMETISBalance, unstakePending]);
 
   return (
     <>
@@ -194,6 +210,7 @@ export default function Unstake() {
                   />
                   <StakingFormButtom
                     isLoading={isPending || unstakePending}
+                    disabled={disabled}
                     onUnstake={onStartUnstaking}
                     role="unstake"
                   />

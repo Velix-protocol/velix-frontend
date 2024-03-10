@@ -1,40 +1,28 @@
-import { useAccount, useBalance } from "wagmi";
-import { converGweiToEth, truncateString } from "@/lib/utils";
+import { useAccount } from "wagmi";
+import { truncateString } from "@/lib/utils";
 import { useMetisBalance } from "@/hooks/use-contract";
+import { useBalanceStore } from "@/store/balanceState";
 
 export default function Balance({
   isConnected,
-  role,
-  operationsDone
+  role
 }: {
   isConnected: boolean;
-  operationsDone: boolean;
   role: "mint" | "stake" | "unstake";
 }) {
   const { address } = useAccount();
-  const { data } = useBalance({
-    address
-  });
-  const { veMetisbalance, sveMetisBalance } = useMetisBalance(
-    address as string,
-    {
-      operationsDone
-    }
-  );
+  useMetisBalance();
+  const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
 
   const renderBalance = () => {
     if (role === "mint") {
-      if (data) {
-        return data.symbol.toLowerCase() === "metis"
-          ? `${converGweiToEth(data?.value)} METIS`
-          : "0.0 METIS";
-      }
+      return `${METISBalance} METIS`;
     }
     if (role === "stake") {
-      return `${veMetisbalance} veMETIS`;
+      return `${veMETISBalance} veMETIS`;
     }
     if (role === "unstake") {
-      return `${sveMetisBalance} sveMETIS`;
+      return `${sveMETISBalance} sveMETIS`;
     }
     return "0.0";
   };
@@ -56,9 +44,9 @@ export default function Balance({
     switch (role) {
       case "mint":
       case "unstake":
-        return `${veMetisbalance} veMETIS`;
+        return `${veMETISBalance} veMETIS`;
       case "stake":
-        return `${sveMetisBalance} sveMETIS`;
+        return `${sveMETISBalance} sveMETIS`;
       default:
         "";
     }

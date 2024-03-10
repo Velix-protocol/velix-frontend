@@ -7,12 +7,13 @@ import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
 import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import Modal from "../ui/velix/Modal";
 import { useApproveMinting, useMint } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
+import { useAccount, useBalance } from "wagmi";
 import classnames from "classnames";
 import SuccessIcon from "../ui/velix/icons/SuccessIcon";
+import { useBalanceStore } from "@/store/balanceState";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -33,6 +34,8 @@ export default function Mint() {
     reset: resetMintState
   } = useMint();
   const { address: walletAddress } = useAccount();
+  useBalance();
+  const { METISBalance } = useBalanceStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -53,7 +56,6 @@ export default function Mint() {
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToMint(e.target.value);
-    console.log(e.target.value);
   };
 
   const onStartMinting = async () => {
@@ -112,6 +114,16 @@ export default function Mint() {
     resetApproveState();
     resetMintState();
   };
+
+  const disabled = useMemo(() => {
+    return (
+      isPending ||
+      mintPending ||
+      !amountToMint ||
+      !Number(amountToMint) ||
+      Number(amountToMint) > Number(METISBalance)
+    );
+  }, [METISBalance, amountToMint, isPending, mintPending]);
 
   return (
     <>
@@ -210,18 +222,11 @@ export default function Mint() {
                     title="Exchange Rate"
                     value="1 METIS = 1 veMETIS"
                   />
-                  <StakingDetails
-                    title="Average return"
-                    value={
-                      <span className="text-xs lg:text-base">
-                        =3.13 <span className="font-bold">APR</span>
-                      </span>
-                    }
-                  />
+                  <StakingDetails title="Average return" value={"--"} />
                 </div>
                 <StakingFormButtom
                   isLoading={isPending || mintPending}
-                  disabled={isPending || mintPending}
+                  disabled={disabled}
                   onMint={onStartMinting}
                   role="mint"
                 />

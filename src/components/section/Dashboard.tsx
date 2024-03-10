@@ -2,39 +2,29 @@ import { CardContent, Card } from "@/components/ui/DashboardCard";
 import { Button } from "@/components/ui/button";
 import Chart from "./Chart";
 import Section from "../layouts/Section";
-import { useAccount, useBalance } from "wagmi";
 import { useMetisBalance } from "@/hooks/use-contract";
-import { converGweiToEth } from "@/lib/utils";
+import { useBalanceStore } from "@/store/balanceState";
 
 export default function Dashboard() {
-  const { address } = useAccount();
-  const { data } = useBalance({
-    address
-  });
-
-  const { veMetisbalance, sveMetisBalance } = useMetisBalance(
-    address as string,
-    {
-      operationsDone: true
-    }
-  );
+  useMetisBalance();
+  const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
 
   const velixData = [
     {
       name: "METIS",
-      value: converGweiToEth(data?.value ?? BigInt(0))
+      value: METISBalance
     },
     {
       name: "veMETIS",
-      value: veMetisbalance
+      value: veMETISBalance
     },
     {
       name: "sveMETIS",
-      value: sveMetisBalance
+      value: sveMETISBalance
     },
     {
       name: "APR",
-      value: "20%"
+      value: "--"
     }
   ];
 
