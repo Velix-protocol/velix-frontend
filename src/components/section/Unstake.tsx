@@ -38,7 +38,7 @@ export default function Unstake() {
     reset: resetUnstakeState
   } = useUnstake();
   const { address: walletAddress } = useAccount();
-  useMetisBalance();
+  const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
 
   useEffect(() => {
@@ -47,8 +47,9 @@ export default function Unstake() {
     }
     if (isunStaked) {
       setAmountToUnstake("");
+      getBalances();
     }
-  }, [isSuccess, isunStaked]);
+  }, [getBalances, isSuccess, isunStaked]);
 
   useEffect(() => {
     if (showModal) {

@@ -304,29 +304,26 @@ export const useMetisBalance = () => {
     [contractsDetails]
   );
 
-  const getBalances = useCallback(
-    async (address: string) => {
-      return await Promise.all([
+  const getBalances = useCallback(async () => {
+    try {
+      const balances = await Promise.all([
         contracts[0].balanceOf(address),
         contracts[1].balanceOf(address)
       ]);
-    },
-    [contracts]
-  );
+      setsveMETISBalance(formatEther(balances[1]));
+      setveMETISBalance(formatEther(balances[0]));
+    } catch (err) {
+      console.log(err);
+    }
+  }, [address, contracts, setsveMETISBalance, setveMETISBalance]);
 
   useEffect(() => {
     if (data) return setMETISBalance(formatEther(data.value));
   }, [data, setMETISBalance]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const balances = await getBalances(address as string);
-        setsveMETISBalance(formatEther(balances[1]));
-        setveMETISBalance(formatEther(balances[0]));
-      } catch (err) {
-        console.warn(err);
-      }
-    })();
+    getBalances();
   }, [address, getBalances, setsveMETISBalance, setveMETISBalance]);
+
+  return { getBalances };
 };
