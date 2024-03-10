@@ -9,8 +9,12 @@ import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import Modal from "../ui/velix/Modal";
-import { useApproveMinting, useMint } from "@/hooks/use-contract";
-import { useAccount, useBalance } from "wagmi";
+import {
+  useApproveMinting,
+  useMetisBalance,
+  useMint
+} from "@/hooks/use-contract";
+import { useAccount } from "wagmi";
 import classnames from "classnames";
 import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import { useBalanceStore } from "@/store/balanceState";
@@ -34,8 +38,12 @@ export default function Mint() {
     reset: resetMintState
   } = useMint();
   const { address: walletAddress } = useAccount();
-  useBalance();
+  const { getBalances } = useMetisBalance();
   const { METISBalance } = useBalanceStore();
+
+  useEffect(() => {
+    setAmountToMint(METISBalance);
+  }, [METISBalance]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -43,8 +51,9 @@ export default function Mint() {
     }
     if (isMinted) {
       setAmountToMint("");
+      getBalances();
     }
-  }, [isMinted, isSuccess]);
+  }, [getBalances, isMinted, isSuccess]);
 
   useEffect(() => {
     if (showModal) {

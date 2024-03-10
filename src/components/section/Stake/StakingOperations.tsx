@@ -1,7 +1,7 @@
 import StakingFormButtom from "@/components/ui/velix/StakingFormButtom";
 import StakingDetails from "@/components/ui/velix/StakingDetails";
 import ArrowDropDownIcon from "@/components/ui/velix/icons/ArrowDropDownIcon";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
 import {
   useApproveStaking,
@@ -40,8 +40,12 @@ export default function StakingOperations() {
     reset: resetStakeState
   } = useStaking();
   const { address: walletAddress } = useAccount();
-  useMetisBalance();
+  const { getBalances } = useMetisBalance();
   const { veMETISBalance } = useBalanceStore();
+
+  useEffect(() => {
+    setAmountToStake(veMETISBalance);
+  }, [veMETISBalance]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -50,8 +54,7 @@ export default function StakingOperations() {
     }
     if (isStaked) {
       setAmountToStake("");
-      resetApproveState();
-      resetStakeState();
+      getBalances();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
@@ -101,14 +104,18 @@ export default function StakingOperations() {
     [stakebridge, vestment]
   );
 
-  const onCloseModal = () => {
+  const onCloseModal = useCallback(() => {
     if (isPending || stakePending) return;
     setShowModal(false);
     setStakeBrigde(false);
     setVestment(false);
     resetApproveState();
     resetStakeState();
-  };
+  }, [isPending, resetApproveState, resetStakeState, stakePending]);
+
+  useEffect(() => {
+    if (isStaked) setTimeout(onCloseModal, 5000);
+  }, [isStaked, onCloseModal]);
 
   const disabled = useMemo(() => {
     return (
@@ -173,6 +180,7 @@ export default function StakingOperations() {
                 </div>
               </>
             )}
+
             {(error || stakeError) && (
               <p className="text-red-600 text-center text-base">
                 {renderErrorMessage()}
