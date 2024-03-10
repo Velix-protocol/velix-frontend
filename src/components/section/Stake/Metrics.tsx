@@ -9,7 +9,7 @@ export default function Metrics() {
       <MetricsCard
         icon={<PlusMinusTable className="fill-velix-primary h-6 w-6" />}
         description="Annual percentage rate"
-        value="5.5%"
+        value="--"
       />
       <MetricsCard
         icon={<ChatIcon className="fill-velix-primary h-6 w-6" />}
