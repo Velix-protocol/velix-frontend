@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
