@@ -220,7 +220,6 @@ export default function Mint() {
                 />
               </div>
               <StakeLayout
-                operationsDone={isMinted}
                 value={amountToMint}
                 role="mint"
                 onFromValueChange={onChange}
