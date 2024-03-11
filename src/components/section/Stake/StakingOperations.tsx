@@ -47,10 +47,6 @@ export default function StakingOperations() {
   const { veMETISBalance } = useBalanceStore();
 
   useEffect(() => {
-    setAmountToStake(veMETISBalance);
-  }, [veMETISBalance]);
-
-  useEffect(() => {
     if (isSuccess) {
       setCurrentStep(2);
       resetApproveState();
@@ -243,6 +239,11 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
+        error={
+          Number(amountToStake) > Number(veMETISBalance)
+            ? "Entered amount exceeds your veMETIS balance"
+            : ""
+        }
         value={amountToStake}
         role="stake"
         onFromValueChange={onChange}

@@ -45,10 +45,6 @@ export default function Mint() {
   const { METISBalance } = useBalanceStore();
 
   useEffect(() => {
-    setAmountToMint(METISBalance);
-  }, [METISBalance]);
-
-  useEffect(() => {
     if (isSuccess) {
       setCurrentStep(2);
     }
@@ -234,6 +230,11 @@ export default function Mint() {
                 />
               </div>
               <StakeLayout
+                error={
+                  Number(amountToMint) > Number(METISBalance)
+                    ? "Entered amount exceeds your balance"
+                    : ""
+                }
                 value={amountToMint}
                 role="mint"
                 onFromValueChange={onChange}

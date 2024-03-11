@@ -5,17 +5,20 @@ import SwapIcon from "./icons/SwapIcon";
 import VelixBlueLogo from "./icons/VelixBlueLogo";
 import { ChangeEvent } from "react";
 import SveMETIS from "./icons/SveMETIS";
+import classNames from "classnames";
 
 export default function StakingForm({
   showSwapIcon = true,
   onChange,
   role,
-  value
+  value,
+  error
 }: {
   showSwapIcon?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   role: "mint" | "stake" | "unstake";
+  error: string;
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -66,9 +69,16 @@ export default function StakingForm({
     METIS: <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
   };
 
+  const inputClassName = classNames(
+    "flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg",
+    {
+      "border-velix-red border text-velix-red": !!error
+    }
+  );
+
   return (
     <div className="flex flex-col relative gap-3">
-      <div className="flex items-center justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
+      <div className={inputClassName}>
         <Input
           value={value}
           onChange={onChange}
@@ -84,7 +94,12 @@ export default function StakingForm({
           </span>
         </p>
       </div>
-      {showSwapIcon && (
+      {error && (
+        <div className="bg-velix-red -mt-1 text-white font-space-grotesk text-sm w-fit px-2 py-1 rounded-md">
+          {error}
+        </div>
+      )}
+      {showSwapIcon && !error && (
         <button
           onClick={() =>
             navigate(
