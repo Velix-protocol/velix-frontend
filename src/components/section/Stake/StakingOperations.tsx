@@ -12,7 +12,7 @@ import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
-import { CheckCircle2, Clock4, Loader } from "lucide-react";
+import { CheckCircle2, Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { useBalanceStore } from "@/store/balanceState";
@@ -138,6 +138,18 @@ export default function StakingOperations() {
     );
   }, [amountToStake, isPending, stakePending, veMETISBalance]);
 
+  const renderApproveStakeButtonTitle = () => {
+    if (isPending) return "Approving...";
+    if (isSuccess) return "Approved";
+    return "Approve";
+  };
+
+  const renderStakeButtonTitle = () => {
+    if (stakePending) return "Staking...";
+    if (isStaked) return "Staked";
+    return "Stake";
+  };
+
   return (
     <>
       {showModal && (
@@ -210,11 +222,7 @@ export default function StakingOperations() {
                   }
                   className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
                 >
-                  {isPending ? (
-                    <Loader className="animate-spin text-white" />
-                  ) : (
-                    "Approve"
-                  )}
+                  {renderApproveStakeButtonTitle()}
                 </Button>
                 <Button
                   onClick={onStake}
@@ -227,11 +235,7 @@ export default function StakingOperations() {
                   variant="outline"
                   className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
                 >
-                  {stakePending ? (
-                    <Loader className="animate-spin text-velix-primary" />
-                  ) : (
-                    "Stake"
-                  )}
+                  {renderStakeButtonTitle()}
                 </Button>
               </div>
             )}
