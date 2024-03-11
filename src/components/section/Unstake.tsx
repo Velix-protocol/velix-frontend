@@ -204,6 +204,7 @@ export default function Unstake() {
                 <Title name="Unstake METIS" subtitle="Request your veMETIS" />
               </div>
               <StakeLayout
+                onSetMaxValue={() => setAmountToUnstake(sveMETISBalance)}
                 error={
                   Number(amountToUnstake) > Number(sveMETISBalance)
                     ? "Entered amount exceeds your staked balance"

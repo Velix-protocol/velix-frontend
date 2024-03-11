@@ -239,6 +239,7 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
+        onSetMaxValue={() => setAmountToStake(veMETISBalance)}
         error={
           Number(amountToStake) > Number(veMETISBalance)
             ? "Entered amount exceeds your veMETIS balance"

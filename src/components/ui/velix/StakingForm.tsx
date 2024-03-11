@@ -12,13 +12,15 @@ export default function StakingForm({
   onChange,
   role,
   value,
-  error
+  error,
+  onSetMaxValue
 }: {
   showSwapIcon?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
   role: "mint" | "stake" | "unstake";
   error: string;
+  onSetMaxValue: () => void;
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -87,12 +89,20 @@ export default function StakingForm({
           placeholder={`0.00 ${renderFromTitles()}`}
           className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:ring-velix-slate-blue focus-visible:rin"
         />
-        <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
-          <span>{icons?.[renderFromTitles() as never]}</span>
-          <span className="text-[0.625rem] lg:text-base">
-            {renderFromTitles()} Amount
-          </span>
-        </p>
+        <div className="shrink-0 flex gap-1">
+          <button
+            onClick={onSetMaxValue}
+            className="font-bold text-velix-primary uppercase text-sm p-3 lg:p-4 bg-velix-primary/5 rounded-md"
+          >
+            Max
+          </button>
+          <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
+            <span>{icons?.[renderFromTitles() as never]}</span>
+            <span className="text-[0.625rem] lg:text-base">
+              {renderFromTitles()} Amount
+            </span>
+          </p>
+        </div>
       </div>
       {error && (
         <div className="bg-velix-red -mt-1 text-white font-space-grotesk text-sm w-fit px-2 py-1 rounded-md">

@@ -230,6 +230,7 @@ export default function Mint() {
                 />
               </div>
               <StakeLayout
+                onSetMaxValue={() => setAmountToMint(METISBalance)}
                 error={
                   Number(amountToMint) > Number(METISBalance)
                     ? "Entered amount exceeds your balance"

@@ -9,7 +9,8 @@ const StakeLayout = ({
   onFromValueChange,
   value,
   role,
-  error
+  error,
+  onSetMaxValue
 }: {
   children: ReactNode;
   showSwapIcon?: boolean;
@@ -17,6 +18,7 @@ const StakeLayout = ({
   value: string;
   role: "mint" | "stake" | "unstake";
   error: string;
+  onSetMaxValue: () => void;
 }) => {
   const { isConnected } = useAccount();
 
@@ -29,6 +31,7 @@ const StakeLayout = ({
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
         <StakingForm
+          onSetMaxValue={onSetMaxValue}
           error={error}
           value={value}
           role={role}
