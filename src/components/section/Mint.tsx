@@ -56,6 +56,7 @@ export default function Mint() {
       setAmountToMint("");
       getBalances();
       toast("Mint completed", {
+        duration: 5000,
         description: `${txhash?.substring(0, 10)}...`,
         position: "top-right",
         action: {

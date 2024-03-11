@@ -52,6 +52,7 @@ export default function Unstake() {
       setAmountToUnstake("");
       getBalances();
       toast("Unstake completed", {
+        duration: 5000,
         description: `${txhash?.substring(0, 10)}...`,
         position: "top-right",
         action: {

@@ -59,6 +59,7 @@ export default function StakingOperations() {
       setAmountToStake("");
       getBalances();
       toast("Stake completed", {
+        duration: 5000,
         description: `${txhash?.substring(0, 10)}...`,
         position: "top-right",
         action: {
