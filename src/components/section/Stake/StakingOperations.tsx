@@ -23,7 +23,7 @@ export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
   const [stakebridge, setStakeBrigde] = useState(false);
-  const [vestment, setVestment] = useState(false);
+  // const [vestment, setVestment] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
@@ -111,16 +111,16 @@ export default function StakingOperations() {
     if (stakeError) return stakeError.message.split(".")[0];
   };
 
-  const isAllChecked = useMemo(
-    () => stakebridge && vestment,
-    [stakebridge, vestment]
-  );
+  // const isAllChecked = useMemo(
+  //   () => stakebridge && vestment,
+  //   [stakebridge, vestment]
+  // );
 
   const onCloseModal = useCallback(() => {
     if (isPending || stakePending) return;
     setShowModal(false);
     setStakeBrigde(false);
-    setVestment(false);
+    // setVestment(false);
     resetApproveState();
     resetStakeState();
   }, [isPending, resetApproveState, resetStakeState, stakePending]);
@@ -177,7 +177,7 @@ export default function StakingOperations() {
                       L2 to L1, staking rewards will start after 7 days
                     </p>
                   </div>
-                  <div className="flex gap-6 text-velix-gray justify-start items-start ">
+                  {/* <div className="flex gap-6 text-velix-gray justify-start items-start ">
                     <Checkbox
                       onClick={() => setVestment(!vestment)}
                       className="w-5 h-5 checked:accent-velix-primary"
@@ -188,7 +188,7 @@ export default function StakingOperations() {
                       the remaining 30% of the rewards will be vested and can be
                       released by staking Velix within 365 days
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </>
             )}
@@ -207,7 +207,7 @@ export default function StakingOperations() {
                     isPending ||
                     stakePending ||
                     currentStep === 2 ||
-                    !isAllChecked
+                    !stakebridge
                   }
                   className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
                 >
@@ -223,7 +223,7 @@ export default function StakingOperations() {
                     isPending ||
                     stakePending ||
                     currentStep !== 2 ||
-                    !isAllChecked
+                    !stakebridge
                   }
                   variant="outline"
                   className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
