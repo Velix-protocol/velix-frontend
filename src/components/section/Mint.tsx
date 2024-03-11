@@ -57,10 +57,9 @@ export default function Mint() {
       getBalances();
       toast("Mint completed", {
         duration: 5000,
-        description: `${txhash?.substring(0, 10)}...`,
         position: "top-right",
         action: {
-          label: "view",
+          label: "View transaction",
           onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
         }
       });
