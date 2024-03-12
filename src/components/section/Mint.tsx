@@ -1,4 +1,4 @@
-import { InfoIcon, Loader } from "lucide-react";
+import { InfoIcon } from "lucide-react";
 import Section from "../layouts/Section";
 import StakingDetails from "../ui/velix/StakingDetails";
 import StakingFormButtom from "../ui/velix/StakingFormButtom";
@@ -15,11 +15,12 @@ import {
   useMint
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
-import classnames from "classnames";
-import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import { useBalanceStore } from "@/store/balanceState";
-import { toast } from "sonner";
 import { EXPLORER_TX_URL } from "@/lib/constant";
+import ModalButtons from "../ui/velix/ModalButtons";
+import SuccessModal from "../ui/velix/SuccessModal";
+import classnames from "classnames";
+import Loader from "../ui/velix/icons/Loader";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -51,14 +52,6 @@ export default function Mint() {
     if (isMinted) {
       setAmountToMint("");
       getBalances();
-      toast("Mint completed", {
-        duration: 5000,
-        position: "top-right",
-        action: {
-          label: "View transaction",
-          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
-        }
-      });
     }
   }, [getBalances, isMinted, isSuccess, txhash]);
 
@@ -74,9 +67,16 @@ export default function Mint() {
     setAmountToMint(e.target.value);
   };
 
+  const onViewTransaction = () => {
+    window.open(`${EXPLORER_TX_URL}${txhash}`);
+  };
+
   const onStartMinting = async () => {
     if (!amountToMint || !amountToMint.trim()) return;
     setShowModal(true);
+  };
+
+  const onApproveMinting = async () => {
     await approveMinting(amountToMint);
   };
 
@@ -91,7 +91,7 @@ export default function Mint() {
     if (currentStep === 2 && !mintError && !isMinted)
       return "Approved, you can now mint.";
     if (currentStep === 2 && mintError) return "Failed to mint.";
-    if (currentStep === 2 && isMinted) return "Successfully Minted.";
+    if (currentStep === 2 && mintPending) return "Waiting for confirmation.";
   };
 
   const renderErrorMessage = () => {
@@ -144,15 +144,20 @@ export default function Mint() {
     );
   }, [METISBalance, amountToMint, isPending, mintPending]);
 
+  const renderMintButtonTitle = () => {
+    if (mintPending) return "Minting...";
+    if (isMinted) return "Minted";
+    return "Mint";
+  };
+
   return (
     <>
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
-              <Loader className="w-10 h-10 mb-6 animate-spin" />
+              <Loader className="w-20 h-20 mb-6 animate-spin" />
             )}
-            {isMinted && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
               {renderModalTitle()}
             </p>
@@ -168,13 +173,21 @@ export default function Mint() {
                 {renderErrorMessage()}
               </p>
             )}
-
-            {currentStep === 2 && !isMinted && (
-              <StakingFormButtom
-                isLoading={mintPending}
-                disabled={mintPending}
-                role="mint"
-                onMint={onMint}
+            {isMinted && currentStep === 2 && (
+              <SuccessModal
+                onViewOnExploer={onViewTransaction}
+                onClose={onClose}
+              />
+            )}
+            {!isMinted && (
+              <ModalButtons
+                isApprovePending={isPending}
+                isApproveSuccess={isSuccess}
+                isLastStepDisabled={mintPending || currentStep !== 2}
+                isApproveButtonDisabled={isPending}
+                title={renderMintButtonTitle()}
+                onLastStepClick={onMint}
+                onClickApproveButton={onApproveMinting}
               />
             )}
             <div className="flex gap-0 items-center w-fit h-fit mt-8">

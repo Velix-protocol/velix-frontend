@@ -14,10 +14,11 @@ import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { CheckCircle2, Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL } from "@/lib/constant";
-import { toast } from "sonner";
+import ModalButtons from "@/components/ui/velix/ModalButtons";
+import WaitingForApprovalModal from "./_partials/WaitingForApprovalModal";
+import SuccessModal from "@/components/ui/velix/SuccessModal";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -54,14 +55,6 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       getBalances();
-      toast("Stake completed", {
-        duration: 5000,
-        position: "top-right",
-        action: {
-          label: "View transaction",
-          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
-        }
-      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
@@ -73,6 +66,10 @@ export default function StakingOperations() {
       document.body.style.overflow = "auto";
     }
   }, [showModal]);
+
+  const onViewTransaction = async () => {
+    window.open(`${EXPLORER_TX_URL}${txhash}`);
+  };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToStake(e.target.value);
@@ -106,23 +103,23 @@ export default function StakingOperations() {
     if (stakeError) return stakeError.message.split(".")[0];
   };
 
-  // const isAllChecked = useMemo(
-  //   () => stakebridge && vestment,
-  //   [stakebridge, vestment]
-  // );
-
   const onCloseModal = useCallback(() => {
     if (isPending || stakePending) return;
     setShowModal(false);
     setStakeBrigde(false);
-    // setVestment(false);
     resetApproveState();
+  }, [isPending, resetApproveState, stakePending]);
+
+  const onCloseSuccessModal = useCallback(() => {
     resetStakeState();
-  }, [isPending, resetApproveState, resetStakeState, stakePending]);
+  }, [resetStakeState]);
 
   useEffect(() => {
-    if (isStaked) setTimeout(onCloseModal, 5000);
-  }, [isStaked, onCloseModal]);
+    if (isStaked) {
+      setShowModal(false);
+      setTimeout(onCloseSuccessModal, 5000);
+    }
+  }, [isStaked, onCloseSuccessModal]);
 
   const disabled = useMemo(() => {
     return (
@@ -134,12 +131,6 @@ export default function StakingOperations() {
     );
   }, [amountToStake, isPending, stakePending, veMETISBalance]);
 
-  const renderApproveStakeButtonTitle = () => {
-    if (isPending) return "Approving...";
-    if (isSuccess) return "Approved";
-    return "Approve";
-  };
-
   const renderStakeButtonTitle = () => {
     if (stakePending) return "Staking...";
     if (isStaked) return "Staked";
@@ -148,6 +139,26 @@ export default function StakingOperations() {
 
   return (
     <>
+      {isPending && (
+        <WaitingForApprovalModal
+          title="Waiting for Approval."
+          subTitle="Confirm this transaction in your wallet"
+        />
+      )}
+      {stakePending && (
+        <WaitingForApprovalModal
+          title="Waiting for confirmation."
+          subTitle="Pending confirmation on wallet."
+        />
+      )}
+      {isStaked && (
+        <Modal onClose={onCloseSuccessModal}>
+          <SuccessModal
+            onViewOnExploer={onViewTransaction}
+            onClose={onCloseSuccessModal}
+          />
+        </Modal>
+      )}
       {showModal && (
         <Modal onClose={onCloseModal}>
           <div className="flex flex-col gap-3 w-full items-center">
@@ -184,18 +195,6 @@ export default function StakingOperations() {
                       L2 to L1, staking rewards will start after 7 days
                     </p>
                   </div>
-                  {/* <div className="flex gap-6 text-velix-gray justify-start items-start ">
-                    <Checkbox
-                      onClick={() => setVestment(!vestment)}
-                      className="w-5 h-5 checked:accent-velix-primary"
-                    />
-                    <p className="-mt-1">
-                      I understand that 70% of the veMETIS rewards earned from
-                      veMETIS staking will be converted upon redeeming veMETIS.
-                      the remaining 30% of the rewards will be vested and can be
-                      released by staking Velix within 365 days
-                    </p>
-                  </div> */}
                 </div>
               </>
             )}
@@ -207,33 +206,19 @@ export default function StakingOperations() {
             )}
 
             {!isStaked && (
-              <div className="flex items-center w-full gap-5">
-                <Button
-                  onClick={onApproveStaking}
-                  disabled={
-                    isPending ||
-                    stakePending ||
-                    currentStep === 2 ||
-                    !stakebridge
-                  }
-                  className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
-                >
-                  {renderApproveStakeButtonTitle()}
-                </Button>
-                <Button
-                  onClick={onStake}
-                  disabled={
-                    isPending ||
-                    stakePending ||
-                    currentStep !== 2 ||
-                    !stakebridge
-                  }
-                  variant="outline"
-                  className="lg:py-7 disabled:cursor-not-allowed disabled:bg-velix-primary/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
-                >
-                  {renderStakeButtonTitle()}
-                </Button>
-              </div>
+              <ModalButtons
+                isApproveButtonDisabled={
+                  isPending || stakePending || currentStep === 2 || !stakebridge
+                }
+                onClickApproveButton={onApproveStaking}
+                onLastStepClick={onStake}
+                isApprovePending={isPending}
+                isApproveSuccess={isSuccess}
+                isLastStepDisabled={
+                  isPending || stakePending || currentStep !== 2 || !stakebridge
+                }
+                title={renderStakeButtonTitle()}
+              />
             )}
           </div>
         </Modal>

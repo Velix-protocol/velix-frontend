@@ -14,12 +14,12 @@ import {
 } from "@/hooks/use-contract";
 import classnames from "classnames";
 import { useAccount } from "wagmi";
-import SuccessIcon from "../ui/velix/icons/SuccessIcon";
 import Modal from "../ui/velix/Modal";
-import { Loader } from "lucide-react";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL } from "@/lib/constant";
-import { toast } from "sonner";
+import Loader from "../ui/velix/icons/Loader";
+import SuccessModal from "../ui/velix/SuccessModal";
+import ModalButtons from "../ui/velix/ModalButtons";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -51,14 +51,6 @@ export default function Unstake() {
     if (isunStaked) {
       setAmountToUnstake("");
       getBalances();
-      toast("Unstake completed", {
-        duration: 5000,
-        position: "top-right",
-        action: {
-          label: "View transaction",
-          onClick: () => window.open(`${EXPLORER_TX_URL}${txhash}`)
-        }
-      });
     }
   }, [getBalances, isSuccess, isunStaked, txhash]);
 
@@ -70,6 +62,10 @@ export default function Unstake() {
     }
   }, [showModal]);
 
+  const onViewTransaction = () => {
+    window.open(`${EXPLORER_TX_URL}${txhash}`);
+  };
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToUnstake(e.target.value);
   };
@@ -77,6 +73,9 @@ export default function Unstake() {
   const onStartUnstaking = async () => {
     if (!amountToUnstake || !amountToUnstake.trim()) return;
     setShowModal(true);
+  };
+
+  const onApproveUnstaking = async () => {
     await approveUnstaking(amountToUnstake);
   };
 
@@ -91,7 +90,7 @@ export default function Unstake() {
     if (currentStep === 2 && !unstakeError && !isunStaked)
       return "Approved, you can now unStake.";
     if (currentStep === 2 && unstakeError) return "Failed to unstake.";
-    if (currentStep === 2 && isunStaked) return "Successfully unstaked.";
+    if (currentStep === 2 && unstakePending) return "Waiting for confirmation.";
   };
 
   const renderErrorMessage = () => {
@@ -144,15 +143,20 @@ export default function Unstake() {
     );
   }, [amountToUnstake, isPending, sveMETISBalance, unstakePending]);
 
+  const renderUnstakeButtonTitle = () => {
+    if (unstakePending) return "Unstaking...";
+    if (isunStaked) return "Unstaked";
+    return "Unstake";
+  };
+
   return (
     <>
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && currentStep === 1 && (
-              <Loader className="w-10 h-10 mb-6 animate-spin" />
+              <Loader className="w-20 h-20 mb-6 animate-spin" />
             )}
-            {isunStaked && <SuccessIcon className="w-10 h-10 mb-6" />}
             <p className="font-bold text-center text-2xl lg:text-4xl">
               {renderModalTitle()}
             </p>
@@ -169,12 +173,21 @@ export default function Unstake() {
               </p>
             )}
 
-            {currentStep === 2 && !isunStaked && (
-              <StakingFormButtom
-                isLoading={unstakePending}
-                disabled={unstakePending}
-                role="unstake"
-                onUnstake={onUnstake}
+            {isunStaked && currentStep === 2 && (
+              <SuccessModal
+                onViewOnExploer={onViewTransaction}
+                onClose={onClose}
+              />
+            )}
+            {!isunStaked && (
+              <ModalButtons
+                isApprovePending={isPending}
+                isApproveSuccess={isSuccess}
+                isLastStepDisabled={unstakePending || currentStep !== 2}
+                isApproveButtonDisabled={isPending}
+                title={renderUnstakeButtonTitle()}
+                onLastStepClick={onUnstake}
+                onClickApproveButton={onApproveUnstaking}
               />
             )}
             <div className="flex gap-0 items-center w-fit h-fit mt-8">
