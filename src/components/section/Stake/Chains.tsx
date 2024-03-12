@@ -1,12 +1,18 @@
-import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import {
+  EXPLORER_ADDRESS_URL,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS
 } from "@/lib/constant";
 import { truncateString } from "@/lib/utils";
-import { Loader } from "lucide-react";
+import {
+  ArrowUpRightFromSquare,
+  Check,
+  Copy,
+  Loader,
+  PlusCircle
+} from "lucide-react";
 import { useState } from "react";
 
 const avalableChains = [
@@ -36,6 +42,8 @@ export default function Chains() {
   const [chainToAdd, setChainToAdd] = useState<
     (typeof avalableChains)[0] | null
   >(null);
+  const [copied, setCopied] = useState(false);
+  const [copiedAddress, setCopiedAddress] = useState("");
 
   const addMetisToMetamaskBrowserWallet = async (
     options: (typeof avalableChains)[0]
@@ -64,6 +72,20 @@ export default function Chains() {
     }
   };
 
+  const onCopyToClickboard = async (address: string) => {
+    setCopied(true);
+    setCopiedAddress(address);
+    await navigator.clipboard.writeText(address);
+    setTimeout(() => {
+      setCopied(false);
+      setCopiedAddress("");
+    }, 1500);
+  };
+
+  const onViewChainOnExplorer = (address: string) => {
+    window.open(`${EXPLORER_ADDRESS_URL}${address}`);
+  };
+
   return (
     <div className="bg-white rounded-xl flex flex-col gap-3 h-max p-5 lg:p-11">
       {avalableChains.map((chain) => {
@@ -87,10 +109,28 @@ export default function Chains() {
                 <Loader className="w-7 h-7 animate-spin mr-5 text-velix-primary" />
               </>
             ) : (
-              <AddBoxIcon
-                onClick={() => addMetisToMetamaskBrowserWallet(chain)}
-                className="w-7 h-7 fill-velix-primary mr-5 cursor-pointer"
-              />
+              <div className="flex gap-3 items-center mr-5">
+                <PlusCircle
+                  role="button"
+                  onClick={() => addMetisToMetamaskBrowserWallet(chain)}
+                  className="text-velix-primary w-5 h-5 cursor-pointer"
+                />
+                {copied &&
+                chain.address.toLowerCase() === copiedAddress.toLowerCase() ? (
+                  <Check className="text-velix-primary w-5 h-5" />
+                ) : (
+                  <Copy
+                    role="button"
+                    onClick={() => onCopyToClickboard(chain.address)}
+                    className="text-velix-primary w-5 h-5 cursor-pointer"
+                  />
+                )}
+                <ArrowUpRightFromSquare
+                  onClick={() => onViewChainOnExplorer(chain.address)}
+                  role="button"
+                  className="text-velix-primary w-5 h-5 cursor-pointer"
+                />
+              </div>
             )}
           </div>
         );
