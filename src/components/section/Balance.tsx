@@ -1,5 +1,3 @@
-import { useAccount } from "wagmi";
-import { truncateString } from "@/lib/utils";
 import { useMetisBalance } from "@/hooks/use-contract";
 import { useBalanceStore } from "@/store/balanceState";
 
@@ -10,7 +8,6 @@ export default function Balance({
   isConnected: boolean;
   role: "mint" | "stake" | "unstake";
 }) {
-  const { address } = useAccount();
   useMetisBalance();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
 
@@ -55,11 +52,6 @@ export default function Balance({
   if (!isConnected) return <>{""}</>;
   return (
     <div className="bg-velix-primary p-5 lg:p-10 space-y-5 lg:space-y-10 text-white font-space-grotesk rounded-2xl">
-      <div className="bg-white/25 w-fit px-5 py-2 rounded-lg">
-        <p className="text-[0.625rem] lg:text-xs">
-          {truncateString(address, 4, 10)}
-        </p>
-      </div>
       <div className="flex gap-2 md:gap-5 max-md:flex-col lg:gap-10 md:justify-center md:items-center">
         <div className="bg-white/25 p-3 gap-4 md:p-5 flex flex-row md:flex-col w-fit items-center md:items-start lg:p-7 rounded-lg h-full md:w-full md:space-y-2">
           <p className="text-xs lg:text-base flex">

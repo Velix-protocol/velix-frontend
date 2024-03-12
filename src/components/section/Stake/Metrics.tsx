@@ -14,12 +14,12 @@ export default function Metrics() {
       <MetricsCard
         icon={<ChatIcon className="fill-velix-primary h-6 w-6" />}
         description="veMETIS market cap"
-        value="$2,166"
+        value="--"
       />
       <MetricsCard
         icon={<Copy className="fill-velix-primary h-6 w-6" />}
         description="Stakers"
-        value="6569"
+        value="--"
       />
     </div>
   );

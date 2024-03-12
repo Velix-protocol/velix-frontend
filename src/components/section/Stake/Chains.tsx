@@ -1,5 +1,4 @@
 import AddBoxIcon from "@/components/ui/velix/icons/AddBoxIcon";
-import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import {
@@ -9,16 +8,8 @@ import {
 import { truncateString } from "@/lib/utils";
 import { Loader } from "lucide-react";
 import { useState } from "react";
-import { metis } from "wagmi/chains";
 
 const avalableChains = [
-  {
-    address: metis.contracts.multicall3.address,
-    symbol: metis.nativeCurrency.symbol,
-    decimals: metis.nativeCurrency.decimals,
-    name: metis.name,
-    logo: <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
-  },
   {
     address: VEMETIS_CONTRACT_ADDRESS,
     symbol: "veMETIS",
