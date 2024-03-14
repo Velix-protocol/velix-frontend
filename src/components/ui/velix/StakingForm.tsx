@@ -80,7 +80,7 @@ export default function StakingForm({
 
   return (
     <div className="flex flex-col relative gap-3">
-      <div className={inputClassName}>
+      <div onSubmit={(e) => e.preventDefault()} className={inputClassName}>
         <Input
           value={value}
           onChange={onChange}

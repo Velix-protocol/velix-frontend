@@ -15,3 +15,4 @@ export const CONFIRMATION_BLOCKS_NUMBER = 5;
 export const EXPLORER_TX_URL = "https://sepolia.explorer.metisdevops.link/tx/";
 export const EXPLORER_ADDRESS_URL =
   "https://sepolia.explorer.metisdevops.link/address/";
+export const MAX_INPUT_LENGTH = 10;

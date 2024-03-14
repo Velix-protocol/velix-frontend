@@ -16,7 +16,7 @@ import classnames from "classnames";
 import { useAccount } from "wagmi";
 import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
 import Loader from "../ui/velix/icons/Loader";
 import SuccessModal from "../ui/velix/SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
@@ -57,9 +57,9 @@ export default function Unstake() {
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+      return;
     }
+    document.body.style.overflow = "auto";
   }, [showModal]);
 
   const onViewTransaction = () => {
@@ -67,7 +67,11 @@ export default function Unstake() {
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToUnstake(e.target.value);
+    setAmountToUnstake(
+      e.target.value.length > MAX_INPUT_LENGTH
+        ? e.target.value.slice(0, MAX_INPUT_LENGTH)
+        : e.target.value
+    );
   };
 
   const onStartUnstaking = async () => {

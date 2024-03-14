@@ -15,7 +15,7 @@ import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { CheckCircle2, Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "./_partials/WaitingForApprovalModal";
 import SuccessModal from "@/components/ui/velix/SuccessModal";
@@ -62,9 +62,9 @@ export default function StakingOperations() {
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+      return;
     }
+    document.body.style.overflow = "auto";
   }, [showModal]);
 
   const onViewTransaction = async () => {
@@ -72,7 +72,11 @@ export default function StakingOperations() {
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToStake(e.target.value);
+    setAmountToStake(
+      e.target.value.length > MAX_INPUT_LENGTH
+        ? e.target.value.slice(0, MAX_INPUT_LENGTH)
+        : e.target.value
+    );
   };
 
   const onOpenProtocolDisclaimer = () =>

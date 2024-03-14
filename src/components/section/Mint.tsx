@@ -16,7 +16,7 @@ import {
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
 import SuccessModal from "../ui/velix/SuccessModal";
 import classnames from "classnames";
@@ -58,13 +58,17 @@ export default function Mint() {
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+      return;
     }
+    document.body.style.overflow = "auto";
   }, [showModal]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToMint(e.target.value);
+    setAmountToMint(
+      e.target.value.length > MAX_INPUT_LENGTH
+        ? e.target.value.slice(0, MAX_INPUT_LENGTH)
+        : e.target.value
+    );
   };
 
   const onViewTransaction = () => {
