@@ -20,7 +20,7 @@ export default function VelixCard({
       <div className="bg-velix-slate-blue font-space-grotesk w-full h-full p-9 flex gap-9 rounded-[0.9375rem]">
         <span className="w-fit h-fit">{icon}</span>
         <div className="flex flex-col justify-start">
-          <h3 className="font-bold text-2xl">{title}</h3>
+          <h3 className="font-bold lg:text-2xl text-[1.25rem]">{title}</h3>
           <p className="text-velix-gray text-base mt-2">{description}</p>
         </div>
       </div>
