@@ -5,7 +5,11 @@ import AnalyticsIcon from "./icons/AnalyticsIcon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-export default function BottomBar() {
+export default function BottomBar({
+  isNotFound = false
+}: {
+  isNotFound?: boolean;
+}) {
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname.split("/").at(-1));
 
@@ -14,6 +18,8 @@ export default function BottomBar() {
   }, [pathname]);
 
   const applyActiveStyles = (path: string, option?: { className?: string }) => {
+    if (isNotFound)
+      return option?.className + " " + "text-velix-gray fill-velix-gray";
     if (activePath === path)
       return option?.className + " " + "fill-velix-primary text-velix-primary";
     return option?.className + " " + "text-velix-gray fill-velix-gray";
@@ -23,7 +29,7 @@ export default function BottomBar() {
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
       <NavLink
         relative="path"
-        to="mint"
+        to={isNotFound ? "/app/mint" : "mint"}
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
@@ -42,7 +48,7 @@ export default function BottomBar() {
 
       <NavLink
         relative="path"
-        to="stake"
+        to={isNotFound ? "/app/stake" : "stake"}
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
@@ -60,7 +66,7 @@ export default function BottomBar() {
       </NavLink>
       <NavLink
         relative="path"
-        to="unstake"
+        to={isNotFound ? "/app/unstake" : "unstake"}
         className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
@@ -78,7 +84,7 @@ export default function BottomBar() {
       </NavLink>
       <NavLink
         relative="path"
-        to="dashboard"
+        to={isNotFound ? "/app/dashboard" : "dashboard"}
         className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
       >
         <span>
