@@ -21,9 +21,12 @@ export default function Notfound({ isNested = false }: { isNested?: boolean }) {
           </div>
         </div>
       )}
-      <div className="relative flex flex-col items-center w-fit mt-48 mx-auto">
-        <NotfoundIcon className="w-full h-56 lg:w-96 lg:h-96" />
+      <div className="relative flex flex-col items-center w-fit mt-28 mx-auto">
+        <NotfoundIcon className="w-full h-48 lg:w-96 lg:h-96" />
         <Number className="absolute w-28 -top-10 lg:w-32 h-20 lg:top-0 mx-auto left-0 right-0" />
+        <h2 className="text-2xl md:text-4xl text-center text-velix-primary font-bold font-space-grotesk mb-5 md:mb-10">
+          Page not found
+        </h2>
         <Button className="flex bg-white hover:bg-velix-primary text-velix-primary hover:text-white font-space-grotesk px-8 font-bold text-center items-center">
           Go to home
         </Button>
