@@ -61,12 +61,12 @@ export default function Dashboard() {
             Transaction hash
           </TableHead>
         </TableHeader>
-        <TableBody className="bg-white py-10">
+        <TableBody className="bg-white py-10 space-y-2">
           {velixData.map((data) => {
             return (
               <div
                 key={data.amount}
-                className="grid grid-cols-3 w-full justify-between px-8"
+                className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary px-8 hover:text-white rounded-xl"
               >
                 <TableCell>{data.date}</TableCell>
                 <TableCell>{data.amount}</TableCell>
