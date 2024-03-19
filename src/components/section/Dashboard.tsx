@@ -1,68 +1,83 @@
-import { CardContent, Card } from "@/components/ui/DashboardCard";
-import { Button } from "@/components/ui/button";
-import Chart from "./Chart";
 import Section from "../layouts/Section";
 import { useMetisBalance } from "@/hooks/use-contract";
-import { useBalanceStore } from "@/store/balanceState";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader
+} from "@/components/ui/table";
 
 export default function Dashboard() {
   useMetisBalance();
-  const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
-
   const velixData = [
     {
-      name: "METIS",
-      value: METISBalance
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
     },
     {
-      name: "veMETIS",
-      value: veMETISBalance
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
     },
     {
-      name: "sveMETIS",
-      value: sveMETISBalance
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
     },
     {
-      name: "APR",
-      value: "--"
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
+    },
+    {
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
+    },
+    {
+      date: "Feb 15 17:04:09",
+      amount: "577,858,885",
+      transationHash:
+        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
     }
   ];
 
   return (
-    <Section className="mt-28 px-5 pb-28">
-      <div className="py-8 flex-col flex gap-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 bg-white p-5 lg:p-12 rounded-lg">
-          {velixData.map((data, index) => (
-            <Card key={index} className="bg-velix-slate-blue">
-              <CardContent className="p-7 space-y-2">
-                <div className="text-sm text-velix-gray">
-                  {data.name} balance
-                </div>
-                <div className="text-lg font-semibold text-velix-primary">
-                  {data.value} {data.name}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="flex flex-col items-center bg-white p-5 md:p-12 rounded-lg">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full pb-12 font-space-grotesk">
-            <h2 className="text-2xl font-bold mb-4">METIS Analytics</h2>
-            <div className="flex md:justify-center w-fit lg:space-x-4 mt-4 bg-velix-slate-blue p-2 rounded-lg">
-              <Button className="bg-velix-primary hover:bg-velix-primary">
-                Day
-              </Button>
-              <Button className="text-velix-gray bg-transparent hover:bg-transparent">
-                Week
-              </Button>
-              <Button className="text-velix-gray bg-transparent hover:bg-transparent">
-                Month
-              </Button>
-            </div>
-          </div>
-          <Chart className="w-full h-[300px]" />
-        </div>
-      </div>
+    <Section className="mt-28 px-5 pb-28 min-h-screen">
+      <Table className="p-10 font-space-grotesk mt-16">
+        <TableHeader className="bg-velix-primary pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
+          <TableHead className="w-[100px] text-white font-bold h-fit">
+            Date
+          </TableHead>
+          <TableHead className="text-white font-bold h-fit">Amount</TableHead>
+          <TableHead className="text-white font-bold h-fit">
+            Transaction hash
+          </TableHead>
+        </TableHeader>
+        <TableBody className="bg-white py-10">
+          {velixData.map((data) => {
+            return (
+              <div
+                key={data.amount}
+                className="grid grid-cols-3 w-full justify-between px-8"
+              >
+                <TableCell>{data.date}</TableCell>
+                <TableCell>{data.amount}</TableCell>
+                <TableCell className="truncate underline cursor-pointer">
+                  {data.transationHash}
+                </TableCell>
+              </div>
+            );
+          })}
+        </TableBody>
+      </Table>
     </Section>
   );
 }
