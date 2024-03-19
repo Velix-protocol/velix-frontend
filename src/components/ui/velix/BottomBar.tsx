@@ -18,8 +18,7 @@ export default function BottomBar({
   }, [pathname]);
 
   const applyActiveStyles = (path: string, option?: { className?: string }) => {
-    if (isNotFound)
-      return option?.className + " " + "text-velix-gray fill-velix-gray";
+    if (isNotFound) return option?.className + " " + "text-white fill-white";
     if (activePath === path)
       return option?.className + " " + "fill-velix-primary text-velix-primary";
     return option?.className + " " + "text-velix-gray fill-velix-gray";
