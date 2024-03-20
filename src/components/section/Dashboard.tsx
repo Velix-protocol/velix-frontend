@@ -103,7 +103,7 @@ export default function Dashboard() {
             return (
               <div
                 key={data.amount}
-                className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary px-8 hover:text-white rounded-xl"
+                className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary hover:text-white rounded-xl"
               >
                 <TableCell>{data.date}</TableCell>
                 <TableCell>{data.amount}</TableCell>
