@@ -16,7 +16,7 @@ const metadata = {
 };
 
 export const METIS_SEPOLIA = defineChain({
-  id: 59901,
+  id: 59902,
   name: "METIS sepolia",
   nativeCurrency: {
     name: "Metis",
@@ -31,12 +31,12 @@ export const METIS_SEPOLIA = defineChain({
   blockExplorers: {
     default: {
       name: "Metis Sepoliaa Explorer",
-      url: "https://sepolia.explorer.metisdevops.link/"
+      url: "https://sepolia-explorer.metisdevops.link/"
     }
   },
   rpcUrls: {
     default: {
-      http: ["https://sepolia.rpc.metisdevops.link/"],
+      http: ["https://sepolia.metisdevops.link/"],
       webSocket: ["wss://sepolia-ws.rpc.metisdevops.link"]
     }
   }
