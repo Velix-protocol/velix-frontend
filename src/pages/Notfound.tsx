@@ -22,7 +22,7 @@ export default function Notfound({ isNested = false }: { isNested?: boolean }) {
         </div>
       )}
       <div className="relative flex flex-col items-center h-screen w-fit mt-28 mx-auto">
-        <Number className="w-96 h-96 mx-auto left-0 right-0" />
+        <Number className="max-md:w-60 max-md:h-60 w-96 h-96 mx-auto left-0 right-0" />
         <h2 className="text-2xl md:text-4xl text-center text-velix-primary font-bold font-space-grotesk mb-5 md:mb-10">
           Page not found
         </h2>
