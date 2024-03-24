@@ -30,7 +30,7 @@ export default function Notfound({ isNested = false }: { isNested?: boolean }) {
           onClick={() => navigate("/", { replace: true })}
           className="flex bg-velix-primary text-white hover:bg-velix-primary font-space-grotesk px-8 font-bold text-center items-center"
         >
-          Go home
+          Go to home
         </Button>
       </div>
     </Section>
