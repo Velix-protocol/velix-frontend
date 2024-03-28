@@ -292,7 +292,7 @@ export const useMetisBalance = () => {
   });
 
   const provider = useMemo(
-    () => new ethers.JsonRpcProvider("https://sepolia.rpc.metisdevops.link/"),
+    () => new ethers.JsonRpcProvider("https://sepolia.metisdevops.link/"),
     []
   );
 
