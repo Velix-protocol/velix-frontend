@@ -80,6 +80,7 @@ export default function Unstake() {
   };
 
   const onApproveUnstaking = async () => {
+    resetApproveState();
     await approveUnstaking(amountToUnstake);
   };
 
@@ -92,7 +93,7 @@ export default function Unstake() {
     if (currentStep === 1 && !error) return "Waiting for Approval.";
     if (currentStep === 1 && error) return "Approval failed.";
     if (currentStep === 2 && !unstakeError && !isunStaked)
-      return "Approved, you can now unStake.";
+      return "Approved, you can now unstake.";
     if (currentStep === 2 && unstakeError) return "Failed to unstake.";
     if (currentStep === 2 && unstakePending) return "Waiting for confirmation.";
   };
@@ -158,7 +159,7 @@ export default function Unstake() {
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
-            {isPending && currentStep === 1 && (
+            {(isPending || unstakePending) && (
               <Loader className="w-20 h-20 mb-6 animate-spin" />
             )}
             <p className="font-bold text-center text-2xl lg:text-4xl">
@@ -188,7 +189,7 @@ export default function Unstake() {
                 isApprovePending={isPending}
                 isApproveSuccess={isSuccess}
                 isLastStepDisabled={unstakePending || currentStep !== 2}
-                isApproveButtonDisabled={isPending}
+                isApproveButtonDisabled={isPending || isSuccess}
                 title={renderUnstakeButtonTitle()}
                 onLastStepClick={onUnstake}
                 onClickApproveButton={onApproveUnstaking}
@@ -240,7 +241,7 @@ export default function Unstake() {
                       </p>
                     }
                   />
-                  <StakingDetails title="Max transaction cost" value="$82.47" />
+                  {/* <StakingDetails title="Max transaction cost" value="$82.47" /> */}
                   <StakingDetails title="Allowance" value="0.0 veMETIS" />
                   <StakingDetails
                     title="Exchange rate"

@@ -81,6 +81,7 @@ export default function Mint() {
   };
 
   const onApproveMinting = async () => {
+    resetApproveState();
     await approveMinting(amountToMint);
   };
 
@@ -159,7 +160,7 @@ export default function Mint() {
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
-            {isPending && currentStep === 1 && (
+            {(isPending || mintPending) && (
               <Loader className="w-20 h-20 mb-6 animate-spin" />
             )}
             <p className="font-bold text-center text-2xl lg:text-4xl">
@@ -188,7 +189,7 @@ export default function Mint() {
                 isApprovePending={isPending}
                 isApproveSuccess={isSuccess}
                 isLastStepDisabled={mintPending || currentStep !== 2}
-                isApproveButtonDisabled={isPending}
+                isApproveButtonDisabled={isPending || isSuccess}
                 title={renderMintButtonTitle()}
                 onLastStepClick={onMint}
                 onClickApproveButton={onApproveMinting}

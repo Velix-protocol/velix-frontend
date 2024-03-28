@@ -184,7 +184,7 @@ export default function StakingOperations() {
                     </p>
                     <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
                       <CheckCircle2 className="fill-velix-primary w-8 h-8 stroke-white" />
-                      Wait 7 days
+                      Start earning
                     </p>
                   </div>
                 </div>
