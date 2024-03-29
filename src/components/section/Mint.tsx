@@ -105,26 +105,32 @@ export default function Mint() {
   };
 
   const step1Classnames = classnames(
-    "text-white  h-8 w-8 flex justify-center items-center rounded-full",
+    "text-white h-8 w-8 flex justify-center items-center rounded-full",
     {
       "bg-red-600": error,
-      "bg-velix-primary": !error
+      "bg-velix-green !text-white": !error && isSuccess,
+      "bg-velix-gray/20 !text-velix-primary": !error
     }
   );
 
-  const stepsLinkClassnames = classnames("h-1 w-32 bg-gradient-to-r", {
-    "from-velix-primary to-velix-gray/20": currentStep === 1 && !error,
-    "from-red-600 to-velix-gray/20": currentStep === 1 && error,
-    "from-velix-primary to-red-600": currentStep === 2 && mintError,
-    "from-velix-primary to-velix-primary": currentStep === 2 && !mintError
+  const stepsLinkClassnames = classnames("h-1 w-32", {
+    "bg-velix-gray/20": currentStep === 1 && !error,
+    "from-velix-green bg-gradient-to-r to-velix-gray/20":
+      currentStep === 2 && isSuccess,
+    "from-red-600 bg-gradient-to-r to-velix-gray/20":
+      currentStep === 1 && error,
+    "!from-red-600 bg-gradient-to-l  !to-velix-green":
+      currentStep === 2 && mintError,
+    "!from-velix-green bg-gradient-to-l !to-velix-green":
+      currentStep === 2 && isMinted
   });
 
   const step2Classnames = classnames(
     "h-8 w-8 flex justify-center items-center p-2 rounded-full",
     {
-      "bg-red-600 text-white": currentStep === 2 && mintError,
-      "text-white bg-velix-primary": currentStep === 2 && !mintError,
-      "bg-velix-gray/20 text-velix-primary": currentStep === 1 && !mintError
+      "bg-red-600 !text-white": mintError,
+      "bg-velix-green !text-white": !mintError && isMinted,
+      "bg-velix-gray/20 !text-velix-primary": !mintError
     }
   );
 
@@ -133,6 +139,7 @@ export default function Mint() {
     setShowModal(false);
     resetApproveState();
     resetMintState();
+    setCurrentStep(1);
   }, [isPending, mintPending, resetApproveState, resetMintState]);
 
   useEffect(() => {

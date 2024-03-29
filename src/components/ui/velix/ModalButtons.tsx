@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { Button } from "../button";
-import SuccessIcon from "./icons/SuccessIcon";
 
 interface IModalButtons {
   isApprovalPending: boolean;
@@ -43,9 +42,6 @@ export default function ModalButtons({
         className={approveButtonClass}
       >
         {renderApproveStakeButtonTitle()}{" "}
-        {isApprovalSuccess && (
-          <SuccessIcon className="h-3 w-3 ml-0.5 fill-white" />
-        )}
       </Button>
       <Button
         onClick={onLastStepClick}
