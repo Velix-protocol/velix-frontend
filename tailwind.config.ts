@@ -29,6 +29,7 @@ const config = {
         "velix-gray": "#54616b",
         "velix-slate-green": "#068012",
         "velix-red": "#FF4949",
+        "velix-green": "#13C244",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

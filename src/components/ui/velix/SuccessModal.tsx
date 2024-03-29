@@ -10,7 +10,7 @@ export default function SuccessModal({
 }) {
   return (
     <div className="flex flex-col items-center">
-      <SuccessIcon className="w-10 h-10 mb-6" />
+      <SuccessIcon className="w-10 h-10 mb-6 fill-velix-green" />
       <p className="font-bold text-center text-2xl lg:text-4xl">
         Transaction submitted
       </p>

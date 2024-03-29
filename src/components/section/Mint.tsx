@@ -186,8 +186,8 @@ export default function Mint() {
             )}
             {!isMinted && (
               <ModalButtons
-                isApprovePending={isPending}
-                isApproveSuccess={isSuccess}
+                isApprovalPending={isPending}
+                isApprovalSuccess={isSuccess}
                 isLastStepDisabled={mintPending || currentStep !== 2}
                 isApproveButtonDisabled={isPending || isSuccess}
                 title={renderMintButtonTitle()}

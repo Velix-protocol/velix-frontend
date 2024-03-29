@@ -186,8 +186,8 @@ export default function Unstake() {
             )}
             {!isunStaked && (
               <ModalButtons
-                isApprovePending={isPending}
-                isApproveSuccess={isSuccess}
+                isApprovalPending={isPending}
+                isApprovalSuccess={isSuccess}
                 isLastStepDisabled={unstakePending || currentStep !== 2}
                 isApproveButtonDisabled={isPending || isSuccess}
                 title={renderUnstakeButtonTitle()}

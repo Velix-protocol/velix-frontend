@@ -50,7 +50,6 @@ export default function StakingOperations() {
   useEffect(() => {
     if (isSuccess) {
       setCurrentStep(2);
-      resetApproveState();
     }
     if (isStaked) {
       setAmountToStake("");
@@ -112,11 +111,15 @@ export default function StakingOperations() {
     setShowModal(false);
     setStakeBrigde(false);
     resetApproveState();
-  }, [isPending, resetApproveState, stakePending]);
+    resetStakeState();
+    setCurrentStep(1);
+  }, [isPending, resetApproveState, resetStakeState, stakePending]);
 
   const onCloseSuccessModal = useCallback(() => {
     resetStakeState();
-  }, [resetStakeState]);
+    resetApproveState();
+    setCurrentStep(1);
+  }, [resetApproveState, resetStakeState]);
 
   useEffect(() => {
     if (isStaked) {
@@ -212,12 +215,16 @@ export default function StakingOperations() {
             {!isStaked && (
               <ModalButtons
                 isApproveButtonDisabled={
-                  isPending || stakePending || currentStep === 2 || !stakebridge
+                  isPending ||
+                  stakePending ||
+                  currentStep === 2 ||
+                  !stakebridge ||
+                  isSuccess
                 }
                 onClickApproveButton={onApproveStaking}
                 onLastStepClick={onStake}
-                isApprovePending={isPending}
-                isApproveSuccess={isSuccess}
+                isApprovalPending={isPending}
+                isApprovalSuccess={isSuccess}
                 isLastStepDisabled={
                   isPending || stakePending || currentStep !== 2 || !stakebridge
                 }
