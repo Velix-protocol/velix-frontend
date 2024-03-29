@@ -12,7 +12,6 @@ import {
   useMetisBalance,
   useUnstake
 } from "@/hooks/use-contract";
-import classnames from "classnames";
 import { useAccount } from "wagmi";
 import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
@@ -20,6 +19,7 @@ import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
 import Loader from "../ui/velix/icons/Loader";
 import SuccessModal from "../ui/velix/SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
+import Steps from "../ui/Steps";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -103,30 +103,6 @@ export default function Unstake() {
     if (unstakeError) return unstakeError.message.split(".")[0];
   };
 
-  const step1Classnames = classnames(
-    "text-white  h-8 w-8 flex justify-center items-center rounded-full",
-    {
-      "bg-red-600": error,
-      "bg-velix-primary": !error
-    }
-  );
-
-  const stepsLinkClassnames = classnames("h-1 w-32 bg-gradient-to-r", {
-    "from-velix-primary to-velix-gray/20": currentStep === 1 && !error,
-    "from-red-600 to-velix-gray/20": currentStep === 1 && error,
-    "from-velix-primary to-red-600": currentStep === 2 && unstakeError,
-    "from-velix-primary to-velix-primary": currentStep === 2 && !unstakeError
-  });
-
-  const step2Classnames = classnames(
-    "h-8 w-8 flex justify-center items-center p-2 rounded-full",
-    {
-      "bg-red-600 text-white": currentStep === 2 && unstakeError,
-      "text-white bg-velix-primary": currentStep === 2 && !unstakeError,
-      "bg-velix-gray/20 text-velix-primary": currentStep === 1 && !unstakeError
-    }
-  );
-
   const onClose = useCallback(() => {
     if (isPending || unstakePending) return;
     setShowModal(false);
@@ -195,11 +171,13 @@ export default function Unstake() {
                 onClickApproveButton={onApproveUnstaking}
               />
             )}
-            <div className="flex gap-0 items-center w-fit h-fit mt-8">
-              <p className={step1Classnames}>1</p>
-              <div className={stepsLinkClassnames} />
-              <p className={step2Classnames}>2</p>
-            </div>
+            <Steps
+              currentStep={currentStep}
+              step1Error={error}
+              step1Success={isSuccess}
+              step2Sucesss={isunStaked}
+              step2Error={unstakeError}
+            />
           </div>
         </Modal>
       )}

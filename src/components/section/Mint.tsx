@@ -19,8 +19,8 @@ import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
 import SuccessModal from "../ui/velix/SuccessModal";
-import classnames from "classnames";
 import Loader from "../ui/velix/icons/Loader";
+import Steps from "../ui/Steps";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -104,36 +104,6 @@ export default function Mint() {
     if (mintError) return mintError.message.split(".")[0];
   };
 
-  const step1Classnames = classnames(
-    "text-white h-8 w-8 flex justify-center items-center rounded-full",
-    {
-      "bg-red-600": error,
-      "bg-velix-green !text-white": !error && isSuccess,
-      "bg-velix-gray/20 !text-velix-primary": !error
-    }
-  );
-
-  const stepsLinkClassnames = classnames("h-1 w-32", {
-    "bg-velix-gray/20": currentStep === 1 && !error,
-    "from-velix-green bg-gradient-to-r to-velix-gray/20":
-      currentStep === 2 && isSuccess,
-    "from-red-600 bg-gradient-to-r to-velix-gray/20":
-      currentStep === 1 && error,
-    "!from-red-600 bg-gradient-to-l  !to-velix-green":
-      currentStep === 2 && mintError,
-    "!from-velix-green bg-gradient-to-l !to-velix-green":
-      currentStep === 2 && isMinted
-  });
-
-  const step2Classnames = classnames(
-    "h-8 w-8 flex justify-center items-center p-2 rounded-full",
-    {
-      "bg-red-600 !text-white": mintError,
-      "bg-velix-green !text-white": !mintError && isMinted,
-      "bg-velix-gray/20 !text-velix-primary": !mintError
-    }
-  );
-
   const onClose = useCallback(() => {
     if (isPending || mintPending) return;
     setShowModal(false);
@@ -202,11 +172,13 @@ export default function Mint() {
                 onClickApproveButton={onApproveMinting}
               />
             )}
-            <div className="flex gap-0 items-center w-fit h-fit mt-8">
-              <p className={step1Classnames}>1</p>
-              <div className={stepsLinkClassnames} />
-              <p className={step2Classnames}>2</p>
-            </div>
+            <Steps
+              currentStep={currentStep}
+              step1Error={error}
+              step1Success={isSuccess}
+              step2Sucesss={isMinted}
+              step2Error={mintError}
+            />
           </div>
         </Modal>
       )}
