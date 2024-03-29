@@ -338,7 +338,7 @@ export const useMetisBalance = () => {
   }, [data, setMETISBalance]);
 
   useEffect(() => {
-    getBalances();
+    if (address) getBalances();
   }, [address, getBalances, setsveMETISBalance, setveMETISBalance]);
 
   return { getBalances };
