@@ -287,7 +287,7 @@ export const useMetisBalance = () => {
   const { address } = useAccount();
   const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
     useBalanceStore();
-  const { data } = useBalance({
+  const { data, refetch: fetchMETISBalance } = useBalance({
     address: address as `0x${string}`
   });
 
@@ -317,14 +317,21 @@ export const useMetisBalance = () => {
     try {
       const balances = await Promise.all([
         contracts[0].balanceOf(address),
-        contracts[1].balanceOf(address)
+        contracts[1].balanceOf(address),
+        fetchMETISBalance()
       ]);
       setsveMETISBalance(formatEther(balances[1]));
       setveMETISBalance(formatEther(balances[0]));
     } catch (err) {
       console.log(err);
     }
-  }, [address, contracts, setsveMETISBalance, setveMETISBalance]);
+  }, [
+    address,
+    contracts,
+    fetchMETISBalance,
+    setsveMETISBalance,
+    setveMETISBalance
+  ]);
 
   useEffect(() => {
     if (data) return setMETISBalance(formatEther(data.value));
