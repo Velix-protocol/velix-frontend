@@ -12,7 +12,8 @@ import {
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
-  CONFIRMATION_BLOCKS_NUMBER
+  CONFIRMATION_BLOCKS_NUMBER,
+  CONFIRMATION_BLOCKS_NUMBER_APPROVE
 } from "@/lib/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
@@ -49,7 +50,7 @@ export const useApproveMinting = () => {
 
   const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
     {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
       hash
     }
   );
@@ -139,7 +140,7 @@ export const useApproveStaking = () => {
 
   const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
     {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
       hash
     }
   );
@@ -224,7 +225,7 @@ export const useApproveUnstaking = () => {
 
   const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
     {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER,
+      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
       hash
     }
   );
