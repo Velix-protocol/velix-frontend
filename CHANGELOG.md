@@ -1,5 +1,28 @@
 # Changelog
 
+## [1.13.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.12.0...v1.13.0) (2024-03-30)
+
+
+### Features
+
+* add max button ([8f4ecfc](https://github.com/Velix-protocol/velix-frontend/commit/8f4ecfc1a1bceb11f9d02c6c4562e942a5dc4ac5))
+* add metis balances on the dashboard ([a6e58d9](https://github.com/Velix-protocol/velix-frontend/commit/a6e58d9dea9137d4c8d5f7e11899cd14b803d95b))
+* add negative feedback to the input ([a9afe5f](https://github.com/Velix-protocol/velix-frontend/commit/a9afe5f08bf05cbe2ebc39abec415618b3cbee50))
+* add new icons to chains ([648623c](https://github.com/Velix-protocol/velix-frontend/commit/648623caf5d9412a3e8fccb9bc82aed9e1344a21))
+* add not found page ([e9b44f2](https://github.com/Velix-protocol/velix-frontend/commit/e9b44f2dc53c6e6767e3e9ac36d660ff6729526a))
+* add toast after transaction ([c4b1e84](https://github.com/Velix-protocol/velix-frontend/commit/c4b1e84a961ad8728e1265213e21cda069ce513c))
+* add two setps modals ([3f2340b](https://github.com/Velix-protocol/velix-frontend/commit/3f2340b1420ffb0cd7e3697b3aa2ba8e21a9db9a))
+* add wording ([3f686ce](https://github.com/Velix-protocol/velix-frontend/commit/3f686ce61cb4bb06662a9ce48bc7d1717db01dd2))
+* improve notFoundPage ([23d99c4](https://github.com/Velix-protocol/velix-frontend/commit/23d99c45c486c195ae062cd95b0df05df6423e15))
+* improve the dashboard ([1868b94](https://github.com/Velix-protocol/velix-frontend/commit/1868b94a40a88f1e12fd7d946302ac70582c5f39))
+* update contracts ([97b0ca6](https://github.com/Velix-protocol/velix-frontend/commit/97b0ca644e83736bcf6ee575798a8c5e27529325))
+
+
+### Bug Fixes
+
+* add navigation  to 404 page ([f9fbc64](https://github.com/Velix-protocol/velix-frontend/commit/f9fbc64cd06dd9e947cc9659683757afda30113b))
+* the step 2 color on failure ([cfbb630](https://github.com/Velix-protocol/velix-frontend/commit/cfbb630736e0c78519ca73ad875acaa7503150e8))
+
 ## [1.12.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.11.0...v1.12.0) (2024-03-10)
 
 
