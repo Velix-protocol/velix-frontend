@@ -24,11 +24,11 @@ export default function Steps({
   );
 
   const stepsLinkClassnames = classnames("h-1 w-32", {
-    "bg-velix-gray/20": currentStep === 1 && !step1Error,
+    "bg-velix-gray/20": currentStep === 1 && !step1Error && !step1Success,
     "from-velix-green bg-gradient-to-r to-velix-gray/20":
-      currentStep === 2 && step1Success,
+      currentStep === 2 && step1Success && !step2Error,
     "from-red-600 bg-gradient-to-r to-velix-gray/20":
-      currentStep === 1 && step1Error,
+      currentStep === 1 && step1Error && !step2Sucesss,
     "!from-red-600 bg-gradient-to-l !to-velix-green":
       currentStep === 2 && step2Error,
     "!from-velix-green bg-gradient-to-l !to-velix-green":
