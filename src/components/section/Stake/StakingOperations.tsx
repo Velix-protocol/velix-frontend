@@ -15,7 +15,7 @@ import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { CheckCircle2, Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "./_partials/WaitingForApprovalModal";
 import SuccessModal from "@/components/ui/velix/SuccessModal";
@@ -93,7 +93,7 @@ export default function StakingOperations() {
 
   const onStake = async () => {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
-    await stake(walletAddress, amountToStake);
+    await stake(amountToStake);
   };
 
   const renderModalTitle = () => {

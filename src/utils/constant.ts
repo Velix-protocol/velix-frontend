@@ -18,8 +18,8 @@ export const DEALER_CONTRACT_ADDRESS =
 export const PROTOCOL_TREASURE_CONTRACT_ADDRESS =
   "0xc3BD53e8BB7F5a8f98C565aad28C9b618c84D8Fa" as const;
 
-export const CONFIRMATION_BLOCKS_NUMBER = 2;
-export const CONFIRMATION_BLOCKS_NUMBER_APPROVE = 2;
+export const CONFIRMATION_BLOCKS_NUMBER = 1;
+export const CONFIRMATION_BLOCKS_NUMBER_APPROVE = 1;
 
 export const EXPLORER_TX_URL = "https://sepolia-explorer.metisdevops.link/tx/";
 export const EXPLORER_ADDRESS_URL =

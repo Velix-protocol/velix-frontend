@@ -4,7 +4,7 @@ import { Button } from "../button";
 import BottomBar from "./BottomBar";
 import VelixPrimaryBlackLogo from "./icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
-import { converGweiToEth, truncateString } from "@/lib/utils";
+import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 
 export default function AppHeader() {

@@ -1,4 +1,4 @@
-import { config, projectId } from "@/lib/wagmi.config";
+import { config, projectId } from "@/utils/wagmi.config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { ReactNode } from "react";

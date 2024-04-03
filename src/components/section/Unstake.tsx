@@ -15,7 +15,7 @@ import {
 import { useAccount } from "wagmi";
 import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import Loader from "../ui/velix/icons/Loader";
 import SuccessModal from "../ui/velix/SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
@@ -86,7 +86,7 @@ export default function Unstake() {
 
   const onUnstake = async () => {
     if (!amountToUnstake || !amountToUnstake.trim() || !walletAddress) return;
-    await unstake(amountToUnstake, walletAddress);
+    await unstake(amountToUnstake);
   };
 
   const renderModalTitle = () => {

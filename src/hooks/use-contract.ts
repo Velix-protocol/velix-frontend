@@ -1,25 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  useAccount,
-  useBalance,
-  useWaitForTransactionReceipt,
-  useWriteContract
-} from "wagmi";
-import { useCallback, useEffect, useMemo } from "react";
+import { useAccount, useBalance } from "wagmi";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
 import {
   METIS_TOKEN_CONTRACT_ADDRESS,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMETIS_CONTRACT_ADDRESS,
-  CONFIRMATION_BLOCKS_NUMBER,
-  CONFIRMATION_BLOCKS_NUMBER_APPROVE
-} from "@/lib/constant";
+  VEMETIS_CONTRACT_ADDRESS
+} from "@/utils/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
-import { ethers, formatEther, parseUnits } from "ethers";
+import {
+  ContractTransactionReceipt,
+  ethers,
+  formatEther,
+  parseUnits
+} from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
+import Web3Service from "@/services/web3Service";
 
 /**
  * useApproveMinting approves the minting proess
@@ -28,39 +27,56 @@ import { useBalanceStore } from "@/store/balanceState";
  * @returns {*}
  */
 export const useApproveMinting = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const approveMinting = useCallback(
     async (amount: string) => {
-      return await writeContractAsync({
-        abi: METIS_TOKEN_CONTRACT_ABI,
-        address: METIS_TOKEN_CONTRACT_ADDRESS,
-        functionName: "approve",
-        args: [VEMETIS_MINTER_CONTRACT_ADDRESS, parseUnits(amount)]
-      });
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          METIS_TOKEN_CONTRACT_ADDRESS,
+          METIS_TOKEN_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.approve(
+          VEMETIS_MINTER_CONTRACT_ADDRESS,
+          parseUnits(amount)
+        );
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
-      hash
-    }
-  );
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     approveMinting,
-    error
+    error,
+    data
   };
 };
 
@@ -72,42 +88,53 @@ export const useApproveMinting = () => {
  * @returns {*}
  */
 export const useMint = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const mint = useCallback(
-    async (walletAddress: `0x${string}`, amount: string) => {
-      return await writeContractAsync({
-        abi: VEMETIS_MINTER_CONTRACT_ABI,
-        address: VEMETIS_MINTER_CONTRACT_ADDRESS,
-        functionName: "mint",
-        args: [walletAddress, parseUnits(amount)]
-      });
+    async (amount: string) => {
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          VEMETIS_MINTER_CONTRACT_ADDRESS,
+          VEMETIS_MINTER_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.mint(address, parseUnits(amount));
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const {
-    isLoading: receiptPending,
-    isSuccess,
-    data
-  } = useWaitForTransactionReceipt({
-    confirmations: CONFIRMATION_BLOCKS_NUMBER,
-    hash
-  });
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     mint,
     error,
-    txhash: data?.transactionHash
+    txhash: data
   };
 };
 
@@ -118,39 +145,56 @@ export const useMint = () => {
  * @returns {*}
  */
 export const useApproveStaking = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
-      return await writeContractAsync({
-        abi: VEMETIS_CONTRACT_ABI,
-        address: VEMETIS_CONTRACT_ADDRESS,
-        functionName: "approve",
-        args: [SVEMETIS_CONTRACT_ADDRESS, parseUnits(amountToStake)]
-      });
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          VEMETIS_CONTRACT_ADDRESS,
+          VEMETIS_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.approve(
+          SVEMETIS_CONTRACT_ADDRESS,
+          parseUnits(amountToStake)
+        );
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
-      hash
-    }
-  );
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     approveStaking,
-    error
+    error,
+    data
   };
 };
 
@@ -159,42 +203,53 @@ export const useApproveStaking = () => {
  *  staking
  */
 export const useStaking = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const stake = useCallback(
-    async (walletAddress: `0x${string}`, amount: string) => {
-      return await writeContractAsync({
-        abi: SVMETIS_CONTRACT_ABI,
-        address: SVEMETIS_CONTRACT_ADDRESS,
-        functionName: "deposit",
-        args: [parseUnits(amount), walletAddress]
-      });
+    async (amountToStake: string) => {
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          SVEMETIS_CONTRACT_ADDRESS,
+          SVMETIS_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.deposit(parseUnits(amountToStake), address);
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const {
-    isLoading: receiptPending,
-    isSuccess,
-    data
-  } = useWaitForTransactionReceipt({
-    confirmations: CONFIRMATION_BLOCKS_NUMBER,
-    hash
-  });
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     stake,
     error,
-    txhash: data?.transactionHash
+    txhash: data
   };
 };
 
@@ -203,39 +258,56 @@ export const useStaking = () => {
  * @returns
  */
 export const useApproveUnstaking = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
-      return await writeContractAsync({
-        abi: SVMETIS_CONTRACT_ABI,
-        address: SVEMETIS_CONTRACT_ADDRESS,
-        functionName: "approve",
-        args: [SVEMETIS_CONTRACT_ADDRESS, parseUnits(amount)]
-      });
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          SVEMETIS_CONTRACT_ADDRESS,
+          SVMETIS_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.approve(
+          SVEMETIS_CONTRACT_ADDRESS,
+          parseUnits(amount)
+        );
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const { isLoading: receiptPending, isSuccess } = useWaitForTransactionReceipt(
-    {
-      confirmations: CONFIRMATION_BLOCKS_NUMBER_APPROVE,
-      hash
-    }
-  );
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     approveUnstaking,
-    error
+    error,
+    data
   };
 };
 
@@ -245,42 +317,53 @@ export const useApproveUnstaking = () => {
  * @returns
  */
 export const useUnstake = () => {
-  const {
-    writeContractAsync,
-    data: hash,
-    reset,
-    error,
-    isPending: writePending
-  } = useWriteContract();
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
 
   const unstake = useCallback(
-    async (amount: string, walletAddress: `0x${string}`) => {
-      return await writeContractAsync({
-        abi: SVMETIS_CONTRACT_ABI,
-        address: SVEMETIS_CONTRACT_ADDRESS,
-        functionName: "redeem",
-        args: [parseUnits(amount), walletAddress, walletAddress]
-      });
+    async (amount: string) => {
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const contract = await new Web3Service().contract(
+          SVEMETIS_CONTRACT_ADDRESS,
+          SVMETIS_CONTRACT_ABI,
+          address
+        );
+        const tx = await contract.redeem(parseUnits(amount), address, address);
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
     },
-    [writeContractAsync]
+    [address]
   );
 
-  const {
-    isLoading: receiptPending,
-    isSuccess,
-    data
-  } = useWaitForTransactionReceipt({
-    confirmations: CONFIRMATION_BLOCKS_NUMBER,
-    hash
-  });
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
 
   return {
-    isPending: writePending || receiptPending,
+    isPending,
     isSuccess,
     reset,
     unstake,
     error,
-    txhash: data?.transactionHash
+    txhash: data
   };
 };
 

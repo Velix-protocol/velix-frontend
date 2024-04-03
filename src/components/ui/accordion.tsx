@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/utils";
 import ArrowDropDownIcon from "./velix/icons/ArrowDropDownIcon";
 
 const Accordion = AccordionPrimitive.Root;

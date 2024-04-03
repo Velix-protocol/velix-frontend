@@ -4,8 +4,8 @@ import {
   EXPLORER_ADDRESS_URL,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS
-} from "@/lib/constant";
-import { truncateString } from "@/lib/utils";
+} from "@/utils/constant";
+import { truncateString } from "@/utils/utils";
 import {
   ArrowUpRightFromSquare,
   Check,

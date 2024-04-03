@@ -16,7 +16,7 @@ import {
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/lib/constant";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
 import SuccessModal from "../ui/velix/SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
@@ -87,7 +87,7 @@ export default function Mint() {
 
   const onMint = async () => {
     if (!amountToMint || !amountToMint.trim() || !walletAddress) return;
-    await mint(walletAddress, amountToMint);
+    await mint(amountToMint);
   };
 
   const renderModalTitle = () => {
