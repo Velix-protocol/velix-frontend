@@ -108,6 +108,7 @@ export default function Unstake() {
     setShowModal(false);
     resetApproveState();
     resetUnstakeState();
+    setCurrentStep(1);
   }, [isPending, resetApproveState, resetUnstakeState, unstakePending]);
 
   useEffect(() => {

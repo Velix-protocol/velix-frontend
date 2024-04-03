@@ -9,10 +9,36 @@ import {
 } from "@/components/ui/table";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
+import { useEffect, useState } from "react";
+import { retreivedUnstakedTraffic } from "@/utils/supabase";
+import { useAccount } from "wagmi";
+import dayjs from "dayjs";
+import { EXPLORER_TX_URL } from "@/utils/constant";
+import { Skeleton } from "../ui/skeleton";
+
+type UnstakeActivity = {
+  id: string;
+  wallet_address: string;
+  tx_hash: string;
+  amount: string;
+  created_at: string;
+};
 
 export default function Dashboard() {
   useMetisBalance();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
+  const { address } = useAccount();
+  const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
+
+  useEffect(() => {
+    async function getUnstakeActivity() {
+      if (!address) return;
+      const { data } = await retreivedUnstakedTraffic(address);
+      setUnstakeActivity(data as unknown as UnstakeActivity[]);
+    }
+
+    void getUnstakeActivity();
+  }, [address]);
 
   const velixBalances = [
     {
@@ -30,45 +56,6 @@ export default function Dashboard() {
     {
       name: "APR",
       value: "--"
-    }
-  ];
-
-  const velixData = [
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
-    },
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
-    },
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
-    },
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
-    },
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
-    },
-    {
-      date: "Feb 15 17:04:09",
-      amount: "577,858,885",
-      transationHash:
-        "57yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer88557yw457854455fghhh64hgdj8ywer885"
     }
   ];
 
@@ -99,20 +86,47 @@ export default function Dashboard() {
           </TableHead>
         </TableHeader>
         <TableBody className="bg-white py-10 space-y-2">
-          {velixData.map((data) => {
-            return (
-              <div
-                key={data.amount}
-                className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary hover:text-white rounded-xl"
-              >
-                <TableCell>{data.date}</TableCell>
-                <TableCell>{data.amount}</TableCell>
-                <TableCell className="truncate underline cursor-pointer">
-                  {data.transationHash}
-                </TableCell>
-              </div>
-            );
-          })}
+          {unstakeActivity.length === 0 &&
+            Array.from({ length: 8 }).map((_, index) => {
+              return (
+                <tr
+                  key={`skeletons-${index}`}
+                  className="grid grid-cols-3 w-full justify-between rounded-xl"
+                >
+                  <TableCell>
+                    <Skeleton className="w-20 h-2" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="w-20 h-2" />
+                  </TableCell>
+                  <TableCell className="truncate underline cursor-pointer">
+                    <Skeleton className="w-40 md:w-56 lg:w-96 h-2" />
+                  </TableCell>
+                </tr>
+              );
+            })}
+          {unstakeActivity.length >= 0 &&
+            unstakeActivity.map((data) => {
+              return (
+                <tr
+                  onClick={() =>
+                    window.open(`${EXPLORER_TX_URL}${data.tx_hash}`)
+                  }
+                  key={data.amount}
+                  className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary hover:text-white rounded-xl"
+                >
+                  <TableCell>
+                    {dayjs(data.created_at.split("T")[0]).format(
+                      "MMMM D, YYYY"
+                    )}
+                  </TableCell>
+                  <TableCell>{data.amount}</TableCell>
+                  <TableCell className="truncate underline cursor-pointer">
+                    {data.tx_hash}
+                  </TableCell>
+                </tr>
+              );
+            })}
         </TableBody>
       </Table>
     </Section>

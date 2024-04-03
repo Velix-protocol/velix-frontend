@@ -14,7 +14,7 @@ export default function Loader(props: ComponentProps<"svg">) {
         r="45"
         transform="matrix(1 0 0 -1 0 93)"
         stroke="url(#paint0_linear_1165_292)"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <defs>
         <linearGradient
@@ -25,8 +25,8 @@ export default function Loader(props: ComponentProps<"svg">) {
           y2="93"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#54616B" />
-          <stop offset="1" stop-color="#A4BDD1" stop-opacity="0" />
+          <stop stopColor="#54616B" />
+          <stop offset="1" stop-color="#A4BDD1" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>

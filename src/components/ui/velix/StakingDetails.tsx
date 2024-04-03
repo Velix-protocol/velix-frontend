@@ -12,15 +12,15 @@ export default function StakingDetails({
 }) {
   return (
     <div>
-      <p
+      <div
         className={cn(
           "flex text-velix-gray items-center justify-between font-space-grotesk",
           className
         )}
       >
-        <span className="text-xs lg:text-base">{title}</span>
-        <span className="text-xs lg:text-base">{value}</span>
-      </p>
+        <div className="text-xs lg:text-base">{title}</div>
+        <div className="text-xs lg:text-base">{value}</div>
+      </div>
     </div>
   );
 }

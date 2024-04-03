@@ -19,6 +19,7 @@ import {
 } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
+import { savedUnstakedAmount } from "@/utils/supabase";
 
 /**
  * useApproveMinting approves the minting proess
@@ -335,6 +336,7 @@ export const useUnstake = () => {
         );
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        await savedUnstakedAmount(amount, address, txhash.hash);
         setData(txhash.hash);
         setError(null);
         setIsSuccess(true);
