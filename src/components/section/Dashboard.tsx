@@ -3,6 +3,7 @@ import { useMetisBalance } from "@/hooks/use-contract";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader
@@ -29,12 +30,15 @@ export default function Dashboard() {
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
   const { address } = useAccount();
   const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function getUnstakeActivity() {
       if (!address) return;
+      setLoading(true);
       const { data } = await retreivedUnstakedTraffic(address);
       setUnstakeActivity(data as unknown as UnstakeActivity[]);
+      setLoading(false);
     }
 
     void getUnstakeActivity();
@@ -86,7 +90,7 @@ export default function Dashboard() {
           </TableHead>
         </TableHeader>
         <TableBody className="bg-white py-10 space-y-2">
-          {unstakeActivity.length === 0 &&
+          {loading &&
             Array.from({ length: 8 }).map((_, index) => {
               return (
                 <tr
@@ -105,7 +109,7 @@ export default function Dashboard() {
                 </tr>
               );
             })}
-          {unstakeActivity.length >= 0 &&
+          {!loading &&
             unstakeActivity.map((data) => {
               return (
                 <tr
@@ -128,6 +132,9 @@ export default function Dashboard() {
               );
             })}
         </TableBody>
+        {!loading && unstakeActivity.length === 0 && (
+          <TableCaption>No transaction recorded</TableCaption>
+        )}
       </Table>
     </Section>
   );
