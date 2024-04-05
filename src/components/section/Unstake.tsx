@@ -20,6 +20,8 @@ import Loader from "../ui/velix/icons/Loader";
 import SuccessModal from "../ui/velix/SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
 import Steps from "../ui/Steps";
+import { recordStaker } from "@/utils/supabase";
+import { useStakersStore } from "@/store/stakers";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -43,6 +45,7 @@ export default function Unstake() {
   const { address: walletAddress } = useAccount();
   const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
+  const { setStakers } = useStakersStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -87,6 +90,11 @@ export default function Unstake() {
   const onUnstake = async () => {
     if (!amountToUnstake || !amountToUnstake.trim() || !walletAddress) return;
     await unstake(amountToUnstake);
+    const stakers = await recordStaker(
+      walletAddress,
+      Number(sveMETISBalance) - Number(amountToUnstake)
+    );
+    setStakers(stakers ?? 0);
   };
 
   const renderModalTitle = () => {

@@ -19,6 +19,8 @@ import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "./_partials/WaitingForApprovalModal";
 import SuccessModal from "@/components/ui/velix/SuccessModal";
+import { recordStaker } from "@/utils/supabase";
+import { useStakersStore } from "@/store/stakers";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -45,7 +47,8 @@ export default function StakingOperations() {
   } = useStaking();
   const { address: walletAddress } = useAccount();
   const { getBalances } = useMetisBalance();
-  const { veMETISBalance } = useBalanceStore();
+  const { veMETISBalance, sveMETISBalance } = useBalanceStore();
+  const { setStakers } = useStakersStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -94,6 +97,11 @@ export default function StakingOperations() {
   const onStake = async () => {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
     await stake(amountToStake);
+    const stakers = await recordStaker(
+      walletAddress as `0x${string}`,
+      Number(sveMETISBalance) + Number(amountToStake)
+    );
+    setStakers(stakers ?? 0);
   };
 
   const renderModalTitle = () => {
@@ -116,8 +124,10 @@ export default function StakingOperations() {
   }, [isPending, resetApproveState, resetStakeState, stakePending]);
 
   const onCloseSuccessModal = useCallback(() => {
-    resetStakeState();
+    setShowModal(false);
+    setStakeBrigde(false);
     resetApproveState();
+    resetStakeState();
     setCurrentStep(1);
   }, [resetApproveState, resetStakeState]);
 
