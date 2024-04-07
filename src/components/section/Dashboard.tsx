@@ -117,7 +117,7 @@ export default function Dashboard() {
                     window.open(`${EXPLORER_TX_URL}${data.tx_hash}`)
                   }
                   key={data.amount}
-                  className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-primary hover:text-white rounded-xl"
+                  className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue text-velix-primary rounded-xl"
                 >
                   <TableCell>
                     {dayjs(data.created_at.split("T")[0]).format(
