@@ -8,10 +8,11 @@ import {
   TableHead,
   TableHeader
 } from "@/components/ui/table";
+import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
-import { retreivedUnstakedTraffic } from "@/utils/supabase";
+import { Action, retreiveActionsActivity } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
 import { EXPLORER_TX_URL } from "@/utils/constant";
@@ -31,18 +32,19 @@ export default function Dashboard() {
   const { address } = useAccount();
   const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
   const [loading, setLoading] = useState(false);
+  const [actionToRetreive, setActionToRetreive] = useState<Action>("mint");
 
   useEffect(() => {
     async function getUnstakeActivity() {
       if (!address) return;
       setLoading(true);
-      const { data } = await retreivedUnstakedTraffic(address);
+      const { data } = await retreiveActionsActivity(actionToRetreive, address);
       setUnstakeActivity(data as unknown as UnstakeActivity[]);
       setLoading(false);
     }
 
     void getUnstakeActivity();
-  }, [address]);
+  }, [actionToRetreive, address]);
 
   const velixBalances = [
     {
@@ -64,7 +66,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <Section className="mt-48 px-5 pb-28 min-h-screen">
+    <Section className="mt-36 md:mt-48 px-5 pb-28 min-h-screen">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white p-5 lg:p-12 rounded-lg">
         {velixBalances.map((balance, index) => (
           <Card key={index} className="bg-velix-slate-blue">
@@ -79,6 +81,36 @@ export default function Dashboard() {
           </Card>
         ))}
       </div>
+      <Menubar className="mt-10 py-10 px-5 md:p-10 border-none rounded-lg bg-white text-velix-primary font-space-grotesk font-bold text-base">
+        <MenubarMenu>
+          <MenubarTrigger
+            onClick={() => setActionToRetreive("mint")}
+            className={`py-3 px-7 cursor-pointer ${
+              actionToRetreive === "mint" && "bg-velix-slate-blue"
+            }`}
+          >
+            Mint
+          </MenubarTrigger>
+          <MenubarTrigger
+            onClick={() => {
+              setActionToRetreive("stake");
+            }}
+            className={`py-3 px-7 cursor-pointer ${
+              actionToRetreive === "stake" && "bg-velix-slate-blue"
+            }`}
+          >
+            Stake
+          </MenubarTrigger>
+          <MenubarTrigger
+            onClick={() => setActionToRetreive("unstake")}
+            className={`py-3 px-7 cursor-pointer ${
+              actionToRetreive === "unstake" && "bg-velix-slate-blue"
+            }`}
+          >
+            Unstake
+          </MenubarTrigger>
+        </MenubarMenu>
+      </Menubar>
       <Table className="p-10 font-space-grotesk mt-10">
         <TableHeader className="bg-velix-primary pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
           <TableHead className="w-[100px] text-white font-bold h-fit">

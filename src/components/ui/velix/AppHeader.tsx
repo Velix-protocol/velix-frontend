@@ -52,7 +52,7 @@ export default function AppHeader() {
               </span>
             )}
             <p className="bg-[#969696]/10 px-2 text-velix-gray py-1 rounded-lg">
-              {truncateString(address, 4, 10)}
+              {truncateString(address, 4, 4)}
             </p>
           </div>
         )}

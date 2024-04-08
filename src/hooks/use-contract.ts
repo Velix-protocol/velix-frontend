@@ -19,7 +19,7 @@ import {
 } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
-import { savedUnstakedAmount } from "@/utils/supabase";
+import { savedAction } from "@/utils/supabase";
 
 /**
  * useApproveMinting approves the minting proess
@@ -107,6 +107,11 @@ export const useMint = () => {
         );
         const tx = await contract.mint(address, parseUnits(amount));
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        await savedAction("mint", {
+          amount,
+          wallet_address: address,
+          tx_hash: txhash.hash
+        });
         setData(txhash.hash);
         setError(null);
         setIsSuccess(true);
@@ -222,6 +227,11 @@ export const useStaking = () => {
         );
         const tx = await contract.deposit(parseUnits(amountToStake), address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        await savedAction("stake", {
+          amount: amountToStake,
+          wallet_address: address,
+          tx_hash: txhash.hash
+        });
         setData(txhash.hash);
         setError(null);
         setIsSuccess(true);
@@ -336,7 +346,11 @@ export const useUnstake = () => {
         );
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await savedUnstakedAmount(amount, address, txhash.hash);
+        await savedAction("unstake", {
+          amount,
+          wallet_address: address,
+          tx_hash: txhash.hash
+        });
         setData(txhash.hash);
         setError(null);
         setIsSuccess(true);
