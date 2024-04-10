@@ -159,7 +159,7 @@ export default function StakingOperations() {
       {isPending && (
         <WaitingForApprovalModal
           title="Waiting for Approval."
-          subTitle="Confirm this transaction in your wallet"
+          subTitle="Confirm this transaction on your wallet"
         />
       )}
       {stakePending && (

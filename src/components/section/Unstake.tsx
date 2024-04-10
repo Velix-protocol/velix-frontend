@@ -153,7 +153,7 @@ export default function Unstake() {
             {!error && !unstakeError && !isunStaked && (
               <p className="text-velix-gray text-center text-base">
                 {currentStep === 1
-                  ? "Confirm this transaction in your wallet."
+                  ? "Confirm this transaction on your wallet."
                   : "unstake sveMETIS"}
               </p>
             )}

@@ -146,7 +146,7 @@ export default function Mint() {
             {!error && !mintError && !isMinted && (
               <p className="text-velix-gray text-center text-base">
                 {currentStep === 1
-                  ? "Confirm this transaction in your wallet."
+                  ? "Confirm this transaction on your wallet."
                   : "Mint METIS"}
               </p>
             )}
