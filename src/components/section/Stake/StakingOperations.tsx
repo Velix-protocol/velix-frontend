@@ -12,7 +12,7 @@ import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
-import { CheckCircle2, Clock4 } from "lucide-react";
+import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
@@ -193,23 +193,22 @@ export default function StakingOperations() {
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
                     <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg">
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white" />
-                      Wait 7 days
+                      Start earning within 7 days
                     </p>
-                    <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
+                    {/* <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
                       <CheckCircle2 className="fill-velix-primary w-8 h-8 stroke-white" />
                       Start earning
-                    </p>
+                    </p> */}
                   </div>
                 </div>
-                <div className="space-y-10 mt-10">
+                <div className="space-y-10 mt-10 w-full">
                   <div className="flex gap-6 text-velix-gray justify-start items-start ">
                     <Checkbox
                       onClick={() => setStakeBrigde(!stakebridge)}
                       className="w-5 h-5 accent-velix-primary"
                     />
                     <p className="-mt-1">
-                      I understand that due to the 7-days bridging process from
-                      L2 to L1, staking rewards will start after 7 days
+                      I understand that Staking rewards start after 7 days.
                     </p>
                   </div>
                 </div>
