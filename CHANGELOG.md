@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.16.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.15.0...v1.16.0) (2024-04-10)
+
+
+### Features
+
+* add mints and stakes to the dashboard ([e559e10](https://github.com/Velix-protocol/velix-frontend/commit/e559e1035569345ce582c70507551ac2265dc81f))
+* save stakers in firebase ([cfff959](https://github.com/Velix-protocol/velix-frontend/commit/cfff9595a2ac47a3ab56a4c66fe19cd8f6f5378e))
+
 ## [1.15.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.14.0...v1.15.0) (2024-04-05)
 
 
