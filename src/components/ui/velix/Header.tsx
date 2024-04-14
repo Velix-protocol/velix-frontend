@@ -1,8 +1,8 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "../button";
-import { Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { Switch } from "../switch";
 
 export default function Header() {
   const { ref, inView } = useInView({
@@ -20,14 +20,17 @@ export default function Header() {
         <Link to="/">
           <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
         </Link>
-        <Button
-          onClick={() => {
-            // return navigate("/app/mint");
-          }}
-          className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
-        >
-          Launch app
-        </Button>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={() => {
+              // return navigate("/app/mint");
+            }}
+            className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+          >
+            Launch app
+          </Button>
+          <Switch />
+        </div>
       </header>
 
       <header
@@ -39,14 +42,17 @@ export default function Header() {
           <Link to="/">
             <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
           </Link>
-          <Button
-            onClick={() => {
-              // return navigate("/app/mint");
-            }}
-            className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
-          >
-            Launch app
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button
+              onClick={() => {
+                // return navigate("/app/mint");
+              }}
+              className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+            >
+              Launch app
+            </Button>
+            <Switch />
+          </div>
         </div>
       </header>
     </div>

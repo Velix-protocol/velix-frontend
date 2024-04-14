@@ -7,10 +7,11 @@ import DashboardPage from "./pages/Dashboard";
 import Page from "./components/layouts/Page";
 import { Toaster } from "@/components/ui/sonner";
 import Notfound from "./pages/Notfound";
+import ThemeProvider from "./context/theme-provider";
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Toaster />
       <BrowserRouter>
         <Routes>
@@ -30,7 +31,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 

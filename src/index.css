@@ -46,11 +46,14 @@ input[type="checkbox"]:checked {
 
 @layer base {
   :root {
+    color-scheme: light dark;
     --velix-primary: #0000fe;
     --velix-yellow: #f4c245;
     --velix-slate-blue: #f5f7ff;
     --velix-gray: #54616b;
     --velix-slate-green: #068012;
+    --velix-black: #1e1e1e;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
 
@@ -60,7 +63,7 @@ input[type="checkbox"]:checked {
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 0 0% 9%;
+    --primary: #0000fe;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96.1%;
@@ -83,6 +86,13 @@ input[type="checkbox"]:checked {
   }
 
   .dark {
+    --velix-primary: #1e1e1e;
+    --velix-yellow: #f4c245;
+    --velix-slate-blue: #292929;
+    --velix-gray: #54616b;
+    --velix-slate-green: #068012;
+    --velix-black: #1b1b1b;
+
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
 
@@ -118,7 +128,7 @@ input[type="checkbox"]:checked {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background dark:bg-velix-primary text-foreground;
   }
 }
 
