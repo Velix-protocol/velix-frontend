@@ -56,7 +56,7 @@ export default function FAQ() {
         </div>
         <div className="relative p-0.25 mt-20">
           <GradientBorder className="rounded-lg" />
-          <VelixEclips className="absolute -top-20 translate-x-1/2" />
+          <VelixEclips className="absolute -top-20 -translate-x-1/2 left-1/2 max-lg:w-52 max-lg:h-52 max-lg:rotate-45" />
           <div className="bg-velix-slate-blue dark:bg-velix-black p-5 lg:p-16 rounded-lg grid grid-cols-1 gap-5 justify-start items-startn relative">
             {FAQs.map((faq, index) => {
               return (

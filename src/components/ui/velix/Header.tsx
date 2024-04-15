@@ -3,13 +3,15 @@ import { useInView } from "react-intersection-observer";
 import { Button } from "../button";
 import { Link } from "react-router-dom";
 import { Switch } from "../switch";
+import { useTheme } from "@/context/theme-provider";
 
 export default function Header() {
   const { ref, inView } = useInView({
     threshold: 0.2,
     initialInView: true
   });
-  // const navigate = useNavigate();
+
+  const { setTheme, theme } = useTheme();
 
   return (
     <div>
@@ -29,7 +31,10 @@ export default function Header() {
           >
             Launch app
           </Button>
-          <Switch />
+          <Switch
+            checked={theme === "dark"}
+            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
+          />
         </div>
       </header>
 
@@ -51,7 +56,12 @@ export default function Header() {
             >
               Launch app
             </Button>
-            <Switch />
+            <Switch
+              checked={theme === "dark"}
+              onCheckedChange={(checked) =>
+                setTheme(checked ? "dark" : "light")
+              }
+            />
           </div>
         </div>
       </header>

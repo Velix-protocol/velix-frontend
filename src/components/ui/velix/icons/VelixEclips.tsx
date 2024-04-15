@@ -1,5 +1,48 @@
 import { ComponentProps } from "react";
 
+export function RoundedEclipse(props: ComponentProps<"svg">) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="476"
+      height="448"
+      viewBox="0 0 476 448"
+      fill="none"
+    >
+      <g opacity="0.5" filter="url(#filter0_f_1609_1948)">
+        <path
+          d="M321.32 225.637C303.844 260.858 212.685 310.531 179.824 294.226C146.963 277.921 143.162 245.49 160.638 210.27C178.114 175.05 227.223 138.651 260.084 154.956C292.945 171.262 338.796 190.417 321.32 225.637Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <filter
+          id="filter0_f_1609_1948"
+          x="0.358414"
+          y="0.94519"
+          width="474.809"
+          height="446.475"
+          filterUnits="userSpaceOnUse"
+          colorInterpolationFilters="sRGB"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="75"
+            result="effect1_foregroundBlur_1609_1948"
+          />
+        </filter>
+      </defs>
+    </svg>
+  );
+}
+
 export default function VelixEclips(props: ComponentProps<"svg">) {
   return (
     <svg
