@@ -32,7 +32,6 @@ export const useTheme = () => {
 
 export default function ThemeProvider({
   children,
-  defaultTheme = "system",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
