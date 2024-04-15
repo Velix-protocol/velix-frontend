@@ -1,5 +1,5 @@
-import StakingFormButtom from "@/components/ui/velix/StakingFormButtom";
-import StakingDetails from "@/components/ui/velix/StakingDetails";
+import StakingFormButtom from "@/components/StakingFormButtom";
+import StakingDetails from "@/components/StakingDetails";
 import ArrowDropDownIcon from "@/components/ui/velix/icons/ArrowDropDownIcon";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
@@ -17,8 +17,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
-import WaitingForApprovalModal from "./_partials/WaitingForApprovalModal";
-import SuccessModal from "@/components/ui/velix/SuccessModal";
+import WaitingForApprovalModal from "../../WaitingForApprovalModal";
+import SuccessModal from "@/components/SuccessModal";
 import { recordStaker } from "@/utils/supabase";
 import { useStakersStore } from "@/store/stakers";
 

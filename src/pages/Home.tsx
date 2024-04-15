@@ -9,7 +9,7 @@ import VelixProperties from "@/components/section/VelixProperties";
 export default function Home() {
   return (
     <>
-      <div className="dark:bg-velix-primary-">
+      <div>
         <Hero />
         <HowItWorks />
         <VelixProperties />

@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
-import Balance from "../section/Balance";
-import StakingForm from "../ui/velix/StakingForm";
+import Balance from "../Balance";
+import StakingForm from "../StakingForm";
 import { ChangeEvent, ReactNode } from "react";
 
 const StakeLayout = ({
@@ -29,7 +29,7 @@ const StakeLayout = ({
       } rounded-2xl`}
     >
       <Balance role={role} isConnected={isConnected} />
-      <div className="bg-white p-5 lg:p-11 rounded-xl h-full">
+      <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <StakingForm
           onSetMaxValue={onSetMaxValue}
           error={error}

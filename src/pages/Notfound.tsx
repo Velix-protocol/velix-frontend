@@ -1,6 +1,6 @@
+import BottomBar from "@/components/BottomBar";
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
-import BottomBar from "@/components/ui/velix/BottomBar";
 import Number from "@/components/ui/velix/icons/404";
 import VelixPrimaryBlackLogo from "@/components/ui/velix/icons/VelixPrimaryBlackLogo";
 import { Link, useNavigate } from "react-router-dom";

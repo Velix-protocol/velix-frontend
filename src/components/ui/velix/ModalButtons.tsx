@@ -29,8 +29,9 @@ export default function ModalButtons({
   const approveButtonClass = classNames(
     "lg:py-6 disabled:cursor-not-allowed disabled:opacity/60 w-full mt-10 text-xs lg:text-base font-bold font-space-grotesk",
     {
-      "hover:bg-velix-primary bg-velix-primary": !isApprovalSuccess,
-      "hover:bg-velix-green bg-velix-green": isApprovalSuccess
+      "hover:bg-velix-primary bg-velix-primary dark:bg-white":
+        !isApprovalSuccess,
+      "hover:bg-velix-green bg-velix-green dark:text-white": isApprovalSuccess
     }
   );
 

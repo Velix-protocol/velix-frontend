@@ -1,5 +1,5 @@
 import Section from "../layouts/Section";
-import Header from "../ui/velix/Header";
+import Header from "../Header";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 

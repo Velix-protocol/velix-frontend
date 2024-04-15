@@ -1,8 +1,8 @@
 import Section from "@/components/layouts/Section";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { Button } from "../button";
+import { Button } from "./ui/button";
 import BottomBar from "./BottomBar";
-import VelixPrimaryBlackLogo from "./icons/VelixPrimaryBlackLogo";
+import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";

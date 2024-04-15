@@ -1,8 +1,8 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
-import { Button } from "../button";
+import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { Switch } from "../switch";
+import { Switch } from "./ui/switch";
 import { useTheme } from "@/context/theme-provider";
 
 export default function Header() {

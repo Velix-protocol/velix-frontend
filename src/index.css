@@ -53,6 +53,14 @@ input[type="checkbox"]:checked {
     --velix-gray: #54616b;
     --velix-slate-green: #068012;
     --velix-black: #1e1e1e;
+    --velix-form-input-dark: #343434;
+    --velix-light-dark: #3f3f3f;
+    --velix-page-dark: #323232;
+    --velix-form-dark-background: #272727;
+    --velix-icon-dark: #949494;
+    --velix-dark-white: #dddddd;
+    --velix-red: red;
+    --velix-green: #13c244;
 
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -92,6 +100,14 @@ input[type="checkbox"]:checked {
     --velix-gray: #54616b;
     --velix-slate-green: #068012;
     --velix-black: #1b1b1b;
+    --velix-form-input-dark: #343434;
+    --velix-light-dark: #3f3f3f;
+    --velix-page-dark: #323232;
+    --velix-form-dark-background: #272727;
+    --velix-icon-dark: #949494;
+    --velix-dark-white: #dddddd;
+    --velix-red: red;
+    --velix-green: #13c244;
 
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

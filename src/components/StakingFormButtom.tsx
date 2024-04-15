@@ -1,6 +1,6 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
-import { Button } from "../button";
+import { Button } from "./ui/button";
 
 export default function StakingFormButtom({
   role,
@@ -60,7 +60,7 @@ export default function StakingFormButtom({
     <Button
       disabled={disabled}
       onClick={onStakeOperationClick}
-      className="lg:py-7 disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
+      className="lg:py-7 dark:bg-white dark:text-velix-primary disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
     >
       {isLoading
         ? renderStakeOperationButtonProgressTitle()

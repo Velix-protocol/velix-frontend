@@ -21,7 +21,7 @@ const avalableChains = [
     symbol: "veMETIS",
     decimals: 18,
     name: "veMETIS",
-    logo: <VelixBlueLogo className="w-6 h-6" />,
+    logo: <VelixBlueLogo className="w-6 h-6 dark:fill-velix-dark-white" />,
     image:
       "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
   },
@@ -87,19 +87,19 @@ export default function Chains() {
   };
 
   return (
-    <div className="bg-white rounded-xl flex flex-col gap-3 h-max p-5 lg:p-11">
+    <div className="bg-white dark:bg-velix-form-dark-background rounded-xl flex flex-col gap-3 h-max p-5 lg:p-11">
       {avalableChains.map((chain) => {
         return (
           <div
             key={chain.address}
-            className="bg-velix-slate-blue flex justify-between items-center p-2 rounded-lg"
+            className="bg-velix-slate-blue dark:bg-velix-form-input-dark flex justify-between items-center p-2 rounded-lg"
           >
-            <div className="bg-velix-primary/5 px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
+            <div className="bg-velix-primary/5 dark:text-velix-dark-white dark:bg-velix-light-dark px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
               {chain.logo}
               <p className="lg:text-sm text-[0.625rem] font-bold">
                 {chain.name}
               </p>
-              <p className="lg:text-sm text-[0.625rem] text-velix-primary">
+              <p className="lg:text-sm text-[0.625rem] text-velix-primary dark:text-velix-dark-white">
                 {truncateString(chain.address)}
               </p>
             </div>
@@ -113,22 +113,22 @@ export default function Chains() {
                 <PlusCircle
                   role="button"
                   onClick={() => addMetisToMetamaskBrowserWallet(chain)}
-                  className="text-velix-primary w-5 h-5 cursor-pointer"
+                  className="text-velix-primary dark:text-velix-icon-dark w-5 h-5 cursor-pointer"
                 />
                 {copied &&
                 chain.address.toLowerCase() === copiedAddress.toLowerCase() ? (
-                  <Check className="text-velix-primary w-5 h-5" />
+                  <Check className="text-velix-primary w-5 h-5 dark:text-velix-icon-dark" />
                 ) : (
                   <Copy
                     role="button"
                     onClick={() => onCopyToClickboard(chain.address)}
-                    className="text-velix-primary w-5 h-5 cursor-pointer"
+                    className="text-velix-primary w-5 h-5 cursor-pointer dark:text-velix-icon-dark"
                   />
                 )}
                 <ArrowUpRightFromSquare
                   onClick={() => onViewChainOnExplorer(chain.address)}
                   role="button"
-                  className="text-velix-primary w-5 h-5 cursor-pointer"
+                  className="text-velix-primary w-5 h-5 cursor-pointer dark:text-velix-icon-dark"
                 />
               </div>
             )}

@@ -1,8 +1,8 @@
 import Section from "@/components/layouts/Section";
-import Discord from "./icons/Discord";
-import Telegram from "./icons/Telegram";
-import VelixPrimaryBlackLogo from "./icons/VelixPrimaryBlackLogo";
-import XIcon from "./icons/XIcon";
+import Discord from "./ui/velix/icons/Discord";
+import Telegram from "./ui/velix/icons/Telegram";
+import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
+import XIcon from "./ui/velix/icons/XIcon";
 import { FaMedium } from "react-icons/fa6";
 
 export default function AppFooter() {
