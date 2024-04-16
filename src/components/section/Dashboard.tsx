@@ -67,26 +67,30 @@ export default function Dashboard() {
 
   return (
     <Section className="mt-36 md:mt-48 px-5 pb-28 min-h-screen">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white p-5 lg:p-12 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
         {velixBalances.map((balance, index) => (
-          <Card key={index} className="bg-velix-slate-blue">
+          <Card
+            key={index}
+            className="bg-velix-slate-blue dark:bg-velix-light-dark"
+          >
             <CardContent className="p-7 space-y-2">
               <div className="text-sm text-velix-gray">
                 {balance.name} balance
               </div>
-              <div className="text-lg font-semibold text-velix-primary">
+              <div className="text-lg font-semibold text-velix-primary dark:text-velix-dark-white">
                 {balance.value} {balance.name}
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
-      <Menubar className="mt-10 py-10 px-5 md:p-10 border-none rounded-lg bg-white text-velix-primary font-space-grotesk font-bold text-base">
+      <Menubar className="mt-10 py-10 px-5 md:p-10 border-none rounded-lg bg-white dark:bg-velix-form-input-dark text-velix-primary font-space-grotesk font-bold text-base">
         <MenubarMenu>
           <MenubarTrigger
             onClick={() => setActionToRetreive("mint")}
-            className={`py-3 px-7 cursor-pointer ${
-              actionToRetreive === "mint" && "bg-velix-slate-blue"
+            className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              actionToRetreive === "mint" &&
+              "bg-velix-slate-blue dark:bg-velix-light-dark"
             }`}
           >
             Mint
@@ -95,16 +99,18 @@ export default function Dashboard() {
             onClick={() => {
               setActionToRetreive("stake");
             }}
-            className={`py-3 px-7 cursor-pointer ${
-              actionToRetreive === "stake" && "bg-velix-slate-blue"
+            className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              actionToRetreive === "stake" &&
+              "bg-velix-slate-blue dark:bg-velix-light-dark"
             }`}
           >
             Stake
           </MenubarTrigger>
           <MenubarTrigger
             onClick={() => setActionToRetreive("unstake")}
-            className={`py-3 px-7 cursor-pointer ${
-              actionToRetreive === "unstake" && "bg-velix-slate-blue"
+            className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              actionToRetreive === "unstake" &&
+              "bg-velix-slate-blue dark:bg-velix-light-dark"
             }`}
           >
             Unstake
@@ -112,7 +118,7 @@ export default function Dashboard() {
         </MenubarMenu>
       </Menubar>
       <Table className="p-10 font-space-grotesk mt-10">
-        <TableHeader className="bg-velix-primary pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
+        <TableHeader className="bg-velix-primary dark:bg-velix-form-input-dark pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
           <TableHead className="w-[100px] text-white font-bold h-fit">
             Date
           </TableHead>
@@ -121,7 +127,7 @@ export default function Dashboard() {
             Transaction hash
           </TableHead>
         </TableHeader>
-        <TableBody className="bg-white py-10 space-y-2">
+        <TableBody className="bg-white dark:bg-velix-form-dark-background py-10 space-y-2">
           {loading &&
             Array.from({ length: 8 }).map((_, index) => {
               return (
@@ -130,13 +136,13 @@ export default function Dashboard() {
                   className="grid grid-cols-3 w-full justify-between rounded-xl"
                 >
                   <TableCell>
-                    <Skeleton className="w-20 h-2" />
+                    <Skeleton className="w-20 h-2 dark:bg-velix-form-input-dark" />
                   </TableCell>
                   <TableCell>
-                    <Skeleton className="w-20 h-2" />
+                    <Skeleton className="w-20 h-2 dark:bg-velix-form-input-dark" />
                   </TableCell>
                   <TableCell className="truncate underline cursor-pointer">
-                    <Skeleton className="w-40 md:w-56 lg:w-96 h-2" />
+                    <Skeleton className="w-40 md:w-56 lg:w-96 h-2 dark:bg-velix-form-input-dark" />
                   </TableCell>
                 </tr>
               );
@@ -149,7 +155,7 @@ export default function Dashboard() {
                     window.open(`${EXPLORER_TX_URL}${data.tx_hash}`)
                   }
                   key={data.amount}
-                  className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue text-velix-primary rounded-xl"
+                  className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
                 >
                   <TableCell>
                     {dayjs(data.created_at.split("T")[0]).format(

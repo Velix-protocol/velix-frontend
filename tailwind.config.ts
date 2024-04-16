@@ -22,6 +22,7 @@ const config = {
         "space-grotesk": "space-grotesk"
       },
       colors: {
+        "velix-blue": "#0000fe",
         "velix-primary": "var(--velix-primary)",
         "velix-yellow": "var(--velix-yellow)",
         "velix-slate-blue": "var(--velix-slate-blue)",

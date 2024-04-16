@@ -41,7 +41,7 @@ export default function Mint() {
     reset: resetMintState,
     txhash
   } = useMint();
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
   const { METISBalance } = useBalanceStore();
 
@@ -247,7 +247,7 @@ export default function Mint() {
                 </div>
                 <StakingFormButtom
                   isLoading={isPending || mintPending}
-                  disabled={disabled}
+                  disabled={disabled && isConnected}
                   onMint={onStartMinting}
                   role="mint"
                 />

@@ -45,7 +45,7 @@ export default function StakingOperations() {
     reset: resetStakeState,
     txhash
   } = useStaking();
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
   const { veMETISBalance, sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
@@ -287,7 +287,7 @@ export default function StakingOperations() {
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}
-          disabled={disabled}
+          disabled={disabled && isConnected}
           onStake={onStartStaking}
           role="stake"
         />

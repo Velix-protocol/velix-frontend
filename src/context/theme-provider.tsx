@@ -33,10 +33,11 @@ export const useTheme = () => {
 export default function ThemeProvider({
   children,
   storageKey = "vite-ui-theme",
+  defaultTheme = "system",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || getThemeFromSystem()
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
 
   function getThemeFromSystem() {

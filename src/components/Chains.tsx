@@ -21,7 +21,9 @@ const avalableChains = [
     symbol: "veMETIS",
     decimals: 18,
     name: "veMETIS",
-    logo: <VelixBlueLogo className="w-6 h-6 dark:fill-velix-dark-white" />,
+    logo: (
+      <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
+    ),
     image:
       "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
   },
@@ -94,7 +96,7 @@ export default function Chains() {
             key={chain.address}
             className="bg-velix-slate-blue dark:bg-velix-form-input-dark flex justify-between items-center p-2 rounded-lg"
           >
-            <div className="bg-velix-primary/5 dark:text-velix-dark-white dark:bg-velix-light-dark px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
+            <div className="bg-velix-blue/5 dark:text-velix-dark-white dark:bg-velix-light-dark px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
               {chain.logo}
               <p className="lg:text-sm text-[0.625rem] font-bold">
                 {chain.name}

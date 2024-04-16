@@ -8,9 +8,9 @@ import { FaMedium } from "react-icons/fa6";
 export default function AppFooter() {
   return (
     <Section className="lg:block hidden">
-      <div className="flex justify-between absolute bottom-0 left-0 right-0 w-full items-center border-t-[0.5px] border-neutral-300 py-7">
+      <div className="flex justify-between absolute bottom-0 left-0 right-0 w-full items-center border-t-[0.5px] border-neutral-300 dark:border-velix-light-dark py-7">
         <div className="flex gap-5 items-center text-velix-gray font-space-grotesk">
-          <VelixPrimaryBlackLogo className="fill-velix-gray w-[4.25rem] h-4" />
+          <VelixPrimaryBlackLogo className="fill-velix-gray dark:fill-velix-dark-white w-[4.25rem] h-4" />
           <p>© {new Date().getFullYear()} All rights reserved</p>
         </div>
         <ul className="flex items-center gap-3">

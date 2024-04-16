@@ -5,8 +5,10 @@ import MetricsCard from "./ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
 import { retreiveStakersNumber } from "@/utils/supabase";
+import { useAccount } from "wagmi";
 
 export default function Metrics() {
+  const { isConnected } = useAccount();
   const { setStakers, stakers } = useStakersStore();
 
   useEffect(() => {
@@ -17,7 +19,11 @@ export default function Metrics() {
   }, [setStakers]);
 
   return (
-    <div className="bg-white dark:bg-velix-form-dark-background rounded-xl flex flex-col gap-3 mt-10 lg:mt-20 p-5 lg:p-11">
+    <div
+      className={`bg-white dark:bg-velix-form-dark-background rounded-xl flex flex-col gap-3 mt-10 p-5 lg:p-11 ${
+        isConnected ? "lg:mt-20" : "lg:mt-[3.75rem]"
+      }`}
+    >
       <MetricsCard
         icon={
           <PlusMinusTable className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />

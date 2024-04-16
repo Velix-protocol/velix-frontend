@@ -19,10 +19,22 @@ export default function BottomBar({
 
   const applyActiveStyles = (path: string, option?: { className?: string }) => {
     if (isNotFound)
-      return option?.className + " " + "text-velix-gray fill-velix-gray";
+      return (
+        option?.className +
+        " " +
+        "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
+      );
     if (activePath === path)
-      return option?.className + " " + "fill-velix-primary text-velix-primary";
-    return option?.className + " " + "text-velix-gray fill-velix-gray";
+      return (
+        option?.className +
+        " " +
+        "fill-velix-primary text-velix-primary dark:fill-velix-dark-white dark:text-velix-dark-white"
+      );
+    return (
+      option?.className +
+      " " +
+      "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
+    );
   };
 
   return (

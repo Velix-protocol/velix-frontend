@@ -42,7 +42,7 @@ export default function Unstake() {
     reset: resetUnstakeState,
     txhash
   } = useUnstake();
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
@@ -236,7 +236,7 @@ export default function Unstake() {
                   />
                   <StakingFormButtom
                     isLoading={isPending || unstakePending}
-                    disabled={disabled}
+                    disabled={disabled && isConnected}
                     onUnstake={onStartUnstaking}
                     role="unstake"
                   />

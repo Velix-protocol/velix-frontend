@@ -67,8 +67,10 @@ export default function StakingForm({
 
   const icons = {
     sveMETIS: <SveMETIS className="w-8 h-8" />,
-    veMETIS: <VelixBlueLogo className="w-6 h-6 dark:fill-velix-dark-white" />,
-    METIS: <MetisIcon className="w-5 h-5  fill-[#00ceff]" />
+    veMETIS: (
+      <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
+    ),
+    METIS: <MetisIcon className="w-5 h-5 fill-[#00ceff]" />
   };
 
   const inputClassName = classNames(
@@ -92,11 +94,11 @@ export default function StakingForm({
         <div className="shrink-0 flex gap-1">
           <button
             onClick={onSetMaxValue}
-            className="font-bold text-velix-primary dark:text-white uppercase text-sm p-3 lg:p-4 bg-velix-primary/5 dark:bg-velix-light-dark rounded-md"
+            className="font-bold text-velix-primary dark:text-white uppercase text-sm p-3 lg:p-4 bg-velix-blue/5 dark:bg-velix-light-dark rounded-md"
           >
             Max
           </button>
-          <p className="shrink-0 flex items-center gap-2 bg-velix-primary/5 dark:bg-velix-light-dark p-2 lg:p-3 text-sm text-velix-gray rounded-md">
+          <p className="shrink-0 flex items-center gap-2 bg-velix-blue/5 dark:bg-velix-light-dark p-2 lg:p-3 text-sm text-velix-gray rounded-md">
             <span>{icons?.[renderFromTitles() as never]}</span>
             <span className="text-[0.625rem] lg:text-base">
               {renderFromTitles()} Amount
@@ -125,7 +127,7 @@ export default function StakingForm({
         </button>
       )}
       <div className="flex justify-between dark:bg-velix-form-input-dark items-center gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg">
-        <p className="shrink-0 flex items-center dark:bg-velix-light-dark gap-2 bg-velix-primary/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
+        <p className="shrink-0 flex items-center dark:bg-velix-light-dark gap-2 bg-velix-blue/5 p-2 lg:p-3 text-sm text-velix-gray rounded-md">
           <span>{icons?.[renderToTitles() as never]}</span>
           <span className="text-[0.625rem] lg:text-base">
             {renderToTitles()} Amount
