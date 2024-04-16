@@ -1,6 +1,8 @@
+import { useTheme } from "@/context/theme-provider";
 import { ComponentProps } from "react";
 
 export default function Loader(props: ComponentProps<"svg">) {
+  const { theme } = useTheme();
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -25,8 +27,12 @@ export default function Loader(props: ComponentProps<"svg">) {
           y2="93"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#54616B" />
-          <stop offset="1" stop-color="#A4BDD1" stopOpacity="0" />
+          <stop stopColor={theme === "light" ? "#54616B" : "#fff"} />
+          <stop
+            offset="1"
+            stopColor={theme === "light" ? "#A4BDD1" : "#fff"}
+            stopOpacity="0"
+          />
         </linearGradient>
       </defs>
     </svg>

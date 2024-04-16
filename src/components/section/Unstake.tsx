@@ -3,8 +3,8 @@ import AppContent from "../layouts/AppContent";
 import Section from "../layouts/Section";
 import StakeLayout from "../layouts/StakeLayout";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
-import StakingDetails from "../ui/velix/StakingDetails";
-import StakingFormButtom from "../ui/velix/StakingFormButtom";
+import StakingDetails from "../StakingDetails";
+import StakingFormButtom from "../StakingFormButtom";
 import Title from "../ui/velix/Title";
 import Statitics from "./Statitics";
 import {
@@ -17,7 +17,7 @@ import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import Loader from "../ui/velix/icons/Loader";
-import SuccessModal from "../ui/velix/SuccessModal";
+import SuccessModal from "../SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
 import Steps from "../ui/Steps";
 import { recordStaker } from "@/utils/supabase";
@@ -42,7 +42,7 @@ export default function Unstake() {
     reset: resetUnstakeState,
     txhash
   } = useUnstake();
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
@@ -89,6 +89,7 @@ export default function Unstake() {
 
   const onUnstake = async () => {
     if (!amountToUnstake || !amountToUnstake.trim() || !walletAddress) return;
+    resetUnstakeState();
     await unstake(amountToUnstake);
     const stakers = await recordStaker(
       walletAddress,
@@ -236,7 +237,7 @@ export default function Unstake() {
                   />
                   <StakingFormButtom
                     isLoading={isPending || unstakePending}
-                    disabled={disabled}
+                    disabled={disabled && isConnected}
                     onUnstake={onStartUnstaking}
                     role="unstake"
                   />

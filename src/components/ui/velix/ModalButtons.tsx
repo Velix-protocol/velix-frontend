@@ -29,8 +29,9 @@ export default function ModalButtons({
   const approveButtonClass = classNames(
     "lg:py-6 disabled:cursor-not-allowed disabled:opacity/60 w-full mt-10 text-xs lg:text-base font-bold font-space-grotesk",
     {
-      "hover:bg-velix-primary bg-velix-primary": !isApprovalSuccess,
-      "hover:bg-velix-green bg-velix-green": isApprovalSuccess
+      "hover:bg-velix-primary bg-velix-primary dark:bg-velix-dark-white":
+        !isApprovalSuccess,
+      "hover:bg-velix-green bg-velix-green dark:text-white": isApprovalSuccess
     }
   );
 
@@ -47,7 +48,7 @@ export default function ModalButtons({
         onClick={onLastStepClick}
         disabled={isLastStepDisabled}
         variant="outline"
-        className="lg:py-6 disabled:cursor-not-allowed disabled:bg-velix-primary/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
+        className="lg:py-6 dark:border dark:border-velix-dark-white dark:bg-velix-primary dark:text-white dark:disabled:bg-velix-primary disabled:cursor-not-allowed disabled:bg-velix-blue/20 w-full mt-10 text-xs lg:text-base font-bold border-velix-primary text-velix-primary hover:text-velix-primary font-space-grotesk hover:bg-white"
       >
         {title}
       </Button>

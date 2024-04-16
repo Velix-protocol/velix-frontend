@@ -22,14 +22,21 @@ const config = {
         "space-grotesk": "space-grotesk"
       },
       colors: {
-        "velix-primary": "#0000fe",
-        "velix-yellow": "#f4c245",
-        "velix-slate-blue": "#f5f7ff",
-        "velix-black": "#1E1E1E",
-        "velix-gray": "#54616b",
-        "velix-slate-green": "#068012",
-        "velix-red": "#FF4949",
-        "velix-green": "#13C244",
+        "velix-blue": "#0000fe",
+        "velix-primary": "var(--velix-primary)",
+        "velix-yellow": "var(--velix-yellow)",
+        "velix-slate-blue": "var(--velix-slate-blue)",
+        "velix-black": "var(--velix-black)",
+        "velix-gray": "var{--velix-gray)",
+        "velix-slate-green": "var(--velix-slate-green)",
+        "velix-red": "var(--velix-red)",
+        "velix-green": "var(--velix-green)",
+        "velix-form-input-dark": "var(--velix-form-input-dark)",
+        "velix-light-dark": "var(--velix-light-dark)",
+        "velix-page-dark": "var(--velix-page-dark)",
+        "velix-form-dark-background": "var(--velix-form-dark-background)",
+        "velix-icon-dark": "var(--velix-icon-dark)",
+        "velix-dark-white": "var(--velix-dark-white)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -82,6 +89,9 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out"
+      },
+      spacing: {
+        0.25: "0.0625rem"
       }
     }
   },

@@ -1,12 +1,12 @@
 import Section from "../layouts/Section";
-import Header from "../ui/velix/Header";
+import Header from "../Header";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
   const navigate = useNavigate();
   return (
-    <Section className="bg-velix-primary to-[#E8B94E]/90 px-5">
+    <Section className="bg-velix-primary px-5">
       <Header />
       <div className="flex flex-col items-center lg:grid lg:-mt-28 h-fit lg:grid-cols-2 justify-between lg:py-28 max-lg:mt-8">
         <div className="font-space-grotesk lg:mt-20 flex flex-col max-lg:items-center max-lg:px-5">

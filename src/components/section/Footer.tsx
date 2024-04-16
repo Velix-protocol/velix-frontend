@@ -5,17 +5,22 @@ import XIcon from "../ui/velix/icons/XIcon";
 import Discord from "../ui/velix/icons/Discord";
 import Telegram from "../ui/velix/icons/Telegram";
 import { FaMedium } from "react-icons/fa6";
+import VelixLogo from "@/components/svg/VelixLogoGroup";
+import { RoundedEclipse } from "../ui/velix/icons/VelixEclips";
 
 export default function Footer() {
   return (
     <div>
       <Section className="bg-velix-slate-blue relative mt-28">
-        <VelixBlueLogo className="w-32 h-32 bg-white p-5 rounded-full absolute left-0 right-0 mx-auto -mt-16" />
-
+        <div className="w-32 h-32 bg-white dark:bg-velix-primary p-5 rounded-full absolute left-0 right-0 mx-auto -mt-16">
+          <VelixBlueLogo className="bg-velix-primary dark:bg-primary dark:fill-velix-primary fill-white rounded-full" />
+          <RoundedEclipse className="rounded-full h-56 w-56 absolute -translate-x-1/2 -translate-y-[65%] left-1/2" />
+        </div>
         <div className="grid md:grid-cols-2 md:justify-center px-5 gap-10 xl:grid-cols-3 py-24">
           <div>
-            <VelixBlackLogo />
-            <p className="text-velix-primary font-space-grotesk text-[1rem] mt-5">
+            <VelixBlackLogo className="dark:hidden" />
+            <VelixLogo className="dark:block hidden w-[5.625rem] h-[1.4375rem]" />
+            <p className="text-velix-primary dark:text-white font-space-grotesk text-[1rem] mt-5">
               Simplified{" "}
               <b className="font-bold">
                 staking
@@ -33,18 +38,6 @@ export default function Footer() {
               <li className="cursor-pointer">What are the risks</li>
             </ul>
           </div>
-
-          {/*<div className="flex flex-col gap-6">*/}
-          {/*  <h2 className="font-bold font-space-grotesk text-[1rem]">*/}
-          {/*    Sequencer staking*/}
-          {/*  </h2>*/}
-          {/*  <ul className="font-space-grotesk text-velix-gray text-[1rem]">*/}
-          {/*    <li className="cursor-pointer">What’s sequencer staking</li>*/}
-          {/*    <li className="cursor-pointer">What can i earn</li>*/}
-          {/*    <li className="cursor-pointer">What are the costs</li>*/}
-          {/*  </ul>*/}
-          {/*</div>*/}
-
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-[1rem]">
               Protocol
@@ -57,30 +50,30 @@ export default function Footer() {
           </div>
         </div>
       </Section>
-      <Section className="bg-velix-primary mb-2">
+      <Section className="bg-velix-primary dark:bg-primary mb-2">
         <div className="px-5 w-full flex justify-between items-center py-5">
-          <span className="text-white font-space-grotesk">
+          <span className="text-white dark:text-velix-primary font-space-grotesk">
             © 2023 - 2024 Velix
           </span>
           <ul className="flex items-center gap-3">
-            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+            <li className="bg-white dark:bg-velix-primary cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
-                <XIcon className="w-4 h-4 fill-velix-primary" />
+                <XIcon className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+            <li className="bg-white cursor-pointer p-2 dark:bg-velix-primary rounded-full w-fit">
               <a href="https://velixonmetis.medium.com" target="_blank">
-                <FaMedium className="w-4 h-4 fill-velix-primary" />
+                <FaMedium className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+            <li className="bg-white cursor-pointer p-2 dark:bg-velix-primary rounded-full w-fit">
               <a href="https://discord.gg/v594pjBw5u" target="_blank">
-                <Discord className="w-4 h-4 fill-velix-primary" />
+                <Discord className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 rounded-full w-fit">
+            <li className="bg-white cursor-pointer p-2 rounded-full dark:bg-velix-primary w-fit">
               <a href="https://t.me/velixprotocol" target="_blank">
-                <Telegram className="w-4 h-4 fill-velix-primary" />
+                <Telegram className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
           </ul>

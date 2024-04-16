@@ -1,7 +1,7 @@
 import { InfoIcon } from "lucide-react";
 import Section from "../layouts/Section";
-import StakingDetails from "../ui/velix/StakingDetails";
-import StakingFormButtom from "../ui/velix/StakingFormButtom";
+import StakingDetails from "../StakingDetails";
+import StakingFormButtom from "../StakingFormButtom";
 import Title from "../ui/velix/Title";
 import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
@@ -18,7 +18,7 @@ import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
-import SuccessModal from "../ui/velix/SuccessModal";
+import SuccessModal from "../SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
 
@@ -41,7 +41,7 @@ export default function Mint() {
     reset: resetMintState,
     txhash
   } = useMint();
-  const { address: walletAddress } = useAccount();
+  const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
   const { METISBalance } = useBalanceStore();
 
@@ -87,6 +87,7 @@ export default function Mint() {
 
   const onMint = async () => {
     if (!amountToMint || !amountToMint.trim() || !walletAddress) return;
+    resetMintState();
     await mint(amountToMint);
   };
 
@@ -247,7 +248,7 @@ export default function Mint() {
                 </div>
                 <StakingFormButtom
                   isLoading={isPending || mintPending}
-                  disabled={disabled}
+                  disabled={disabled && isConnected}
                   onMint={onStartMinting}
                   role="mint"
                 />

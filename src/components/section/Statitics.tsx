@@ -1,5 +1,5 @@
-import Chains from "./Stake/Chains";
-import Metrics from "./Stake/Metrics";
+import Chains from "../Chains";
+import Metrics from "../Metrics";
 
 const Statitics = () => {
   return (

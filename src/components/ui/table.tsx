@@ -28,7 +28,7 @@ const TableBody = React.forwardRef<
   HTMLTableSectionElement,
   React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-  <div className="bg-white rounded-xl p-5 -mt-5">
+  <div className="bg-white dark:bg-velix-form-dark-background rounded-xl p-5 -mt-5">
     <tbody
       ref={ref}
       className={cn("[&_tr:last-child]:border-0", className)}
