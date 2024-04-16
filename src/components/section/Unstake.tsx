@@ -89,6 +89,7 @@ export default function Unstake() {
 
   const onUnstake = async () => {
     if (!amountToUnstake || !amountToUnstake.trim() || !walletAddress) return;
+    resetUnstakeState();
     await unstake(amountToUnstake);
     const stakers = await recordStaker(
       walletAddress,

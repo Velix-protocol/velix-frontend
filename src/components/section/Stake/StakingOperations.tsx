@@ -96,6 +96,7 @@ export default function StakingOperations() {
 
   const onStake = async () => {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
+    resetStakeState();
     await stake(amountToStake);
     const stakers = await recordStaker(
       walletAddress as `0x${string}`,
@@ -186,13 +187,13 @@ export default function StakingOperations() {
             {!isStaked && (
               <>
                 <div className="flex flex-col gap-5 w-full">
-                  <div className="bg-velix-slate-blue p-5 text-velix-gray flex gap-2 items-center rounded-lg">
-                    <MetisIcon className="w-6 h-6 fill-velix-primary" />
+                  <div className="bg-velix-slate-blue dark:text-velix-dark-white p-5 text-velix-gray flex gap-2 items-center rounded-lg">
+                    <MetisIcon className="w-6 h-6 fill-velix-primary dark:fill-velix-icon-dark" />
                     Receive {amountToStake} veMETIS
                   </div>
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
-                    <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg">
-                      <Clock4 className="fill-velix-primary w-7 h-7 stroke-white" />
+                    <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
+                      <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
                       Start earning within 7 days
                     </p>
                     {/* <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
@@ -202,10 +203,10 @@ export default function StakingOperations() {
                   </div>
                 </div>
                 <div className="space-y-10 mt-10 w-full">
-                  <div className="flex gap-6 text-velix-gray justify-start items-start ">
+                  <div className="flex gap-6 text-velix-gray dark:text-velix-dark-white justify-start items-start ">
                     <Checkbox
                       onClick={() => setStakeBrigde(!stakebridge)}
-                      className="w-5 h-5 accent-velix-primary"
+                      className="w-5 h-5 accent-velix-primary dark:accent-velix-dark-white"
                     />
                     <p className="-mt-1">
                       I understand that Staking rewards start after 7 days.
@@ -262,7 +263,7 @@ export default function StakingOperations() {
               className="flex items-center text-velix-gray justify-between font-space-grotesk"
             >
               <span className="text-xs lg:text-base">Routing</span>
-              <span className="flex items-center bg-velix-slate-blue px-5 py-1 text-xs max-sm:text-[0.625rem] rounded-lg cursor-pointer">
+              <span className="flex items-center bg-velix-slate-blue dark:bg-velix-form-input-dark px-5 py-1 text-xs max-sm:text-[0.625rem] rounded-lg cursor-pointer">
                 Protocol
                 <ArrowDropDownIcon
                   className={`fill-velix-gray w-5 h-5 transition-all duration-150 ease-in-out ${
@@ -274,9 +275,9 @@ export default function StakingOperations() {
           </div>
           {isProtocolDisclaimerOpened && (
             <StakingDetails
-              className="bg-velix-slate-blue p-6 rounded-lg"
+              className="bg-velix-slate-blue dark:bg-velix-form-input-dark p-6 rounded-lg"
               title=""
-              value="Be aware of both minting   and deposit  fee that will be deducted when the transaction is done."
+              value="Be aware of both minting and deposit fee that will be deducted when the transaction is done."
             />
           )}
           <StakingDetails

@@ -87,6 +87,7 @@ export default function Mint() {
 
   const onMint = async () => {
     if (!amountToMint || !amountToMint.trim() || !walletAddress) return;
+    resetMintState();
     await mint(amountToMint);
   };
 
