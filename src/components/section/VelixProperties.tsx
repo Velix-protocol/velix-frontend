@@ -8,29 +8,35 @@ import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 
 const PROPERTIES = [
   {
-    icon: <Cancel />,
+    icon: <Cancel className="fill-velix-primary dark:fill-primary" />,
     title: "Any amount",
     description: "Earn yield on any amount of veMetis staked"
   },
   {
-    icon: <OfflineBolt />,
+    icon: <OfflineBolt className="fill-velix-primary dark:fill-primary" />,
     title: "Earn rewards",
     description:
       "Watch your veMETIS grow in value over time as it earns rewards"
   },
   {
-    icon: <OutBond className="rotate-[222deg]" />,
+    icon: (
+      <OutBond className="rotate-[222deg] fill-velix-primary dark:fill-primary" />
+    ),
     title: "Easily unstake",
     description: "Unstake at any time with no minimum lock up periods"
   },
   {
-    icon: <World className="fill-white bg-velix-primary p-1 rounded-full" />,
+    icon: (
+      <World className="fill-white dark:fill-velix-primary bg-velix-primary dark:bg-white p-1 rounded-full" />
+    ),
     title: "Use in Defi",
     description:
       "Trade your veMETIS on Defi platforms and boost your liquidity rewards"
   },
   {
-    icon: <OutBond className="rotate-45" />,
+    icon: (
+      <OutBond className="rotate-45 fill-velix-primary dark:fill-primary" />
+    ),
     title: "Restaking veMETIS",
     description: "COMING SOON"
   }
@@ -60,8 +66,8 @@ export default function VelixProperties() {
             />
           );
         })}
-        <div className="bg-velix-primary relative overflow-hidden text-white font-space-grotesk flex flex-col justify-center rounded-[15px] p-9">
-          <VelixEclips className="absolute -top-72 -right-56" />
+        <div className="bg-velix-primary relative dark:border dark:bg-black dark:border-white/10 overflow-hidden text-white font-space-grotesk flex flex-col justify-center rounded-[0.9375rem] p-9">
+          <VelixEclips className="absolute -top-72 -right-56 dark:hidden" />
           <p className="flex items-end gap-4 z-20">
             <span className="font-bold text-5xl">=20 %</span>
             <span className="font-medium">APR</span>

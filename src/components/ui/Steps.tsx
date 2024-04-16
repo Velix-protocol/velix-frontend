@@ -19,15 +19,17 @@ export default function Steps({
     {
       "bg-red-600": step1Error,
       "bg-velix-green !text-white": !step1Error && step1Success,
-      "bg-velix-gray/20 !text-velix-primary": !step1Error
+      "bg-gray-200 dark:bg-white/40 !text-velix-primary dark:!text-white":
+        !step1Error && !step1Success
     }
   );
 
   const stepsLinkClassnames = classnames("h-1 w-32", {
-    "bg-velix-gray/20": currentStep === 1 && !step1Error && !step1Success,
-    "from-velix-green bg-gradient-to-r to-velix-gray/20":
+    "bg-gray-200 dark:bg-white/40":
+      currentStep === 1 && !step1Error && !step1Success,
+    "from-velix-green bg-gradient-to-r to-gray-200 dark:to-white/40":
       currentStep === 2 && step1Success && !step2Error,
-    "from-red-600 bg-gradient-to-r to-velix-gray/20":
+    "from-red-600 bg-gradient-to-r to-gray-200 dark:to-white/40":
       currentStep === 1 && step1Error && !step2Sucesss,
     "!from-red-600 bg-gradient-to-l !to-velix-green":
       currentStep === 2 && step2Error,
@@ -40,7 +42,8 @@ export default function Steps({
     {
       "bg-red-600 !text-white": step2Error,
       "bg-velix-green !text-white": !step2Error && step2Sucesss,
-      "bg-velix-gray/20 !text-velix-primary": !step2Error
+      "bg-gray-200 dark:bg-white/40 !text-velix-primary dark:!text-white":
+        !step2Error && !step2Sucesss
     }
   );
 
