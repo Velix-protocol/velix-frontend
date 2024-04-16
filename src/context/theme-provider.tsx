@@ -55,6 +55,7 @@ export default function ThemeProvider({
       const systemTheme = getThemeFromSystem();
 
       root.classList.add(systemTheme);
+      setTheme(systemTheme);
       return;
     }
 

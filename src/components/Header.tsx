@@ -2,8 +2,29 @@ import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { Switch } from "./ui/switch";
 import { useTheme } from "@/context/theme-provider";
+import { MoonIcon, SunIcon } from "lucide-react";
+
+const ThemeButton = ({
+  toggleTheme,
+  theme
+}: {
+  toggleTheme: () => void;
+  theme: "dark" | "light" | "system";
+}) => {
+  return (
+    <button
+      onClick={toggleTheme}
+      className="bg-white dark:bg-black p-2 rounded-full"
+    >
+      {theme === "dark" ? (
+        <SunIcon className="text-white" />
+      ) : (
+        <MoonIcon className="text-velix-blue" />
+      )}
+    </button>
+  );
+};
 
 export default function Header() {
   const { ref, inView } = useInView({
@@ -12,6 +33,10 @@ export default function Header() {
   });
 
   const { setTheme, theme } = useTheme();
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
     <div>
@@ -31,10 +56,7 @@ export default function Header() {
           >
             Launch app
           </Button>
-          <Switch
-            checked={theme === "dark"}
-            onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
-          />
+          <ThemeButton toggleTheme={toggleTheme} theme={theme} />
         </div>
       </header>
 
@@ -56,12 +78,7 @@ export default function Header() {
             >
               Launch app
             </Button>
-            <Switch
-              checked={theme === "dark"}
-              onCheckedChange={(checked) =>
-                setTheme(checked ? "dark" : "light")
-              }
-            />
+            <ThemeButton toggleTheme={toggleTheme} theme={theme} />
           </div>
         </div>
       </header>
