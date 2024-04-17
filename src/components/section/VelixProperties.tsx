@@ -66,8 +66,8 @@ export default function VelixProperties() {
             />
           );
         })}
-        <div className="bg-velix-primary relative dark:border dark:bg-black dark:border-white/10 overflow-hidden text-white font-space-grotesk flex flex-col justify-center rounded-[0.9375rem] p-9">
-          <VelixEclips className="absolute -top-72 -right-56 dark:hidden" />
+        <div className="bg-velix-primary relative dark:border dark:bg-black/30 dark:border-white/10 overflow-hidden text-white font-space-grotesk flex flex-col justify-center rounded-[0.9375rem] p-9">
+          <VelixEclips className="absolute -top-72 -right-56 dark:-right-56 dark:opacity-25" />
           <p className="flex items-end gap-4 z-20">
             <span className="font-bold text-5xl">=20 %</span>
             <span className="font-medium">APR</span>
