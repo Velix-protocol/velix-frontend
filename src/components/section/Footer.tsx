@@ -50,28 +50,28 @@ export default function Footer() {
           </div>
         </div>
       </Section>
-      <Section className="bg-velix-primary dark:bg-primary mb-2">
+      <Section className="bg-velix-primary dark:bg-[#101010] mb-2">
         <div className="px-5 w-full flex justify-between items-center py-5">
-          <span className="text-white dark:text-velix-primary font-space-grotesk">
+          <span className="text-white dark:text-primary font-space-grotesk">
             © 2023 - 2024 Velix
           </span>
           <ul className="flex items-center gap-3">
-            <li className="bg-white dark:bg-velix-primary cursor-pointer p-2 rounded-full w-fit">
+            <li className="bg-white dark:bg-primary cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
                 <XIcon className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 dark:bg-velix-primary rounded-full w-fit">
+            <li className="bg-white cursor-pointer p-2 dark:bg-primary rounded-full w-fit">
               <a href="https://velixonmetis.medium.com" target="_blank">
                 <FaMedium className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 dark:bg-velix-primary rounded-full w-fit">
+            <li className="bg-white cursor-pointer p-2 dark:bg-primary rounded-full w-fit">
               <a href="https://discord.gg/v594pjBw5u" target="_blank">
                 <Discord className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>
             </li>
-            <li className="bg-white cursor-pointer p-2 rounded-full dark:bg-velix-primary w-fit">
+            <li className="bg-white cursor-pointer p-2 rounded-full dark:bg-primary w-fit">
               <a href="https://t.me/velixprotocol" target="_blank">
                 <Telegram className="w-4 h-4 fill-velix-primary dark:fill-primary" />
               </a>

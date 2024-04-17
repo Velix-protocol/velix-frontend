@@ -14,7 +14,7 @@ export default function HowItWorks() {
             How Velix works
           </h2>
           <Steps />
-          <VelixEclips className="absolute -top-64 -right-44 dark:w-full dark:h-full dark:scale-[2.5] dark:rotate-12 dark:opacity-40 dark:-right-96 dark:-top-32" />
+          <VelixEclips className="absolute -top-64 -right-44 dark:w-full dark:h-full dark:scale-[2.5] dark:rotate-12 dark:opacity-35 dark:-right-[30rem] dark:-top-32" />
         </div>
       </div>
       <div className="relative lg:mt-28 dark:max-lg:mt-28 p-0.25 rounded-lg">
