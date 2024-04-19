@@ -32,11 +32,14 @@ export default function Dashboard() {
   const { address } = useAccount();
   const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
   const [loading, setLoading] = useState(false);
-  const [actionToRetreive, setActionToRetreive] = useState<Action>("mint");
+  const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
+    "mint"
+  );
 
   useEffect(() => {
     async function getUnstakeActivity() {
       if (!address) return;
+      if (actionToRetreive === "reward") return;
       setLoading(true);
       const { data } = await retreiveActionsActivity(actionToRetreive, address);
       setUnstakeActivity(data as unknown as UnstakeActivity[]);
@@ -84,7 +87,7 @@ export default function Dashboard() {
           </Card>
         ))}
       </div>
-      <Menubar className="mt-10 py-10 px-5 md:p-10 border-none rounded-lg bg-white dark:bg-velix-form-input-dark text-velix-primary font-space-grotesk font-bold text-base">
+      <Menubar className="mt-10 w-full overflow-x-auto overflow-y-hidden py-10 px-5 md:p-10 border-none rounded-lg bg-white dark:bg-velix-form-input-dark text-velix-primary font-space-grotesk font-bold text-base">
         <MenubarMenu>
           <MenubarTrigger
             onClick={() => setActionToRetreive("mint")}
@@ -115,9 +118,31 @@ export default function Dashboard() {
           >
             Unstake
           </MenubarTrigger>
+          <MenubarTrigger
+            onClick={() => setActionToRetreive("reward")}
+            className={`py-3 px-7 w-fit items-center justify-center flex cursor-pointer dark:text-velix-dark-white ${
+              actionToRetreive === "reward" &&
+              "bg-velix-slate-blue dark:bg-velix-light-dark"
+            }`}
+          >
+            Reward{" "}
+            <small className="rounded-full shrink-0 ml-2 border border-green-500 px-2">
+              Coming soon
+            </small>
+          </MenubarTrigger>
         </MenubarMenu>
       </Menubar>
       <Table className="p-10 font-space-grotesk mt-10">
+        {actionToRetreive === "reward" && (
+          <div className="flex text-velix-blue dark:text-velix-dark-white max-lg:flex-col rounded-t-lg flex-row lg:items-center -mb-2.5 bg-white dark:bg-velix-form-input-dark gap-3 px-8 py-8">
+            <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
+              Est Rewards 2023 : <b>0.000000 VeMetis</b>
+            </p>
+            <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
+              Est Monthly 2023 : <b>0.000000 VeMetis</b>
+            </p>
+          </div>
+        )}
         <TableHeader className="bg-velix-primary dark:bg-velix-form-input-dark pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
           <TableHead className="w-[100px] text-white font-bold h-fit">
             Date
