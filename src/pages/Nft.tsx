@@ -3,6 +3,7 @@ import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import SuperNft from "@/components/svg/superNft.svg?react";
 import { Check } from "lucide-react";
+import { cn } from "@/utils/utils";
 
 function Requirement({
   title,
@@ -14,7 +15,7 @@ function Requirement({
   return (
     <p className="flex items-center gap-2">
       <span className="bg-white dark:bg-velix-dark-white dark:text-velix-primary rounded-full p-0.5">
-        <Check className="w-4 h-4" />
+        <Check className={cn("w-4 h-4", isFullfilled ? "" : "")} />
       </span>
       <p className="text-white">{title}</p>
     </p>
