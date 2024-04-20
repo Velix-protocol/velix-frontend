@@ -6,7 +6,8 @@ import {
   METIS_TOKEN_CONTRACT_ADDRESS,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMETIS_CONTRACT_ADDRESS
+  VEMETIS_CONTRACT_ADDRESS,
+  FAUCET_CONTRACT_ADDRESS
 } from "@/utils/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
@@ -20,6 +21,7 @@ import {
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { savedAction } from "@/utils/supabase";
+import { FAUCET_CONTRACT_ABI } from "@/abi/faucet";
 
 /**
  * useApproveMinting approves the minting proess
@@ -378,6 +380,54 @@ export const useUnstake = () => {
     isSuccess,
     reset,
     unstake,
+    error,
+    txhash: data
+  };
+};
+
+export const useFaucet = () => {
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
+
+  const claim = useCallback(async () => {
+    if (!address) return;
+    try {
+      setIsPending(true);
+      const contract = await new Web3Service().contract(
+        FAUCET_CONTRACT_ADDRESS,
+        FAUCET_CONTRACT_ABI,
+        address
+      );
+      const tx = await contract.claim();
+      const txhash = (await tx.wait()) as ContractTransactionReceipt;
+      setData(txhash.hash);
+      setError(null);
+      setIsSuccess(true);
+    } catch (e: any) {
+      console.log(e);
+      setData(null);
+      setIsSuccess(false);
+      setError({ message: e.shortMessage ?? e });
+    } finally {
+      setIsPending(false);
+    }
+  }, [address]);
+
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
+
+  return {
+    isPending,
+    isSuccess,
+    reset,
+    claim,
     error,
     txhash: data
   };
