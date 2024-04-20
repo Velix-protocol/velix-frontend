@@ -54,9 +54,9 @@ export default function DefiIntegration() {
               <img src="/svg/wagmi.svg" alt="wagmi" />
             </DefiIconCard>
             <DefiIconCard>
-              <></>
+              <img src="/svg/herculeProtocol.svg" alt="hercule protocol" />
             </DefiIconCard>
-            <DefiIconCard>
+            <DefiIconCard className="bg-velix-blue/30">
               <img src="/svg/Hermes.svg" alt="chocolateTree" />
             </DefiIconCard>
           </div>
