@@ -7,6 +7,7 @@ import Telegram from "../ui/velix/icons/Telegram";
 import { FaMedium } from "react-icons/fa6";
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { RoundedEclipse } from "../ui/velix/icons/VelixEclips";
+import ThemeButton from "../ui/velix/ThemeButton";
 
 export default function Footer() {
   return (
@@ -50,35 +51,37 @@ export default function Footer() {
           </div>
         </div>
       </Section>
-      <Section className="bg-velix-primary dark:bg-[#101010] mb-2">
+      <Section className="bg-velix-primary dark:bg-[#101010]">
         <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white dark:text-primary font-space-grotesk">
             © 2023 - 2024 Velix
           </span>
+          <ThemeButton />
           <ul className="flex items-center gap-3">
             <li className="bg-white dark:bg-primary cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">
-                <XIcon className="w-4 h-4 fill-velix-primary dark:fill-primary" />
+                <XIcon className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 dark:bg-primary rounded-full w-fit">
               <a href="https://velixonmetis.medium.com" target="_blank">
-                <FaMedium className="w-4 h-4 fill-velix-primary dark:fill-primary" />
+                <FaMedium className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 dark:bg-primary rounded-full w-fit">
               <a href="https://discord.gg/v594pjBw5u" target="_blank">
-                <Discord className="w-4 h-4 fill-velix-primary dark:fill-primary" />
+                <Discord className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
             <li className="bg-white cursor-pointer p-2 rounded-full dark:bg-primary w-fit">
               <a href="https://t.me/velixprotocol" target="_blank">
-                <Telegram className="w-4 h-4 fill-velix-primary dark:fill-primary" />
+                <Telegram className="w-4 h-4 fill-velix-primary" />
               </a>
             </li>
           </ul>
         </div>
       </Section>
+      <div className="h-3 w-full bg-gradient-to-r from-velix-blue via-velix-blue to-velix-yellow" />
     </div>
   );
 }

@@ -8,6 +8,8 @@ import Page from "./components/layouts/Page";
 import { Toaster } from "@/components/ui/sonner";
 import Notfound from "./pages/Notfound";
 import ThemeProvider from "./context/theme-provider";
+import Faucet from "./pages/Faucet";
+import Nft from "./pages/Nft";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
               }
             />
             <Route path="mint" element={<MintPage />} />
+            <Route path="nft" element={<Nft />} />
+            <Route path="faucet" element={<Faucet />} />
             <Route path="unstake" element={<UnstakePage />} />
             <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />

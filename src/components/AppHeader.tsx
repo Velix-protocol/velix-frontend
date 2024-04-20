@@ -25,7 +25,7 @@ export default function AppHeader() {
           isConnected ? "py-8" : "py-5"
         }`}
       >
-        <div className="flex items-center justify-betwee space-x-32 text-base">
+        <div className="flex items-center justify-betwee space-x-16 text-base">
           <Link to="/">
             <VelixPrimaryBlackLogo className="fill-black dark:fill-velix-dark-white w-[4.25rem] h-4" />
           </Link>

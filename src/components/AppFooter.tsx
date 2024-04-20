@@ -4,6 +4,7 @@ import Telegram from "./ui/velix/icons/Telegram";
 import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
 import XIcon from "./ui/velix/icons/XIcon";
 import { FaMedium } from "react-icons/fa6";
+import ThemeButton from "./ui/velix/ThemeButton";
 
 export default function AppFooter() {
   return (
@@ -13,23 +14,24 @@ export default function AppFooter() {
           <VelixPrimaryBlackLogo className="fill-velix-gray dark:fill-velix-dark-white w-[4.25rem] h-4" />
           <p>© {new Date().getFullYear()} All rights reserved</p>
         </div>
+        <ThemeButton />
         <ul className="flex items-center gap-3">
-          <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
+          <li className="bg-velix-gray dark:bg-velix-form-input-dark cursor-pointer p-2 rounded-full w-fit">
             <a href="https://twitter.com/velixprotocol" target="_blank">
               <XIcon className="w-4 h-4 fill-white" />
             </a>
           </li>
-          <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
+          <li className="bg-velix-gray dark:bg-velix-form-input-dark cursor-pointer p-2 rounded-full w-fit">
             <a href="https://velixonmetis.medium.com" target="_blank">
               <FaMedium className="w-4 h-4 fill-white" />
             </a>
           </li>
-          <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
+          <li className="bg-velix-gray dark:bg-velix-form-input-dark cursor-pointer p-2 rounded-full w-fit">
             <a href="https://discord.gg/v594pjBw5u" target="_blank">
               <Discord className="w-4 h-4 fill-white" />
             </a>
           </li>
-          <li className="bg-velix-gray cursor-pointer p-2 rounded-full w-fit">
+          <li className="bg-velix-gray dark:bg-velix-form-input-dark cursor-pointer p-2 rounded-full w-fit">
             <a href="https://t.me/velixprotocol" target="_blank">
               <Telegram className="w-4 h-4 fill-white" />
             </a>

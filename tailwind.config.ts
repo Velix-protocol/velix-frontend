@@ -27,7 +27,7 @@ const config = {
         "velix-yellow": "var(--velix-yellow)",
         "velix-slate-blue": "var(--velix-slate-blue)",
         "velix-black": "var(--velix-black)",
-        "velix-gray": "var{--velix-gray)",
+        "velix-gray": "var(--velix-gray)",
         "velix-slate-green": "var(--velix-slate-green)",
         "velix-red": "var(--velix-red)",
         "velix-green": "var(--velix-green)",

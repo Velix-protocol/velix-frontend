@@ -2,41 +2,12 @@ import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
-import { useTheme } from "@/context/theme-provider";
-import { MoonIcon, SunIcon } from "lucide-react";
-
-const ThemeButton = ({
-  toggleTheme,
-  theme
-}: {
-  toggleTheme: () => void;
-  theme: "dark" | "light" | "system";
-}) => {
-  return (
-    <button
-      onClick={toggleTheme}
-      className="bg-black/30 dark:bg-black p-2 rounded-full"
-    >
-      {theme === "dark" ? (
-        <SunIcon className="text-white" />
-      ) : (
-        <MoonIcon className="text-transparent fill-white" />
-      )}
-    </button>
-  );
-};
 
 export default function Header() {
   const { ref, inView } = useInView({
     threshold: 0.2,
     initialInView: true
   });
-
-  const { setTheme, theme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   return (
     <div>
@@ -56,7 +27,6 @@ export default function Header() {
           >
             Launch
           </Button>
-          <ThemeButton toggleTheme={toggleTheme} theme={theme} />
         </div>
       </header>
 
@@ -78,7 +48,6 @@ export default function Header() {
             >
               Launch
             </Button>
-            <ThemeButton toggleTheme={toggleTheme} theme={theme} />
           </div>
         </div>
       </header>

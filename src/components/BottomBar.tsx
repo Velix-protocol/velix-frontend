@@ -4,11 +4,20 @@ import TwigLightIcon from "./ui/velix/icons/TwigLightIcon";
 import AnalyticsIcon from "./ui/velix/icons/AnalyticsIcon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import FaucetIcon from "./ui/velix/icons/FaucetIcon";
+import ImageIcon from "./ui/velix/icons/ImageIcon";
+import { cn } from "@/utils/utils";
 
-export default function BottomBar({
-  isNotFound = false
+function NavigationMenuCard({
+  isNotFound,
+  path,
+  label,
+  className
 }: {
-  isNotFound?: boolean;
+  isNotFound: boolean;
+  label: string;
+  path: string;
+  className?: string;
 }) {
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname.split("/").at(-1));
@@ -37,81 +46,91 @@ export default function BottomBar({
     );
   };
 
+  const menuIcons = {
+    mint: (
+      <TwigLightIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    ),
+    stake: (
+      <WalletIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    ),
+    unstake: (
+      <UnstakeIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    ),
+    faucet: (
+      <FaucetIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    ),
+    nft: (
+      <ImageIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    ),
+    dashboard: (
+      <AnalyticsIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
+    )
+  } as const;
+
+  return (
+    <NavLink
+      relative="path"
+      to={isNotFound ? `/app/${path}` : path}
+      className={cn(
+        "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk",
+        className
+      )}
+    >
+      <span>{menuIcons?.[path as never]}</span>
+      <span
+        className={applyActiveStyles(path, {
+          className: "lg:font-bold text-[0.625rem] lg:text-base"
+        })}
+      >
+        {label}
+      </span>
+    </NavLink>
+  );
+}
+
+export default function BottomBar({
+  isNotFound = false
+}: {
+  isNotFound?: boolean;
+}) {
   return (
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
-      <NavLink
-        relative="path"
-        to={isNotFound ? "/app/mint" : "mint"}
-        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
-      >
-        <span>
-          <TwigLightIcon
-            className={applyActiveStyles("mint", { className: "w-5 h-5" })}
-          />
-        </span>
-        <span
-          className={applyActiveStyles("mint", {
-            className: "lg:font-bold text-[0.625rem] lg:text-base"
-          })}
-        >
-          Mint
-        </span>
-      </NavLink>
-
-      <NavLink
-        relative="path"
-        to={isNotFound ? "/app/stake" : "stake"}
-        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
-      >
-        <span>
-          <WalletIcon
-            className={applyActiveStyles("stake", { className: "w-5 h-5" })}
-          />
-        </span>
-        <span
-          className={applyActiveStyles("stake", {
-            className: "lg:font-bold text-[0.625rem] lg:text-base"
-          })}
-        >
-          Stake
-        </span>
-      </NavLink>
-      <NavLink
-        relative="path"
-        to={isNotFound ? "/app/unstake" : "unstake"}
-        className="flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
-      >
-        <span>
-          <UnstakeIcon
-            className={applyActiveStyles("unstake", { className: "w-5 h-5" })}
-          />
-        </span>
-        <span
-          className={applyActiveStyles("unstake", {
-            className: "lg:font-bold text-[0.625rem] lg:text-base"
-          })}
-        >
-          Unstake
-        </span>
-      </NavLink>
-      <NavLink
-        relative="path"
-        to={isNotFound ? "/app/dashboard" : "dashboard"}
-        className="flex lg:flex-row relative flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk"
-      >
-        <span>
-          <AnalyticsIcon
-            className={applyActiveStyles("dashboard", { className: "w-5 h-5" })}
-          />
-        </span>
-        <span
-          className={applyActiveStyles("dashboard", {
-            className: "lg:font-bold text-[0.625rem] lg:text-base"
-          })}
-        >
-          Dashboard
-        </span>
-      </NavLink>
+      <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
+      <NavigationMenuCard path="stake" label="Stake" isNotFound={isNotFound} />
+      <NavigationMenuCard
+        path="unstake"
+        label="Unstake"
+        isNotFound={isNotFound}
+      />
+      <NavigationMenuCard
+        path="faucet"
+        label="Faucet"
+        isNotFound={isNotFound}
+        className="max-lg:hidden"
+      />
+      <NavigationMenuCard
+        className="max-lg:hidden"
+        path="nft"
+        label="Nft"
+        isNotFound={isNotFound}
+      />
+      <NavigationMenuCard
+        path="dashboard"
+        label="Dashboard"
+        isNotFound={isNotFound}
+      />
     </div>
   );
 }
