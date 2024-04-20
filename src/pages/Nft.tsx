@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import SuperNft from "@/components/svg/superNft.svg?react";
