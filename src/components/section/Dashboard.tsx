@@ -134,7 +134,7 @@ export default function Dashboard() {
       </Menubar>
       <Table className="p-10 font-space-grotesk mt-10">
         {actionToRetreive === "reward" && (
-          <div className="flex text-velix-blue dark:text-velix-dark-white max-lg:flex-col rounded-t-lg flex-row lg:items-center -mb-2.5 bg-white dark:bg-velix-form-input-dark gap-3 px-8 py-8">
+          <div className="flex text-velix-blue dark:text-velix-dark-white max-lg:flex-col rounded-t-lg flex-row lg:items-center -mb-2.5 bg-white dark:bg-velix-form-dark-background gap-3 px-8 py-8">
             <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
               Est Rewards 2023 : <b>0.000000 VeMetis</b>
             </p>

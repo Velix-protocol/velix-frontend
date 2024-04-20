@@ -15,12 +15,12 @@ const ThemeButton = ({
   return (
     <button
       onClick={toggleTheme}
-      className="bg-white dark:bg-black p-2 rounded-full"
+      className="bg-black/30 dark:bg-black p-2 rounded-full"
     >
       {theme === "dark" ? (
         <SunIcon className="text-white" />
       ) : (
-        <MoonIcon className="text-velix-blue" />
+        <MoonIcon className="text-transparent fill-white" />
       )}
     </button>
   );
@@ -54,7 +54,7 @@ export default function Header() {
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
-            Launch app
+            Launch
           </Button>
           <ThemeButton toggleTheme={toggleTheme} theme={theme} />
         </div>
@@ -76,7 +76,7 @@ export default function Header() {
               }}
               className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
             >
-              Launch app
+              Launch
             </Button>
             <ThemeButton toggleTheme={toggleTheme} theme={theme} />
           </div>
