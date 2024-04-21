@@ -1,5 +1,6 @@
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
+import { useTheme } from "@/context/theme-provider";
 import {
   EXPLORER_ADDRESS_URL,
   SVEMETIS_CONTRACT_ADDRESS,
@@ -14,29 +15,7 @@ import {
   PlusCircle
 } from "lucide-react";
 import { useState } from "react";
-
-const avalableChains = [
-  {
-    address: VEMETIS_CONTRACT_ADDRESS,
-    symbol: "veMETIS",
-    decimals: 18,
-    name: "veMETIS",
-    logo: (
-      <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
-    ),
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
-  },
-  {
-    address: SVEMETIS_CONTRACT_ADDRESS,
-    symbol: "sveMETIS",
-    decimals: 18,
-    name: "sveMETIS",
-    logo: <SveMETIS className="w-8 h-8" />,
-    image:
-      "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Sve%404x.png?alt=media&token=678c31d7-c9d2-4c51-b5e7-3eac25e31482"
-  }
-];
+import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 
 export default function Chains() {
   const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =
@@ -46,6 +25,7 @@ export default function Chains() {
   >(null);
   const [copied, setCopied] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState("");
+  const { theme } = useTheme();
 
   const addMetisToMetamaskBrowserWallet = async (
     options: (typeof avalableChains)[0]
@@ -87,6 +67,34 @@ export default function Chains() {
   const onViewChainOnExplorer = (address: string) => {
     window.open(`${EXPLORER_ADDRESS_URL}${address}`);
   };
+
+  const avalableChains = [
+    {
+      address: VEMETIS_CONTRACT_ADDRESS,
+      symbol: "veMETIS",
+      decimals: 18,
+      name: "veMETIS",
+      logo: (
+        <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
+      ),
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
+    },
+    {
+      address: SVEMETIS_CONTRACT_ADDRESS,
+      symbol: "sveMETIS",
+      decimals: 18,
+      name: "sveMETIS",
+      logo:
+        theme === "dark" ? (
+          <Svedarkmode className="w-8 h-8" />
+        ) : (
+          <SveMETIS className="w-8 h-8" />
+        ),
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Sve%404x.png?alt=media&token=678c31d7-c9d2-4c51-b5e7-3eac25e31482"
+    }
+  ];
 
   return (
     <div className="bg-white dark:bg-velix-form-dark-background rounded-xl flex flex-col gap-3 h-max p-5 lg:p-11">
