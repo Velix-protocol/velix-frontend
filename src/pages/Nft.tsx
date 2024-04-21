@@ -23,8 +23,8 @@ function Requirement({
 
 export default function Nft() {
   return (
-    <Section className="h-[82dvh]">
-      <div className="my-40 bg-velix-blue dark:bg-velix-black flex justify-between items-center p-24 rounded-xl">
+    <Section>
+      <div className="mt-40 mb-10 bg-velix-blue dark:bg-velix-black flex justify-between items-center p-24 rounded-xl">
         <div className="font-space-grotesk">
           <h2 className="font-bold text-4xl text-white dark:text-velix-dark-white">
             Velix superstar NFT claim

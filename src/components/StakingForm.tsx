@@ -5,7 +5,9 @@ import SwapIcon from "./ui/velix/icons/SwapIcon";
 import VelixBlueLogo from "./ui/velix/icons/VelixBlueLogo";
 import { ChangeEvent } from "react";
 import SveMETIS from "./ui/velix/icons/SveMETIS";
+import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import classNames from "classnames";
+import { useTheme } from "@/context/theme-provider";
 
 export default function StakingForm({
   showSwapIcon = true,
@@ -24,6 +26,7 @@ export default function StakingForm({
 }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { theme } = useTheme();
 
   const renderFromTitles = () => {
     switch (role) {
@@ -66,7 +69,12 @@ export default function StakingForm({
   };
 
   const icons = {
-    sveMETIS: <SveMETIS className="w-8 h-8" />,
+    sveMETIS:
+      theme === "dark" ? (
+        <Svedarkmode className="w-8 h-8" />
+      ) : (
+        <SveMETIS className="w-8 h-8" />
+      ),
     veMETIS: (
       <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
     ),
