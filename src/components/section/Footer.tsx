@@ -56,7 +56,7 @@ export default function Footer() {
           <span className="text-white dark:text-primary font-space-grotesk">
             © 2023 - 2024 Velix
           </span>
-          <ThemeButton />
+          <ThemeButton className="hidden lg:block" />
           <ul className="flex items-center gap-3">
             <li className="bg-white dark:bg-primary cursor-pointer p-2 rounded-full w-fit">
               <a href="https://twitter.com/velixprotocol" target="_blank">

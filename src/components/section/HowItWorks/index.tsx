@@ -6,7 +6,7 @@ import GradientBorder from "@/components/ui/velix/GradientBorder";
 
 export default function HowItWorks() {
   return (
-    <Section className="py-28 px-5">
+    <Section className="py-28 px-5 max-md:pb-0 max-md:pt-10">
       <div className="relative">
         <VelixEclips className="absolute -top-24 dark:max-lg:-top-16 dark:max-lg:w-80 dark:max-lg:h-56 rotate-90 -z-[3] left-1/2 -translate-x-1/2 max-lg:w-20 max-lg:h-32" />
         <div className="items-center text-white rounded-lg relative overflow-hidden">

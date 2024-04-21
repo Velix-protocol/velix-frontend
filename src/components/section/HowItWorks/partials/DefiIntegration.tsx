@@ -4,10 +4,12 @@ import { ReactNode } from "react";
 
 function DefiIconCard({
   children,
-  className
+  className,
+  imageContainerClassName
 }: {
   children: ReactNode;
   className?: string;
+  imageContainerClassName?: string;
 }) {
   return (
     <div
@@ -17,7 +19,12 @@ function DefiIconCard({
       )}
     >
       <VelixEclips className="absolute -top-[20rem] -right-[22rem] -rotate-90" />
-      <span className="h-10 w-10 mx-auto flex justify-center items-center">
+      <span
+        className={cn(
+          "h-10 w-10 mx-auto flex justify-center items-center",
+          imageContainerClassName
+        )}
+      >
         {children}
       </span>
     </div>
@@ -53,7 +60,7 @@ export default function DefiIntegration() {
             <DefiIconCard>
               <img src="/svg/wagmi.svg" alt="wagmi" />
             </DefiIconCard>
-            <DefiIconCard>
+            <DefiIconCard imageContainerClassName="w-14 h-14">
               <img src="/svg/herculeProtocol.svg" alt="hercule protocol" />
             </DefiIconCard>
             <DefiIconCard className="bg-velix-blue/30">

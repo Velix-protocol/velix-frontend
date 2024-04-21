@@ -2,6 +2,7 @@ import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import ThemeButton from "./ui/velix/ThemeButton";
 
 export default function Header() {
   const { ref, inView } = useInView({
@@ -27,6 +28,7 @@ export default function Header() {
           >
             Launch
           </Button>
+          <ThemeButton className="hidden max-lg:block" />
         </div>
       </header>
 
@@ -48,6 +50,7 @@ export default function Header() {
             >
               Launch
             </Button>
+            <ThemeButton className="hidden max-lg:block" />
           </div>
         </div>
       </header>
