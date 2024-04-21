@@ -17,7 +17,7 @@ export default function Community() {
           <GradientBorder className="rounded-[0.9375rem]" />
           <div className="bg-velix-black relative overflow-hidden flex justify-between items-center lg:py-10 lg:px-14 p-10 rounded-[15px]">
             <VelixEclips className="absolute -top-56 -right-20 dark:scale-[3] dark:opacity-50" />
-            <div>
+            <div className="z-20">
               <p className="text-white font-bold font-space-grotesk text-4xl flex items-center gap-3">
                 Velix community
               </p>
