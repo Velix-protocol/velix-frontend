@@ -7,6 +7,7 @@ export const VITE_VELIX_SUPER_NFT_HASH = import.meta.env
   .VITE_VELIX_SUPER_NFT_HASH;
 export const VITE_VELIX_SUPER_NFT_NAME = import.meta.env
   .VITE_VELIX_SUPER_NFT_NAME;
+export const VELIX_SUPER_NFT_URL = import.meta.env.VITE_VELIX_SUPER_NFT_URL;
 
 export const METIS_TOKEN_CONTRACT_ADDRESS =
   "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;

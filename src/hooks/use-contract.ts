@@ -8,7 +8,7 @@ import {
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
-  VITE_VELIX_SUPER_NFT_HASH
+  VELIX_SUPER_NFT_URL
 } from "@/utils/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
@@ -426,7 +426,8 @@ export const useMintNft = () => {
       const tx = await contract.safeMint(
         address,
         parseUnits("3332"),
-        VITE_VELIX_SUPER_NFT_HASH
+        VELIX_SUPER_NFT_URL,
+        { from: address }
       );
 
       console.log(tx);
