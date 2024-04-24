@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { claimFaucetToken } from "@/services/http";
 import { useCallback, useState } from "react";
 import { useAccount } from "wagmi";
@@ -15,7 +16,7 @@ export const useFaucet = () => {
       await claimFaucetToken(address);
       setError(null);
       setIsSuccess(true);
-    } catch (e: unknown) {
+    } catch (e: any) {
       console.log(e);
       setIsSuccess(false);
       setError({ message: e.message ?? e });
