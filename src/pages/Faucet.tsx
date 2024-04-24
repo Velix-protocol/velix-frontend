@@ -4,20 +4,19 @@ import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/velix/Modal";
 import FaucetImage from "@/components/ui/velix/icons/FaucetImage";
-import { useFaucet } from "@/hooks/use-contract";
-import { EXPLORER_TX_URL } from "@/utils/constant";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
+import { useFaucet } from "@/hooks/useHttp";
 
 export default function Faucet() {
   const isMobile = useMediaQuery({ maxWidth: "1024px" });
   const navigate = useNavigate();
-  const { claim, isPending, isSuccess, txhash, reset } = useFaucet();
-  const { isConnected } = useAccount();
+  const { claim, isPending, isSuccess, reset } = useFaucet();
+  const { isConnected, address } = useAccount();
   const { open } = useWeb3Modal();
   const [isAllowedToClaim, setIsAllowedToClaim] = useState(true);
 
@@ -33,6 +32,8 @@ export default function Faucet() {
     if (date) {
       const diff = dayjs(JSON.parse(date)).diff(now, "day");
       setIsAllowedToClaim(diff > 1);
+    } else {
+      setIsAllowedToClaim(true);
     }
   }, []);
 
@@ -40,11 +41,10 @@ export default function Faucet() {
     checkIsAllowedToClaim();
   }, [checkIsAllowedToClaim, isAllowedToClaim]);
 
-  const onViewTransaction = async () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
-  };
-
   const onClaim = async () => {
+    if (!isConnected) return open();
+    if (!address) return;
+
     const now = dayjs();
     const saveNewDate = () => {
       const lockedFor = now.add(1, "day");
@@ -57,14 +57,16 @@ export default function Faucet() {
     const date = localStorage.getItem("velix-allowed-to-claim-after");
     if (date && dayjs(JSON.parse(date)).diff(now, "day") === 1) return;
 
-    if (isConnected) {
-      await claim();
-      saveNewDate();
-      setIsAllowedToClaim(false);
-      return;
+    try {
+      if (isConnected) {
+        await claim();
+        saveNewDate();
+        setIsAllowedToClaim(false);
+        return;
+      }
+    } catch (e) {
+      console.log("Faucet error: ", e);
     }
-
-    open();
   };
 
   return (
@@ -72,7 +74,7 @@ export default function Faucet() {
       {isPending && <WaitingModal title="Claiming is in process" subTitle="" />}
       {isSuccess && (
         <Modal onClose={reset}>
-          <SuccessModal onViewOnExploer={onViewTransaction} onClose={reset} />
+          <SuccessModal onClose={reset} />
         </Modal>
       )}
       <Section>

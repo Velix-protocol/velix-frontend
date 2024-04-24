@@ -2,6 +2,7 @@ export const INFURA_API_KEY = import.meta.env.VITE_INFURA_API_KEY;
 export const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
 export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+export const VELIX_API_URL = import.meta.env.VITE_VELIX_API_URL;
 
 export const METIS_TOKEN_CONTRACT_ADDRESS =
   "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;

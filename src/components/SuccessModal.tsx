@@ -5,7 +5,7 @@ export default function SuccessModal({
   onViewOnExploer,
   onClose
 }: {
-  onViewOnExploer: () => void;
+  onViewOnExploer?: () => void;
   onClose: () => void;
 }) {
   return (
@@ -17,6 +17,7 @@ export default function SuccessModal({
       <div className="flex items-center w-full gap-5">
         <Button
           onClick={onViewOnExploer}
+          disabled={!onViewOnExploer}
           className="lg:py-6 dark:bg-velix-dark-white disabled:cursor-not-allowed disabled:bg-velix-primary/60 w-full mt-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
         >
           View Transaction
