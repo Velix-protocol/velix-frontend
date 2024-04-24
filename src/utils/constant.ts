@@ -3,6 +3,10 @@ export const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
 export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 export const VELIX_API_URL = import.meta.env.VITE_VELIX_API_URL;
+export const VITE_VELIX_SUPER_NFT_HASH = import.meta.env
+  .VITE_VELIX_SUPER_NFT_HASH;
+export const VITE_VELIX_SUPER_NFT_NAME = import.meta.env
+  .VITE_VELIX_SUPER_NFT_NAME;
 
 export const METIS_TOKEN_CONTRACT_ADDRESS =
   "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;
@@ -22,6 +26,8 @@ export const PROTOCOL_TREASURE_CONTRACT_ADDRESS =
   "0xc3BD53e8BB7F5a8f98C565aad28C9b618c84D8Fa" as const;
 export const FAUCET_CONTRACT_ADDRESS =
   "0xCAfBeA96C9A96f59d2FB26175ef9Ec2Ec4F1f449" as const;
+export const VELIX_NFT_CONTRACT_ADDRESS =
+  "0x5DBcfb13aC3aab5cCFD7d2c9b49b9017b7477EC8" as const;
 
 export const CONFIRMATION_BLOCKS_NUMBER = 1;
 export const CONFIRMATION_BLOCKS_NUMBER_APPROVE = 1;
