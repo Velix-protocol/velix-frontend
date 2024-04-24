@@ -112,7 +112,7 @@ export default function Nft() {
             </div>
             <Button
               onClick={mintNft}
-              // disabled={hasClaimed === null || hasClaimed}
+              disabled={hasClaimed === null || hasClaimed}
               className="bg-velix-yellow hover:bg-velix-yellow mt-10 px-20"
             >
               Claim now
