@@ -6,7 +6,9 @@ import {
   METIS_TOKEN_CONTRACT_ADDRESS,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMETIS_CONTRACT_ADDRESS
+  VEMETIS_CONTRACT_ADDRESS,
+  VELIX_NFT_CONTRACT_ADDRESS,
+  VITE_VELIX_SUPER_NFT_HASH
 } from "@/utils/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
@@ -19,7 +21,8 @@ import {
 } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
-import { savedAction } from "@/utils/supabase";
+import { saveClaimNftAction, savedAction } from "@/utils/supabase";
+import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 
 /**
  * useApproveMinting approves the minting proess
@@ -333,6 +336,7 @@ export const useUnstake = () => {
   const [error, setError] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const { address } = useAccount();
+  const { addEligibleAddress } = useMintNft();
 
   const unstake = useCallback(
     async (amount: string) => {
@@ -346,6 +350,7 @@ export const useUnstake = () => {
         );
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        await addEligibleAddress();
         await savedAction("unstake", {
           amount,
           wallet_address: address,
@@ -363,7 +368,7 @@ export const useUnstake = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [addEligibleAddress, address]
   );
 
   const reset = useCallback(() => {
@@ -378,6 +383,86 @@ export const useUnstake = () => {
     isSuccess,
     reset,
     unstake,
+    error,
+    txhash: data
+  };
+};
+
+export const useMintNft = () => {
+  const [data, setData] = useState<any>(null);
+  const [isPending, setIsPending] = useState(false);
+  const [error, setError] = useState<any>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const { address } = useAccount();
+
+  const addEligibleAddress = useCallback(async () => {
+    if (!address) return;
+    try {
+      const contract = await new Web3Service().contract(
+        VELIX_NFT_CONTRACT_ADDRESS,
+        VELIX_NFT_CONTRACT_ABI,
+        address
+      );
+      await contract.addEligibleAddress(address);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }, [address]);
+
+  const mintNft = useCallback(async () => {
+    if (!address) return;
+    try {
+      setIsPending(true);
+      const contract = await new Web3Service().contract(
+        VELIX_NFT_CONTRACT_ADDRESS,
+        VELIX_NFT_CONTRACT_ABI,
+        address
+      );
+
+      // 3332 is a random number for now is just to satisfy the contract requirement,
+      // when the contract is update that parameter should be removed
+
+      const tx = await contract.safeMint(
+        address,
+        parseUnits("3332"),
+        VITE_VELIX_SUPER_NFT_HASH
+      );
+
+      console.log(tx);
+
+      const txhash = (await tx.wait()) as ContractTransactionReceipt;
+      console.log(txhash);
+      const { error } = await saveClaimNftAction(address, "3332", txhash.hash);
+      console.log(error);
+      if (error) throw error;
+
+      setData(txhash.hash);
+      setError(null);
+      setIsSuccess(true);
+    } catch (e: any) {
+      console.log(e);
+      setData(null);
+      setIsSuccess(false);
+      setError({ message: e.shortMessage ?? e });
+    } finally {
+      setIsPending(false);
+    }
+  }, [address]);
+
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, []);
+
+  return {
+    isPending,
+    addEligibleAddress,
+    isSuccess,
+    reset,
+    mintNft,
     error,
     txhash: data
   };

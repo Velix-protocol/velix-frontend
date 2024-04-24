@@ -5,6 +5,7 @@ export const UNSTAKES_TABLE = "unstakes";
 export const STAKES_TABLE = "stakes";
 export const MINTS_TABLE = "mints";
 export const STAKERS_TABLE = "stakers";
+export const CLAIMS_TABLE = "claims";
 
 export type Action = "mint" | "stake" | "unstake";
 
@@ -30,6 +31,25 @@ export async function savedAction(
   }
 ) {
   return await supabase.from(getActionTable(action)).insert(data);
+}
+
+export async function saveClaimNftAction(
+  walletAddress: string,
+  nftId: string,
+  txHash: string
+) {
+  return await supabase.from(CLAIMS_TABLE).insert({
+    wallet_address: walletAddress,
+    nft_id: nftId,
+    tx_hash: txHash
+  });
+}
+
+export async function retreiveClaims(walletAddress: string) {
+  return await supabase
+    .from(CLAIMS_TABLE)
+    .select("*")
+    .eq("wallet_address", walletAddress);
 }
 
 export async function retreiveActionsActivity(
