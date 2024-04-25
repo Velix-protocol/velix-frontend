@@ -336,7 +336,6 @@ export const useUnstake = () => {
   const [error, setError] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const { address } = useAccount();
-  const { addEligibleAddress } = useMintNft();
 
   const unstake = useCallback(
     async (amount: string) => {
@@ -350,7 +349,6 @@ export const useUnstake = () => {
         );
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await addEligibleAddress();
         await savedAction("unstake", {
           amount,
           wallet_address: address,
@@ -368,7 +366,7 @@ export const useUnstake = () => {
         setIsPending(false);
       }
     },
-    [addEligibleAddress, address]
+    [address]
   );
 
   const reset = useCallback(() => {
@@ -403,7 +401,8 @@ export const useMintNft = () => {
         VELIX_NFT_CONTRACT_ABI,
         address
       );
-      await contract.addEligibleAddress(address);
+      const tx = await contract.addEligibleAddress(address);
+      await tx.wait();
     } catch (err) {
       console.log(err);
       throw err;
@@ -422,7 +421,7 @@ export const useMintNft = () => {
 
       // 3332 is a random number for now is just to satisfy the contract requirement,
       // when the contract is update that parameter should be removed
-
+      await addEligibleAddress();
       const tx = await contract.safeMint(
         address,
         parseUnits("3332"),
@@ -449,7 +448,7 @@ export const useMintNft = () => {
     } finally {
       setIsPending(false);
     }
-  }, [address]);
+  }, [addEligibleAddress, address]);
 
   const reset = useCallback(() => {
     setData(null);
