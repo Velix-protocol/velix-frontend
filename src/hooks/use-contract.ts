@@ -8,7 +8,7 @@ import {
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
-  VITE_VELIX_SUPER_NFT_HASH
+  VELIX_SUPER_NFT_URL
 } from "@/utils/constant";
 import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
@@ -403,7 +403,8 @@ export const useMintNft = () => {
         VELIX_NFT_CONTRACT_ABI,
         address
       );
-      await contract.addEligibleAddress(address);
+      const tx = await contract.addEligibleAddress(address);
+      await tx.wait();
     } catch (err) {
       console.log(err);
       throw err;
@@ -422,11 +423,12 @@ export const useMintNft = () => {
 
       // 3332 is a random number for now is just to satisfy the contract requirement,
       // when the contract is update that parameter should be removed
-
+      await addEligibleAddress();
       const tx = await contract.safeMint(
         address,
         parseUnits("3332"),
-        VITE_VELIX_SUPER_NFT_HASH
+        VELIX_SUPER_NFT_URL,
+        { from: address }
       );
 
       console.log(tx);
@@ -448,7 +450,7 @@ export const useMintNft = () => {
     } finally {
       setIsPending(false);
     }
-  }, [address]);
+  }, [addEligibleAddress, address]);
 
   const reset = useCallback(() => {
     setData(null);

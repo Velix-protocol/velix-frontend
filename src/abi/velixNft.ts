@@ -246,19 +246,6 @@ export const VELIX_NFT_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "admin",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -334,18 +321,7 @@ export const VELIX_NFT_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [
-      {
-        internalType: "string",
-        name: "_name",
-        type: "string"
-      },
-      {
-        internalType: "string",
-        name: "_symbol",
-        type: "string"
-      }
-    ],
+    inputs: [],
     name: "initialize",
     outputs: [],
     stateMutability: "nonpayable",
