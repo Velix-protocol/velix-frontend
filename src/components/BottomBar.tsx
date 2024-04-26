@@ -118,7 +118,7 @@ export default function BottomBar({
         path="faucet"
         label="Faucet"
         isNotFound={isNotFound}
-        className="max-lg:hidden"
+        className=""
       />
       <NavigationMenuCard
         className="max-lg:hidden"

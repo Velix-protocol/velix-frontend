@@ -1,7 +1,7 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
 import { Button } from "./ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeButton from "./ui/velix/ThemeButton";
 
 export default function Header() {
@@ -9,6 +9,8 @@ export default function Header() {
     threshold: 0.2,
     initialInView: true
   });
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -22,7 +24,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <Button
             onClick={() => {
-              // return navigate("/app/mint");
+              return navigate("/app/mint");
             }}
             className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
@@ -44,7 +46,7 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Button
               onClick={() => {
-                // return navigate("/app/mint");
+                return navigate("/app/mint");
               }}
               className="font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
             >

@@ -1,4 +1,6 @@
-export default function FaucetImage() {
+import { ComponentProps } from "react";
+
+export default function FaucetImage(props: ComponentProps<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +8,7 @@ export default function FaucetImage() {
       height="326"
       viewBox="0 0 245 326"
       fill="none"
+      {...props}
     >
       <g clipPath="url(#clip0_1772_1818)">
         <path
