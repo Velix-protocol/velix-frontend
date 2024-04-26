@@ -6,6 +6,7 @@ import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
+import ThemeButton from "./ui/velix/ThemeButton";
 
 export default function AppHeader() {
   const { open } = useWeb3Modal();
@@ -33,29 +34,32 @@ export default function AppHeader() {
             <BottomBar />
           </div>
         </div>
-        {!isConnected ? (
-          <Button
-            onClick={onConnectToWalletClick}
-            className="bg-velix-primary dark:bg-velix-dark-white lg:px-8 lg:py-7 hover:bg-velix-primary font-bold font-space-grotesk text-sm"
-          >
-            Connect Wallet
-          </Button>
-        ) : (
-          <div
-            role="button"
-            onClick={onConnectToWalletClick}
-            className="bg-white inline-flex items-center text-sm gap-2 dark:text-velix-dark-white hover:bg-white dark:bg-velix-form-input-dark dark:hover:bg-velix-form-input-dark text-black text-[0.625rem] p-2 rounded-md font-space-grotesk"
-          >
-            {data && (
-              <span className="font-bold">
-                {converGweiToEth(data.value)} {data?.symbol}
-              </span>
-            )}
-            <p className="bg-[#969696]/10 dark:bg-velix-light-dark px-2 dark:text-velix-dark-white text-velix-gray py-1 rounded-lg">
-              {truncateString(address, 4, 4)}
-            </p>
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {!isConnected ? (
+            <Button
+              onClick={onConnectToWalletClick}
+              className="bg-velix-primary dark:bg-velix-dark-white lg:px-8 lg:py-5 hover:bg-velix-primary font-bold font-space-grotesk text-sm"
+            >
+              Connect Wallet
+            </Button>
+          ) : (
+            <div
+              role="button"
+              onClick={onConnectToWalletClick}
+              className="bg-white inline-flex items-center text-sm gap-2 dark:text-velix-dark-white hover:bg-white dark:bg-velix-form-input-dark dark:hover:bg-velix-form-input-dark text-black text-[0.625rem] p-2 rounded-md font-space-grotesk"
+            >
+              {data && (
+                <span className="font-bold">
+                  {converGweiToEth(data.value)} {data?.symbol}
+                </span>
+              )}
+              <p className="bg-[#969696]/10 dark:bg-velix-light-dark px-2 dark:text-velix-dark-white text-velix-gray py-1 rounded-lg">
+                {truncateString(address, 4, 4)}
+              </p>
+            </div>
+          )}
+          <ThemeButton className="lg:hidden" />
+        </div>
       </div>
     </Section>
   );
