@@ -4,7 +4,6 @@ import Telegram from "./ui/velix/icons/Telegram";
 import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
 import XIcon from "./ui/velix/icons/XIcon";
 import { FaMedium } from "react-icons/fa6";
-import ThemeButton from "./ui/velix/ThemeButton";
 
 export default function AppFooter() {
   return (
@@ -14,7 +13,6 @@ export default function AppFooter() {
           <VelixPrimaryBlackLogo className="fill-velix-gray dark:fill-velix-dark-white w-[4.25rem] h-4" />
           <p>© {new Date().getFullYear()} All rights reserved</p>
         </div>
-        <ThemeButton />
         <ul className="flex items-center gap-3">
           <li className="bg-velix-gray dark:bg-velix-form-input-dark cursor-pointer p-2 rounded-full w-fit">
             <a href="https://twitter.com/velixprotocol" target="_blank">

@@ -58,7 +58,7 @@ export default function AppHeader() {
               </p>
             </div>
           )}
-          <ThemeButton className="lg:hidden" />
+          <ThemeButton />
         </div>
       </div>
     </Section>
