@@ -73,7 +73,7 @@ export default function Faucet() {
             <h2 className="font-bold text-xl max-lg:text-center lg:text-6xl text-white dark:text-velix-dark-white">
               Claim your faucet
             </h2>
-            <p className="text-white dark:text-velix-dark-white mt-4">
+            <p className="text-white dark:text-velix-dark-white mt-4 max-md:max-w-[15rem] max-md:text-center">
               You can only claim <b>0.5 METIS</b> every 24 hours
             </p>
             <Button
@@ -88,7 +88,7 @@ export default function Faucet() {
                 : "Claim now"}
             </Button>
           </div>
-          <FaucetImage className="max-lg:w-56 max-lg:h-56 max-lg:mt-10" />
+          <FaucetImage className="max-md:w-40 max-md:h-40 max-lg:w-56 max-lg:h-56 max-lg:mt-10" />
         </div>
       </Section>
     </>

@@ -84,9 +84,9 @@ export default function Nft() {
         </Modal>
       )}
       <Section>
-        <div className="mt-40 mb-10 bg-velix-blue dark:bg-velix-black flex justify-between items-center p-24 rounded-xl">
+        <div className="mt-40 mb-10 max-lg:mb-32 bg-velix-blue max-lg:mx-5 dark:bg-velix-black flex justify-between max-lg:flex max-lg:flex-col-reverse items-center p-24 max-lg:p-5 rounded-xl">
           <div className="font-space-grotesk">
-            <h2 className="font-bold text-4xl text-white dark:text-velix-dark-white">
+            <h2 className="font-bold  max-lg:text-2xl max-lg:mt-10 max-lg:text-center text-4xl text-white dark:text-velix-dark-white">
               Velix superstar NFT claim
             </h2>
             <p className="text-white dark:text-velix-dark-white mt-4">
@@ -118,7 +118,7 @@ export default function Nft() {
               Claim now
             </Button>
           </div>
-          <SuperNft />
+          <SuperNft className="max-lg:!w-40 max-lg:!h-40" />
         </div>
       </Section>
     </>
