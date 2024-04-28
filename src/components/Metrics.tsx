@@ -43,7 +43,7 @@ export default function Metrics() {
           <Copy className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
         description={stakers <= 1 ? "Staker" : "Stakers"}
-        value={stakers.toString()}
+        value={stakers.toLocaleString()}
       />
     </div>
   );

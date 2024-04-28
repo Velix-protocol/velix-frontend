@@ -53,7 +53,7 @@ export default function AppHeader() {
                   {converGweiToEth(data.value)} {data?.symbol}
                 </span>
               )}
-              <p className="bg-[#969696]/10 dark:bg-velix-light-dark px-2 dark:text-velix-dark-white text-velix-gray py-1 rounded-lg">
+              <p className="bg-[#969696]/10 max-md:hidden dark:bg-velix-light-dark px-2 dark:text-velix-dark-white text-velix-gray py-1 rounded-lg">
                 {truncateString(address, 4, 4)}
               </p>
             </div>

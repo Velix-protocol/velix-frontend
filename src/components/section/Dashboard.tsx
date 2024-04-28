@@ -69,7 +69,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <Section className="mt-36 md:mt-48 px-5 pb-28 min-h-screen">
+    <Section className="mt-36 md:mt-48 px-5 pb-28">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
         {velixBalances.map((balance, index) => (
           <Card

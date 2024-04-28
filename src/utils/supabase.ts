@@ -88,12 +88,12 @@ export async function updateStakerAmount(
 }
 
 export async function retreiveStakersNumber() {
-  const { data, error } = await supabase
+  const { error, count } = await supabase
     .from(STAKERS_TABLE)
-    .select("*")
-    .gt("amount", 0);
+    .select("*", { count: "exact" });
+
   if (error) return;
-  return data.length;
+  return count;
 }
 
 export async function retreiveStakerByWalletAddress(
