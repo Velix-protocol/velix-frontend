@@ -43,23 +43,13 @@ export default function Nft() {
 
   const checkForUserClaimingPermissions = useCallback(async () => {
     if (!address) return;
-    const { data: mints } = await retreiveActionsActivity(
-      "mint",
-      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
-    );
-    const { data: stakes } = await retreiveActionsActivity(
-      "stake",
-      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
-    );
+    const { data: mints } = await retreiveActionsActivity("mint", address);
+    const { data: stakes } = await retreiveActionsActivity("stake", address);
     const { data: unstakes } = await retreiveActionsActivity(
       "unstake",
-      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
+      address
     );
-    const { data: claims } = await retreiveClaims(
-      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
-    );
-
-    console.log({ mints, stakes, unstakes });
+    const { data: claims } = await retreiveClaims(address);
 
     setHasMinted(mints ? mints?.length >= 1 : false);
     setHasStaked(stakes ? stakes?.length >= 1 : false);
