@@ -43,13 +43,23 @@ export default function Nft() {
 
   const checkForUserClaimingPermissions = useCallback(async () => {
     if (!address) return;
-    const { data: mints } = await retreiveActionsActivity("mint", address);
-    const { data: stakes } = await retreiveActionsActivity("stake", address);
+    const { data: mints } = await retreiveActionsActivity(
+      "mint",
+      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
+    );
+    const { data: stakes } = await retreiveActionsActivity(
+      "stake",
+      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
+    );
     const { data: unstakes } = await retreiveActionsActivity(
       "unstake",
-      address
+      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
     );
-    const { data: claims } = await retreiveClaims(address);
+    const { data: claims } = await retreiveClaims(
+      "0xc2aD1bfD19693e292db2AA4337494B6cc876d83A"
+    );
+
+    console.log({ mints, stakes, unstakes });
 
     setHasMinted(mints ? mints?.length >= 1 : false);
     setHasStaked(stakes ? stakes?.length >= 1 : false);
@@ -112,7 +122,13 @@ export default function Nft() {
             </div>
             <Button
               onClick={mintNft}
-              disabled={hasClaimed === null || hasClaimed}
+              disabled={
+                hasClaimed === null ||
+                hasClaimed ||
+                !hasMinted ||
+                !hasStaked ||
+                !hasUnstaked
+              }
               className="bg-velix-yellow hover:bg-velix-yellow mt-10 px-20"
             >
               Claim now
