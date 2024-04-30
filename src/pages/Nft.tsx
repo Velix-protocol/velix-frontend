@@ -11,6 +11,8 @@ import Modal from "@/components/ui/velix/Modal";
 import SuccessModal from "@/components/SuccessModal";
 import { useMintNft } from "@/hooks/use-contract";
 import { EXPLORER_TX_URL } from "@/utils/constant";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 function Requirement({
   title,
@@ -20,16 +22,20 @@ function Requirement({
   isFullfilled: boolean;
 }) {
   return (
-    <p className="flex items-center gap-2">
-      <span
-        className={`dark:text-velix-primary rounded-full p-0.5 ${
-          isFullfilled ? "bg-green-500" : "bg-white dark:bg-velix-dark-white/25"
-        }`}
-      >
-        <Check className={cn("w-4 h-4")} />
-      </span>
-      <p className="text-white">{title}</p>
-    </p>
+    <>
+      <p className="flex items-center gap-2">
+        <span
+          className={`dark:text-velix-primary rounded-full p-0.5 ${
+            isFullfilled
+              ? "bg-green-500"
+              : "bg-white dark:bg-velix-dark-white/25"
+          }`}
+        >
+          <Check className={cn("w-4 h-4")} />
+        </span>
+        <p className="text-white">{title}</p>
+      </p>
+    </>
   );
 }
 
@@ -40,6 +46,7 @@ export default function Nft() {
   const [hasClaimed, setHasClaimed] = useState<boolean | null>(null);
   const { address } = useAccount();
   const { isPending, isSuccess, reset, txhash, mintNft } = useMintNft();
+  const { width, height } = useWindowSize();
 
   const checkForUserClaimingPermissions = useCallback(async () => {
     if (!address) return;
@@ -49,6 +56,7 @@ export default function Nft() {
       "unstake",
       address
     );
+
     const { data: claims } = await retreiveClaims(address);
 
     setHasMinted(mints ? mints?.length >= 1 : false);
@@ -83,6 +91,7 @@ export default function Nft() {
           />
         </Modal>
       )}
+      {isSuccess && <Confetti width={width} height={height} />}
       <Section>
         <div className="mt-40 mb-10 max-lg:mb-32 bg-velix-blue max-lg:mx-5 dark:bg-velix-black flex justify-between max-lg:flex max-lg:flex-col-reverse items-center p-24 max-lg:p-5 rounded-xl">
           <div className="font-space-grotesk">
