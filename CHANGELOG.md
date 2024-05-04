@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.22.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.21.0...v1.22.0) (2024-05-04)
+
+
+### Features
+
+* add confetti ([9957a15](https://github.com/Velix-protocol/velix-frontend/commit/9957a154178379792c13bc439522c119165cff78))
+
 ## [1.21.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.20.0...v1.21.0) (2024-04-28)
 
 
