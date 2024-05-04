@@ -1,6 +1,7 @@
 import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 import { cn } from "@/utils/utils";
 import { ReactNode } from "react";
+import HermesProtocolIcon from "@/components/svg/hermes-protocol.svg?react";
 
 function DefiIconCard({
   children,
@@ -63,8 +64,8 @@ export default function DefiIntegration() {
             <DefiIconCard imageContainerClassName="w-14 h-14">
               <img src="/svg/herculeProtocol.svg" alt="hercule protocol" />
             </DefiIconCard>
-            <DefiIconCard className="bg-velix-blue/30">
-              <img src="/svg/Hermes.svg" alt="chocolateTree" />
+            <DefiIconCard imageContainerClassName="w-14 h-14">
+              <HermesProtocolIcon />
             </DefiIconCard>
           </div>
           <div className="row-span-3 flex flex-col gap-10 justify-center items-center">
