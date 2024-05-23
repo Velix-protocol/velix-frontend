@@ -1,36 +1,8 @@
 import { useAccount } from "wagmi";
 import Balance from "../Balance";
-import {
-  ChangeEvent,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState
-} from "react";
+import StakingForm from "../StakingForm";
+import { ChangeEvent, ReactNode } from "react";
 import { Role } from "@/types";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "@/context/theme-provider";
-import { Input } from "../ui/input";
-import MetisIcon from "../ui/velix/icons/MetisIcon";
-import SwapIcon from "../ui/velix/icons/SwapIcon";
-import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
-import SveMETIS from "../ui/velix/icons/SveMETIS";
-import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
-import classNames from "classnames";
-import { useGetConvertToShareValue } from "@/hooks/use-contract";
-import { formatEther } from "ethers";
-// import debounce from "debounce-promise";
-
-type StakeLayoutProps = {
-  children: ReactNode;
-  showSwapIcon?: boolean;
-  onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  value: string;
-  role: Role;
-  error: string;
-  onSetMaxValue: () => void;
-  withConvertion?: boolean;
-};
 
 const StakeLayout = ({
   children,
@@ -39,9 +11,16 @@ const StakeLayout = ({
   value,
   role,
   error,
-  onSetMaxValue,
-  withConvertion = true
-}: StakeLayoutProps) => {
+  onSetMaxValue
+}: {
+  children: ReactNode;
+  showSwapIcon?: boolean;
+  onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  role: Role;
+  error: string;
+  onSetMaxValue: () => void;
+}) => {
   const { isConnected } = useAccount();
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -116,6 +95,7 @@ const StakeLayout = ({
 
   return (
     <div
+      className={`mt-10 w-full lg:mt-20 ${
       className={`mt-10 w-full lg:mt-20 ${
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
