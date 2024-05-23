@@ -8,6 +8,7 @@ import SveMETIS from "./ui/velix/icons/SveMETIS";
 import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import classNames from "classnames";
 import { useTheme } from "@/context/theme-provider";
+import { Role } from "@/types";
 
 export default function StakingForm({
   showSwapIcon = true,
@@ -20,7 +21,7 @@ export default function StakingForm({
   showSwapIcon?: boolean;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  role: "mint" | "stake" | "unstake";
+  role: Role;
   error: string;
   onSetMaxValue: () => void;
 }) {

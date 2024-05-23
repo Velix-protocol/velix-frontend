@@ -1,6 +1,7 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { Button } from "./ui/button";
+import { Role } from "@/types";
 
 export default function StakingFormButtom({
   role,
@@ -10,7 +11,7 @@ export default function StakingFormButtom({
   disabled,
   isLoading
 }: {
-  role: "stake" | "mint" | "unstake";
+  role: Role;
   isLoading: boolean;
   disabled?: boolean;
   onMint?: () => void;
@@ -40,9 +41,18 @@ export default function StakingFormButtom({
 
   const renderStakeOperationButtonTitle = () => {
     if (!isConnected) return "Connect wallet";
-    if (role === "stake") return "Stake now";
-    if (role === "unstake") return "Unstake now";
-    if (role === "mint") return "Mint now";
+    switch (role) {
+      case "stake":
+        return "Stake now";
+      case "unstake":
+        return "Unstake now";
+      case "mint":
+        return "Mint now";
+      case "redeem":
+        return "Redeem";
+      case "swap":
+        return "Swap";
+    }
   };
 
   const renderStakeOperationButtonProgressTitle = () => {
@@ -53,6 +63,10 @@ export default function StakingFormButtom({
         return "Unstaking...";
       case "mint":
         return "Minting...";
+      case "redeem":
+        return "Redeeming...";
+      case "swap":
+        return "Swaping...";
     }
   };
 

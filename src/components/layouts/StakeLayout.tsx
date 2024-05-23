@@ -2,6 +2,7 @@ import { useAccount } from "wagmi";
 import Balance from "../Balance";
 import StakingForm from "../StakingForm";
 import { ChangeEvent, ReactNode } from "react";
+import { Role } from "@/types";
 
 const StakeLayout = ({
   children,
@@ -16,7 +17,7 @@ const StakeLayout = ({
   showSwapIcon?: boolean;
   onFromValueChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
-  role: "mint" | "stake" | "unstake";
+  role: Role;
   error: string;
   onSetMaxValue: () => void;
 }) => {
@@ -24,7 +25,7 @@ const StakeLayout = ({
 
   return (
     <div
-      className={`mt-10 lg:mt-20 ${
+      className={`mt-10 w-full lg:mt-20 ${
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
     >
