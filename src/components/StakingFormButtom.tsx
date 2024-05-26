@@ -54,6 +54,10 @@ export default function StakingFormButtom({
         return "Redeem";
       case "swap":
         return "Swap";
+      case "reward":
+        return "Withdraw rewards";
+      case "restakeReward":
+        return "Stake rewards";
     }
   };
 
@@ -69,6 +73,10 @@ export default function StakingFormButtom({
         return "Redeeming...";
       case "swap":
         return "Swaping...";
+      case "reward":
+        return "Withdrawing...";
+      case "restakeReward":
+        return "Staking reward...";
     }
   };
 
