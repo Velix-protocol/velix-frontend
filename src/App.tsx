@@ -11,6 +11,7 @@ import ThemeProvider from "./context/theme-provider";
 import Faucet from "./views/Faucet";
 import Nft from "./views/Nft";
 import Redeem from "./views/Redeem";
+import Reward from "./views/Reward";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="redeem" element={<Redeem />} />
+            <Route path="reward" element={<Reward />} />
           </Route>
         </Routes>
       </BrowserRouter>
