@@ -21,7 +21,6 @@ import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { saveClaimNftAction, savedAction } from "@/utils/supabase";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
-import { useMetricsStore } from "@/store/velixMetrics";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -43,21 +42,6 @@ const useContractHookState = () => {
   };
 };
 
-export type ContractName = keyof typeof velixContracts;
-
-export const useContract = (contactName: ContractName) => {
-  const { address } = useAccount();
-  if (!address) return;
-  const contractData = velixContracts[contactName];
-  if (!contractData.abi || !contractData.address) return;
-
-  return new Web3Service().contract(
-    contractData.address,
-    contractData.abi,
-    address
-  );
-};
-
 export const useApproveMinting = () => {
   const {
     address,
@@ -70,7 +54,6 @@ export const useApproveMinting = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("METIS_TOKEN");
 
   const approveMinting = useCallback(
     async (amount: string) => {
@@ -135,7 +118,6 @@ export const useMint = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VEMETIS_MINTER");
 
   const mint = useCallback(
     async (amount: string) => {
@@ -201,7 +183,6 @@ export const useApproveStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VEMETIS");
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
@@ -263,7 +244,6 @@ export const useStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -327,7 +307,6 @@ export const useApproveUnstaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
@@ -390,7 +369,6 @@ export const useUnstake = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
 
   const unstake = useCallback(
     async (amount: string) => {
@@ -450,7 +428,6 @@ export const useMintNft = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VELIX_NFT");
 
   const addEligibleAddress = useCallback(async () => {
     const contract = await contractInstance;
