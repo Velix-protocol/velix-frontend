@@ -24,18 +24,38 @@ import Web3Service from "@/services/web3Service";
 import { saveClaimNftAction, savedAction } from "@/utils/supabase";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 
-/**
- * useApproveMinting approves the minting proess
- * @date 3/5/2024 - 12:40:00 AM
- *
- * @returns {*}
- */
-export const useApproveMinting = () => {
+const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const { address } = useAccount();
+
+  return {
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess,
+    address
+  };
+};
+
+export const useApproveMinting = () => {
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const approveMinting = useCallback(
     async (amount: string) => {
@@ -92,11 +112,17 @@ export const useApproveMinting = () => {
  * @returns {*}
  */
 export const useMint = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const mint = useCallback(
     async (amount: string) => {
@@ -154,11 +180,17 @@ export const useMint = () => {
  * @returns {*}
  */
 export const useApproveStaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
@@ -212,11 +244,17 @@ export const useApproveStaking = () => {
  *  staking
  */
 export const useStaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -272,11 +310,17 @@ export const useStaking = () => {
  * @returns
  */
 export const useApproveUnstaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
@@ -331,11 +375,17 @@ export const useApproveUnstaking = () => {
  * @returns
  */
 export const useUnstake = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const unstake = useCallback(
     async (amount: string) => {
@@ -387,11 +437,17 @@ export const useUnstake = () => {
 };
 
 export const useMintNft = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
 
   const addEligibleAddress = useCallback(async () => {
     if (!address) return;

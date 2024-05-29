@@ -8,5 +8,7 @@
   "jsxBracketSameLine": false,
   "quoteProps": "as-needed",
   "jsxSingleQuote": false,
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "tabWidth": 2,
+  "printWidth": 80
 }
