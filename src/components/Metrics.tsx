@@ -2,23 +2,26 @@ import PlusMinusTable from "@/components/ui/velix/icons/PlusMinusTable";
 import ChatIcon from "@/components/ui/velix/icons/ChatIcon";
 import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "./ui/velix/cards/MetricsCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStakersStore } from "@/store/stakers";
 import { retreiveStakersNumber } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
-import { useMetricsStore } from "@/store/velixMetrics";
+import { formatEther } from "ethers";
 
 export default function Metrics() {
   const { isConnected } = useAccount();
   const { setStakers, stakers } = useStakersStore();
-  const { totalValueLocked } = useMetricsStore();
-  useGetTotalVeMetisAssets();
+  const totalVeMetisAssets = useGetTotalVeMetisAssets();
+  const [veMetisTotalValueLoad, setVeMetisTotalValue] = useState("--");
 
   useEffect(() => {
     (async () => {
       const stakersNumber = await retreiveStakersNumber();
       setStakers(stakersNumber ?? 0);
+      setVeMetisTotalValue(
+        Number(formatEther(await totalVeMetisAssets())).toFixed(4)
+      );
     })();
   }, [setStakers]);
 
@@ -47,7 +50,7 @@ export default function Metrics() {
           <ChatIcon className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
         description="veMetis TVL"
-        value={totalValueLocked}
+        value={veMetisTotalValueLoad}
       />
       <MetricsCard
         icon={
