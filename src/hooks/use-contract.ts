@@ -21,6 +21,7 @@ import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { saveClaimNftAction, savedAction } from "@/utils/supabase";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
+import { useMetricsStore } from "@/store/velixMetrics";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -530,19 +531,51 @@ export const useMintNft = () => {
 export const useGetTotalVeMetisAssets = () => {
   const { address } = useAccount();
   const contractInstance = useContract("SVEMETIS");
+  const { setTotalValueLocked } = useMetricsStore();
 
-  return useCallback(async () => {
+  const getTotalLocked = useCallback(async () => {
     const contract = await contractInstance;
     if (!contract) return;
     if (!address) return;
 
     try {
-      return await contract.totalAssets();
+      const totalValueLocked = await contract.totalAssets();
+      setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
     } catch (err) {
       console.log(err);
       throw err;
     }
   }, [address, contractInstance]);
+
+  useEffect(() => {
+    getTotalLocked();
+  }, [getTotalLocked]);
+};
+
+/**
+ * This hook returns the amount of shares that would be exchanged by the vault for the amount of assets provided.
+ * @returns
+ */
+export const useGetConvertToShareValue = () => {
+  const { address } = useAccount();
+  const contractInstance = useContract("SVEMETIS");
+
+  return useCallback(
+    async (assets: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
+      if (!address) return;
+
+      try {
+        const shareValue = await contract.convertToShares(parseUnits(assets));
+        return shareValue;
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+    [address, contractInstance]
+  );
 };
 
 export const useMetisBalance = () => {
