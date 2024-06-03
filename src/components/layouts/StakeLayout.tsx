@@ -1,6 +1,12 @@
 import { useAccount } from "wagmi";
 import Balance from "../Balance";
-import { ChangeEvent, ReactNode } from "react";
+import {
+  ChangeEvent,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState
+} from "react";
 import { Role } from "@/types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/context/theme-provider";
@@ -11,6 +17,9 @@ import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import SveMETIS from "../ui/velix/icons/SveMETIS";
 import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import classNames from "classnames";
+import { useGetConvertToShareValue } from "@/hooks/use-contract";
+import { formatEther } from "ethers";
+// import debounce from "debounce-promise";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -34,10 +43,11 @@ const StakeLayout = ({
   withConvertion = true
 }: StakeLayoutProps) => {
   const { isConnected } = useAccount();
-
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { theme } = useTheme();
+  const [convertedValue, setConvertedValue] = useState<number | string>(0);
+  const getConvertToShareValue = useGetConvertToShareValue();
 
   const renderFromTitles = () => {
     switch (role) {
@@ -65,19 +75,24 @@ const StakeLayout = ({
     }
   };
 
-  const renderConvertedValue = () => {
-    if (!value) return "0.0";
-    switch (role) {
-      case "mint":
-        return Number(value) * 1;
-      case "stake":
-        return Number(value) * 1;
-      case "unstake":
-        return Number(value) * 1;
-      default:
-        return 0;
-    }
-  };
+  const renderConvertedValue: () => Promise<number | string> =
+    useCallback(async () => {
+      if (!value) return "0.0";
+      switch (role) {
+        case "mint":
+          return Number(value) * 1;
+        case "stake":
+          return Number(formatEther(await getConvertToShareValue(value))) * 1;
+        case "unstake":
+          return Number(value) * 1;
+        default:
+          return 0;
+      }
+    }, [getConvertToShareValue, role, value]);
+
+  useEffect(() => {
+    (async () => setConvertedValue(await renderConvertedValue()))();
+  }, [renderConvertedValue]);
 
   const icons = {
     sveMETIS:
@@ -163,7 +178,7 @@ const StakeLayout = ({
               </p>
               <div>
                 <p className="text-velix-primary dark:text-white font-bold text-base ml-2 mr-3">
-                  {renderConvertedValue()} {renderToTitles()}
+                  {convertedValue} {renderToTitles()}
                 </p>
               </div>
             </div>
