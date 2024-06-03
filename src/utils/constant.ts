@@ -30,9 +30,6 @@ export const FAUCET_CONTRACT_ADDRESS =
 export const VELIX_NFT_CONTRACT_ADDRESS =
   "0xfe2bbF579004E10926c925001068CA3E6FCE90DC" as const;
 
-export const CONFIRMATION_BLOCKS_NUMBER = 1;
-export const CONFIRMATION_BLOCKS_NUMBER_APPROVE = 1;
-
 export const EXPLORER_TX_URL = "https://sepolia-explorer.metisdevops.link/tx/";
 export const EXPLORER_ADDRESS_URL =
   "https://sepolia-explorer.metisdevops.link/address/";
