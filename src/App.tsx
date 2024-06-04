@@ -1,15 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import MintPage from "./pages/Mint";
-import UnstakePage from "./pages/Unskate";
-import StakePage from "./pages/Staking";
-import DashboardPage from "./pages/Dashboard";
+import Home from "./views/Home";
+import MintPage from "./views/Mint";
+import UnstakePage from "./views/Unskate";
+import StakePage from "./views/Staking";
+import DashboardPage from "./views/Dashboard";
 import Page from "./components/layouts/Page";
 import { Toaster } from "@/components/ui/sonner";
-import Notfound from "./pages/Notfound";
+import Notfound from "./views/Notfound";
 import ThemeProvider from "./context/theme-provider";
-import Faucet from "./pages/Faucet";
-import Nft from "./pages/Nft";
+import Faucet from "./views/Faucet";
+import Nft from "./views/Nft";
+import Redeem from "./views/Redeem";
+import Reward from "./views/Reward";
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
             <Route path="unstake" element={<UnstakePage />} />
             <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="redeem" element={<Redeem />} />
+            <Route path="reward" element={<Reward />} />
           </Route>
         </Routes>
       </BrowserRouter>

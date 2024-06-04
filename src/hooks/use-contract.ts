@@ -1,16 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAccount, useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
 import {
-  METIS_TOKEN_CONTRACT_ADDRESS,
   SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
-  VELIX_SUPER_NFT_URL
+  VELIX_SUPER_NFT_URL,
+  velixContracts
 } from "@/utils/constant";
-import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
 import {
@@ -23,30 +21,64 @@ import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { saveClaimNftAction, savedAction } from "@/utils/supabase";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
+import { useMetricsStore } from "@/store/velixMetrics";
 
-/**
- * useApproveMinting approves the minting proess
- * @date 3/5/2024 - 12:40:00 AM
- *
- * @returns {*}
- */
-export const useApproveMinting = () => {
+const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const { address } = useAccount();
 
+  return {
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess,
+    address
+  };
+};
+
+export type ContractName = keyof typeof velixContracts;
+
+export const useContract = (contactName: ContractName) => {
+  const { address } = useAccount();
+  if (!address) return;
+  const contractData = velixContracts[contactName];
+  if (!contractData.abi || !contractData.address) return;
+
+  return new Web3Service().contract(
+    contractData.address,
+    contractData.abi,
+    address
+  );
+};
+
+export const useApproveMinting = () => {
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("METIS_TOKEN");
+
   const approveMinting = useCallback(
     async (amount: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          METIS_TOKEN_CONTRACT_ADDRESS,
-          METIS_TOKEN_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.approve(
           VEMETIS_MINTER_CONTRACT_ADDRESS,
           parseUnits(amount)
@@ -92,22 +124,26 @@ export const useApproveMinting = () => {
  * @returns {*}
  */
 export const useMint = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("VEMETIS_MINTER");
 
   const mint = useCallback(
     async (amount: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          VEMETIS_MINTER_CONTRACT_ADDRESS,
-          VEMETIS_MINTER_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.mint(address, parseUnits(amount));
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         await savedAction("mint", {
@@ -154,22 +190,26 @@ export const useMint = () => {
  * @returns {*}
  */
 export const useApproveStaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("VEMETIS");
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          VEMETIS_CONTRACT_ADDRESS,
-          VEMETIS_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.approve(
           SVEMETIS_CONTRACT_ADDRESS,
           parseUnits(amountToStake)
@@ -212,22 +252,26 @@ export const useApproveStaking = () => {
  *  staking
  */
 export const useStaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("SVEMETIS");
 
   const stake = useCallback(
     async (amountToStake: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          SVEMETIS_CONTRACT_ADDRESS,
-          SVMETIS_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.deposit(parseUnits(amountToStake), address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         await savedAction("stake", {
@@ -247,7 +291,7 @@ export const useStaking = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance]
   );
 
   const reset = useCallback(() => {
@@ -272,22 +316,26 @@ export const useStaking = () => {
  * @returns
  */
 export const useApproveUnstaking = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("SVEMETIS");
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          SVEMETIS_CONTRACT_ADDRESS,
-          SVMETIS_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.approve(
           SVEMETIS_CONTRACT_ADDRESS,
           parseUnits(amount)
@@ -305,7 +353,7 @@ export const useApproveUnstaking = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance]
   );
 
   const reset = useCallback(() => {
@@ -331,22 +379,26 @@ export const useApproveUnstaking = () => {
  * @returns
  */
 export const useUnstake = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("SVEMETIS");
 
   const unstake = useCallback(
     async (amount: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
-        const contract = await new Web3Service().contract(
-          SVEMETIS_CONTRACT_ADDRESS,
-          SVMETIS_CONTRACT_ABI,
-          address
-        );
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         await savedAction("unstake", {
@@ -366,7 +418,7 @@ export const useUnstake = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance]
   );
 
   const reset = useCallback(() => {
@@ -387,20 +439,24 @@ export const useUnstake = () => {
 };
 
 export const useMintNft = () => {
-  const [data, setData] = useState<any>(null);
-  const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("VELIX_NFT");
 
   const addEligibleAddress = useCallback(async () => {
+    const contract = await contractInstance;
+    if (!contract) return;
     if (!address) return;
     try {
-      const contract = await new Web3Service().contract(
-        VELIX_NFT_CONTRACT_ADDRESS,
-        VELIX_NFT_CONTRACT_ABI,
-        address
-      );
       const tx = await contract.addEligibleAddress(address);
       await tx.wait();
     } catch (err) {
@@ -466,6 +522,60 @@ export const useMintNft = () => {
     error,
     txhash: data
   };
+};
+
+/**
+ * This hook returns the total amount of underlying (veMetis) assets held by the vault.
+ *
+ * */
+export const useGetTotalVeMetisAssets = () => {
+  const { address } = useAccount();
+  const contractInstance = useContract("SVEMETIS");
+  const { setTotalValueLocked } = useMetricsStore();
+
+  const getTotalLocked = useCallback(async () => {
+    const contract = await contractInstance;
+    if (!contract) return;
+    if (!address) return;
+
+    try {
+      const totalValueLocked = await contract.totalAssets();
+      setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }, [address, contractInstance]);
+
+  useEffect(() => {
+    getTotalLocked();
+  }, [getTotalLocked]);
+};
+
+/**
+ * This hook returns the amount of shares that would be exchanged by the vault for the amount of assets provided.
+ * @returns
+ */
+export const useGetConvertToShareValue = () => {
+  const { address } = useAccount();
+  const contractInstance = useContract("SVEMETIS");
+
+  return useCallback(
+    async (assets: string) => {
+      const contract = await contractInstance;
+      if (!contract) return;
+      if (!address) return;
+
+      try {
+        const shareValue = await contract.convertToShares(parseUnits(assets));
+        return shareValue;
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+    [address, contractInstance]
+  );
 };
 
 export const useMetisBalance = () => {

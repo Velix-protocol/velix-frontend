@@ -6,10 +6,14 @@ import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
 import { retreiveStakersNumber } from "@/utils/supabase";
 import { useAccount } from "wagmi";
+import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
+import { useMetricsStore } from "@/store/velixMetrics";
 
 export default function Metrics() {
   const { isConnected } = useAccount();
   const { setStakers, stakers } = useStakersStore();
+  const { totalValueLocked } = useMetricsStore();
+  useGetTotalVeMetisAssets();
 
   useEffect(() => {
     (async () => {
@@ -29,7 +33,7 @@ export default function Metrics() {
           <PlusMinusTable className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
         description="Annual percentage rate"
-        value="--"
+        value="20%"
       />
       <MetricsCard
         icon={
@@ -37,6 +41,13 @@ export default function Metrics() {
         }
         description="veMETIS market cap"
         value="--"
+      />
+      <MetricsCard
+        icon={
+          <ChatIcon className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+        }
+        description="veMetis TVL"
+        value={totalValueLocked}
       />
       <MetricsCard
         icon={

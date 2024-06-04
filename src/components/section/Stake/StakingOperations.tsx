@@ -73,12 +73,13 @@ export default function StakingOperations() {
     window.open(`${EXPLORER_TX_URL}${txhash}`);
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToStake(
+  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const value =
       e.target.value.length > MAX_INPUT_LENGTH
         ? e.target.value.slice(0, MAX_INPUT_LENGTH)
-        : e.target.value
-    );
+        : e.target.value;
+
+    setAmountToStake(value);
   };
 
   const onOpenProtocolDisclaimer = () =>

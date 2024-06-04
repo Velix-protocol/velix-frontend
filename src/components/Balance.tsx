@@ -1,12 +1,13 @@
 import { useMetisBalance } from "@/hooks/use-contract";
 import { useBalanceStore } from "@/store/balanceState";
+import { Role } from "@/types";
 
 export default function Balance({
   isConnected,
   role
 }: {
   isConnected: boolean;
-  role: "mint" | "stake" | "unstake";
+  role: Role;
 }) {
   useMetisBalance();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
