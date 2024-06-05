@@ -285,7 +285,7 @@ export default function StakingOperations() {
             title="Exchange Rate"
             value="1 veMETIS = 1 sveMETIS"
           />
-          <StakingDetails title="Average return" value={"--"} />
+          {/* <StakingDetails title="Average return" value={"--"} /> */}
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}

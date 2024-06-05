@@ -240,7 +240,7 @@ export default function Mint() {
                     title="Exchange Rate"
                     value="1 METIS = 1 veMETIS"
                   />
-                  <StakingDetails title="Average return" value={"--"} />
+                  {/* <StakingDetails title="Average return" value={"--"} /> */}
                 </div>
                 <StakingFormButtom
                   isLoading={isPending || mintPending}
