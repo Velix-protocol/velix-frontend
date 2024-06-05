@@ -29,8 +29,6 @@ function App() {
               }
             />
             <Route path="mint" element={<MintPage />} />
-            <Route path="nft" element={<Nft />} />
-            <Route path="faucet" element={<Faucet />} />
             <Route path="unstake" element={<UnstakePage />} />
             <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />
