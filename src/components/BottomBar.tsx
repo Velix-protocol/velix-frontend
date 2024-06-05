@@ -62,12 +62,12 @@ function NavigationMenuCard({
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
     ),
-    faucet: (
+    redeem: (
       <FaucetIcon
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
     ),
-    nft: (
+    reward: (
       <ImageIcon
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
@@ -115,15 +115,15 @@ export default function BottomBar({
         isNotFound={isNotFound}
       />
       <NavigationMenuCard
-        path="faucet"
-        label="Faucet"
+        path="redeem"
+        label="Redeem"
         isNotFound={isNotFound}
         className=""
       />
       <NavigationMenuCard
         className="max-lg:hidden"
-        path="nft"
-        label="Nft"
+        path="reward"
+        label="Reward"
         isNotFound={isNotFound}
       />
       <NavigationMenuCard
