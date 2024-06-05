@@ -64,7 +64,7 @@ export default function Dashboard() {
     },
     {
       name: "APR",
-      value: "--"
+      value: "20%"
     }
   ];
 
