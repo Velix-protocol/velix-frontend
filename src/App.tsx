@@ -8,8 +8,6 @@ import Page from "./components/layouts/Page";
 import { Toaster } from "@/components/ui/sonner";
 import Notfound from "./views/Notfound";
 import ThemeProvider from "./context/theme-provider";
-import Faucet from "./views/Faucet";
-import Nft from "./views/Nft";
 import Redeem from "./views/Redeem";
 import Reward from "./views/Reward";
 
