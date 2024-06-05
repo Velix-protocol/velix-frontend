@@ -12,18 +12,19 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
-import { Action, retreiveActionsActivity } from "@/utils/supabase";
+import { Action } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
+import { velixApi } from "@/services/http";
 
 type UnstakeActivity = {
   id: string;
-  wallet_address: string;
-  tx_hash: string;
+  walletAddress: string;
+  txHash: string;
   amount: string;
-  created_at: string;
+  createdAt: string;
 };
 
 export default function Dashboard() {
@@ -41,7 +42,11 @@ export default function Dashboard() {
       if (!address) return;
       if (actionToRetreive === "reward") return;
       setLoading(true);
-      const { data } = await retreiveActionsActivity(actionToRetreive, address);
+      const { data } = await velixApi.retreiveActionsActivity(
+        actionToRetreive,
+        address
+      );
+      console.log({ data });
       setUnstakeActivity(data as unknown as UnstakeActivity[]);
       setLoading(false);
     }
@@ -177,19 +182,17 @@ export default function Dashboard() {
               return (
                 <tr
                   onClick={() =>
-                    window.open(`${EXPLORER_TX_URL}${data.tx_hash}`)
+                    window.open(`${EXPLORER_TX_URL}${data.txHash}`)
                   }
                   key={data.amount}
                   className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
                 >
                   <TableCell>
-                    {dayjs(data.created_at.split("T")[0]).format(
-                      "MMMM D, YYYY"
-                    )}
+                    {dayjs(data.createdAt.split("T")[0]).format("MMMM D, YYYY")}
                   </TableCell>
                   <TableCell>{data.amount}</TableCell>
                   <TableCell className="truncate underline cursor-pointer">
-                    {data.tx_hash}
+                    {data.txHash}
                   </TableCell>
                 </tr>
               );

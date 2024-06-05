@@ -19,8 +19,8 @@ import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "../../WaitingForApprovalModal";
 import SuccessModal from "@/components/SuccessModal";
-import { recordStaker } from "@/utils/supabase";
 import { useStakersStore } from "@/store/stakers";
+import { velixApi } from "@/services/http";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -99,11 +99,12 @@ export default function StakingOperations() {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
     resetStakeState();
     await stake(amountToStake);
-    const stakers = await recordStaker(
-      walletAddress as `0x${string}`,
-      Number(sveMETISBalance) + Number(amountToStake)
-    );
-    setStakers(stakers ?? 0);
+    await velixApi.saveStaker({
+      walletAddress: walletAddress as `0x${string}`,
+      amount: Number(sveMETISBalance) + Number(amountToStake)
+    });
+    const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
+    setStakers(stakersNumber ?? 0);
   };
 
   const renderModalTitle = () => {

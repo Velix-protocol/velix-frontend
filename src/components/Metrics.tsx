@@ -4,10 +4,10 @@ import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "./ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
-import { retreiveStakersNumber } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
 import { useMetricsStore } from "@/store/velixMetrics";
+import { velixApi } from "@/services/http";
 
 export default function Metrics() {
   const { isConnected } = useAccount();
@@ -17,7 +17,7 @@ export default function Metrics() {
 
   useEffect(() => {
     (async () => {
-      const stakersNumber = await retreiveStakersNumber();
+      const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
       setStakers(stakersNumber ?? 0);
     })();
   }, [setStakers]);

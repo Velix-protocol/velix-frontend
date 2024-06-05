@@ -21,9 +21,11 @@ import {
 } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
-import { saveClaimNftAction, savedAction } from "@/utils/supabase";
+import { saveClaimNftAction } from "@/utils/supabase";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 import { useMetricsStore } from "@/store/velixMetrics";
+import { velixApi } from "@/services/http";
+import { AxiosError } from "axios";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -152,10 +154,10 @@ export const useMint = () => {
         setIsPending(true);
         const tx = await contract.mint(address, parseUnits(amount));
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await savedAction("mint", {
-          amount,
-          wallet_address: address,
-          tx_hash: txhash.hash
+        await velixApi.saveAction("mint", {
+          amount: Number(amount),
+          walletAddress: address,
+          txHash: txhash.hash
         });
         setData(txhash.hash);
         setError(null);
@@ -164,7 +166,9 @@ export const useMint = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        setError({
+          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+        });
       } finally {
         setIsPending(false);
       }
@@ -284,10 +288,10 @@ export const useStaking = () => {
         setIsPending(true);
         const tx = await contract.deposit(parseUnits(amountToStake), address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await savedAction("stake", {
-          amount: amountToStake,
-          wallet_address: address,
-          tx_hash: txhash.hash
+        await velixApi.saveAction("stake", {
+          amount: Number(amountToStake),
+          walletAddress: address,
+          txHash: txhash.hash
         });
         setData(txhash.hash);
         setError(null);
@@ -296,7 +300,9 @@ export const useStaking = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        setError({
+          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+        });
       } finally {
         setIsPending(false);
       }
@@ -417,10 +423,10 @@ export const useUnstake = () => {
         setIsPending(true);
         const tx = await contract.redeem(parseUnits(amount), address, address);
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await savedAction("unstake", {
-          amount,
-          wallet_address: address,
-          tx_hash: txhash.hash
+        await velixApi.saveAction("unstake", {
+          amount: Number(amount),
+          walletAddress: address,
+          txHash: txhash.hash
         });
         setData(txhash.hash);
         setError(null);
@@ -429,7 +435,9 @@ export const useUnstake = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        setError({
+          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+        });
       } finally {
         setIsPending(false);
       }
