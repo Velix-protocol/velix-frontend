@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
@@ -10,9 +9,9 @@ interface CardProps {
 
 const AuditCard: React.FC<CardProps> = ({ title, iconSrc, link }) => {
   return (
-    <div className="w-full flex flex-col justify-between h-[360px] rounded overflow-hidden dark:border dark:bg-black dark:border-white/20 bg-velix-slate-blue m-4">
+    <div className="w-full flex font-space-grotesk flex-col justify-between h-[360px] rounded overflow-hidden dark:border dark:bg-black dark:border-white/20 bg-velix-slate-blue m-4">
       <div className="px-6 py-10 flex justify-center items-center h-4/6`">
-        <Image
+        <img
           src={iconSrc}
           alt={title}
           width={iconSrc === "./book.svg" ? 220 : 140}
