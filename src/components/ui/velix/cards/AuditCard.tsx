@@ -8,7 +8,7 @@ interface CardProps {
   link: string;
 }
 
-const AuditCard: React.FC<CardProps> = ({ title, iconSrc }) => {
+const AuditCard: React.FC<CardProps> = ({ title, iconSrc, link }) => {
   return (
     <div className="w-full flex flex-col justify-between h-[360px] rounded overflow-hidden dark:border dark:bg-black dark:border-white/20 bg-velix-slate-blue m-4">
       <div className="px-6 py-10 flex justify-center items-center h-4/6`">
@@ -21,10 +21,11 @@ const AuditCard: React.FC<CardProps> = ({ title, iconSrc }) => {
       </div>
       <div className="flex justify-between px-6 py-4 bg-velix-primary text-white text-center rounded-b-lg ">
         <span className="">{title}</span>
-        <FaLongArrowAltRight className="hover:cursor-pointer"/>
+        <a href={link} target="_blank">
+          <FaLongArrowAltRight className="hover:cursor-pointer" />
+        </a>
       </div>
     </div>
   );
 };
-
 export default AuditCard;
