@@ -5,7 +5,7 @@ import VelixEclips from "../ui/velix/icons/VelixEclips";
 
 export default function Community() {
   return (
-    <Section className="mt-6 px-5">
+    <Section className="mt-20 px-5">
       <div className="relative">
         <div className="font-space-grotesk hidden lg:block">
           <h2 className="text-4xl font-bold text-center">Join our community</h2>
@@ -13,7 +13,7 @@ export default function Community() {
             Explore Velix, engage with us, and shape our ecosystem's future.
           </p>
         </div>
-        <div className="relative p-0.25 lg:mt-20">
+        <div className="relative p-0.25 mt-16">
           <GradientBorder className="rounded-[0.9375rem]" />
           <div className="bg-velix-black relative overflow-hidden flex justify-between items-center lg:py-10 lg:px-14 p-10 rounded-[15px]">
             <VelixEclips className="absolute -top-56 -right-20 dark:scale-[3] dark:opacity-50" />
