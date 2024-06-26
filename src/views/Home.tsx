@@ -1,4 +1,3 @@
-import AuditsDoc from "@/components/section/AuditsDoc";
 import Community from "@/components/section/Community";
 import FAQ from "@/components/section/FAQ";
 import Footer from "@/components/section/Footer";
@@ -16,7 +15,6 @@ export default function Home() {
         <VelixProperties />
         {/* <SequencerStaking /> */}
         <FAQ />
-        <AuditsDoc/>
         <Community />
         <Footer />
       </div>
