@@ -98,7 +98,7 @@ export const useApproveMinting = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -106,7 +106,7 @@ export const useApproveMinting = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -167,7 +167,7 @@ export const useMint = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -231,7 +231,7 @@ export const useApproveStaking = () => {
         setIsPending(false);
       }
     },
-    [address]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -239,7 +239,7 @@ export const useApproveStaking = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -297,7 +297,7 @@ export const useStaking = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -305,7 +305,7 @@ export const useStaking = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -359,7 +359,7 @@ export const useApproveUnstaking = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -367,7 +367,7 @@ export const useApproveUnstaking = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -426,7 +426,7 @@ export const useUnstake = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance]
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
   );
 
   const reset = useCallback(() => {
@@ -434,7 +434,7 @@ export const useUnstake = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -471,7 +471,7 @@ export const useMintNft = () => {
       console.log(err);
       throw err;
     }
-  }, [address]);
+  }, [address, contractInstance]);
 
   const mintNft = useCallback(async () => {
     if (!address) return;
@@ -512,14 +512,21 @@ export const useMintNft = () => {
     } finally {
       setIsPending(false);
     }
-  }, [addEligibleAddress, address]);
+  }, [
+    addEligibleAddress,
+    address,
+    setData,
+    setError,
+    setIsPending,
+    setIsSuccess
+  ]);
 
   const reset = useCallback(() => {
     setData(null);
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
@@ -553,7 +560,7 @@ export const useGetTotalVeMetisAssets = () => {
       console.log(err);
       throw err;
     }
-  }, [address, contractInstance]);
+  }, [address, contractInstance, setTotalValueLocked]);
 
   useEffect(() => {
     getTotalLocked();
