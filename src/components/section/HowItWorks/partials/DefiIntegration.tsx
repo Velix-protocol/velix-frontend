@@ -34,7 +34,7 @@ function DefiIconCard({
 
 export default function DefiIntegration() {
   return (
-    <div className="flex flex-col lg:grid grid-cols-2 py-24 px-10 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
+    <div className="flex flex-col lg:grid grid-cols-2 pb-16 px-10 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
       <img
         src="/svg/defi-integration.svg"
         alt="defi integration"
