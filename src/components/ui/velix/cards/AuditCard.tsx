@@ -10,7 +10,7 @@ interface CardProps {
 
 const AuditCard: React.FC<CardProps> = ({ title, iconSrc, link }) => {
   return (
-    <div className="relative p-0.25">
+    <div className="relative p-0.25 w-full">
       <GradientBorder className="rounded-[0.9375rem] z-0 via-white/35" />
       <div className="w-full flex font-space-grotesk flex-col justify-between h-[360px] dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
         <div className="flex justify-center items-center h-4/6">

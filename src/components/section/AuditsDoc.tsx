@@ -13,7 +13,7 @@ const AuditsDoc = () => {
             We have been audited by one of the best firms
           </p>
         </div>
-        <div className="flex flex-col lg:grid grid-cols-2 py-16  justify-center gap-[-2] lg:gap-12 lg:px-1  items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
+        <div className="flex flex-col lg:grid grid-cols-2 py-16  justify-center gap-2 lg:gap-12 lg:px-1  items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
           <AuditCard
             title="Audit Report"
             iconSrc="./audit.svg"
