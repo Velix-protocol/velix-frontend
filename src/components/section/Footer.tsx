@@ -81,7 +81,6 @@ export default function Footer() {
           </ul>
         </div>
       </Section>
-      <div className="h-3 w-full bg-gradient-to-r from-velix-blue via-velix-blue to-velix-yellow" />
     </div>
   );
 }
