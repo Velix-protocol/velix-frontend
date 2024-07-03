@@ -28,7 +28,7 @@ const FAQs = [
     answer: (
       <span>
         - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
-        <b>veMETIS</b> gives you acess to the velix protocol to participate in
+        <b>veMETIS</b> gives you access to the velix protocol to participate in
         sequencer node staking. <br />-<b> sveMETIS</b> is staked veMETIS that
         automatically accumulates and compounds staking rewards in the form of
         veMETIS.

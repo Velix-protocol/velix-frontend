@@ -2,7 +2,7 @@ const STEPS = [
   {
     title: "1. Mint",
     description:
-      "Mint veMETIS with  METIS . veMETIS gives you acess to Velix protocol and opportunity to participate in sequencer node staking."
+      "Mint veMETIS with  METIS . veMETIS gives you access to Velix protocol and opportunity to participate in sequencer node staking."
   },
   {
     title: "2. Do More with veMETIS",
