@@ -221,7 +221,6 @@ export default function Mint() {
                       </span>
                       <span>
                         Mint veMETIS to participate in liquid staking.
-                        <br /> veMETIS is a liquid staking derivative of METIS.
                       </span>
                     </p>
                   }
