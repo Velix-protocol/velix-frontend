@@ -18,8 +18,8 @@ const FAQs = [
     question: "How to participate in liquid staking and earn staking rewards?",
     answer: (
       <span>
-        Stake veMETIS using the 'Stake' tab. Staking rewards are automatically
-        compounded during the staking period, enhancing your stake.
+        Stake veMETIS using the 'Stake' tab. Rewards are earned during staking
+        period, boosting your staking yield
       </span>
     )
   },
