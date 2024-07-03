@@ -28,17 +28,17 @@ const FAQs = [
     answer: (
       <span>
         - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
-        <b>veMETIS</b> is a liquid staking derivative of METIS, tradable on
-        decentralized exchanges, and can be swapped back into METIS. <br />-
-        <b> sveMETIS</b> is staked veMETIS that automatically accumulates and
-        compounds staking rewards in the form of veMETIS.
+        <b>veMETIS</b> gives you acess to the velix protocol to participate in
+        sequencer node staking. <br />-<b> sveMETIS</b> is staked veMETIS that
+        automatically accumulates and compounds staking rewards in the form of
+        veMETIS.
       </span>
     )
   },
   {
     question: "How to get veMETIS?",
     answer:
-      "Mint veMETIS from METIS using the 'Mint' form above or buy veMETIS on decentralized exchanges."
+      "Mint veMETIS with METIS using the mint button or acquire veMETIS from decentralized exchanges."
   }
 ];
 
