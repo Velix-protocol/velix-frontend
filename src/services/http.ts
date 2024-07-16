@@ -1,3 +1,4 @@
+import { Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import { saveActionDto, saveStakerDto } from "@/utils/dto";
 import axios, { AxiosInstance } from "axios";
@@ -46,6 +47,11 @@ class VelixApi {
 
   async retreiveStakersNumber() {
     return await this.api.get("/stake/stakers/count");
+  }
+
+  async getStaker(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<Staker>(`/stake/stakers/${walletAddress}`);
   }
 }
 

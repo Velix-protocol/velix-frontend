@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
+import { useStakersStore } from "@/store/stakers";
 
 type UnstakeActivity = {
   id: string;
@@ -37,6 +38,8 @@ export default function Dashboard() {
     "mint"
   );
 
+  const { staker } = useStakersStore();
+
   useEffect(() => {
     async function getUnstakeActivity() {
       if (!address) return;
@@ -46,7 +49,6 @@ export default function Dashboard() {
         actionToRetreive,
         address
       );
-      console.log({ data });
       setUnstakeActivity(data as unknown as UnstakeActivity[]);
       setLoading(false);
     }
@@ -75,7 +77,7 @@ export default function Dashboard() {
 
   return (
     <Section className="mt-36 md:mt-48 px-5 pb-28">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
         {velixBalances.map((balance, index) => (
           <Card
             key={index}
@@ -91,6 +93,14 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         ))}
+        <Card className="bg-velix-slate-blue dark:bg-velix-light-dark">
+          <CardContent className="p-7 space-y-2">
+            <div className="text-sm text-velix-gray">Staking points</div>
+            <div className="text-lg font-semibold text-velix-primary dark:text-velix-dark-white">
+              {`${staker?.stakingpoints ?? "--"}`}
+            </div>
+          </CardContent>
+        </Card>
       </div>
       <Menubar className="mt-10 w-full overflow-x-auto overflow-y-hidden py-10 px-5 md:p-10 border-none rounded-lg bg-white dark:bg-velix-form-input-dark text-velix-primary font-space-grotesk font-bold text-base">
         <MenubarMenu>
