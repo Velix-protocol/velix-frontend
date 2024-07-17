@@ -117,7 +117,6 @@ const StakeLayout = ({
   return (
     <div
       className={`mt-10 w-full lg:mt-20 ${
-      className={`mt-10 w-full lg:mt-20 ${
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
     >
