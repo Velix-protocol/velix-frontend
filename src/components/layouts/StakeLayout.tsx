@@ -124,7 +124,7 @@ const StakeLayout = ({
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
-          <div onSubmit={(e) => e.preventDefault()} className={inputClassName}>
+          <div className={inputClassName}>
             <Input
               value={value}
               onChange={onFromValueChange}
