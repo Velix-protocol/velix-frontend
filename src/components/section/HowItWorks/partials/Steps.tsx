@@ -2,7 +2,7 @@ const STEPS = [
   {
     title: "1. Mint",
     description:
-      "Mint veMETIS by depositing METIS tokens. veMETIS represents a liquid staking derivative of METIS."
+      "Mint veMETIS with  METIS . veMETIS gives you access to Velix protocol and opportunity to participate in sequencer node staking."
   },
   {
     title: "2. Do More with veMETIS",
@@ -12,12 +12,12 @@ const STEPS = [
   {
     title: "3. Receive veMETIS",
     description:
-      "Earn yield, liquidity pool rewards and protocol fees by deploying your veMetis while your original METIS earns rewards."
+      "Receive veMETIS Earn yield, liquidity pool rewards and protocol fees by deploying your veMetis to decentralized exchanges."
   },
   {
     title: "4. Stake",
     description:
-      "Use veMETIS across various DeFi protocols in the Metis ecosystem to maximize your rewards."
+      "Lend and Borrow Redeploy your sveMETIS across various lending protocols in the Metis ecosystem to maximize  your earnings"
   }
 ];
 
