@@ -2,7 +2,6 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
 import { Button } from "./ui/button";
 import { Role } from "@/types";
-import { Role } from "@/types";
 
 export default function StakingFormButtom({
   role,
@@ -12,7 +11,6 @@ export default function StakingFormButtom({
   disabled,
   isLoading
 }: {
-  role: Role;
   role: Role;
   isLoading: boolean;
   disabled?: boolean;
