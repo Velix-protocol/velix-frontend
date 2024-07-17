@@ -6,10 +6,9 @@ import {
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
+  velixContracts,
   VELIX_SUPER_NFT_URL,
-  velixContracts
-  VELIX_SUPER_NFT_URL,
-  velixContracts
+  
 } from "@/utils/constant";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
