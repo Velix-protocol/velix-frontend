@@ -114,7 +114,7 @@ export default function BottomBar({
         label="Unstake"
         isNotFound={isNotFound}
       />
-      <NavigationMenuCard
+      {/* <NavigationMenuCard
         path="redeem"
         label="Redeem"
         isNotFound={isNotFound}
@@ -125,7 +125,7 @@ export default function BottomBar({
         path="reward"
         label="Reward"
         isNotFound={isNotFound}
-      />
+      /> */}
       <NavigationMenuCard
         path="dashboard"
         label="Dashboard"

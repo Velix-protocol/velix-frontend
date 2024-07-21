@@ -7,8 +7,7 @@ import {
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
   velixContracts,
-  VELIX_SUPER_NFT_URL,
-  
+  VELIX_SUPER_NFT_URL
 } from "@/utils/constant";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
@@ -178,7 +177,7 @@ export const useMint = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,
