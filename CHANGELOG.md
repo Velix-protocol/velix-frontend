@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.27.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.26.0...v1.27.0) (2024-07-21)
+
+
+### Features
+
+* add conversation for staking ([eef2fbd](https://github.com/Velix-protocol/velix-frontend/commit/eef2fbd28e2fbb4c7f25ce513ca2402e7739f7d1))
+* add how to get velix point section and refactor svg folder ([f32bbef](https://github.com/Velix-protocol/velix-frontend/commit/f32bbefa2b8a1ffe57546d95215b361939daa427))
+* add redeem page ([3992f81](https://github.com/Velix-protocol/velix-frontend/commit/3992f81ec5be9854bbb83a56bf822302c33c90d7))
+* add reward page ([1c0623a](https://github.com/Velix-protocol/velix-frontend/commit/1c0623a226aa15a43e25b6f08d450ee8b038abde))
+* add vemetis tvl metric to metrics component ([ae5cd25](https://github.com/Velix-protocol/velix-frontend/commit/ae5cd25d9b4836c9f21d76ad45c6fd238bbd8eb7))
+* remove redeem and reward pages ([#80](https://github.com/Velix-protocol/velix-frontend/issues/80)) ([#81](https://github.com/Velix-protocol/velix-frontend/issues/81)) ([c1a9f4e](https://github.com/Velix-protocol/velix-frontend/commit/c1a9f4e5ee97ef643ba5557d73282f3d743ebd3a))
+* upgrade FAB ([#70](https://github.com/Velix-protocol/velix-frontend/issues/70)) ([5c825ce](https://github.com/Velix-protocol/velix-frontend/commit/5c825ce45b43d5f286b83e0e66739682a0302a11))
+
+
+### Bug Fixes
+
+* added config file ([153046c](https://github.com/Velix-protocol/velix-frontend/commit/153046c0450a1eabfb6762ae58b66262f6727441))
+* deleted discord icon ([88f25be](https://github.com/Velix-protocol/velix-frontend/commit/88f25be8ab388bf26b982bfcedb6864f43c8e00c))
+* fixed use-contract ([549653c](https://github.com/Velix-protocol/velix-frontend/commit/549653c1b24d26a411db987d5e752788f9b0b1be))
+* refactore button errors ([d4ab9c9](https://github.com/Velix-protocol/velix-frontend/commit/d4ab9c9fb9a2aff9c6156b9240b76cd7c7017f12))
+* refactored css aerros ([7d5c2af](https://github.com/Velix-protocol/velix-frontend/commit/7d5c2af589e7a9314e887dc697159daa22d48c6c))
+* update audit card icon paths in AuditsDoc component ([8d2c44a](https://github.com/Velix-protocol/velix-frontend/commit/8d2c44a17c439aec6e2a657146ebf9dd76275671))
+* updated lock file ([865b2aa](https://github.com/Velix-protocol/velix-frontend/commit/865b2aa549d07b73a771895735a047fca4944272))
+
 ## [1.26.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.25.0...v1.26.0) (2024-07-03)
 
 
