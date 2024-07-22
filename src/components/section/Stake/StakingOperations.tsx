@@ -21,6 +21,7 @@ import WaitingForApprovalModal from "../../WaitingForApprovalModal";
 import SuccessModal from "@/components/SuccessModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
+import useReferralCode from "@/hooks/useReferralCode";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -49,6 +50,7 @@ export default function StakingOperations() {
   const { getBalances } = useMetisBalance();
   const { veMETISBalance, sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
+  const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
 
   useEffect(() => {
     if (isSuccess) {
@@ -101,10 +103,12 @@ export default function StakingOperations() {
     await stake(amountToStake);
     await velixApi.saveStaker({
       walletAddress: walletAddress as `0x${string}`,
-      amount: Number(sveMETISBalance) + Number(amountToStake)
+      amount: Number(sveMETISBalance) + Number(amountToStake),
+      referralCode
     });
     const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
     setStakers(stakersNumber ?? 0);
+    removeReferralCodeFromStoreAndUrl();
   };
 
   const renderModalTitle = () => {
