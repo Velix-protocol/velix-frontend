@@ -64,8 +64,8 @@ export default function Chains() {
     setCopied(true);
     setCopiedAddress(address);
     const urlWithRefferalCode = location.port
-      ? `${location.protocol}//${location.hostname}:${location.port}/app/stake/?${address}`
-      : `${location.protocol}//${location.hostname}/app/stake/?${address}`;
+      ? `${location.protocol}//${location.hostname}:${location.port}/app/stake/?referralCode=${address}`
+      : `${location.protocol}//${location.hostname}/app/stake/?referralCode=${address}`;
     const addressToCopy = isRefferalCode ? urlWithRefferalCode : address;
     await navigator.clipboard.writeText(addressToCopy);
     setTimeout(() => {
