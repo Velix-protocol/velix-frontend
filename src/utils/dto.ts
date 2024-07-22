@@ -7,4 +7,5 @@ export type saveActionDto = {
 export type saveStakerDto = {
   walletAddress: string;
   amount: number;
+  referralCode?: string;
 };
