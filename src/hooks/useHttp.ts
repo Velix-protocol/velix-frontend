@@ -47,9 +47,9 @@ export const useRedeemPoints = () => {
         setIsSuccess(true);
         await getStaker(address);
       } catch (err: any) {
-        console.log(err);
+        console.log(err.response);
         setIsSuccess(false);
-        setError(err.message ?? "");
+        setError(err.response.data.message || err.message || "");
       } finally {
         setIsPending(false);
       }
