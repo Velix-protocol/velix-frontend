@@ -123,7 +123,7 @@ export default function Dashboard() {
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
-            {isPending && (
+            {isPending && !isSuccess && (
               <Fragment>
                 <Loader className="w-20 h-20 mb-6 animate-spin" />
                 <p className="font-bold text-center text-2xl lg:text-4xl">
@@ -207,7 +207,7 @@ export default function Dashboard() {
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
             >
-              Reward{" "}
+              Redeem{" "}
               <small className="rounded-full shrink-0 ml-2 border border-green-500 px-2">
                 Coming soon
               </small>

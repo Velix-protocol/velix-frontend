@@ -51,6 +51,7 @@ export default function StakingOperations() {
   const { veMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
+  const { getStaker } = useStakersStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -59,6 +60,7 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       getBalances();
+      getStaker(`${walletAddress}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
