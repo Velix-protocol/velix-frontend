@@ -48,7 +48,8 @@ export default function Dashboard() {
   const [pointsToRedeem, setPointsToRedeem] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const { staker, getStaker } = useStakersStore();
-  const { isPending, isSuccess, redeemPoints, cleanup } = useRedeemPoints();
+  const { isPending, isSuccess, redeemPoints, cleanup, error } =
+    useRedeemPoints();
 
   useEffect(() => {
     getStaker(`${address}`);
@@ -129,6 +130,9 @@ export default function Dashboard() {
                   Redeeming ...
                 </p>
               </Fragment>
+            )}
+            {!!error && (
+              <p className="text-red-600 text-center text-base">{`${error}`}</p>
             )}
             {isSuccess && (
               <SuccessModal
