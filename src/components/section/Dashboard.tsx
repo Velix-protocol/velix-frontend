@@ -19,6 +19,9 @@ import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
+import { Input } from "../ui/input";
+import MaxButton from "../ui/velix/MaxButton";
+import { Button } from "../ui/button";
 
 type UnstakeActivity = {
   id: string;
@@ -149,15 +152,30 @@ export default function Dashboard() {
       </Menubar>
       <Table className="p-10 font-space-grotesk mt-10">
         {actionToRetreive === "reward" && (
-          <div className="flex text-velix-blue dark:text-velix-dark-white max-lg:flex-col rounded-t-lg flex-row lg:items-center -mb-2.5 bg-white dark:bg-velix-form-dark-background gap-3 px-8 py-8">
-            <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
-              Est Rewards 2023 : <b>0.000000 VeMetis</b>
-            </p>
-            <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
-              Est Monthly 2023 : <b>0.000000 VeMetis</b>
-            </p>
+          <div className="flex text-velix-blue dark:text-velix-dark-white flex-col rounded-t-lg -mb-2.5 bg-white dark:bg-velix-form-dark-background gap-3 px-8 py-8">
+            <div className="flex max-lg:flex-col gap-3">
+              <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
+                Est Rewards 2023 : <b>0.000000 VeMetis</b>
+              </p>
+              <p className="bg-velix-slate-blue dark:bg-velix-light-dark p-4 rounded-lg">
+                Est Monthly 2023 : <b>0.000000 VeMetis</b>
+              </p>
+            </div>
+            <div className="flex gap-3 w-full">
+              <div className="flex w-full items-center bg-white dark:bg-velix-form-dark-background">
+                <Input
+                  placeholder="Points to redeem"
+                  className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:rin"
+                />
+                <MaxButton className="!py-5">max</MaxButton>
+              </div>
+              <Button className="lg:py-7 dark:bg-velix-dark-white dark:text-velix-primary disabled:bg-velix-primary/60 w-fit px-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary">
+                Redeem
+              </Button>
+            </div>
           </div>
         )}
+
         <TableHeader className="bg-velix-primary dark:bg-velix-form-input-dark pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
           <TableHead className="w-[100px] text-white font-bold h-fit">
             Date

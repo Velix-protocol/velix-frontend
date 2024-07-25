@@ -19,6 +19,7 @@ import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import classNames from "classnames";
 import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
+import MaxButton from "../ui/velix/MaxButton";
 // import debounce from "debounce-promise";
 
 type StakeLayoutProps = {
@@ -133,12 +134,7 @@ const StakeLayout = ({
               className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:rin"
             />
             <div className="shrink-0 flex gap-1">
-              <button
-                onClick={onSetMaxValue}
-                className="font-bold text-velix-primary dark:text-white uppercase text-sm p-3 lg:p-4 bg-velix-blue/5 dark:bg-velix-light-dark rounded-md"
-              >
-                Max
-              </button>
+              <MaxButton onClick={onSetMaxValue}>max</MaxButton>
               <p className="shrink-0 flex items-center gap-2 bg-velix-blue/5 dark:bg-velix-light-dark p-2 lg:p-3 text-sm text-velix-gray rounded-md">
                 <span>{icons?.[renderFromTitles() as never]}</span>
                 <span className="text-[0.625rem] lg:text-base">
