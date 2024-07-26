@@ -4,6 +4,7 @@ import FAQ from "@/components/section/FAQ";
 import Footer from "@/components/section/Footer";
 import Hero from "@/components/section/Hero";
 import HowItWorks from "@/components/section/HowItWorks";
+import HowToGetVelixPoints from "@/components/section/HowToGetPoints";
 // import SequencerStaking from "@/components/section/SequencerStaking";
 import VelixProperties from "@/components/section/VelixProperties";
 
@@ -16,7 +17,8 @@ export default function Home() {
         <VelixProperties />
         {/* <SequencerStaking /> */}
         <FAQ />
-        <AuditsDoc/>
+        <AuditsDoc />
+        <HowToGetVelixPoints />
         <Community />
         <Footer />
       </div>

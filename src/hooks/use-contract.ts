@@ -6,8 +6,8 @@ import {
   VEMETIS_MINTER_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS,
   VELIX_NFT_CONTRACT_ADDRESS,
-  VELIX_SUPER_NFT_URL,
-  velixContracts
+  velixContracts,
+  VELIX_SUPER_NFT_URL
 } from "@/utils/constant";
 import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
@@ -78,6 +78,7 @@ export const useApproveMinting = () => {
     async (amount: string) => {
       const contract = await contractInstance;
       if (!contract) return;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
@@ -143,6 +144,7 @@ export const useMint = () => {
     async (amount: string) => {
       const contract = await contractInstance;
       if (!contract) return;
+      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
@@ -175,7 +177,7 @@ export const useMint = () => {
     setIsSuccess(false);
     setError(null);
     setIsPending(false);
-  }, []);
+  }, [setData, setError, setIsPending, setIsSuccess]);
 
   return {
     isPending,

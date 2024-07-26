@@ -8,12 +8,17 @@ import { useAccount } from "wagmi";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
+import { FaGift } from "react-icons/fa6";
 
 export default function Metrics() {
-  const { isConnected } = useAccount();
-  const { setStakers, stakers } = useStakersStore();
+  const { isConnected, address } = useAccount();
+  const { setStakers, stakers, staker, getStaker } = useStakersStore();
   const { totalValueLocked } = useMetricsStore();
   useGetTotalVeMetisAssets();
+
+  useEffect(() => {
+    getStaker(address as string);
+  }, [address, getStaker]);
 
   useEffect(() => {
     (async () => {
@@ -55,6 +60,13 @@ export default function Metrics() {
         }
         description={stakers <= 1 ? "Staker" : "Stakers"}
         value={stakers.toLocaleString()}
+      />
+      <MetricsCard
+        icon={
+          <FaGift className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+        }
+        description="My staking points"
+        value={`${staker?.stakingpoints?.toFixed(3) ?? "--"}`}
       />
     </div>
   );
