@@ -41,7 +41,7 @@ export default function DefiIntegration() {
         className="scale-75 xl:scale-90"
       />
       <div className="max-w-sm- lg:max-w-[25rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
-        <h2 className="font-space-grotesk font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
+        <h2 className="font-space-grotesk mt-5 font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8">
             Discover your Liquid staked token and Velix token available on

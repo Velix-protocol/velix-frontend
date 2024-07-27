@@ -14,16 +14,16 @@ export default function Hero() {
           <p className="text-white max-lg:text-xs max-lg:text-center mt-2">
             Simplifying your liquid staking experience
           </p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 max-sm:flex-col">
             <Link
               to="/app/stake"
-              className="bg-velix-yellow hover:bg-velix-yellow px-10 py-3 rounded-sm w-fit mt-4 lg:mt-16 font-semibold"
+              className="bg-velix-yellow hover:bg-velix-yellow px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
             >
               Stake now
             </Link>
             <Link
               to="/app/dashboard"
-              className="border border-velix-yellow px-10 py-3 rounded-sm w-fit mt-4 lg:mt-16 font-semibold"
+              className="border-2 border-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-0 lg:mt-16 font-semibold"
             >
               VePoints
             </Link>

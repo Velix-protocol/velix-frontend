@@ -26,10 +26,10 @@ export default function Header() {
           <Link
             to="https://docs.velix.io"
             target="_blank"
-            className="font-space-grotesk font-semibold flex items-center gap-1"
+            className="font-space-grotesk font-semibold text-white flex items-center gap-1"
           >
             Docs
-            <HiArrowLongRight className="hover:cursor-pointer -rotate-45 stroke-1" />
+            <HiArrowLongRight className="hover:cursor-pointer -rotate-45 text-white stroke-1" />
           </Link>
           <Button
             onClick={() => {
@@ -56,10 +56,10 @@ export default function Header() {
             <Link
               to="https://docs.velix.io"
               target="_blank"
-              className="font-space-grotesk font-semibold flex items-center gap-1"
+              className="font-space-grotesk font-semibold text-white flex items-center gap-1"
             >
               Docs
-              <HiArrowLongRight className="hover:cursor-pointer -rotate-45 stroke-1" />
+              <HiArrowLongRight className="hover:cursor-pointer -rotate-45 text-white stroke-1" />
             </Link>
             <Button
               onClick={() => {
