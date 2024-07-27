@@ -88,7 +88,7 @@ export default function Faucet() {
                 : "Claim now"}
             </Button>
           </div>
-          <FaucetImage className="max-md:w-40 max-md:h-40 max-lg:w-56 max-lg:h-56 max-lg:mt-10" />
+          <FaucetImage className="max-md:w-40 max-md:h-40 max-lg:w-56 max-lg:h-56 max-lg:mt-10" aria-label="FaucetImage"/>
         </div>
       </Section>
     </>

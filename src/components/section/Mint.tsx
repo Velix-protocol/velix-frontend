@@ -192,7 +192,7 @@ export default function Mint() {
                 subtitle={
                   <p className="flex items-start justify-start gap-4">
                     <span>
-                      <InfoIcon className="h-6 w-6 text-white fill-velix-primary" />
+                      <InfoIcon className="h-6 w-6 text-white fill-velix-primary" aria-label="InfoIcon"/>
                     </span>
                     <span>Mint veMETIS to participate in liquid staking.</span>
                   </p>
@@ -214,7 +214,7 @@ export default function Mint() {
                   subtitle={
                     <p className="flex items-start justify-start gap-4">
                       <span>
-                        <InfoIcon className="h-6 w-6 text-white fill-velix-primary" />
+                        <InfoIcon className="h-6 w-6 text-white fill-velix-primary" aria-label="InfoIcon" />
                       </span>
                       <span>
                         Mint veMETIS to participate in liquid staking.

@@ -1,25 +1,26 @@
 const STEPS = [
   {
-    title: "1. Mint",
+    title: "1. Mint veMETIS Tokens",
     description:
       "Mint veMETIS with  METIS . veMETIS gives you access to Velix protocol and opportunity to participate in sequencer node staking."
   },
   {
-    title: "2. Do More with veMETIS",
+    title: "2. Stake veMETIS for sveMETIS Rewards",
     description:
       "Stake veMetis to receive sveMETIS, accumulating staking rewards denominated in veMETIS."
   },
   {
-    title: "3. Receive veMETIS",
+    title: "3. Earn Rewards with veMETIS",
     description:
       "Receive veMETIS Earn yield, liquidity pool rewards and protocol fees by deploying your veMetis to decentralized exchanges."
   },
   {
-    title: "4. Stake",
+    title: "4. Use veMETIS in DeFi Protocols",
     description:
       "Lend and Borrow Redeploy your sveMETIS across various lending protocols in the Metis ecosystem to maximize  your earnings"
   }
 ];
+
 
 export default function Steps() {
   return (
