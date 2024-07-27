@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import ThemeButton from "../ui/velix/ThemeButton";
+import { HiArrowLongRight } from "react-icons/hi2";
 
 export default function Header() {
   const { ref, inView } = useInView({
@@ -22,6 +23,14 @@ export default function Header() {
           <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
         </Link>
         <div className="flex items-center gap-3">
+          <Link
+            to="https://docs.velix.io"
+            target="_blank"
+            className="font-space-grotesk font-semibold flex items-center gap-1"
+          >
+            Docs
+            <HiArrowLongRight className="hover:cursor-pointer -rotate-45 stroke-1" />
+          </Link>
           <Button
             onClick={() => {
               return navigate("/app/mint");
@@ -44,6 +53,14 @@ export default function Header() {
             <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
           </Link>
           <div className="flex items-center gap-3">
+            <Link
+              to="https://docs.velix.io"
+              target="_blank"
+              className="font-space-grotesk font-semibold flex items-center gap-1"
+            >
+              Docs
+              <HiArrowLongRight className="hover:cursor-pointer -rotate-45 stroke-1" />
+            </Link>
             <Button
               onClick={() => {
                 return navigate("/app/mint");

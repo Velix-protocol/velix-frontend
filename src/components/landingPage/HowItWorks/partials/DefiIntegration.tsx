@@ -44,8 +44,8 @@ export default function DefiIntegration() {
         <h2 className="font-space-grotesk font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8">
-            Discover veMETIS and VELIX tokens available on popular DeFi
-            platforms within the Metis ecosystem
+            Discover your Liquid staked token and Velix token available on
+            popular cross-chain Defi platforms
           </span>
         </h2>
         <div className="grid max-[380px]:grid-cols-3 grid-cols-3 grid-rows-3 lg:max-w-[21rem] gap-5 mt-16 justify-center items-center">
