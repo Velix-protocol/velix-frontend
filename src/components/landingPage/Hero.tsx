@@ -1,7 +1,7 @@
 import Section from "../layouts/Section";
-import Header from "../Header";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 export default function Hero() {
   const navigate = useNavigate();

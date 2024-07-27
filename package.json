@@ -9,7 +9,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "preview": "vite preview",
     "branch-name-check": "./branch-name-check.sh",
-    "prepare": "npx husky install && chmod +x .husky/*"
     "prepare": "npx husky install"
   },
   "dependencies": {

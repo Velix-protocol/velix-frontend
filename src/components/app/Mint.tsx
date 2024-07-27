@@ -1,7 +1,7 @@
 import { InfoIcon } from "lucide-react";
 import Section from "../layouts/Section";
-import StakingDetails from "../StakingDetails";
-import StakingFormButtom from "../StakingFormButtom";
+import StakingDetails from "./StakingDetails";
+import StakingFormButtom from "./StakingFormButtom";
 import Title from "../ui/velix/Title";
 import AppContent from "../layouts/AppContent";
 import StakeLayout from "../layouts/StakeLayout";
@@ -18,7 +18,7 @@ import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
-import SuccessModal from "../SuccessModal";
+import SuccessModal from "./SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
 
@@ -192,7 +192,10 @@ export default function Mint() {
                 subtitle={
                   <p className="flex items-start justify-start gap-4">
                     <span>
-                      <InfoIcon className="h-6 w-6 text-white fill-velix-primary" aria-label="InfoIcon"/>
+                      <InfoIcon
+                        className="h-6 w-6 text-white fill-velix-primary"
+                        aria-label="InfoIcon"
+                      />
                     </span>
                     <span>Mint veMETIS to participate in liquid staking.</span>
                   </p>
@@ -214,7 +217,10 @@ export default function Mint() {
                   subtitle={
                     <p className="flex items-start justify-start gap-4">
                       <span>
-                        <InfoIcon className="h-6 w-6 text-white fill-velix-primary" aria-label="InfoIcon" />
+                        <InfoIcon
+                          className="h-6 w-6 text-white fill-velix-primary"
+                          aria-label="InfoIcon"
+                        />
                       </span>
                       <span>
                         Mint veMETIS to participate in liquid staking.

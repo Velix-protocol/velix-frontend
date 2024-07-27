@@ -25,7 +25,7 @@ import { Button } from "../ui/button";
 import { useRedeemPoints } from "@/hooks/useHttp";
 import Modal from "../ui/velix/Modal";
 import Loader from "../ui/velix/icons/Loader";
-import SuccessModal from "../SuccessModal";
+import SuccessModal from "./SuccessModal";
 import { viewTransactionOnExplorer } from "@/utils/utils";
 
 type UnstakeActivity = {

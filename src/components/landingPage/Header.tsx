@@ -1,8 +1,8 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { useInView } from "react-intersection-observer";
-import { Button } from "./ui/button";
 import { Link, useNavigate } from "react-router-dom";
-import ThemeButton from "./ui/velix/ThemeButton";
+import { Button } from "../ui/button";
+import ThemeButton from "../ui/velix/ThemeButton";
 
 export default function Header() {
   const { ref, inView } = useInView({
