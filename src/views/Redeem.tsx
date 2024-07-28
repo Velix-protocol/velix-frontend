@@ -1,5 +1,5 @@
-import StakingDetails from "@/components/StakingDetails";
-import StakingFormButtom from "@/components/StakingFormButtom";
+import StakingDetails from "@/components/app/StakingDetails";
+import StakingFormButtom from "@/components/app/StakingFormButtom";
 import AppContent from "@/components/layouts/AppContent";
 import Section from "@/components/layouts/Section";
 import StakeLayout from "@/components/layouts/StakeLayout";

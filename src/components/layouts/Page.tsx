@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import AppFooter from "../AppFooter";
-import AppHeader from "../AppHeader";
-import BottomBar from "../BottomBar";
+import AppFooter from "../app/AppFooter";
+import AppHeader from "../app/AppHeader";
+import BottomBar from "../app/BottomBar";
 import WagmiProvider from "@/context/WagmiProvider";
 
 export default function Page() {

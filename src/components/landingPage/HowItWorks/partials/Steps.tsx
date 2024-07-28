@@ -2,22 +2,22 @@ const STEPS = [
   {
     title: "1. Mint",
     description:
-      "Mint veMETIS with  METIS . veMETIS gives you access to Velix protocol and opportunity to participate in sequencer node staking."
+      "Mint your liquid staked token, get access to Velix protocol, participate in node staking across several chains."
   },
   {
-    title: "2. Do More with veMETIS",
+    title: "2. Do more with your LST",
     description:
-      "Stake veMetis to receive sveMETIS, accumulating staking rewards denominated in veMETIS."
+      "Stake your your LST with our carefully selected validator/sequencer node runners  and start accumulating your staking rewards."
   },
   {
     title: "3. Receive veMETIS",
     description:
-      "Receive veMETIS Earn yield, liquidity pool rewards and protocol fees by deploying your veMetis to decentralized exchanges."
+      "Receive your LST,earn yield, liquidity pool rewards and protocol fees by deploying LST  to decentralized exchange."
   },
   {
     title: "4. Stake",
     description:
-      "Lend and Borrow Redeploy your sveMETIS across various lending protocols in the Metis ecosystem to maximize  your earnings"
+      "Lend and borrow by redeploying your liquid staked token across various lending protocols across the supported networks to maximize your earnings"
   }
 ];
 
