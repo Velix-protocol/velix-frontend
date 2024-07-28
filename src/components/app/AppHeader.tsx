@@ -1,12 +1,12 @@
 import Section from "@/components/layouts/Section";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import BottomBar from "./BottomBar";
-import VelixPrimaryBlackLogo from "./ui/velix/icons/VelixPrimaryBlackLogo";
+import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
-import ThemeButton from "./ui/velix/ThemeButton";
+import ThemeButton from "../ui/velix/ThemeButton";
 
 export default function AppHeader() {
   const { open } = useWeb3Modal();
@@ -28,7 +28,10 @@ export default function AppHeader() {
       >
         <div className="flex items-center justify-betwee space-x-16 text-base">
           <Link to="/">
-            <VelixPrimaryBlackLogo className="fill-black dark:fill-velix-dark-white w-[4.25rem] h-4" aria-label="VelixPrimaryBlackLogo" />
+            <VelixPrimaryBlackLogo
+              className="fill-black dark:fill-velix-dark-white w-[4.25rem] h-4"
+              aria-label="VelixPrimaryBlackLogo"
+            />
           </Link>
           <div className="hidden lg:block">
             <BottomBar />

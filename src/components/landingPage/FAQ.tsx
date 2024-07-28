@@ -18,23 +18,23 @@ const FAQs = [
     question: "How to participate in liquid staking and earn staking rewards?",
     answer: (
       <span>
-        Stake veMETIS using the 'Stake' tab. Rewards are earned during staking
-        period, boosting your staking yield
+        Stake your native token using the stake tab on the dapp page. Rewards
+        are earned during the staking period boosting your staking yield.
       </span>
     )
   },
-  {
-    question: "What is the difference between METIS, veMETIS, and sveMETIS?",
-    answer: (
-      <span>
-        - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
-        <b>veMETIS</b> gives you access to the velix protocol to participate in
-        sequencer node staking. <br />-<b> sveMETIS</b> is staked veMETIS that
-        automatically accumulates and compounds staking rewards in the form of
-        veMETIS.
-      </span>
-    )
-  },
+  // {
+  //   question: "What is the difference between METIS, veMETIS, and sveMETIS?",
+  //   answer: (
+  //     <span>
+  //       - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
+  //       <b>veMETIS</b> gives you access to the velix protocol to participate in
+  //       sequencer node staking. <br />-<b> sveMETIS</b> is staked veMETIS that
+  //       automatically accumulates and compounds staking rewards in the form of
+  //       veMETIS.
+  //     </span>
+  //   )
+  // },
   {
     question: "How to get veMETIS?",
     answer:

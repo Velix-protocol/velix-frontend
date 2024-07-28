@@ -1,11 +1,11 @@
-import WalletIcon from "./ui/velix/icons/WalletIcon";
-import UnstakeIcon from "./ui/velix/icons/UnstakeIcon";
-import TwigLightIcon from "./ui/velix/icons/TwigLightIcon";
-import AnalyticsIcon from "./ui/velix/icons/AnalyticsIcon";
+import WalletIcon from "../ui/velix/icons/WalletIcon";
+import UnstakeIcon from "../ui/velix/icons/UnstakeIcon";
+import TwigLightIcon from "../ui/velix/icons/TwigLightIcon";
+import AnalyticsIcon from "../ui/velix/icons/AnalyticsIcon";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import FaucetIcon from "./ui/velix/icons/FaucetIcon";
-import ImageIcon from "./ui/velix/icons/ImageIcon";
+import FaucetIcon from "../ui/velix/icons/FaucetIcon";
+import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn } from "@/utils/utils";
 
 function NavigationMenuCard({

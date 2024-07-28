@@ -1,5 +1,5 @@
 import { useAccount } from "wagmi";
-import Balance from "../Balance";
+import Balance from "../app/Balance";
 import {
   ChangeEvent,
   ReactNode,

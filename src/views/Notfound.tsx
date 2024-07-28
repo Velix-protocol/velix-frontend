@@ -1,4 +1,4 @@
-import BottomBar from "@/components/BottomBar";
+import BottomBar from "@/components/app/BottomBar";
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import Number from "@/components/ui/velix/icons/404";

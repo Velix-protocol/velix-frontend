@@ -1,5 +1,5 @@
-import Chains from "../Chains";
-import Metrics from "../Metrics";
+import Chains from "./Chains";
+import Metrics from "./Metrics";
 
 const Statitics = () => {
   return (

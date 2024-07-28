@@ -12,9 +12,9 @@ export default function HowItWorks() {
         <div className="items-center text-white rounded-lg relative overflow-hidden">
           <GradientBorder />
           <div className="bg-[#1E1E1E] dark:bg-velix-black m-0.25 p-5 lg:p-16 rounded-lg relative overflow-hidden">
-          <h2 className="font-space-grotesk font-bold text-2xl lg:text-4xl text-center mt-5 md:mt-0 lg:text-start">
-            How Velix Works: A Comprehensive Guide to Our Innovative Technology
-          </h2>
+            <h2 className="font-space-grotesk font-bold text-2xl lg:text-4xl text-center mt-5 md:mt-0 lg:text-start">
+              How Velix Works
+            </h2>
             <Steps />
             <VelixEclips className="absolute -top-64 -right-44 dark:w-full dark:h-full dark:scale-[2.5] dark:rotate-12 dark:opacity-35 dark:-right-[30rem] dark:-top-32" />
           </div>

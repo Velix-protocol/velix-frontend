@@ -1,6 +1,6 @@
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useAccount } from "wagmi";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Role } from "@/types";
 
 export default function StakingFormButtom({
