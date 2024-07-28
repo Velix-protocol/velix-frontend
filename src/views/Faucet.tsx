@@ -1,5 +1,5 @@
-import SuccessModal from "@/components/SuccessModal";
-import WaitingModal from "@/components/WaitingForApprovalModal";
+import SuccessModal from "@/components/app/SuccessModal";
+import WaitingModal from "@/components/app/WaitingForApprovalModal";
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/velix/Modal";
@@ -84,11 +84,14 @@ export default function Faucet() {
               {!isConnected
                 ? "Connect wallet"
                 : isPending
-                ? "Claiming..."
-                : "Claim now"}
+                  ? "Claiming..."
+                  : "Claim now"}
             </Button>
           </div>
-          <FaucetImage className="max-md:w-40 max-md:h-40 max-lg:w-56 max-lg:h-56 max-lg:mt-10" />
+          <FaucetImage
+            className="max-md:w-40 max-md:h-40 max-lg:w-56 max-lg:h-56 max-lg:mt-10"
+            aria-label="FaucetImage"
+          />
         </div>
       </Section>
     </>

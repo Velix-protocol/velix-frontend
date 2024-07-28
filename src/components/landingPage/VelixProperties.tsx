@@ -8,36 +8,55 @@ import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 
 const PROPERTIES = [
   {
-    icon: <Cancel className="fill-velix-primary dark:fill-primary" />,
+    icon: (
+      <Cancel
+        className="fill-velix-primary dark:fill-primary"
+        aria-label="Cancel Icon"
+      />
+    ),
     title: "Any amount",
     description: "Earn yield on any amount of veMetis staked"
   },
   {
-    icon: <OfflineBolt className="fill-velix-primary dark:fill-primary" />,
+    icon: (
+      <OfflineBolt
+        className="fill-velix-primary dark:fill-primary"
+        aria-label="OfflineBolt Icon"
+      />
+    ),
     title: "Earn rewards",
     description:
       "Watch your veMETIS grow in value over time as it earns rewards"
   },
   {
     icon: (
-      <OutBond className="rotate-[222deg] fill-velix-primary dark:fill-primary" />
+      <OutBond
+        className="rotate-[222deg] fill-velix-primary dark:fill-primary"
+        aria-label="OutBond Icon"
+      />
     ),
     title: "Easily unstake",
     description: "Unstake at any time with no minimum lock up periods"
   },
   {
     icon: (
-      <World className="fill-white dark:fill-velix-primary bg-velix-primary dark:bg-white p-1 rounded-full" />
+      <World
+        className="fill-white dark:fill-velix-primary bg-velix-primary dark:bg-white p-1 rounded-full"
+        aria-label="World Icon"
+      />
     ),
     title: "Use in Defi",
     description:
-      "Trade your veMETIS on Defi platforms and boost your liquidity rewards"
+      "Trade your favorite liquid staked token on available Defi platform to boost your liquidity rewards"
   },
   {
     icon: (
-      <OutBond className="rotate-45 fill-velix-primary dark:fill-primary" />
+      <OutBond
+        className="rotate-45 fill-velix-primary dark:fill-primary"
+        aria-label="OutBond Icon"
+      />
     ),
-    title: "Restaking veMETIS",
+    title: "Restake LST",
     description: "COMING SOON"
   }
 ];

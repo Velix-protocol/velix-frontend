@@ -1,4 +1,4 @@
-import Unstake from "@/components/section/Unstake";
+import Unstake from "@/components/app/Unstake";
 
 export default function UnstakePage() {
   return <Unstake />;

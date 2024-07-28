@@ -1,7 +1,7 @@
 import PlusMinusTable from "@/components/ui/velix/icons/PlusMinusTable";
 import ChatIcon from "@/components/ui/velix/icons/ChatIcon";
 import Copy from "@/components/ui/velix/icons/Copy";
-import MetricsCard from "./ui/velix/cards/MetricsCard";
+import MetricsCard from "../ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
 import { useAccount } from "wagmi";
@@ -35,28 +35,40 @@ export default function Metrics() {
     >
       <MetricsCard
         icon={
-          <PlusMinusTable className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <PlusMinusTable
+            className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6"
+            aria-label="PlusMinusTable Icon"
+          />
         }
         description="Annual percentage rate"
         value="20%"
       />
       <MetricsCard
         icon={
-          <ChatIcon className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <ChatIcon
+            className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6"
+            aria-label="ChatIcon Icon"
+          />
         }
         description="veMETIS market cap"
         value="--"
       />
       <MetricsCard
         icon={
-          <ChatIcon className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <ChatIcon
+            className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6"
+            aria-label="ChatIcon Icon"
+          />
         }
         description="veMetis TVL"
         value={totalValueLocked}
       />
       <MetricsCard
         icon={
-          <Copy className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <Copy
+            className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6"
+            aria-label="Copy Icon"
+          />
         }
         description={stakers <= 1 ? "Staker" : "Stakers"}
         value={stakers.toLocaleString()}
