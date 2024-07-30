@@ -9,3 +9,8 @@ export type saveStakerDto = {
   amount: number;
   referralCode?: string;
 };
+
+export type RedeemPointDto = {
+  walletAddress: string;
+  points: number;
+};
