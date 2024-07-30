@@ -48,9 +48,10 @@ export default function StakingOperations() {
   } = useStaking();
   const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
-  const { veMETISBalance, sveMETISBalance } = useBalanceStore();
+  const { veMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
+  const { getStaker } = useStakersStore();
 
   useEffect(() => {
     if (isSuccess) {
@@ -59,6 +60,7 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       getBalances();
+      getStaker(`${walletAddress}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
@@ -103,7 +105,7 @@ export default function StakingOperations() {
     await stake(amountToStake);
     await velixApi.saveStaker({
       walletAddress: walletAddress as `0x${string}`,
-      amount: Number(sveMETISBalance) + Number(amountToStake),
+      amount: Number(amountToStake),
       referralCode
     });
     const { data: stakersNumber } = await velixApi.retreiveStakersNumber();

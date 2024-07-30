@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { EXPLORER_TX_URL } from "./constant";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,4 +21,8 @@ export const converGweiToEth = (value: bigint, maxLength = 6) => {
   return (Number(value.toString()) / 1000000000000000000)
     .toString()
     .substring(0, maxLength);
+};
+
+export const viewTransactionOnExplorer = (txHash: string) => {
+  window.open(`${EXPLORER_TX_URL}${txHash}`);
 };

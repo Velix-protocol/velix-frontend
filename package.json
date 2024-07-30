@@ -4,10 +4,14 @@
   "private": true,
   "scripts": {
     "start": "serve -s dist -l 5173",
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "APP_MODE=landingPage vite",
+    "dev:app": "APP_MODE=app vite",
+    "build:landingPage": "tsc && APP_MODE=landingPage vite build",
+    "build:app": "tsc && APP_MODE=app vite build",
+    "build": "pnpm run build:landingPage && pnpm run build:app",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "preview": "vite preview",
+    "branch-name-check": "./branch-name-check.sh",
     "prepare": "npx husky install"
   },
   "dependencies": {
@@ -62,6 +66,7 @@
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.0.1",
+    "dotenv": "^16.4.5",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",

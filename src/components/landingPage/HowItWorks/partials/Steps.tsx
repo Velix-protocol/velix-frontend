@@ -1,6 +1,6 @@
 const STEPS = [
   {
-    title: "1. Mint",
+    title: "1. Mint veMETIS Tokens",
     description:
       "Mint your liquid staked token, get access to Velix protocol, participate in node staking across several chains."
   },
