@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import ThemeButton from "../ui/velix/ThemeButton";
 
-import { HiOutlineX } from 'react-icons/hi';
-import { HiChevronDown, HiMenu } from "react-icons/hi";
+import { HiOutlineX, HiChevronDown, HiMenu  } from 'react-icons/hi';
 import { useState } from "react";
 
 export default function Header() {
