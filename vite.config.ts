@@ -13,7 +13,7 @@ type AppMode = "landingPage" | "LSD";
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   define: {
-    __APP_MODE__: process.env.APP_MODE as AppMode
+    __APP_MODE__: JSON.stringify(process.env.APP_MODE as AppMode)
   },
   build: {
     outDir: path.join(__dirname, "dist/" + (process.env.APP_MODE as AppMode))
