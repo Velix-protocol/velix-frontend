@@ -16,9 +16,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="*" element={<Notfound />} />
         <Route path="/" element={<Page />}>
-          <Route path="*" element={<Notfound />} />
-          <Route path="mint" element={<MintPage />} />
+          <Route index element={<MintPage />} />
           <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />
           <Route path="dashboard" element={<DashboardPage />} />

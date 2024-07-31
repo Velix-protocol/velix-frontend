@@ -18,3 +18,5 @@ export type Staker = {
   referrerCode: string;
   amount: number;
 };
+
+export type AppMode = "landingPage" | "app";
