@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EXPLORER_TX_URL } from "./constant";
+import { APP_MODE, EXPLORER_TX_URL } from "./constant";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,3 +26,5 @@ export const converGweiToEth = (value: bigint, maxLength = 6) => {
 export const viewTransactionOnExplorer = (txHash: string) => {
   window.open(`${EXPLORER_TX_URL}${txHash}`);
 };
+
+export const isApp = () => APP_MODE === "app";
