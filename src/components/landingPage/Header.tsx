@@ -21,7 +21,10 @@ export default function Header() {
 
   const links = [
     { to: "https://docs.velix.io", text: "Docs" },
-    { to: "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf", text: "Audits" },
+    {
+      to: "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf",
+      text: "Audits"
+    },
     { to: "/app/dashboard", text: "VePoints" }
   ];
 
@@ -78,10 +81,7 @@ export default function Header() {
           >
             Launch
           </Button>
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(true)}
-          >
+          <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(true)}>
             <HiMenu className="w-6 h-6 text-white" />
           </button>
         </div>
@@ -96,10 +96,7 @@ export default function Header() {
               <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-white" />
             )}
           </Link>
-          <button
-            className="text-current"
-            onClick={() => setIsMenuOpen(false)}
-          >
+          <button className="text-current" onClick={() => setIsMenuOpen(false)}>
             <HiOutlineX className="w-6 h-6 transform rotate-180" />
           </button>
         </div>

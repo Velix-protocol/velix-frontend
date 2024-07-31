@@ -7,15 +7,15 @@ import path from "path";
 
 dotenv.config();
 
-type AppMode = "landingPage" | "LSD";
+console.log(process.env.APP_MODE);
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths(), svgr()],
   define: {
-    __APP_MODE__: JSON.stringify(process.env.APP_MODE as AppMode)
+    __APP_MODE__: JSON.stringify(process.env.APP_MODE || "")
   },
   build: {
-    outDir: path.join(__dirname, "dist/" + (process.env.APP_MODE as AppMode))
+    outDir: path.join(__dirname, "dist/" + process.env.APP_MODE)
   }
 });
