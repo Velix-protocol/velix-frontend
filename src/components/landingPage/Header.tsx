@@ -1,5 +1,4 @@
 import VelixLogo from "@/components/svg/VelixLogoGroup";
-import VelixBlackLogo from "@/components/svg/VelixPrimaryLogoBlack";
 import { useInView } from "react-intersection-observer";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
@@ -56,11 +55,7 @@ export default function Header() {
         className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
       >
         <Link to="/">
-          {theme === "light" ? (
-            <VelixBlackLogo className="w-[5.625rem] h-[1.4375rem]" />
-          ) : (
-            <VelixLogo className="w-[5.625rem] h-[1.4375rem]" />
-          )}
+          <VelixLogo className="w-[5.625rem] h-[1.4375rem]" />
         </Link>
         <div className="flex items-center gap-3">
           <div className="relative px-2 hidden lg:flex">
@@ -105,11 +100,7 @@ export default function Header() {
       <div className={drawerStyles}>
         <div className="flex justify-between items-center p-4">
           <Link to="/">
-            {theme === "light" ? (
-              <VelixBlackLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-black" />
-            ) : (
-              <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-white" />
-            )}
+            <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-white" />
           </Link>
           <button className="text-current" onClick={() => setIsMenuOpen(false)}>
             <HiOutlineX className="w-6 h-6 transform rotate-180" />
@@ -139,11 +130,7 @@ export default function Header() {
       >
         <div className="flex justify-between items-center w-full max-w-5xl xl:max-w-7xl mx-auto relative">
           <Link to="/">
-            {theme === "light" ? (
-              <VelixBlackLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-black" />
-            ) : (
-              <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-white" />
-            )}
+            <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem] text-white" />
           </Link>
           <div className="flex items-center gap-3">
             <div className="relative px-2 hidden lg:flex">
