@@ -21,12 +21,6 @@ export default function Hero() {
             >
               Stake now
             </Link>
-            <Link
-              to="/app/dashboard"
-              className="border-2 border-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
-            >
-              VePoints
-            </Link>
           </div>
         </div>
         <img
