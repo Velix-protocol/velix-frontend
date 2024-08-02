@@ -55,7 +55,7 @@ export default function Header() {
         className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
       >
         <Link to="/">
-          <VelixLogo className="w-[5.625rem] h-[1.4375rem]" />
+          <VelixLogo className="w-[4.25rem] h-4 lg:h-5 lg:w-[5rem]" />
         </Link>
         <div className="flex items-center gap-3">
           <div className="relative px-2 hidden lg:flex">
