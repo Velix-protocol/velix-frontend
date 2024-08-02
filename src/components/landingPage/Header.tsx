@@ -7,6 +7,8 @@ import ThemeButton from "../ui/velix/ThemeButton";
 import { HiOutlineX, HiChevronDown, HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
+import { VELIX_APP_ENVIRONMENT } from "@/utils/constant";
+import { velixEnvironmentUrls } from "@/utils/config";
 
 export default function Header() {
   const { ref, inView } = useInView({
@@ -33,6 +35,19 @@ export default function Header() {
   } transition-transform duration-300 ease-in-out ${
     isMenuOpen ? "translate-x-0" : "-translate-x-full"
   } z-50 flex flex-col justify-between`;
+
+  const navigateToApp = () => {
+    switch (VELIX_APP_ENVIRONMENT) {
+      case "production":
+        return (window.location.href = velixEnvironmentUrls.production.app);
+      case "staging":
+        return (window.location.href = velixEnvironmentUrls.staging.app);
+      case "development":
+      case "local":
+      default:
+        return navigate("/app/mint");
+    }
+  };
 
   return (
     <div>
@@ -76,7 +91,7 @@ export default function Header() {
             )}
           </div>
           <Button
-            onClick={() => navigate("/app/mint")}
+            onClick={() => navigateToApp()}
             className="hidden lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
             Launch
@@ -160,7 +175,7 @@ export default function Header() {
               )}
             </div>
             <Button
-              onClick={() => navigate("/app/mint")}
+              onClick={() => navigateToApp()}
               className="hidden lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
             >
               Launch
