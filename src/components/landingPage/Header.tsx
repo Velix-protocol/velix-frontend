@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import ThemeButton from "../ui/velix/ThemeButton";
-import { HiOutlineX, HiChevronDown, HiMenu } from "react-icons/hi";
+import { HiOutlineX, HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
 import { VELIX_APP_ENVIRONMENT } from "@/utils/constant";
@@ -18,7 +18,7 @@ export default function Header() {
 
   const navigate = useNavigate();
   const { theme } = useTheme();
-  const [isDropdownOpened, setIsDropDownOpened] = useState(false);
+  const [isDropdownOpened] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const links = [
@@ -27,7 +27,7 @@ export default function Header() {
       to: "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf",
       text: "Audits"
     },
-    { to: "/app/dashboard", text: "VePoints" }
+    { to: "/dashboard", text: "VePoints" }
   ];
 
   const drawerStyles = `fixed top-0 left-0 h-full w-full ${
@@ -133,7 +133,7 @@ export default function Header() {
       </div>
 
       <header
-        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-[999] items-center pt-5 pb-14 bg-velix-primary ${
+        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-[999] items-center py-5 bg-velix-primary ${
           !inView ? "!top-0 !translate-y-0 transition-all duration-200" : ""
         }`}
       >
@@ -151,17 +151,16 @@ export default function Header() {
                 data-dropdownopened={isDropdownOpened}
                 className="flex items-center gap-4 pb-2"
               >
-                <Link
-                  to="https://docs.velix.io"
-                  target="_blank"
-                  className="hidden lg:block font-space-grotesk !font-normal text-white items-center underline gap-1 relative after:absolute"
-                >
-                  Docs
-                </Link>
-                <HiChevronDown
-                  className={`hidden lg:block w-4 h-4 transition-all text-white cursor-pointer ${isDropdownOpened ? "rotate-0" : "rotate-180"}`}
-                  onClick={() => setIsDropDownOpened((prev) => !prev)}
-                />
+                {links.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    target="_blank"
+                    className="font-space-grotesk !font-normal text-white flex items-center hover:underline gap-1 relative after:absolute"
+                  >
+                    {link.text}
+                  </Link>
+                ))}
               </div>
 
               {isDropdownOpened && (
