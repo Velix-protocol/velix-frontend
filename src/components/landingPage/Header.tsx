@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import ThemeButton from "../ui/velix/ThemeButton";
 import { HiOutlineX, HiChevronDown, HiMenu } from "react-icons/hi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@/context/theme-provider";
 
 export default function Header() {
@@ -18,6 +18,18 @@ export default function Header() {
   const { theme } = useTheme();
   const [isDropdownOpened, setIsDropDownOpened] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isMenuOpen]);
 
   const links = [
     { to: "https://docs.velix.io", text: "Docs" },
