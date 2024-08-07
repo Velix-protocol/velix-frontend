@@ -11,6 +11,7 @@ import ThemeProvider from "./context/theme-provider";
 import Redeem from "./views/Redeem";
 import Reward from "./views/Reward";
 import { APP_MODE } from "./utils/constant";
+import VePoints from "./views/VePoints";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function LandingPage() {
               <Notfound isNested={window.location.pathname.includes("app")} />
             }
           />
+          <Route path="vepoints" element={<VePoints />} />
           <Route path="mint" element={<MintPage />} />
           <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />

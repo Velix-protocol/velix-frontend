@@ -11,7 +11,7 @@ import {
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
-import { ChangeEvent, Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Action } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
@@ -19,14 +19,14 @@ import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
-import { Input } from "../ui/input";
-import MaxButton from "../ui/velix/MaxButton";
-import { Button } from "../ui/button";
-import { useRedeemPoints } from "@/hooks/useHttp";
-import Modal from "../ui/velix/Modal";
-import Loader from "../ui/velix/icons/Loader";
-import SuccessModal from "./SuccessModal";
-import { viewTransactionOnExplorer } from "@/utils/utils";
+// import { Input } from "../ui/input";
+// import MaxButton from "../ui/velix/MaxButton";
+// import { Button } from "../ui/button";
+// import { useRedeemPoints } from "@/hooks/useHttp";
+// import Modal from "../ui/velix/Modal";
+// import Loader from "../ui/velix/icons/Loader";
+// import SuccessModal from "./SuccessModal";
+// import { viewTransactionOnExplorer } from "@/utils/utils";
 
 type UnstakeActivity = {
   id: string;
@@ -45,11 +45,10 @@ export default function Dashboard() {
   const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
     "mint"
   );
-  const [pointsToRedeem, setPointsToRedeem] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+  // const [pointsToRedeem, setPointsToRedeem] = useState(0);
+  // const [showModal, setShowModal] = useState(false);
   const { staker, getStaker } = useStakersStore();
-  const { isPending, isSuccess, redeemPoints, cleanup, error } =
-    useRedeemPoints();
+  // const { isPending, isSuccess, cleanup, error } = useRedeemPoints();
 
   useEffect(() => {
     getStaker(`${address}`);
@@ -71,11 +70,11 @@ export default function Dashboard() {
     void getUnstakeActivity();
   }, [actionToRetreive, address]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      setPointsToRedeem(0);
-    }
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setPointsToRedeem(0);
+  //   }
+  // }, [isSuccess]);
 
   const velixBalances = [
     {
@@ -96,31 +95,31 @@ export default function Dashboard() {
     }
   ];
 
-  const onRedeemPointsChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPointsToRedeem(Number(e.target.value));
-  };
+  // const onRedeemPointsChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setPointsToRedeem(Number(e.target.value));
+  // };
 
-  const onSetMaxValue = () => {
-    if (!staker?.stakingpoints) return;
-    setPointsToRedeem(Number(staker?.stakingpoints));
-  };
+  // const onSetMaxValue = () => {
+  //   if (!staker?.stakingpoints) return;
+  //   setPointsToRedeem(Number(staker?.stakingpoints));
+  // };
 
-  const onRedeemPoints = async () => {
-    if (pointsToRedeem === 0) return;
-    setShowModal(true);
-    await redeemPoints(pointsToRedeem);
-  };
+  // const onRedeemPoints = async () => {
+  //   if (pointsToRedeem === 0) return;
+  //   setShowModal(true);
+  //   await redeemPoints(pointsToRedeem);
+  // };
 
-  const onClose = () => {
-    if (isPending) return;
-    setShowModal(false);
-    setPointsToRedeem(0);
-    cleanup();
-  };
+  // const onClose = () => {
+  //   if (isPending) return;
+  //   setShowModal(false);
+  //   setPointsToRedeem(0);
+  //   cleanup();
+  // };
 
   return (
     <>
-      {showModal && (
+      {/* {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
             {isPending && !isSuccess && (
@@ -142,7 +141,7 @@ export default function Dashboard() {
             )}
           </div>
         </Modal>
-      )}
+      )} */}
       <Section className="mt-36 md:mt-48 px-5 pb-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
           {velixBalances.map((balance, index) => (
@@ -225,7 +224,7 @@ export default function Dashboard() {
                   Est Monthly 2023 : <b>0.000000 VeMetis</b>
                 </p>
               </div>
-              <div className="flex gap-3 w-full lg:w-1/2">
+              {/* <div className="flex gap-3 w-full lg:w-1/2">
                 <div
                   data-isamountvalid={
                     pointsToRedeem <= Number(staker?.stakingpoints ?? 0)
@@ -251,7 +250,7 @@ export default function Dashboard() {
                 >
                   Redeem
                 </Button>
-              </div>
+              </div> */}
             </div>
           )}
 

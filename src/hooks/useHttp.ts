@@ -57,7 +57,7 @@ export const useRedeemPoints = () => {
         setIsPending(false);
       }
     },
-    [address, getStaker, setError, setIsPending, setIsSuccess]
+    [address, getBalances, getStaker, setError, setIsPending, setIsSuccess]
   );
 
   const cleanup = useCallback(() => {
