@@ -22,8 +22,8 @@ function VePointDescriptionSection({
   children: ReactNode;
 }) {
   return (
-    <div className="font-space-grotesk bg-white rounded-2xl">
-      <h4 className="bg-velix-primary py-10 px-11 max-sm:px-5 max-md:text-xl max-md:py-5 text-3xl rounded-t-2xl text-white font-bold">
+    <div className="font-space-grotesk bg-white dark:bg-velix-form-dark-background rounded-2xl">
+      <h4 className="bg-velix-primary dark:bg-velix-light-dark py-10 px-11 max-sm:px-5 max-md:text-xl max-md:py-5 text-3xl rounded-t-2xl text-white font-bold">
         {title}
       </h4>
       <div className="px-11 max-md:px-5 max-md:py-5 text-velix-gray space-y-4 py-10 rounded-b-2xl max-w-[90%]">
@@ -106,7 +106,7 @@ export default function VePoints() {
 
       <Section className="max-md:mx-5 py-32">
         <div className="flex flex-col gap-10">
-          <div className="flex justify-between max-md:flex-col items-center bg-velix-primary mt-20 p-24 max-md:p-5 max-md:py-10 rounded-2xl">
+          <div className="flex justify-between max-md:flex-col items-center bg-velix-primary dark:bg-velix-form-dark-background mt-20 p-24 max-md:p-5 max-md:py-10 rounded-2xl">
             <h2 className="text-5xl max-md:text-2xl max-md:text-center max-w-[650px] text-white font-space-grotesk font-bold">
               Stake and Maximize Rewards with Velix Points, Earn & Refer
             </h2>
@@ -144,7 +144,7 @@ export default function VePoints() {
               </p>
             </VePointDescriptionSection>
           </div>
-          <div className="bg-white p-11 max-md:p-5 rounded-2xl space-y-10">
+          <div className="bg-white dark:bg-velix-form-dark-background p-11 max-md:p-5 rounded-2xl space-y-10">
             <div className="flex items-center gap-8">
               <img
                 src="/velix-icon.png"
@@ -216,7 +216,7 @@ export default function VePoints() {
                 }
                 tokenName="VePoints"
               />
-              <ArrowRightCircleFill className="fill-velix-blue w-16 h-16 max-md:w-5 max-md:h-5 max-md:rotate-90" />
+              <ArrowRightCircleFill className="fill-velix-blue dark:fill-white w-16 h-16 max-md:w-5 max-md:h-5 max-md:rotate-90" />
               <VeInput
                 disabled
                 value={pointToToken}
@@ -235,7 +235,7 @@ export default function VePoints() {
               <Button
                 onClick={onRedeemPoints}
                 disabled={isPending || !address}
-                className="py-8 w-fit px-24 max-md:py-5 max-md:w-full max-md:mt-3 font-space-grotesk disabled:opacity-60"
+                className="py-8 w-fit dark:bg-velix-dark-white px-24 max-md:py-5 max-md:w-full max-md:mt-3 font-space-grotesk disabled:opacity-60"
               >
                 Claim
               </Button>
