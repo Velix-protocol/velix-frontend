@@ -1,7 +1,7 @@
 import Section from "@/components/layouts/Section";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "../ui/button";
-import BottomBar from "./BottomBar";
+import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
 import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
@@ -34,7 +34,7 @@ export default function AppHeader() {
             />
           </Link>
           <div className="hidden lg:block">
-            <BottomBar />
+            <NavigationMenus />
           </div>
         </div>
         <div className="flex items-center gap-3">

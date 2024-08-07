@@ -14,3 +14,8 @@ export type RedeemPointDto = {
   walletAddress: string;
   points: number;
 };
+
+export type GetAmountToRedeemFromPointDto = {
+  amountToRedeem: number;
+  metisPriceToUSD: number;
+};

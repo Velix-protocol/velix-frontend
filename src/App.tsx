@@ -37,7 +37,6 @@ function LandingPage() {
       <Routes>
         <Route path="*" element={<Notfound />} />
         <Route path="/" element={<Home />} />
-        <Route path="/vepoint" element={<VePoints />} />
         <Route path="/app" element={<Page />}>
           <Route
             index
@@ -45,7 +44,7 @@ function LandingPage() {
               <Notfound isNested={window.location.pathname.includes("app")} />
             }
           />
-
+          <Route path="vepoints" element={<VePoints />} />
           <Route path="mint" element={<MintPage />} />
           <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />
