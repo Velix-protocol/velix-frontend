@@ -48,7 +48,6 @@ export default function Header() {
       <header
         ref={ref}
         className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
-        className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
       >
         <Link to="/">
           {theme === "light" ? (
@@ -58,7 +57,6 @@ export default function Header() {
           )}
         </Link>
         <div className="flex items-center gap-3">
-          <div className="relative px-2 hidden lg:flex">
           <div className="relative px-2 hidden lg:flex">
             <div
               data-dropdownopened={isDropdownOpened}
@@ -90,7 +88,6 @@ export default function Header() {
               <Link
                 to="https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf"
                 target="_blank"
-                className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                 className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
               >
                 Audit
@@ -160,7 +157,6 @@ export default function Header() {
           </Link>
           <div className="flex items-center gap-3">
             <div className="relative px-2 hidden lg:flex">
-            <div className="relative px-2 hidden lg:flex">
               <div
                 data-dropdownopened={isDropdownOpened}
                 className="flex items-center gap-4 pb-2"
@@ -182,7 +178,6 @@ export default function Header() {
                 <Link
                   to="https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf"
                   target="_blank"
-                  className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                   className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                 >
                   Audit
