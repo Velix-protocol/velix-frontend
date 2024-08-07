@@ -3,10 +3,11 @@ import UnstakeIcon from "../ui/velix/icons/UnstakeIcon";
 import TwigLightIcon from "../ui/velix/icons/TwigLightIcon";
 import AnalyticsIcon from "../ui/velix/icons/AnalyticsIcon";
 import { NavLink, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
-import { cn } from "@/utils/utils";
+import { cn, isApp } from "@/utils/utils";
+import StartIcon from "../ui/velix/icons/StartIcon";
 
 function NavigationMenuCard({
   isNotFound,
@@ -23,28 +24,42 @@ function NavigationMenuCard({
   const [activePath, setActivePath] = useState(pathname.split("/").at(-1));
 
   useEffect(() => {
-    setActivePath(pathname.split("/").at(-1));
+    setActivePath(pathname === "/" ? pathname : pathname.split("/").at(-1));
   }, [pathname]);
 
-  const applyActiveStyles = (path: string, option?: { className?: string }) => {
-    if (isNotFound)
+  const applyActiveStyles = useCallback(
+    (path: string, option?: { className?: string }) => {
+      if (isNotFound)
+        return (
+          option?.className +
+          " " +
+          "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
+        );
+
+      if (activePath === "/" && path === "mint" && isApp()) {
+        return (
+          option?.className +
+          " " +
+          "fill-velix-primary text-velix-primary dark:fill-velix-dark-white dark:text-velix-dark-white"
+        );
+      }
+
+      if (activePath === path) {
+        return (
+          option?.className +
+          " " +
+          "fill-velix-primary text-velix-primary dark:fill-velix-dark-white dark:text-velix-dark-white"
+        );
+      }
+
       return (
         option?.className +
         " " +
         "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
       );
-    if (activePath === path)
-      return (
-        option?.className +
-        " " +
-        "fill-velix-primary text-velix-primary dark:fill-velix-dark-white dark:text-velix-dark-white"
-      );
-    return (
-      option?.className +
-      " " +
-      "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
-    );
-  };
+    },
+    [activePath, isNotFound]
+  );
 
   const menuIcons = {
     mint: (
@@ -76,13 +91,25 @@ function NavigationMenuCard({
       <AnalyticsIcon
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
+    ),
+    vepoints: (
+      <StartIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
     )
   } as const;
+
+  const getTo = (path: string) => {
+    if (isApp()) {
+      return path === "mint" ? "/" : path;
+    }
+    return isNotFound ? `/app/${path}` : path;
+  };
 
   return (
     <NavLink
       relative="path"
-      to={isNotFound ? `/app/${path}` : path}
+      to={getTo(path)}
       className={cn(
         "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk",
         className
@@ -100,7 +127,7 @@ function NavigationMenuCard({
   );
 }
 
-export default function BottomBar({
+export default function NavigationMenus({
   isNotFound = false
 }: {
   isNotFound?: boolean;
@@ -112,6 +139,11 @@ export default function BottomBar({
       <NavigationMenuCard
         path="unstake"
         label="Unstake"
+        isNotFound={isNotFound}
+      />
+      <NavigationMenuCard
+        path="vepoints"
+        label="VePoints"
         isNotFound={isNotFound}
       />
       {/* <NavigationMenuCard

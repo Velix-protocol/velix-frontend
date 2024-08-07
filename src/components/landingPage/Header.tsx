@@ -48,6 +48,7 @@ export default function Header() {
       <header
         ref={ref}
         className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
+        className="flex justify-between items-center py-5 lg:py-14 z-50 relative"
       >
         <Link to="/">
           {theme === "light" ? (
@@ -58,10 +59,21 @@ export default function Header() {
         </Link>
         <div className="flex items-center gap-3">
           <div className="relative px-2 hidden lg:flex">
+          <div className="relative px-2 hidden lg:flex">
             <div
               data-dropdownopened={isDropdownOpened}
               className="flex items-center gap-4 pb-2"
             >
+              {links.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  target="_blank"
+                  className="font-space-grotesk !font-normal text-white flex items-center hover:underline gap-1 relative after:absolute"
+                >
+                  {link.text}
+                </Link>
+              ))}
               {links.map((link) => (
                 <Link
                   key={link.to}
@@ -78,6 +90,7 @@ export default function Header() {
               <Link
                 to="https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf"
                 target="_blank"
+                className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                 className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
               >
                 Audit
@@ -133,7 +146,7 @@ export default function Header() {
       </div>
 
       <header
-        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-[999] items-center pt-5 pb-14 bg-velix-primary ${
+        className={`px-5 justify-between -top-full -translate-y-full fixed left-0 right-0 z-[999] items-center py-5 bg-velix-primary ${
           !inView ? "!top-0 !translate-y-0 transition-all duration-200" : ""
         }`}
       >
@@ -146,6 +159,7 @@ export default function Header() {
             )}
           </Link>
           <div className="flex items-center gap-3">
+            <div className="relative px-2 hidden lg:flex">
             <div className="relative px-2 hidden lg:flex">
               <div
                 data-dropdownopened={isDropdownOpened}
@@ -168,6 +182,7 @@ export default function Header() {
                 <Link
                   to="https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf"
                   target="_blank"
+                  className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                   className="font-space-grotesk !font-normal absolute text-white underline flex items-center gap-1 pt-2"
                 >
                   Audit

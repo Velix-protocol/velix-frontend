@@ -1,4 +1,4 @@
-import BottomBar from "@/components/app/BottomBar";
+import NavigationMenus from "@/components/app/NavigationMenus";
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import Number from "@/components/ui/velix/icons/404";
@@ -18,7 +18,7 @@ export default function Notfound({ isNested = false }: { isNested?: boolean }) {
               <VelixPrimaryBlackLogo className="fill-velix-black dark:fill-white w-[4.25rem] h-4" />
             </Link>
             <div className="hidden lg:block">
-              <BottomBar isNotFound />
+              <NavigationMenus isNotFound />
             </div>
           </div>
         </div>

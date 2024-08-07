@@ -10,17 +10,14 @@ import {
 import { Role } from "@/types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTheme } from "@/context/theme-provider";
-import { Input } from "../ui/input";
 import MetisIcon from "../ui/velix/icons/MetisIcon";
 import SwapIcon from "../ui/velix/icons/SwapIcon";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import SveMETIS from "../ui/velix/icons/SveMETIS";
 import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
-import classNames from "classnames";
 import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
-import MaxButton from "../ui/velix/MaxButton";
-// import debounce from "debounce-promise";
+import VeInput from "../ui/velix/VeInput";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -108,13 +105,6 @@ const StakeLayout = ({
     METIS: <MetisIcon className="w-5 h-5 fill-[#00ceff]" />
   };
 
-  const inputClassName = classNames(
-    "flex items-center dark:bg-velix-form-input-dark justify-between gap-2 bg-velix-slate-blue font-space-grotesk p-2 lg:p-3 rounded-lg",
-    {
-      "border-velix-red border text-velix-red": !!error
-    }
-  );
-
   return (
     <div
       className={`mt-10 w-full lg:mt-20 ${
@@ -124,25 +114,16 @@ const StakeLayout = ({
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
-          <div className={inputClassName}>
-            <Input
-              value={value}
-              onChange={onFromValueChange}
-              type="number"
-              min={0}
-              placeholder={`0.00 ${renderFromTitles()}`}
-              className="bg-transparent text-base h-5 lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:rin"
-            />
-            <div className="shrink-0 flex gap-1">
-              <MaxButton onClick={onSetMaxValue}>max</MaxButton>
-              <p className="shrink-0 flex items-center gap-2 bg-velix-blue/5 dark:bg-velix-light-dark p-2 lg:p-3 text-sm text-velix-gray rounded-md">
-                <span>{icons?.[renderFromTitles() as never]}</span>
-                <span className="text-[0.625rem] lg:text-base">
-                  {renderFromTitles()} Amount
-                </span>
-              </p>
-            </div>
-          </div>
+          <VeInput
+            withMaxButton
+            onMaxButtonClicked={onSetMaxValue}
+            value={value}
+            onChange={onFromValueChange}
+            icon={icons?.[renderFromTitles() as never]}
+            tokenName={`${renderFromTitles()} Amount`}
+            placeholder={`0.00 ${renderFromTitles()}`}
+            error={error}
+          />
           {error && (
             <div className="bg-velix-red -mt-1 text-white font-space-grotesk text-sm w-fit px-2 py-1 rounded-md">
               {error}

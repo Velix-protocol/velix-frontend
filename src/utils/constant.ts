@@ -83,3 +83,11 @@ export const EXPLORER_TX_URL = "https://sepolia-explorer.metisdevops.link/tx/";
 export const EXPLORER_ADDRESS_URL =
   "https://sepolia-explorer.metisdevops.link/address/";
 export const MAX_INPUT_LENGTH = 10;
+
+export const APP_MODE = __APP_MODE__;
+export const VELIX_APP_ENVIRONMENT = import.meta.env
+  .VITE_VELIX_APP_ENVIRONMENT as
+  | "production"
+  | "staging"
+  | "development"
+  | "local";
