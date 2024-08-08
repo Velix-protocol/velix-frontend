@@ -17,13 +17,12 @@ export default function Hero() {
           <div className="flex items-center gap-2 max-sm:flex-col">
             <Link
               to="/app/stake"
-              className=" hidden lg:block bg-velix-yellow hover:bg-velix-yellow px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
-            >
+              className="bg-velix-yellow hover:bg-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold dark:bg-velix-dark-yellow dark:hover:bg-velix-dark-yellow dark:text-black">
               Stake now
             </Link>
             <Link
               to="/app/dashboard"
-              className="border-2 border-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
+              className="hidden border-2 border-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
             >
               VePoints
             </Link>
