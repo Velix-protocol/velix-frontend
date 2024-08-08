@@ -132,7 +132,7 @@ export default function Header() {
         </div>
         <div className="p-4 flex flex-col justify-end flex-grow">
           <div className="text-center text-xs text-neutral-500">
-            © 2023 - 2024 Velix
+            © 2023 - {new Date().getFullYear()} Velix
           </div>
         </div>
       </div>

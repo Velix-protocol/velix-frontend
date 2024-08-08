@@ -50,7 +50,7 @@ export default function Footer() {
       <Section className="bg-velix-primary dark:bg-[#101010]">
         <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white dark:text-primary font-space-grotesk">
-            © 2023 - 2024 Velix
+            © 2023 - {new Date().getFullYear()} Velix
           </span>
           <ThemeButton className="hidden lg:block" />
           <ul className="flex items-center gap-3">
