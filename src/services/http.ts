@@ -69,11 +69,8 @@ class VelixApi {
   }
 
   async getAmountToRedeemFromPoints(points: number) {
-    return await this.api.post<GetAmountToRedeemFromPointDto>(
-      "/redeem/conversation",
-      {
-        points
-      }
+    return await this.api.get<GetAmountToRedeemFromPointDto>(
+      `/redeem/convert/${points}`
     );
   }
 }
