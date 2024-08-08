@@ -7,7 +7,7 @@ import ThemeButton from "../ui/velix/ThemeButton";
 import { HiOutlineX, HiMenu } from "react-icons/hi";
 import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
-import useBodyOverflow from "@/hooks/useBodyOverflow";
+import useToggleBodyScroll from "@/hooks/useToggleBodyScroll";
 import { VELIX_APP_ENVIRONMENT } from "@/utils/constant";
 import { velixEnvironmentUrls } from "@/utils/config";
 
@@ -21,7 +21,7 @@ export default function Header() {
   const { theme } = useTheme();
   const [isDropdownOpened] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  useBodyOverflow(isMenuOpen);
+  useToggleBodyScroll(isMenuOpen);
 
   const links = [
     { to: "https://docs.velix.io", text: "Docs" },
