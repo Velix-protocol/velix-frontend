@@ -14,7 +14,7 @@ import { velixEnvironmentUrls } from "@/utils/config";
 export default function Header() {
   const { ref, inView } = useInView({
     threshold: 0.2,
-    initialInView: true,
+    initialInView: true
   });
 
   const navigate = useNavigate();
@@ -27,9 +27,9 @@ export default function Header() {
     { to: "https://docs.velix.io", text: "Docs" },
     {
       to: "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf",
-      text: "Audits",
+      text: "Audits"
     },
-    { to: "/app/dashboard", text: "VePoints" },
+    { to: "/app/vepoints", text: "VePoints" }
   ];
 
   const drawerStyles = `fixed top-0 right-0 h-full w-full ${
@@ -94,10 +94,7 @@ export default function Header() {
           >
             Launch
           </Button>
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(true)}
-          >
+          <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(true)}>
             <HiMenu className="w-6 h-6 text-white" />
           </button>
         </div>

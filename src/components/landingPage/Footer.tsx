@@ -22,11 +22,7 @@ export default function Footer() {
             <VelixBlackLogo className="dark:hidden" />
             <VelixLogo className="dark:block hidden w-[5.625rem] h-[1.4375rem]" />
             <p className="text-velix-primary dark:text-white font-space-grotesk text-[1rem] mt-5">
-              Simplified{" "}
-              <b className="font-bold">
-                staking
-                <br /> on METIS
-              </b>
+              Simplifying Liquid Staking <br /> experience across networks
             </p>
           </div>
           <div className="flex flex-col gap-6">
