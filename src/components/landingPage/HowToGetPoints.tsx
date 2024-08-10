@@ -6,9 +6,9 @@ import { VerticalBorderComponent } from "../ui/velix/VerticalBorder";
 import { cn } from "@/utils/utils";
 
 const steps = [
-  "Stake METIS at Velix and earn 1x points everyday",
-  "Supply at shoebill and earn additional 1x points everyday",
-  "Invite friends too deposit and earn up to 20% more points everyday"
+  "Stake METIS at Velix and earn 1x points <br/> everyday",
+  "Supply at shoebill and earn additional 1x points <br/> everyday",
+  "Invite friends too deposit and earn up <br/> to 20% more points everyday"
 ];
 
 const HowToGetVelixPoints = () => {
@@ -17,9 +17,10 @@ const HowToGetVelixPoints = () => {
       <div>
         <div className="font-space-grotesk">
           <Title
-            containerClassName="items-center"
-            name="How to earn points"
-            subtitle="Learn how you can easily earn point"
+            containerClassName="items-center text-center"
+            subTitleClassName="max-sm:max-w-full max-w-[60%]"
+            name="Enjoy Velix Protocol Incentives with vPoints"
+            subtitle="Accumulate vPoints redeemable for VELIX tokens by staking, and boost your earnings through first and second generation referrals. Earn additional points by providing liquidity and participating in governance voting."
           />
         </div>
         <div className="py-16 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
@@ -52,7 +53,10 @@ const HowToGetVelixPoints = () => {
                         )}
                       </div>
 
-                      <p className="text-xl my-0 py-0 -mt-1">{step}</p>
+                      <p
+                        className="text-xl my-0 py-0 -mt-1"
+                        dangerouslySetInnerHTML={{ __html: step }}
+                      />
                     </div>
                   </div>
                 ))}
