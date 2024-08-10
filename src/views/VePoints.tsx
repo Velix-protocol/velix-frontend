@@ -44,7 +44,7 @@ export default function VePoints() {
 
   useQuery({
     queryKey: ["getStaker", address],
-    queryFn: () => getStaker(`${address}`),
+    queryFn: () => getStaker(address as string),
     refetchOnWindowFocus: false
   });
 

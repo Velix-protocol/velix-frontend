@@ -51,7 +51,7 @@ export default function Dashboard() {
   // const { isPending, isSuccess, cleanup, error } = useRedeemPoints();
 
   useEffect(() => {
-    getStaker(`${address}`);
+    getStaker(address as string);
   }, [address, getStaker]);
 
   useEffect(() => {
