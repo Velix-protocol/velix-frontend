@@ -22,11 +22,7 @@ export default function Footer() {
             <VelixBlackLogo className="dark:hidden" />
             <VelixLogo className="dark:block hidden w-[5.625rem] h-[1.4375rem]" />
             <p className="text-velix-primary dark:text-white font-space-grotesk text-[1rem] mt-5">
-              Simplified{" "}
-              <b className="font-bold">
-                staking
-                <br /> on METIS
-              </b>
+              Simplifying Liquid Staking <br /> experience across networks
             </p>
           </div>
           <div className="flex flex-col gap-6">
@@ -54,7 +50,7 @@ export default function Footer() {
       <Section className="bg-velix-primary dark:bg-[#101010]">
         <div className="px-5 w-full flex justify-between items-center py-5">
           <span className="text-white dark:text-primary font-space-grotesk">
-            © 2023 - 2024 Velix
+            © 2023 - {new Date().getFullYear()} Velix
           </span>
           <ThemeButton className="hidden lg:block" />
           <ul className="flex items-center gap-3">

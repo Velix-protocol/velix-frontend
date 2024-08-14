@@ -43,4 +43,18 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
+export function throttle<T extends (...args: any[]) => any>(
+  func: T,
+  limit: number
+) {
+  let inThrottle: boolean;
+  return function (...args: Parameters<T>) {
+    if (!inThrottle) {
+      func(...args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+
 export const isApp = () => APP_MODE === "app";

@@ -9,7 +9,7 @@ import VeInput from "@/components/ui/velix/VeInput";
 import { useRedeemPoints } from "@/hooks/useHttp";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
-import { viewTransactionOnExplorer, debounce } from "@/utils/utils";
+import { viewTransactionOnExplorer, throttle } from "@/utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, Fragment, ReactNode, useState } from "react";
 import { useAccount } from "wagmi";
@@ -44,20 +44,20 @@ export default function VePoints() {
 
   useQuery({
     queryKey: ["getStaker", address],
-    queryFn: () => getStaker(`${address}`),
+    queryFn: () => getStaker(address as string),
     refetchOnWindowFocus: false
   });
 
   const onRedeemPointsChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setPointsToRedeem(e.target.value);
 
-    debounce(async () => {
+    throttle(async () => {
       console.log("debounced debounced onRedeemPointsChange");
       const res = await velixApi.getAmountToRedeemFromPoints(
         Number(e.target.value)
       );
       setPointToToken(res.data.amountToRedeem);
-    }, 500)();
+    }, 200)();
   };
 
   const onSetMaxValue = () => {

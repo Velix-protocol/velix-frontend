@@ -60,7 +60,7 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       getBalances();
-      getStaker(`${walletAddress}`);
+      getStaker(walletAddress as string);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isStaked, isSuccess]);
