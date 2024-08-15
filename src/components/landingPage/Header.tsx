@@ -119,12 +119,11 @@ export default function Header() {
               key={link.to}
               to={link.to}
               target="_blank"
-              className={`font-space-grotesk !font-normal relative pl-6 pb-2 pt-5 after:absolute after:bottom-[-5px] after:left-[-1px] after:w-[calc(100%+2px)] after:h-[1px] ${
-                link.text === "VePoints"
-                  ? "after:bg-transparent"
-                  : theme === "light"
-                  ? "after:bg-neutral-400 after:opacity-30"
-                  : "after:bg-neutral-900"
+              className={classNames("font-space-grotesk !font-normal relative pl-6 pb-2 pt-5 after:absolute after:bottom-[-5px] after:left-[-1px] after:w-[calc(100%+2px)] after:h-[1px]", {
+              "after:bg-transparent": link.text === "VePoints",
+              "after:bg-neutral-400 after:opacity-30": theme === "light",
+              ""after:bg-neutral-900":  theme !== "light",
+              })}
               }`}
             >
               {link.text}
