@@ -54,7 +54,7 @@ export default function DefiIntegration() {
               <img src="/svg/defi1.svg" alt="defDeFi integration icon 1" />
             </DefiIconCard>
             <DefiIconCard>
-              <img src="/svg/tettys1.svg" alt="Tettys stack icon" />
+              <img src="/svg/shoebillIcon.svg" alt="Tettys stack icon" />
             </DefiIconCard>
           </div>
           <div className="row-span-3 flex flex-col gap-10  justify-center  items-center">
@@ -73,7 +73,7 @@ export default function DefiIntegration() {
               <img src="/svg/pinkHead.svg" alt="pink Head icon" />
             </DefiIconCard>
             <DefiIconCard>
-              <img src="/svg/defi-velix.svg" alt="DeFi Velix icon" />
+              <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>
           </div>
         </div>

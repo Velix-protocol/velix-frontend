@@ -113,26 +113,41 @@ export default function Header() {
             <HiOutlineX className="w-6 h-6" />
           </button>
         </div>
-        <div className="flex flex-col p-4 space-y-4 flex-grow mt-16 overflow-y-auto">
+        <div className="flex flex-col space-y-7 mt-20 flex-grow overflow-hidden scrollbar-hidden">
           {links.map((link) => (
             <Link
               key={link.to}
               to={link.to}
               target="_blank"
-              className={`font-space-grotesk !font-normal relative after:absolute after:bottom-[-5px] after:left-0 after:w-full after:h-[1px] ${
-                theme === "light"
-                  ? "after:bg-gradient-to-r after:from-neutral-300 after:to-transparent"
-                  : "after:bg-neutral-800"
+              className={`font-space-grotesk !font-normal relative pl-6 pb-2 pt-5 after:absolute after:bottom-[-5px] after:left-[-1px] after:w-[calc(100%+2px)] after:h-[1px] ${
+                link.text === "VePoints"
+                  ? "after:bg-transparent"
+                  : theme === "light"
+                  ? "after:bg-neutral-400 after:opacity-30"
+                  : "after:bg-neutral-900"
               }`}
             >
               {link.text}
             </Link>
           ))}
-          <ThemeButton className="w-12 h-12 flex items-center justify-center" />
+          <ThemeButton className="w-12 h-12 flex items-center justify-center p-3 ml-4" />
         </div>
         <div className="p-4 flex flex-col justify-end flex-grow">
-          <div className="text-center text-xs text-neutral-500">
-            © 2023 - {new Date().getFullYear()} Velix
+          <div
+            className={`font-space-grotesk !font-normal relative ${
+              theme === "light" ? "text-neutral-800" : "text-neutral-300"
+            }`}
+          >
+            <div
+              className={`absolute top-[-3.5rem] left-0 w-full h-[1px] ${
+                theme === "light"
+                  ? "bg-neutral-400 opacity-30"
+                  : "bg-neutral-900"
+              } transition-opacity duration-300`}
+            />
+            <div className="p-4 mt-[-3rem]">
+              © 2023 - {new Date().getFullYear()} Velix
+            </div>
           </div>
         </div>
       </div>
