@@ -23,10 +23,10 @@ function VePointDescriptionSection({
 }) {
   return (
     <div className="font-space-grotesk bg-white dark:bg-velix-form-dark-background rounded-2xl">
-      <h4 className="bg-velix-primary dark:bg-velix-light-dark py-10 px-11 max-sm:px-5 max-md:text-xl max-md:py-5 text-3xl rounded-t-2xl text-white font-bold">
+      <h4 className="bg-velix-primary dark:bg-velix-light-dark py-10 px-11 max-sm:px-5 max-lg:text-xl max-lg:py-5 text-3xl rounded-t-2xl text-white font-bold">
         {title}
       </h4>
-      <div className="px-11 max-md:px-5 max-md:py-5 text-velix-gray space-y-4 py-10 rounded-b-2xl max-w-[90%]">
+      <div className="px-11 max-lg:px-5 max-lg:py-5 text-velix-gray space-y-4 py-10 rounded-b-2xl max-w-[90%]">
         {children}
       </div>
     </div>
@@ -104,17 +104,17 @@ export default function VePoints() {
         </Modal>
       )}
 
-      <Section className="max-md:mx-5 py-32">
+      <Section className="max-lg:mx-5 py-32">
         <div className="flex flex-col gap-10">
-          <div className="flex justify-between max-md:flex-col items-center bg-velix-primary dark:bg-velix-form-dark-background mt-20 p-24 max-md:p-5 max-md:py-10 rounded-2xl">
-            <h2 className="text-5xl max-md:text-2xl max-md:text-center max-w-[650px] text-white font-space-grotesk font-bold">
+          <div className="flex justify-between max-lg:flex-col items-center bg-velix-primary dark:bg-[#171616] mt-20 p-24 max-lg:p-5 max-lg:py-10 rounded-2xl">
+            <h2 className="text-5xl max-lg:text-2xl max-lg:text-center max-w-[650px] text-white font-space-grotesk font-bold">
               Stake and Maximize Rewards with Velix Points, Earn & Refer
             </h2>
-            <div className="w-fit mr-24 max-md:mr-0 max-md:w-32 max-md:h-32 max-md:my-10">
+            <div className="w-fit mr-24 max-lg:mr-0 max-lg:w-32 max-lg:h-32 max-lg:my-10">
               <img src="/vepoint-illustration.png" alt="vepoints" />
             </div>
           </div>
-          <div className="flex max-md:flex-col gap-10">
+          <div className="flex max-lg:flex-col gap-10">
             <VePointDescriptionSection title="Staking Points">
               <p>
                 <b>Base Points:</b> Users earn base points for every 1$ of
@@ -144,58 +144,58 @@ export default function VePoints() {
               </p>
             </VePointDescriptionSection>
           </div>
-          <div className="bg-white dark:bg-velix-form-dark-background p-11 max-md:p-5 rounded-2xl space-y-10">
+          <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
             <div className="flex items-center gap-8">
               <img
                 src="/velix-icon.png"
                 alt="velix-icon"
-                className="max-md:w-10 max-md:h-10"
+                className="max-lg:w-10 max-lg:h-10"
               />
               <div className="font-space-grotesk">
-                <h4 className="text-3xl font-bold max-md:text-xl">
+                <h4 className="text-3xl font-bold max-lg:text-xl">
                   VePoints/VELIX Token
                 </h4>
-                <p className="text-base text-velix-gray max-md:text-sm">
+                <p className="text-base text-velix-gray max-lg:text-sm">
                   Claim VePoints after 3day
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-10 max-md:flex-col max-md:gap-5">
+            <div className="flex gap-10 max-lg:flex-col max-lg:gap-5">
               <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
                 <CardContent className="p-7 space-y-2">
-                  <div className="max-md:text-sm text-xl text-velix-gray font-bold">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
                     APR
                   </div>
-                  <div className="max-md:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
                     19.77%
                   </div>
                 </CardContent>
               </Card>
               <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
                 <CardContent className="p-7 space-y-2">
-                  <div className="max-md:text-sm text-xl text-velix-gray font-bold">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
                     TVL
                   </div>
-                  <div className="max-md:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
                     $2.45 B
                   </div>
                 </CardContent>
               </Card>
               <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
                 <CardContent className="p-7 space-y-2">
-                  <div className="max-md:text-sm text-xl text-velix-gray font-bold">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
                     POINTS
                   </div>
-                  <div className="max-md:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
                     {staker?.stakingpoints}
                   </div>
                 </CardContent>
               </Card>
             </div>
-            <div className="flex items-center gap-5 max-md:gap-2 max-md:flex-col">
+            <div className="flex items-center gap-5 max-lg:gap-2 max-lg:flex-col">
               <VeInput
-                className="w-full"
+                className="w-full max-lg:-mb-3"
                 value={pointsToRedeem}
                 defaultValue={pointsToRedeem}
                 onChange={onRedeemPointsChange}
@@ -216,12 +216,12 @@ export default function VePoints() {
                 }
                 tokenName="VePoints"
               />
-              <ArrowRightCircleFill className="fill-velix-blue dark:fill-white w-16 h-16 max-md:w-5 max-md:h-5 max-md:rotate-90" />
+              <ArrowRightCircleFill className="fill-velix-blue dark:fill-white w-16 h-16 max-lg:w-5 max-lg:h-5 max-lg:rotate-90" />
               <VeInput
                 disabled
                 value={pointToToken}
                 inputFieldClassName="text-right disabled:opacity-100"
-                className="w-full flex-row-reverse"
+                className="w-full flex-row-reverse max-lg:-mt-3"
                 placeholder="0.00"
                 icon={
                   <img
@@ -235,7 +235,7 @@ export default function VePoints() {
               <Button
                 onClick={onRedeemPoints}
                 disabled={isPending || !address}
-                className="py-8 w-fit dark:bg-velix-dark-white px-24 max-md:py-5 max-md:w-full max-md:mt-3 font-space-grotesk disabled:opacity-60"
+                className="py-8 w-fit dark:bg-velix-dark-white px-24 max-lg:py-5 max-lg:w-full max-lg:mt-3 font-space-grotesk disabled:opacity-60"
               >
                 Claim
               </Button>
