@@ -94,8 +94,12 @@ export default function Header() {
           >
             Launch
           </Button>
-          <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(true)}>
-            <HiMenu className="w-6 h-6 text-white" />
+          <button className="lg:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? (
+              <HiOutlineX className="w-6 h-6 text-white" />
+            ) : (
+              <HiMenu className="w-6 h-6 text-white" />
+            )}
           </button>
         </div>
       </header>
@@ -122,9 +126,7 @@ export default function Header() {
               className={`font-space-grotesk !font-normal relative pl-6 pb-2 pt-5 after:absolute after:bottom-[-5px] after:left-[-1px] after:w-[calc(100%+2px)] after:h-[1px] ${
                 link.text === "VePoints"
                   ? "after:bg-transparent"
-                  : theme === "light"
-                  ? "after:bg-neutral-400 after:opacity-30"
-                  : "after:bg-neutral-900"
+                  : "after:bg-neutral-400 after:opacity-30 dark:after:bg-neutral-900"
               }`}
             >
               {link.text}
@@ -132,20 +134,10 @@ export default function Header() {
           ))}
           <ThemeButton className="w-12 h-12 flex items-center justify-center p-3 ml-4" />
         </div>
-        <div className="p-4 flex flex-col justify-end flex-grow">
-          <div
-            className={`font-space-grotesk !font-normal relative ${
-              theme === "light" ? "text-neutral-800" : "text-neutral-300"
-            }`}
-          >
-            <div
-              className={`absolute top-[-3.5rem] left-0 w-full h-[1px] ${
-                theme === "light"
-                  ? "bg-neutral-400 opacity-30"
-                  : "bg-neutral-900"
-              } transition-opacity duration-300`}
-            />
-            <div className="p-4 mt-[-3rem]">
+        <div className="flex flex-col justify-end flex-grow">
+          <div className="font-space-grotesk !font-normal relative text-neutral-800 dark:text-neutral-300">
+            <div className="absolute top-[-3.5rem] left-0 w-full h-[1px] bg-neutral-400 opacity-30 dark:bg-neutral-900 transition-opacity duration-300" />
+            <div className="p-6 mt-[-3rem]">
               © 2023 - {new Date().getFullYear()} Velix
             </div>
           </div>
@@ -197,9 +189,13 @@ export default function Header() {
             </Button>
             <button
               className="lg:hidden p-2"
-              onClick={() => setIsMenuOpen(true)}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <HiMenu className="w-6 h-6 text-white" />
+              {isMenuOpen ? (
+                <HiOutlineX className="w-6 h-6 text-white" />
+              ) : (
+                <HiMenu className="w-6 h-6 text-white" />
+              )}
             </button>
           </div>
         </div>
