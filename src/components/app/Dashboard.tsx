@@ -284,27 +284,29 @@ export default function Dashboard() {
                 );
               })}
             {!loading &&
-              unstakeActivity.map((data) => {
-                return (
-                  <tr
-                    onClick={() =>
-                      window.open(`${EXPLORER_TX_URL}${data.txHash}`)
-                    }
-                    key={data.amount}
-                    className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
-                  >
-                    <TableCell>
-                      {dayjs(data.createdAt.split("T")[0]).format(
-                        "MMMM D, YYYY"
-                      )}
-                    </TableCell>
-                    <TableCell>{data.amount}</TableCell>
-                    <TableCell className="truncate underline cursor-pointer">
-                      {data.txHash}
-                    </TableCell>
-                  </tr>
-                );
-              })}
+              unstakeActivity
+                .map((data) => {
+                  return (
+                    <tr
+                      onClick={() =>
+                        window.open(`${EXPLORER_TX_URL}${data.txHash}`)
+                      }
+                      key={data.amount}
+                      className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
+                    >
+                      <TableCell>
+                        {dayjs(data.createdAt.split("T")[0]).format(
+                          "MMMM D, YYYY"
+                        )}
+                      </TableCell>
+                      <TableCell>{data.amount}</TableCell>
+                      <TableCell className="truncate underline cursor-pointer">
+                        {data.txHash}
+                      </TableCell>
+                    </tr>
+                  );
+                })
+                .reverse()}
           </TableBody>
           {!loading && unstakeActivity.length === 0 && (
             <TableCaption>No transaction recorded</TableCaption>
