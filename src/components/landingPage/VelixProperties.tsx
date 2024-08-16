@@ -62,7 +62,7 @@ const PROPERTIES = [
 
 export default function VelixProperties() {
   return (
-    <Section className="mt-6 px-5">
+    <Section className="mb-6 px-5">
       <div className="font-space-grotesk flex flex-col justify-center items-center">
         <h2 className="text-[1.25rem] lg:text-4xl font-bold">Velix LSD</h2>
         <p className="text-velix-gray mt-5 text-center">
