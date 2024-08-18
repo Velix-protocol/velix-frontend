@@ -26,7 +26,7 @@ const HowToGetVelixPoints = () => {
         <div className="py-16 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
           <div className="relative p-0.25 w-full">
             <GradientBorder className="rounded-[0.9375rem] z-0 via-white/35" />
-            <div className="w-full grid max-md:grid-rows-2 md:grid-cols-2 h-fit py-20 px-10 flex-row items-center font-space-grotesk dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
+            <div className="w-full grid max-md:grid-rows-2 md:grid-cols-2 h-fit max-md:py-4 py-20 px-10 flex-row items-center font-space-grotesk dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
               <div className="flex justify-center items-center h-fit">
                 <img
                   src={"./svg/giftbox.svg"}
@@ -34,7 +34,7 @@ const HowToGetVelixPoints = () => {
                   alt="git box"
                 />
               </div>
-              <div className="mt-16">
+              <div className="mt-2 md:mt-16 max-md:px-5">
                 {steps.map((step, index) => (
                   <div
                     key={`${step}-${index}`}
