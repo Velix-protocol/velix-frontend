@@ -1,11 +1,11 @@
-import VelixBlackLogo from "@/components/svg/VelixPrimaryLogoBlack";
+import VelixBlackLogo from "@/components/ui/velix/icons/VelixPrimaryLogoBlack";
 import Section from "../layouts/Section";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import XIcon from "../ui/velix/icons/XIcon";
 import Discord from "../ui/velix/icons/Discord";
 import Telegram from "../ui/velix/icons/Telegram";
 import { FaMedium } from "react-icons/fa6";
-import VelixLogo from "@/components/svg/VelixLogoGroup";
+import VelixLogo from "@/components/ui/velix/icons/VelixLogoGroup";
 import { RoundedEclipse } from "../ui/velix/icons/VelixEclips";
 import ThemeButton from "../ui/velix/ThemeButton";
 
