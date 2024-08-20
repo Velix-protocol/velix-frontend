@@ -8,6 +8,7 @@ import Section from "@/components/layouts/Section";
 export type HeaderLink = {
   to: string;
   text: string;
+  external?: boolean;
 }[];
 
 type NavigationProps = {
@@ -42,7 +43,7 @@ export default function Navigation({
               <Link
                 key={link.to}
                 to={link.to}
-                target="_blank"
+                target={link.external ? "_blank" : "_self"}
                 className="font-space-grotesk !font-normal text-white flex items-center hover:underline gap-1 relative after:absolute"
               >
                 {link.text}

@@ -18,7 +18,7 @@ export default function SideMenu({ isMenuOpen, links }: SideMenuProps) {
           <Link
             key={link.to}
             to={link.to}
-            target="_blank"
+            target={link.external ? "_blank" : "_self"}
             className={`font-space-grotesk !font-normal relative p-7 after:absolute after:bottom-[-2px] after:left-[-1px] after:w-[calc(100%+2px)] after:h-[1px] ${
               link.text === "VePoints"
                 ? "after:bg-transparent"

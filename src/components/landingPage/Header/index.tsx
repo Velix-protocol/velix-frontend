@@ -19,12 +19,12 @@ export default function Header() {
   useToggleBodyScroll(isMenuOpen);
 
   const links = [
-    { to: "https://docs.velix.io", text: "Docs" },
+    { to: "https://docs.velix.io", text: "Docs", external: true },
     {
       to: "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-Velix-v1.0.pdf",
-      text: "Audits"
+      text: "Audits", external: true
     },
-    { to: "/app/vepoints", text: "VePoints" }
+    { to: "/app/vepoints", text: "VePoints", external: false }
   ];
 
   const navigateToApp = () => {
