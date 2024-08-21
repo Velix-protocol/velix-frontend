@@ -8,12 +8,17 @@ import {
 } from "ethers";
 
 export default class Web3Service {
-  public provider: JsonRpcProvider | BrowserProvider;
+  public provider: JsonRpcProvider | BrowserProvider | null;
 
-  constructor() {
-    this.provider = window.ethereum
-      ? new ethers.BrowserProvider(window.ethereum)
-      : new ethers.JsonRpcProvider(METIS_SEPOLIA.rpcUrls.default.http[0]);
+  constructor(ecosystem: "metis" | "starknet") {
+    if (ecosystem === "metis") {
+      this.provider = window.ethereum
+        ? new ethers.BrowserProvider(window.ethereum)
+        : new ethers.JsonRpcProvider(METIS_SEPOLIA.rpcUrls.default.http[0]);
+    } else {
+      // TODO: Will be assigned starknet provider
+      this.provider = null;
+    }
   }
 
   async contract(
@@ -21,7 +26,7 @@ export default class Web3Service {
     ABI: Interface | InterfaceAbi,
     connectedWalletAddress: `0x${string}`
   ) {
-    const signer = await this.provider.getSigner(
+    const signer = await this.provider?.getSigner(
       connectedWalletAddress ?? undefined
     );
     return new ethers.Contract(contractAddress, ABI, signer);

@@ -3,7 +3,6 @@ import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import { useTheme } from "@/context/theme-provider";
 import {
   EXPLORER_ADDRESS_URL,
-  SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS
 } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
@@ -18,6 +17,7 @@ import {
 import { useState } from "react";
 import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import { useStakersStore } from "@/store/stakers";
+import { SVEMETIS_CONTRACT_ADDRESS } from "@/utils/SVEMETIS_CONTRACT_ADDRESS.ts";
 
 export default function Chains() {
   const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =

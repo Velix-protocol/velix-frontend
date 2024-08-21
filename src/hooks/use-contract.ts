@@ -1,16 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAccount, useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  SVEMETIS_CONTRACT_ADDRESS,
-  VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMETIS_CONTRACT_ADDRESS,
-  VELIX_NFT_CONTRACT_ADDRESS,
-  velixContracts,
-  VELIX_SUPER_NFT_URL
-} from "@/utils/constant";
-import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
-import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
+import { VELIX_SUPER_NFT_URL } from "@/utils/constant";
 import {
   ContractTransactionReceipt,
   ethers,
@@ -20,10 +11,10 @@ import {
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { saveClaimNftAction } from "@/utils/supabase";
-import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
+import { supportedChains } from "@/utils/config.ts";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -45,16 +36,16 @@ const useContractHookState = () => {
   };
 };
 
-export type ContractName = keyof typeof velixContracts;
+export type ContractName = keyof typeof supportedChains.metis.contracts.testnet;
 
 export const useContract = (contactName: ContractName) => {
   const { address } = useAccount();
   if (!address) return;
-  const contractData = velixContracts[contactName];
+  const contractData = supportedChains.metis.contracts.testnet[contactName];
   if (!contractData.abi || !contractData.address) return;
 
-  return new Web3Service().contract(
-    contractData.address,
+  return new Web3Service("metis").contract(
+    contractData.address as `0x${string}`,
     contractData.abi,
     address
   );
@@ -83,7 +74,7 @@ export const useApproveMinting = () => {
       try {
         setIsPending(true);
         const tx = await contract.approve(
-          VEMETIS_MINTER_CONTRACT_ADDRESS,
+          supportedChains.metis.contracts.testnet.VEMETIS_MINTER.address,
           parseUnits(amount)
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -217,7 +208,7 @@ export const useApproveStaking = () => {
       try {
         setIsPending(true);
         const tx = await contract.approve(
-          SVEMETIS_CONTRACT_ADDRESS,
+          supportedChains.metis.contracts.testnet.SVEMETIS,
           parseUnits(amountToStake)
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -345,7 +336,7 @@ export const useApproveUnstaking = () => {
       try {
         setIsPending(true);
         const tx = await contract.approve(
-          SVEMETIS_CONTRACT_ADDRESS,
+          supportedChains.metis.contracts.testnet.SVEMETIS,
           parseUnits(amount)
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -479,9 +470,10 @@ export const useMintNft = () => {
     if (!address) return;
     try {
       setIsPending(true);
-      const contract = await new Web3Service().contract(
-        VELIX_NFT_CONTRACT_ADDRESS,
-        VELIX_NFT_CONTRACT_ABI,
+      const contract = await new Web3Service("metis").contract(
+        supportedChains.metis.contracts.testnet.VELIX_NFT
+          .address as `0x${string}`,
+        supportedChains.metis.contracts.testnet.VELIX_NFT.abi,
         address
       );
 
@@ -610,8 +602,16 @@ export const useMetisBalance = () => {
 
   const contractsDetails = useMemo(
     () => [
-      [VEMETIS_CONTRACT_ADDRESS, VEMETIS_CONTRACT_ABI, provider] as any,
-      [SVEMETIS_CONTRACT_ADDRESS, SVMETIS_CONTRACT_ABI, provider] as any
+      [
+        supportedChains.metis.contracts.testnet.VEMETIS.address,
+        supportedChains.metis.contracts.testnet.VEMETIS.abi,
+        provider
+      ] as any,
+      [
+        supportedChains.metis.contracts.testnet.SVEMETIS.address,
+        supportedChains.metis.contracts.testnet.SVEMETIS.abi,
+        provider
+      ] as any
     ],
     [provider]
   );
