@@ -69,7 +69,6 @@ export const useApproveMinting = () => {
     async (amount: string) => {
       const contract = await contractInstance;
       if (!contract) return;
-      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
@@ -134,7 +133,6 @@ export const useMint = () => {
   const mint = useCallback(
     async (amount: string) => {
       const contract = await contractInstance;
-      if (!contract) return;
       if (!contract) return;
       if (!address) return;
       try {
@@ -486,8 +484,6 @@ export const useMintNft = () => {
         VELIX_SUPER_NFT_URL,
         { from: address }
       );
-
-      console.log(tx);
 
       const txhash = (await tx.wait()) as ContractTransactionReceipt;
       console.log(txhash);
