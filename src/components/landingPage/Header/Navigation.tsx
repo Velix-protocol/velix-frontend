@@ -8,7 +8,7 @@ import Section from "@/components/layouts/Section";
 export type HeaderLink = {
   to: string;
   text: string;
-  external?: boolean;
+  external: boolean;
 }[];
 
 type NavigationProps = {
