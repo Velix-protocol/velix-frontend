@@ -16,11 +16,12 @@ import {
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
+import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
 import SuccessModal from "./SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
+import { supportedChains } from "@/utils/config";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -72,7 +73,7 @@ export default function Mint() {
   };
 
   const onViewTransaction = () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
+    window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txhash}`);
   };
 
   const onStartMinting = async () => {

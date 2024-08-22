@@ -1,10 +1,7 @@
 import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import { useTheme } from "@/context/theme-provider";
-import {
-  EXPLORER_ADDRESS_URL,
-  VEMETIS_CONTRACT_ADDRESS
-} from "@/utils/constant";
+import { VEMETIS_CONTRACT_ADDRESS } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
 import {
   ArrowUpRightFromSquare,
@@ -17,7 +14,8 @@ import {
 import { useState } from "react";
 import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import { useStakersStore } from "@/store/stakers";
-import { SVEMETIS_CONTRACT_ADDRESS } from "@/utils/SVEMETIS_CONTRACT_ADDRESS.ts";
+import { supportedChains } from "@/utils/config";
+// import { SVEMETIS_CONTRACT_ADDRESS } from "@/utils/SVEMETIS_CONTRACT_ADDRESS.ts";
 
 export default function Chains() {
   const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =
@@ -75,7 +73,9 @@ export default function Chains() {
   };
 
   const onViewChainOnExplorer = (address: string) => {
-    window.open(`${EXPLORER_ADDRESS_URL}${address}`);
+    window.open(
+      `${supportedChains.metis.explorerUrls.testnet.addressUrl}${address}`
+    );
   };
 
   const avalableChains = [
@@ -91,7 +91,7 @@ export default function Chains() {
         "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
     },
     {
-      address: SVEMETIS_CONTRACT_ADDRESS,
+      address: supportedChains.metis.contracts.testnet.SVEMETIS.address,
       symbol: "sveMETIS",
       decimals: 18,
       name: "sveMETIS",
