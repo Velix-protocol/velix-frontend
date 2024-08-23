@@ -44,7 +44,6 @@ export default function Header() {
     <div>
       <header ref={ref} className="z-50 relative">
         <Navigation
-          navigateToApp={navigateToApp}
           isMenuOpen={isMenuOpen}
           setIsMenuOpen={setIsMenuOpen}
           links={links}
