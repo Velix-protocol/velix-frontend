@@ -26,6 +26,12 @@ dependencies:
   '@radix-ui/react-switch':
     specifier: ^1.0.3
     version: 1.0.3(@types/react-dom@18.2.19)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+  '@starknet-react/chains':
+    specifier: ^0.1.7
+    version: 0.1.7
+  '@starknet-react/core':
+    specifier: ^2.9.0
+    version: 2.9.0(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1)
   '@supabase/supabase-js':
     specifier: ^2.42.0
     version: 2.42.0
@@ -60,6 +66,9 @@ dependencies:
     specifier: ^6.11.1
     version: 6.11.1
   get-starknet:
+    specifier: ^3.3.3
+    version: 3.3.3(starknet@6.12.1)
+  get-starknet-core:
     specifier: ^3.3.3
     version: 3.3.3(starknet@6.12.1)
   lodash.debounce:
@@ -4595,6 +4604,27 @@ packages:
     resolution: {integrity: sha512-WLrpK7LIaIb8Ymxu6KF/6JkGW1sso988DweWu7p5QY/3y7waBIiPvzh27D9bX5KIJNRDyOoOVoHVEKYUYWZ/RQ==}
     dev: false
 
+  /@starknet-react/chains@0.1.7:
+    resolution: {integrity: sha512-UNh97I1SvuJKaAhKOmpEk8JcWuZWMlPG/ba2HcvFYL9x/47BKndJ+Da9V+iJFtkHUjreVnajT1snsaz1XMG+UQ==}
+    dev: false
+
+  /@starknet-react/core@2.9.0(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1):
+    resolution: {integrity: sha512-UdRo454/g2lb0YsNAUJohJ2w21LlahcEXQlkWrddoKFubRY6Q0b39hec0eZOCqfU0Z1Sh7kF1XYvI5t9xL4yTQ==}
+    peerDependencies:
+      get-starknet-core: ^3.2.0
+      react: ^18.0
+      starknet: ^5.25.0
+    dependencies:
+      '@starknet-react/chains': 0.1.7
+      '@tanstack/react-query': 5.20.5(react@18.2.0)
+      eventemitter3: 5.0.1
+      get-starknet-core: 3.3.3(starknet@6.12.1)
+      immutable: 4.3.7
+      react: 18.2.0
+      starknet: 6.12.1
+      zod: 3.22.4
+    dev: false
+
   /@supabase/auth-js@2.63.0:
     resolution: {integrity: sha512-yIgcHnlgv24GxHtVGUhwGqAFDyJkPIC/xjx7HostN08A8yCy8HIfl4JEkTKyBqD1v1L05jNEJOUke4Lf4O1+Qg==}
     dependencies:
@@ -8946,6 +8976,10 @@ packages:
     hasBin: true
     dependencies:
       queue: 6.0.2
+    dev: false
+
+  /immutable@4.3.7:
+    resolution: {integrity: sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==}
     dev: false
 
   /import-fresh@2.0.0:

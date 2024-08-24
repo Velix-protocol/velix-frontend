@@ -1,6 +1,8 @@
 import { supportedChains } from "@/utils/config";
 import { createContext, ReactNode, useContext, useLayoutEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import StarknetProviderContext from "./StarknetProvider";
+import WagmiProviderContext from "./WagmiProvider";
 
 const SupportedChainsContext = createContext("");
 
@@ -20,9 +22,14 @@ export default function SupportedChainsProvider({
     }
   }, [navigate, params.ecosystem]);
 
+  const ChainProviderConteext =
+    params.ecosystem === "metis"
+      ? WagmiProviderContext
+      : StarknetProviderContext;
+
   return (
     <SupportedChainsContext.Provider value={params.ecosystem ?? ""}>
-      {children}
+      <ChainProviderConteext>{children}</ChainProviderConteext>
     </SupportedChainsContext.Provider>
   );
 }
