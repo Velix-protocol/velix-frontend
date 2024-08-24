@@ -23,6 +23,7 @@ export const velixEnvironmentUrls = {
 };
 
 export const supportedChains = {
+  starknet: {},
   metis: {
     explorerUrls: {
       testnet: {

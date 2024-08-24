@@ -1,8 +1,9 @@
 import { supportedChains } from "@/utils/config";
 import { createContext, ReactNode, useContext, useLayoutEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import StarknetProviderContext from "./StarknetProvider";
 import WagmiProviderContext from "./WagmiProvider";
+import useGetChain from "@/hooks/useGetChain";
 
 const SupportedChainsContext = createContext("");
 
@@ -13,23 +14,21 @@ export default function SupportedChainsProvider({
 }: {
   children: ReactNode;
 }) {
-  const params = useParams();
+  const chain = useGetChain();
   const navigate = useNavigate();
 
   useLayoutEffect(() => {
-    if (!Object.keys(supportedChains).includes(params.ecosystem ?? "")) {
+    if (!chain) return;
+    if (!Object.keys(supportedChains).includes(chain ?? "")) {
       navigate("/unsupported-chain", { relative: "route", replace: true });
     }
-  }, [navigate, params.ecosystem]);
-
-  const ChainProviderConteext =
-    params.ecosystem === "metis"
-      ? WagmiProviderContext
-      : StarknetProviderContext;
+  }, [navigate, chain]);
 
   return (
-    <SupportedChainsContext.Provider value={params.ecosystem ?? ""}>
-      <ChainProviderConteext>{children}</ChainProviderConteext>
+    <SupportedChainsContext.Provider value={chain ?? ""}>
+      <WagmiProviderContext>
+        <StarknetProviderContext>{children}</StarknetProviderContext>
+      </WagmiProviderContext>
     </SupportedChainsContext.Provider>
   );
 }

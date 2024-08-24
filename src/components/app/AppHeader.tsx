@@ -1,5 +1,4 @@
 import Section from "@/components/layouts/Section";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
@@ -8,9 +7,10 @@ import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
 import useChainAccount from "@/hooks/useChainAccount";
+import useConnectWallet from "@/hooks/useConnectWallet";
 
 export default function AppHeader() {
-  const { open } = useWeb3Modal();
+  const { open } = useConnectWallet();
   const { isConnected, address } = useChainAccount();
   const { data } = useBalance({
     address: address as `0x${string}`

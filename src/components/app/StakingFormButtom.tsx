@@ -1,7 +1,7 @@
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "../ui/button";
 import { Role } from "@/types";
 import useChainAccount from "@/hooks/useChainAccount";
+import useConnectWallet from "@/hooks/useConnectWallet";
 
 export default function StakingFormButtom({
   role,
@@ -18,7 +18,7 @@ export default function StakingFormButtom({
   onStake?: () => void;
   onUnstake?: () => void;
 }) {
-  const { open } = useWeb3Modal();
+  const { open } = useConnectWallet();
   const { isConnected } = useChainAccount();
 
   const onStakeOperationClick = async () => {
