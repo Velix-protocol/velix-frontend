@@ -4,14 +4,14 @@ import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "../ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
-import { useAccount } from "wagmi";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { FaGift } from "react-icons/fa6";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function Metrics() {
-  const { isConnected, address } = useAccount();
+  const { isConnected, address } = useChainAccount();
   const { setStakers, stakers, staker, getStaker } = useStakersStore();
   const { totalValueLocked } = useMetricsStore();
   useGetTotalVeMetisAssets();

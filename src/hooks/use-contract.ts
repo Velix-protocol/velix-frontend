@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAccount, useBalance } from "wagmi";
+import { useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { VELIX_SUPER_NFT_URL } from "@/utils/constant";
 import {
@@ -15,13 +15,14 @@ import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
 import { supportedChains } from "@/utils/config.ts";
+import useChainAccount from "./useChainAccount";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<any>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const { address } = useChainAccount();
 
   return {
     data,
@@ -39,7 +40,7 @@ const useContractHookState = () => {
 export type ContractName = keyof typeof supportedChains.metis.contracts.testnet;
 
 export const useContract = (contactName: ContractName) => {
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   if (!address) return;
   const contractData = supportedChains.metis.contracts.testnet[contactName];
   if (!contractData.abi || !contractData.address) return;
@@ -47,7 +48,7 @@ export const useContract = (contactName: ContractName) => {
   return new Web3Service("metis").contract(
     contractData.address as `0x${string}`,
     contractData.abi,
-    address
+    address as `0x${string}`
   );
 };
 
@@ -472,7 +473,7 @@ export const useMintNft = () => {
         supportedChains.metis.contracts.testnet.VELIX_NFT
           .address as `0x${string}`,
         supportedChains.metis.contracts.testnet.VELIX_NFT.abi,
-        address
+        address as `0x${string}`
       );
 
       // 3332 is a random number for now is just to satisfy the contract requirement,
@@ -534,7 +535,7 @@ export const useMintNft = () => {
  *
  * */
 export const useGetTotalVeMetisAssets = () => {
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const contractInstance = useContract("SVEMETIS");
   const { setTotalValueLocked } = useMetricsStore();
 
@@ -562,7 +563,7 @@ export const useGetTotalVeMetisAssets = () => {
  * @returns
  */
 export const useGetConvertToShareValue = () => {
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const contractInstance = useContract("SVEMETIS");
 
   return useCallback(
@@ -584,7 +585,7 @@ export const useGetConvertToShareValue = () => {
 };
 
 export const useMetisBalance = () => {
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
     useBalanceStore();
   const { data, refetch: fetchMETISBalance } = useBalance({

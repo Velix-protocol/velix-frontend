@@ -14,7 +14,6 @@ import {
   useMetisBalance,
   useMint
 } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
 import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/ModalButtons";
@@ -22,6 +21,7 @@ import SuccessModal from "./SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
 import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
@@ -42,7 +42,7 @@ export default function Mint() {
     reset: resetMintState,
     txhash
   } = useMint();
-  const { address: walletAddress, isConnected } = useAccount();
+  const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances } = useMetisBalance();
   const { METISBalance } = useBalanceStore();
 

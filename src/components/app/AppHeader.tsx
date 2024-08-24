@@ -3,16 +3,17 @@ import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
-import { useAccount, useBalance } from "wagmi";
+import { useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function AppHeader() {
   const { open } = useWeb3Modal();
-  const { isConnected, address } = useAccount();
+  const { isConnected, address } = useChainAccount();
   const { data } = useBalance({
-    address
+    address: address as `0x${string}`
   });
 
   const onConnectToWalletClick = async () => {

@@ -8,7 +8,6 @@ import {
   useMetisBalance,
   useStaking
 } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
@@ -23,6 +22,7 @@ import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
 import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -47,7 +47,7 @@ export default function StakingOperations() {
     reset: resetStakeState,
     txhash
   } = useStaking();
-  const { address: walletAddress, isConnected } = useAccount();
+  const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances } = useMetisBalance();
   const { veMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();

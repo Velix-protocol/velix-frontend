@@ -2,14 +2,14 @@
 import { claimFaucetToken, velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { useCallback, useState } from "react";
-import { useAccount } from "wagmi";
 import { useMetisBalance } from "./use-contract";
+import useChainAccount from "./useChainAccount";
 
 const useApiHookBaseState = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const { address } = useChainAccount();
 
   return {
     isPending,

@@ -1,4 +1,3 @@
-import { useAccount } from "wagmi";
 import Balance from "../app/Balance";
 import {
   ChangeEvent,
@@ -18,6 +17,7 @@ import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
+import useChainAccount from "@/hooks/useChainAccount";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -40,7 +40,7 @@ const StakeLayout = ({
   onSetMaxValue,
   withConvertion = true
 }: StakeLayoutProps) => {
-  const { isConnected } = useAccount();
+  const { isConnected } = useChainAccount();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { theme } = useTheme();
@@ -111,7 +111,7 @@ const StakeLayout = ({
         isConnected && "bg-velix-primary"
       } rounded-2xl`}
     >
-      <Balance role={role} isConnected={isConnected} />
+      <Balance role={role} isConnected={!!isConnected} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
           <VeInput

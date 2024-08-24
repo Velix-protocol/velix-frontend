@@ -5,7 +5,6 @@ import { Check } from "lucide-react";
 import { cn } from "@/utils/utils";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { retreiveActionsActivity, retreiveClaims } from "@/utils/supabase";
-import { useAccount } from "wagmi";
 import WaitingModal from "@/components/app/WaitingForApprovalModal";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessModal from "@/components/app/SuccessModal";
@@ -13,6 +12,7 @@ import { useMintNft } from "@/hooks/use-contract";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 
 function Requirement({
   title,
@@ -44,7 +44,7 @@ export default function Nft() {
   const [hasStaked, setHasStaked] = useState(false);
   const [hasUnstaked, setHasUnstaked] = useState(false);
   const [hasClaimed, setHasClaimed] = useState<boolean | null>(null);
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const { isPending, isSuccess, reset, txhash, mintNft } = useMintNft();
   const { width, height } = useWindowSize();
 

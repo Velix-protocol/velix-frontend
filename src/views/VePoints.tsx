@@ -6,13 +6,13 @@ import ArrowRightCircleFill from "@/components/ui/velix/icons/ArrowRightCircleFi
 import Loader from "@/components/ui/velix/icons/Loader";
 import Modal from "@/components/ui/velix/Modal";
 import VeInput from "@/components/ui/velix/VeInput";
+import useChainAccount from "@/hooks/useChainAccount";
 import { useRedeemPoints } from "@/hooks/useHttp";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { viewTransactionOnExplorer, throttle } from "@/utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, Fragment, ReactNode, useState } from "react";
-import { useAccount } from "wagmi";
 
 function VePointDescriptionSection({
   title,
@@ -37,7 +37,7 @@ export default function VePoints() {
   const { staker, getStaker } = useStakersStore();
   const { isPending, isSuccess, redeemPoints, cleanup, error, txHash } =
     useRedeemPoints();
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const [showModal, setShowModal] = useState(false);
   const [pointsToRedeem, setPointsToRedeem] = useState("");
   const [pointToToken, setPointToToken] = useState(0);
