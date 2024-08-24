@@ -1,10 +1,11 @@
+import { INFURA_API_KEY } from "@/utils/constant";
 import { sepolia } from "@starknet-react/chains";
 import {
   StarknetConfig,
-  publicProvider,
   argent,
   braavos,
   useInjectedConnectors,
+  infuraProvider,
   voyager
 } from "@starknet-react/core";
 
@@ -25,7 +26,7 @@ export default function StarknetProviderContext({
   return (
     <StarknetConfig
       chains={[sepolia]}
-      provider={publicProvider()}
+      provider={infuraProvider({ apiKey: INFURA_API_KEY })}
       connectors={connectors}
       explorer={voyager}
     >
