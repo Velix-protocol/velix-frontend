@@ -2,17 +2,17 @@ import Section from "@/components/layouts/Section";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
-import { useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
 import useChainAccount from "@/hooks/useChainAccount";
 import useConnectWallet from "@/hooks/useConnectWallet";
+import useChainBalance from "@/hooks/useChainBalance";
 
 export default function AppHeader() {
   const { open } = useConnectWallet();
   const { isConnected, address } = useChainAccount();
-  const { data } = useBalance({
+  const { data } = useChainBalance({
     address: address as `0x${string}`
   });
 
