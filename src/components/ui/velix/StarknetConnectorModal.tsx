@@ -10,8 +10,10 @@ export default function StarknetConnectorModal() {
   if (!isStarknetConnectorOpened) return <></>;
   return (
     <Modal onClose={close}>
-      <ul className="w-full flex flex-col gap-10">
-        <h2 className="text-center">Connect Wallet</h2>
+      <ul className="w-full flex flex-col gap-5">
+        <h2 className="text-center mb-5 border-b pb-5 font-bold">
+          Connect Wallet
+        </h2>
         {connectors.map((connector) => (
           <li key={connector.id}>
             <Button

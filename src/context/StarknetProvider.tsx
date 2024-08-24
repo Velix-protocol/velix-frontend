@@ -17,7 +17,7 @@ export default function StarknetProviderContext({
     // Show these connectors if the user has no connector installed.
     recommended: [argent(), braavos()],
     // Hide recommended connectors if the user has any connector installed.
-    includeRecommended: "onlyIfNoConnectors",
+    includeRecommended: "always",
     // Randomize the order of the connectors.
     order: "random"
   });
