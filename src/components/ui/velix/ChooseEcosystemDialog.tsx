@@ -1,6 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HiOutlineX } from 'react-icons/hi';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { HiOutlineX } from "react-icons/hi";
+import useToggleBodyScroll from "@/hooks/useToggleBodyScroll.ts";
+import UpArrow from "@/components/ui/velix/icons/UpArrow.tsx";
 
 type ChooseEcosystemDialogProps = {
   isOpen: boolean;
@@ -8,10 +10,11 @@ type ChooseEcosystemDialogProps = {
   onConnectToWalletClick: () => void;
 };
 
-const ChooseEcosystemDialog: React.FC<ChooseEcosystemDialogProps> = function ({ isOpen, onClose }) {
+export default function ChooseEcosystemDialog({
+  isOpen,
+  onClose
+}: ChooseEcosystemDialogProps) {
   const navigate = useNavigate();
-
-  if (!isOpen) return null;
 
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -24,49 +27,54 @@ const ChooseEcosystemDialog: React.FC<ChooseEcosystemDialogProps> = function ({ 
     onClose();
   };
 
+  useToggleBodyScroll(isOpen);
+
+  if (!isOpen) return null;
   return (
     <div
       className="fixed inset-0 flex items-center justify-center min-h-screen bg-gray-500 bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
-      <div className="bg-velix-Ecosystem rounded-[1.5rem] lg:rounded-[5rem] shadow-lg p-[2.5rem] w-80 h-auto lg:w-[37.5rem] lg:h-[25rem] md:w-[25rem] md:h-[25rem] md:rounded-[2.25rem] dark:bg-velix-form-input-dark ">
+      <div className="bg-velix-Ecosystem rounded-3xl lg:rounded-[5rem] shadow-lg p-10 w-80 h-auto lg:w-[37.5rem] lg:h-96 md:w-96 md:h-96 md:rounded-[2.25rem] dark:bg-velix-form-input-dark ">
         <div className="flex items-center justify-between mb-[0.375rem]">
           <h1 className="text-xl font-bold font-space-grotesk text-start weight-700 text-velix-black dark:text-velix-dark-white">
             Choose Ecosystem
           </h1>
           <HiOutlineX
-            className="text-velix-black cursor-pointer p-[0.25rem] rounded-md hover:bg-velix-gray-200 h-6 w-6 dark:text-velix-dark-white dark:hover:bg-velix-dark-hover"
+            className="text-velix-black cursor-pointer p-1 rounded-md hover:bg-velix-gray-200 h-6 w-6 dark:text-velix-dark-white dark:hover:bg-velix-dark-hover"
             onClick={onClose}
           />
         </div>
-        <p className="font-space-grotesk text-start text-velix-black mb-[1.25rem] lg:mb-[2.5rem] md:mb-[2.5rem] dark:text-velix-dark-white">
+        <p className="font-space-grotesk text-start text-velix-black mb-5 lg:mb-9 md:mb-9 dark:text-velix-dark-white">
           Where would you like to stake?
         </p>
         <div className="space-y-[1.5rem]">
           <button
-            onClick={() => handleNavigate('/app/metis/stake')}
-            className="w-full flex items-center justify-between px-[0.75rem] py-[1rem] sm:px-[0.75rem] sm:py-[1.25rem] bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
+            onClick={() => handleNavigate("/app/metis/stake")}
+            className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
-            <div className="flex items-center space-x-[0.5rem]">
+            <div className="flex items-center space-x-2">
               <img src="/svg/metis.svg" alt="metis arrow" />
-              <h1 className="font-bold font-space-grotesk text-velix-black dark:text-velix-dark-white">Metis</h1>
+              <h1 className="font-bold font-space-grotesk text-velix-black dark:text-velix-dark-white">
+                Metis
+              </h1>
             </div>
-            <img src="/svg/upArrow.svg" alt="Staknet arrow" />
+            <UpArrow />
           </button>
           <button
-            onClick={() => handleNavigate('/app/starknet/stake')}
-            className="w-full flex items-center justify-between px-[0.75rem] py-[1rem] sm:px-[0.75rem] sm:py-[1.25rem] bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
+            onClick={() => handleNavigate("/app/starknet/stake")}
+            className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
             <div className="flex items-center space-x-[0.5rem]">
               <img src="/svg/starknet.svg" alt="starknet icon" />
-              <h1 className="font-bold font-space-grotesk text-velix-black dark:text-velix-dark-white">Starknet</h1>
+              <h1 className="font-bold font-space-grotesk text-velix-black dark:text-velix-dark-white">
+                Starknet
+              </h1>
             </div>
-            <img src="/svg/upArrow.svg" alt="starknet arrow" />
+            <UpArrow />
           </button>
         </div>
       </div>
     </div>
   );
-};
-
-export default ChooseEcosystemDialog;
+}
