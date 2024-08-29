@@ -12,13 +12,15 @@ import Redeem from "./views/Redeem";
 import Reward from "./views/Reward";
 import { APP_MODE } from "./utils/constant";
 import VePoints from "./views/VePoints";
+import UnsupportedChain from "./views/UnsupportedChain";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/unsupported-chain" element={<UnsupportedChain />} />
         <Route path="*" element={<Notfound />} />
-        <Route path="/" element={<Page />}>
+        <Route path="/:ecosystem" element={<Page />}>
           <Route index element={<MintPage />} />
           <Route path="vepoints" element={<VePoints />} />
           <Route path="unstake" element={<UnstakePage />} />
@@ -38,7 +40,8 @@ function LandingPage() {
       <Routes>
         <Route path="*" element={<Notfound />} />
         <Route path="/" element={<Home />} />
-        <Route path="/app" element={<Page />}>
+        <Route path="/unsupported-chain" element={<UnsupportedChain />} />
+        <Route path="/app/:ecosystem" element={<Page />}>
           <Route
             index
             element={

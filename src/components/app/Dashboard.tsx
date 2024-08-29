@@ -13,12 +13,13 @@ import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
 import { Action } from "@/utils/supabase";
-import { useAccount } from "wagmi";
 import dayjs from "dayjs";
-import { EXPLORER_TX_URL } from "@/utils/constant";
+// import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
+import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 // import { Input } from "../ui/input";
 // import MaxButton from "../ui/velix/MaxButton";
 // import { Button } from "../ui/button";
@@ -39,7 +40,7 @@ type UnstakeActivity = {
 export default function Dashboard() {
   useMetisBalance();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
@@ -289,7 +290,9 @@ export default function Dashboard() {
                   return (
                     <tr
                       onClick={() =>
-                        window.open(`${EXPLORER_TX_URL}${data.txHash}`)
+                        window.open(
+                          `${supportedChains.metis.explorerUrls.testnet.txUrl}${data.txHash}`
+                        )
                       }
                       key={data.amount}
                       className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"

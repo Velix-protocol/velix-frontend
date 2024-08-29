@@ -20,3 +20,4 @@ export type Staker = {
 };
 
 export type AppMode = "landingPage" | "app";
+export type SupportedChains = "metis" | "starknet";

@@ -1,4 +1,4 @@
-import VelixLogo from "@/components/svg/VelixLogoGroup";
+import VelixLogo from "@/components/ui/velix/icons/VelixLogoGroup";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
 import { HiOutlineX, HiMenu } from "react-icons/hi";

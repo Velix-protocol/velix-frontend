@@ -2,18 +2,23 @@ import Section from "@/components/layouts/Section";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
-import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
+import useChainAccount from "@/hooks/useChainAccount";
+import useConnectWallet from "@/hooks/useConnectWallet";
+import useChainBalance from "@/hooks/useChainBalance";
 
 export default function AppHeader() {
-  const { isConnected, address } = useAccount();
-  const { open } = useWeb3Modal();
-  const { data } = useBalance({ address });
+  const { open } = useConnectWallet();
+  const { isConnected, address } = useChainAccount();
+  const { data } = useChainBalance({
+    address: address as `0x${string}`
+  });
 
-  const onConnectToWalletClick = () => open();
+  const onConnectToWalletClick = async () => {
+    await open();
+  };
 
   return (
     <Section className="px-5 fixed top-0 left-0 right-0 bg-velix-slate-blue dark:bg-velix-primary z-50">

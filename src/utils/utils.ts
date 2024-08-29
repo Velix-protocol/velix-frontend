@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { APP_MODE, EXPLORER_TX_URL } from "./constant";
+import { APP_MODE } from "./constant";
+import { supportedChains } from "@/utils/config.ts";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -25,7 +26,7 @@ export const converGweiToEth = (value: bigint, maxLength = 6) => {
 };
 
 export const viewTransactionOnExplorer = (txHash: string) => {
-  window.open(`${EXPLORER_TX_URL}${txHash}`);
+  window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txHash}`);
 };
 
 export function debounce<T extends (...args: any[]) => any>(

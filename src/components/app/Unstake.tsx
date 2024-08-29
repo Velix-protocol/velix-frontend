@@ -12,16 +12,17 @@ import {
   useMetisBalance,
   useUnstake
 } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
 import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
+import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import Loader from "../ui/velix/icons/Loader";
 import SuccessModal from "./SuccessModal";
 import ModalButtons from "../ui/velix/ModalButtons";
 import Steps from "../ui/Steps";
 import { recordStaker } from "@/utils/supabase";
 import { useStakersStore } from "@/store/stakers";
+import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -42,7 +43,7 @@ export default function Unstake() {
     reset: resetUnstakeState,
     txhash
   } = useUnstake();
-  const { address: walletAddress, isConnected } = useAccount();
+  const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
@@ -66,7 +67,7 @@ export default function Unstake() {
   }, [showModal]);
 
   const onViewTransaction = () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
+    window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txhash}`);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -92,7 +93,7 @@ export default function Unstake() {
     resetUnstakeState();
     await unstake(amountToUnstake);
     const stakers = await recordStaker(
-      walletAddress,
+      walletAddress as `0x${string}`,
       Number(sveMETISBalance) - Number(amountToUnstake)
     );
     setStakers(stakers ?? 0);

@@ -8,20 +8,21 @@ import {
   useMetisBalance,
   useStaking
 } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
+import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
 import SuccessModal from "@/components/app/SuccessModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
+import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -46,7 +47,7 @@ export default function StakingOperations() {
     reset: resetStakeState,
     txhash
   } = useStaking();
-  const { address: walletAddress, isConnected } = useAccount();
+  const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances } = useMetisBalance();
   const { veMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
@@ -74,7 +75,7 @@ export default function StakingOperations() {
   }, [showModal]);
 
   const onViewTransaction = async () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
+    window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txhash}`);
   };
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
