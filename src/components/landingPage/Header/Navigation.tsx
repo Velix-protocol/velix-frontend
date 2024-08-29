@@ -20,7 +20,8 @@ type NavigationProps = {
 export default function Navigation({
   links,
   isMenuOpen,
-  onLaunchApp
+  onLaunchApp,
+  setIsMenuOpen
 }: NavigationProps) {
   return (
     <>
@@ -58,7 +59,7 @@ export default function Navigation({
           </Button>
           <button
             className="lg:hidden p-2"
-            // onClick={() => setIsMenuOpen(!isMenuOpen)}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
               <HiOutlineX
