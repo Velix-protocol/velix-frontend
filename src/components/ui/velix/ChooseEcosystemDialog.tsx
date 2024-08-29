@@ -5,6 +5,7 @@ import useToggleBodyScroll from "@/hooks/useToggleBodyScroll.ts";
 import UpArrow from "@/components/ui/velix/icons/UpArrow.tsx";
 import { VELIX_APP_ENVIRONMENT } from "@/utils/constant.ts";
 import { velixEnvironmentUrls } from "@/utils/config.ts";
+import { SupportedChains } from "@/types/index.ts";
 
 type ChooseEcosystemDialogProps = {
   isOpen: boolean;
@@ -16,7 +17,6 @@ export default function ChooseEcosystemDialog({
   onClose
 }: ChooseEcosystemDialogProps) {
   const navigate = useNavigate();
-
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -25,21 +25,21 @@ export default function ChooseEcosystemDialog({
 
   useToggleBodyScroll(isOpen);
 
-  const navigateToApp = () => {
+  const navigateToApp = (ecosystem: SupportedChains) => {
     switch (VELIX_APP_ENVIRONMENT) {
       case "production":
-        return (window.location.href = velixEnvironmentUrls.production.app);
+        return (window.location.href = `${velixEnvironmentUrls.production.app}/${ecosystem}/stake`);
       case "staging":
-        return (window.location.href = velixEnvironmentUrls.staging.app);
+        return (window.location.href = `${velixEnvironmentUrls.staging.app}/${ecosystem}/stake`);
       case "development":
       case "local":
       default:
-        return navigate("/app/metis/stake");
+        return navigate(`/app/${ecosystem}/stake`);
     }
   };
 
-  const handleNavigate = () => {
-    navigateToApp();
+  const handleNavigate = (ecosystem: SupportedChains) => {
+    navigateToApp(ecosystem);
     onClose();
   };
 
@@ -64,7 +64,7 @@ export default function ChooseEcosystemDialog({
         </p>
         <div className="space-y-[1.5rem]">
           <button
-            onClick={handleNavigate}
+            onClick={() => handleNavigate("metis")}
             className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
             <div className="flex items-center space-x-2">
@@ -76,7 +76,7 @@ export default function ChooseEcosystemDialog({
             <UpArrow />
           </button>
           <button
-            onClick={handleNavigate}
+            onClick={() => handleNavigate("starknet")}
             className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
             <div className="flex items-center space-x-[0.5rem]">

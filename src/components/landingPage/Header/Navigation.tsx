@@ -43,7 +43,6 @@ export default function Navigation({
                 <Link
                   key={link.to}
                   to={link.to}
-                  target="_blank"
                   className="font-space-grotesk !font-normal text-white flex items-center hover:underline gap-1 relative after:absolute"
                 >
                   {link.text}
@@ -52,7 +51,7 @@ export default function Navigation({
             </div>
           </div>
           <Button
-            onClick={onLaunchApp}
+            onClick={() => onLaunchApp()}
             className="hidden lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
             Launch
