@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { HiOutlineX } from "react-icons/hi";
 import useToggleBodyScroll from "@/hooks/useToggleBodyScroll.ts";
 import UpArrow from "@/components/ui/velix/icons/UpArrow.tsx";
+import { VELIX_APP_ENVIRONMENT } from "@/utils/constant.ts";
+import { velixEnvironmentUrls } from "@/utils/config.ts";
 
 type ChooseEcosystemDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  onConnectToWalletClick: () => void;
 };
 
 export default function ChooseEcosystemDialog({
@@ -22,12 +23,25 @@ export default function ChooseEcosystemDialog({
     }
   };
 
-  const handleNavigate = (path: string) => {
-    navigate(path);
-    onClose();
+  useToggleBodyScroll(isOpen);
+
+  const navigateToApp = () => {
+    switch (VELIX_APP_ENVIRONMENT) {
+      case "production":
+        return (window.location.href = velixEnvironmentUrls.production.app);
+      case "staging":
+        return (window.location.href = velixEnvironmentUrls.staging.app);
+      case "development":
+      case "local":
+      default:
+        return navigate("/app/metis/stake");
+    }
   };
 
-  useToggleBodyScroll(isOpen);
+  const handleNavigate = () => {
+    navigateToApp();
+    onClose();
+  };
 
   if (!isOpen) return null;
   return (
@@ -50,7 +64,7 @@ export default function ChooseEcosystemDialog({
         </p>
         <div className="space-y-[1.5rem]">
           <button
-            onClick={() => handleNavigate("/app/metis/stake")}
+            onClick={handleNavigate}
             className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
             <div className="flex items-center space-x-2">
@@ -62,7 +76,7 @@ export default function ChooseEcosystemDialog({
             <UpArrow />
           </button>
           <button
-            onClick={() => handleNavigate("/app/starknet/stake")}
+            onClick={handleNavigate}
             className="w-full flex items-center justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >
             <div className="flex items-center space-x-[0.5rem]">

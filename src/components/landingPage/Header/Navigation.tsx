@@ -1,12 +1,9 @@
-import { useState } from "react";
 import VelixLogo from "@/components/svg/VelixLogoGroup";
 import { Link } from "react-router-dom";
 import { Button } from "../../ui/button";
 import { HiOutlineX, HiMenu } from "react-icons/hi";
 import { Dispatch, SetStateAction } from "react";
 import Section from "@/components/layouts/Section";
-import StarknetModal from "@/components/ui/velix/ChooseEcosystemDialog";
-import { useWeb3Modal } from "@web3modal/wagmi/react"; // Import the useWeb3Modal hook
 
 export type HeaderLink = {
   to: string;
@@ -17,24 +14,14 @@ type NavigationProps = {
   links: HeaderLink;
   isMenuOpen: boolean;
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
+  onLaunchApp: () => void;
 };
 
 export default function Navigation({
   links,
   isMenuOpen,
-  setIsMenuOpen,
+  onLaunchApp
 }: NavigationProps) {
-  const { open } = useWeb3Modal(); // Initialize the Web3Modal hook
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleLaunchClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <>
       <Section
@@ -64,14 +51,14 @@ export default function Navigation({
             </div>
           </div>
           <Button
-            onClick={handleLaunchClick}
+            onClick={onLaunchApp}
             className="hidden lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
           >
             Launch
           </Button>
           <button
             className="lg:hidden p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            // onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
               <HiOutlineX
@@ -84,9 +71,6 @@ export default function Navigation({
           </button>
         </div>
       </Section>
-
-      {/* Render the StarknetModal */}
-      <StarknetModal isOpen={isModalOpen} onClose={closeModal} onConnectToWalletClick={open} />
     </>
   );
 }

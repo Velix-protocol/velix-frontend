@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
 import Section from "@/components/layouts/Section";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
@@ -8,22 +6,14 @@ import { useAccount, useBalance } from "wagmi";
 import { converGweiToEth, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
-import ChooseEcosystemDialog from '../ui/velix/ChooseEcosystemDialog'; 
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 export default function AppHeader() {
-  const { open } = useWeb3Modal();
   const { isConnected, address } = useAccount();
+  const { open } = useWeb3Modal();
   const { data } = useBalance({ address });
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-  const onConnectToWalletClick = async () => {
-    setIsDialogOpen(true); 
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
+  const onConnectToWalletClick = () => open();
 
   return (
     <Section className="px-5 fixed top-0 left-0 right-0 bg-velix-slate-blue dark:bg-velix-primary z-50">
@@ -70,7 +60,6 @@ export default function AppHeader() {
           <ThemeButton />
         </div>
       </div>
-      <ChooseEcosystemDialog isOpen={isDialogOpen} onClose={handleDialogClose} onConnectToWalletClick={open} />
     </Section>
   );
 }
