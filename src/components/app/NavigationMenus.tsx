@@ -8,6 +8,7 @@ import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
+import useGetChain from "@/hooks/useGetChain.ts";
 
 function NavigationMenuCard({
   isNotFound,
@@ -132,9 +133,13 @@ export default function NavigationMenus({
 }: {
   isNotFound?: boolean;
 }) {
+  const chain = useGetChain();
+
   return (
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
-      <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
+      {chain === "metis" && (
+        <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
+      )}
       <NavigationMenuCard path="stake" label="Stake" isNotFound={isNotFound} />
       <NavigationMenuCard
         path="unstake"
