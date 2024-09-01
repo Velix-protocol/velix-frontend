@@ -1,11 +1,27 @@
 import Section from "../layouts/Section";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+import ChooseEcosystemDialog from "@/components/ui/velix/ChooseEcosystemDialog.tsx";
+import { useState } from "react";
 
 export default function Hero() {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
+
+  const openEcosystemDialog = () => {
+    setIsDialogOpen(true);
+  };
+
   return (
     <>
-      <Header />
+      <Header onLaunchApp={openEcosystemDialog} />
+      <ChooseEcosystemDialog
+        isOpen={isDialogOpen}
+        onClose={handleDialogClose}
+      />
       <Section className="px-5 bg-velix-primary">
         <div className="flex flex-col items-center lg:grid lg:-mt-28 h-fit lg:grid-cols-2 justify-between lg:py-28 pt-5 -mt-2">
           <div className="font-space-grotesk lg:mt-20 flex flex-col max-lg:items-center max-lg:px-5">
@@ -16,14 +32,14 @@ export default function Hero() {
               Simplifying your liquid staking experience
             </p>
             <div className="flex items-center gap-2 max-sm:flex-col">
-              <Link
-                to="/app/stake"
+              <button
+                onClick={openEcosystemDialog}
                 className="bg-velix-yellow hover:bg-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold dark:bg-velix-dark-yellow dark:hover:bg-velix-dark-yellow dark:text-black"
               >
                 Stake now
-              </Link>
+              </button>
               <Link
-                to="/app/dashboard"
+                to="/app/metis/dashboard"
                 className="hidden border-2 border-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold"
               >
                 VePoints

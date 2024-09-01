@@ -6,7 +6,7 @@ type HeaderMiniProps = {
   links: HeaderLink;
   isMenuOpen: boolean;
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
-  navigateToApp: () => void;
+  onLaunchApp: () => void;
 };
 
 export default function HeaderMini({
@@ -14,7 +14,7 @@ export default function HeaderMini({
   links,
   isMenuOpen,
   setIsMenuOpen,
-  navigateToApp
+  onLaunchApp
 }: HeaderMiniProps) {
   return (
     <header
@@ -23,9 +23,9 @@ export default function HeaderMini({
       }`}
     >
       <Navigation
+        onLaunchApp={onLaunchApp}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
-        navigateToApp={navigateToApp}
         links={links}
       />
     </header>
