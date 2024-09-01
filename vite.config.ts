@@ -4,12 +4,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import svgr from "vite-plugin-svgr";
 import dotenv from "dotenv";
 import path from "path";
-import dns from "node:dns";
 
 dotenv.config();
 
 console.log(process.env.APP_MODE);
-dns.setDefaultResultOrder("verbatim");
 
 // https://vitejs.dev/config/
 export default defineConfig({
