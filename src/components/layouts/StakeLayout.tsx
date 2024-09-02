@@ -18,6 +18,7 @@ import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
 import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -46,15 +47,16 @@ const StakeLayout = ({
   const { theme } = useTheme();
   const [convertedValue, setConvertedValue] = useState<number | string>(0);
   const getConvertToShareValue = useGetConvertToShareValue();
+  const chainToken = useChainTokens();
 
   const renderFromTitles = () => {
     switch (role) {
       case "mint":
-        return "METIS";
+        return chainToken.nativeToken;
       case "unstake":
-        return "sveMETIS";
+        return chainToken.stakedToken;
       case "stake":
-        return "veMETIS";
+        return chainToken.derivedToken;
       default:
         return "";
     }
@@ -63,11 +65,11 @@ const StakeLayout = ({
   const renderToTitles = () => {
     switch (role) {
       case "mint":
-        return "veMETIS";
+        return chainToken.derivedToken;
       case "unstake":
-        return "veMETIS";
+        return chainToken.derivedToken;
       case "stake":
-        return "sveMETIS";
+        return chainToken.stakedToken;
       default:
         return "";
     }

@@ -82,3 +82,16 @@ export const supportedChains = {
     }
   }
 };
+
+export const tokenNames = {
+  metis: {
+    nativeToken: "METIS",
+    derivedToken: "veMETIS",
+    stakedToken: "sveMETIS"
+  },
+  starknet: {
+    nativeToken: "STRK",
+    derivedToken: "STRK",
+    stakedToken: "veSTRK"
+  }
+} as const;

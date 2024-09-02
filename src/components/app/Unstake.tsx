@@ -23,6 +23,8 @@ import { recordStaker } from "@/utils/supabase";
 import { useStakersStore } from "@/store/stakers";
 import { supportedChains } from "@/utils/config";
 import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
+import useGetChain from "@/hooks/useGetChain.ts";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
@@ -47,6 +49,8 @@ export default function Unstake() {
   const { getBalances } = useMetisBalance();
   const { sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
+  const chainToken = useChainTokens();
+  const chain = useGetChain();
 
   useEffect(() => {
     if (isSuccess) {
@@ -156,7 +160,7 @@ export default function Unstake() {
               <p className="text-velix-gray text-center text-base">
                 {currentStep === 1
                   ? "Confirm this transaction on your wallet."
-                  : "unstake sveMETIS"}
+                  : `unstake ${chainToken.stakedToken}`}
               </p>
             )}
             {(error || unstakeError) && (
@@ -196,19 +200,25 @@ export default function Unstake() {
         <Section className="px-5 pb-32 lg:pb-16">
           <StakeTitleWrapper>
             <div className="w-full">
-              <Title name="Unstake METIS" subtitle="Request your veMETIS" />
+              <Title
+                name={`Unstake ${chainToken.nativeToken}`}
+                subtitle={`Request your ${chain === "metis" ? chainToken.derivedToken : chainToken.stakedToken}`}
+              />
             </div>
             <div className="w-full">
               <Title
                 name="Velix statistics"
-                subtitle="View your  veMETIS statistics."
+                subtitle={`View your ${chain === "metis" ? chainToken.derivedToken : chainToken.stakedToken} statistics.`}
               />
             </div>
           </StakeTitleWrapper>
           <AppContent>
             <div className="w-full h-fit">
               <div className="w-full block lg:hidden mt-32">
-                <Title name="Unstake METIS" subtitle="Request your veMETIS" />
+                <Title
+                  name={`Unstake ${chainToken.nativeToken}`}
+                  subtitle={`Request your ${chain === "metis" ? chainToken.derivedToken : chainToken.stakedToken}`}
+                />
               </div>
               <StakeLayout
                 onSetMaxValue={() => setAmountToUnstake(sveMETISBalance)}
@@ -231,10 +241,13 @@ export default function Unstake() {
                     }
                   />
                   {/* <StakingDetails title="Max transaction cost" value="$82.47" /> */}
-                  <StakingDetails title="Allowance" value="0.0 veMETIS" />
+                  <StakingDetails
+                    title="Allowance"
+                    value={`0.0 ${chainToken.derivedToken}`}
+                  />
                   <StakingDetails
                     title="Exchange rate"
-                    value="1 sveMETIS = 1 veMETIS"
+                    value={`1 ${chainToken.stakedToken} = 1 ${chainToken.derivedToken}`}
                   />
                   <StakingFormButtom
                     isLoading={isPending || unstakePending}

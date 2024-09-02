@@ -13,6 +13,7 @@ import { useStakersStore } from "@/store/stakers";
 import { viewTransactionOnExplorer, throttle } from "@/utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, Fragment, ReactNode, useState } from "react";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 
 function VePointDescriptionSection({
   title,
@@ -41,6 +42,7 @@ export default function VePoints() {
   const [showModal, setShowModal] = useState(false);
   const [pointsToRedeem, setPointsToRedeem] = useState("");
   const [pointToToken, setPointToToken] = useState(0);
+  const chainToken = useChainTokens();
 
   useQuery({
     queryKey: ["getStaker", address],
@@ -52,7 +54,6 @@ export default function VePoints() {
     setPointsToRedeem(e.target.value);
 
     throttle(async () => {
-      console.log("debounced debounced onRedeemPointsChange");
       const res = await velixApi.getAmountToRedeemFromPoints(
         Number(e.target.value)
       );
@@ -117,16 +118,16 @@ export default function VePoints() {
           <div className="flex max-lg:flex-col gap-10">
             <VePointDescriptionSection title="Staking Points">
               <p>
-                <b>Base Points:</b> Users earn base points for every 1$ of
-                veMETIS token staked
+                <b>Base Points:</b> Users earn base points for every 1$ of{" "}
+                {chainToken.derivedToken} token staked
               </p>
               <p>
-                <b>Base Points:</b> Users earn base points for every 1$ of
-                veMETIS token staked
+                <b>Base Points:</b> Users earn base points for every 1$ of{" "}
+                {chainToken.derivedToken} token staked
               </p>
               <p>
-                <b>Base Points:</b> Users earn base points for every 1$ of
-                veMETIS token staked
+                <b>Base Points:</b> Users earn base points for every 1$ of{" "}
+                {chainToken.derivedToken} token staked
               </p>
             </VePointDescriptionSection>
             <VePointDescriptionSection title="Referral points">
@@ -136,7 +137,7 @@ export default function VePoints() {
               </p>
               <p>
                 <b>Referral Bonus: </b> Additional points if the referred user
-                stakes METIS tokens.
+                stakes {chainToken.nativeToken} tokens.
               </p>
               <p>
                 <b>Formula:</b> Referral Points = User’s Staking Points X

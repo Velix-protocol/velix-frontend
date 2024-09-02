@@ -20,6 +20,7 @@ import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { supportedChains } from "@/utils/config";
 import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 // import { Input } from "../ui/input";
 // import MaxButton from "../ui/velix/MaxButton";
 // import { Button } from "../ui/button";
@@ -46,6 +47,7 @@ export default function Dashboard() {
   const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
     "mint"
   );
+  const chainToken = useChainTokens();
   // const [pointsToRedeem, setPointsToRedeem] = useState(0);
   // const [showModal, setShowModal] = useState(false);
   const { staker, getStaker } = useStakersStore();
@@ -79,15 +81,15 @@ export default function Dashboard() {
 
   const velixBalances = [
     {
-      name: "METIS",
+      name: chainToken.nativeToken,
       value: METISBalance
     },
     {
-      name: "veMETIS",
+      name: chainToken.derivedToken,
       value: veMETISBalance
     },
     {
-      name: "sveMETIS",
+      name: chainToken.stakedToken,
       value: sveMETISBalance
     },
     {
@@ -219,10 +221,10 @@ export default function Dashboard() {
             <div className="flex text-velix-blue dark:text-velix-dark-white flex-col rounded-t-lg -mb-2.5 bg-white dark:bg-velix-form-dark-background gap-3 px-8 py-8">
               <div className="flex max-lg:flex-col gap-3 w-full lg:w-1/2">
                 <p className="bg-velix-slate-blue w-full dark:bg-velix-light-dark p-4 rounded-lg">
-                  Est Rewards 2023 : <b>0.000000 VeMetis</b>
+                  Est Rewards 2023 : <b>0.000000 ${chainToken.derivedToken}</b>
                 </p>
                 <p className="bg-velix-slate-blue w-full dark:bg-velix-light-dark p-4 rounded-lg">
-                  Est Monthly 2023 : <b>0.000000 VeMetis</b>
+                  Est Monthly 2023 : <b>0.000000 ${chainToken.derivedToken}</b>
                 </p>
               </div>
               {/* <div className="flex gap-3 w-full lg:w-1/2">
