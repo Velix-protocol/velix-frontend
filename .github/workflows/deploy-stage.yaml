@@ -15,9 +15,9 @@ jobs:
       - name: deploy velix-frontend
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{secrets.SSH_HOST}}
-          key: ${{secrets.SSH_KEY}}
-          username: ${{secrets.SSH_USERNAME}}
+          host: ${{secrets.SSH_STAGE_HOST}}
+          key: ${{secrets.SSH_STAGE_KEY}}
+          username: ${{secrets.SSH_STAGE_USER_NAME}}
           script_stop: true
           script: |
             cd velix-frontend
