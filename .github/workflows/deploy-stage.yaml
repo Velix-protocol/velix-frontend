@@ -1,0 +1,26 @@
+name: deploy stage
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: deploy velix-frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.SSH_HOST}}
+          key: ${{secrets.SSH_KEY}}
+          username: ${{secrets.SSH_USERNAME}}
+          script_stop: true
+          script: |
+            cd velix-frontend
+            git fetch --all
+            git pull
+            sh .github/workflows/scripts/deploy-dev.sh
