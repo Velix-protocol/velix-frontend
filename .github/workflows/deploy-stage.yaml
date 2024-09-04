@@ -23,4 +23,4 @@ jobs:
             cd velix-frontend
             git fetch --all
             git pull
-            sh .github/workflows/scripts/deploy-dev.sh
+            sh .github/workflows/scripts/deploy-stage.sh
