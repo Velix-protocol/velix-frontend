@@ -9,7 +9,7 @@ pnpm install
 
 # Build the application
 echo "Building the application..."
-pnpm run build
+pnpm run build:dev
 
 # Moving the built app to linux web location
 echo "Moving the build to the www"
