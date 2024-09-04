@@ -21,6 +21,7 @@ jobs:
           script_stop: true
           script: |
             cd velix-frontend
+            git checkout staging
             git fetch --all
             git pull
             sh .github/workflows/scripts/deploy-stage.sh
