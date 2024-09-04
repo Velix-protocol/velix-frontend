@@ -13,6 +13,6 @@ pnpm run build:dev
 
 # Moving the built app to linux web location
 echo "Moving the build to the www"
-mv /dist /var/www/velix-frontend
+mv dist/ /var/www/velix-frontend
 
 echo "Deployment completed successfully!"
