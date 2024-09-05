@@ -1,0 +1,22 @@
+name: deploy production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: deploy velix-frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.SSH_PROD_HOST}}
+          key: ${{secrets.SSH_PROD_KEY}}
+          username: ${{secrets.SSH_PROD_USER_NAME}}
+          script_stop: true
+          script: |
+            cd velix-frontend
+            git checkout main
+            git fetch --all
+            git pull
+            sh .github/workflows/scripts/deploy-prod.sh
