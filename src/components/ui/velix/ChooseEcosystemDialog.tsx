@@ -49,7 +49,7 @@ export default function ChooseEcosystemDialog({
       className="fixed inset-0 flex items-center justify-center min-h-screen bg-gray-500 bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
-      <div className="bg-velix-Ecosystem rounded-3xl lg:rounded-[3.75rem] shadow-lg p-10 w-80 h-auto lg:w-[37.5rem] lg:h-96 md:w-96 md:h-96 md:rounded-[2.25rem] dark:bg-velix-form-input-dark ">
+      <div className="bg-velix-Ecosystem rounded-custom-sm lg:rounded-custom-lg shadow-lg p-10 w-80 h-auto lg:w-[37.5rem] lg:h-96 md:w-96 md:h-96 md:rounded-custom-md dark:bg-velix-form-input-dark ">
         <div className="flex items-center justify-between mb-[0.375rem]">
           <h1 className="text-xl -mt-3 font-bold font-space-grotesk text-start weight-700 text-velix-black dark:text-velix-dark-white">
             Choose Ecosystem

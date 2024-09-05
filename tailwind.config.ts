@@ -83,7 +83,11 @@ const config = {
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)"
+        sm: "calc(var(--radius) - 4px)",
+        // Adding the custom values for ChooseEcosystemDialog
+        "custom-lg": "3.75rem",
+        "custom-md": "2.25rem",
+        "custom-sm": "1.25rem"
       },
       keyframes: {
         "accordion-down": {
