@@ -11,7 +11,7 @@ export default function UpArrow(props: ComponentProps<"svg">) {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g clipPath="url(#clip0_2420_1543)">
-        <path d="M9 5V7H15.59L4 18.59L5.41 20L17 8.41V15H19V5H9Z" />
+        <path d="M1 14L14 1M14 1H5.25455M14 1V9.27273" stroke="#54616B"/>
       </g>
       <defs>
         <clipPath id="clip0_2420_1543">
