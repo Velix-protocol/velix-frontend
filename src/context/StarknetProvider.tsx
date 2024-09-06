@@ -28,6 +28,7 @@ export default function StarknetProviderContext({
       chains={[sepolia]}
       provider={infuraProvider({ apiKey: INFURA_API_KEY })}
       connectors={connectors}
+      autoConnect={true}
       explorer={voyager}
     >
       {children}

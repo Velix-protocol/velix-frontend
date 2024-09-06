@@ -26,9 +26,9 @@ export default function SupportedChainsProvider({
 
   return (
     <SupportedChainsContext.Provider value={chain ?? ""}>
-      <WagmiProviderContext>
-        <StarknetProviderContext>{children}</StarknetProviderContext>
-      </WagmiProviderContext>
+      <StarknetProviderContext>
+        <WagmiProviderContext>{children}</WagmiProviderContext>
+      </StarknetProviderContext>
     </SupportedChainsContext.Provider>
   );
 }
