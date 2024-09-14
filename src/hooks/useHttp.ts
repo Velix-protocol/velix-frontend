@@ -41,7 +41,7 @@ export const useRedeemPoints = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const res = await velixApi.redeemPoints({
+        const res = await velixApi.api.post('/redeem/points/stakes', {
           walletAddress: address,
           points
         });

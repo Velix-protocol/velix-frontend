@@ -13,6 +13,7 @@ import { viewTransactionOnExplorer, throttle } from "@/utils/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ChangeEvent, Fragment, ReactNode, useState } from "react";
 import { useAccount } from "wagmi";
+import ClaimDialog from "@/components/ui/velix/ClaimDialog";
 
 function VePointDescriptionSection({
   title,
@@ -41,6 +42,15 @@ export default function VePoints() {
   const [showModal, setShowModal] = useState(false);
   const [pointsToRedeem, setPointsToRedeem] = useState("");
   const [pointToToken, setPointToToken] = useState(0);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
+
+  const openEcosystemDialog = () => {
+    setIsDialogOpen(true);
+  };
 
   useQuery({
     queryKey: ["getStaker", address],
@@ -80,6 +90,10 @@ export default function VePoints() {
 
   return (
     <>
+      <ClaimDialog
+        isOpen={isDialogOpen}
+        onClose={handleDialogClose}
+      />
       {showModal && (
         <Modal onClose={onClose}>
           <div className="flex flex-col gap-3 items-center">
@@ -160,6 +174,106 @@ export default function VePoints() {
                 </p>
               </div>
             </div>
+            <div className="flex gap-10 max-lg:flex-col max-lg:gap-5">
+              <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
+                <CardContent className="p-7 space-y-2">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                  Amount staked
+                  </div>
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                    00.91%
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
+                <CardContent className="p-7 space-y-2">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                    Points earned
+                  </div>
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                    70
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
+                <CardContent className="p-7 space-y-2">
+                  <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                    Points to claim
+                  </div>
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                    45 
+                  </div>
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                    {staker?.stakingpoints}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="flex items-center gap-5 max-lg:gap-2 max-lg:flex-col">
+              <VeInput
+                className="w-full max-lg:-mb-3"
+                value={pointsToRedeem}
+                defaultValue={pointsToRedeem}
+                onChange={onRedeemPointsChange}
+                onMaxButtonClicked={onSetMaxValue}
+                withMaxButton
+                error={
+                  Number(pointsToRedeem) > Number(staker?.stakingpoints ?? 0)
+                    ? "error"
+                    : ""
+                }
+                placeholder="Points to claim"
+                icon={
+                  <img
+                    src="/velix-icon.png"
+                    alt="velix-icon"
+                    className="w-5 h-5"
+                  />
+                }
+                tokenName="VePoints"
+              />
+              <ArrowRightCircleFill className="fill-velix-blue dark:fill-white w-16 h-16 max-lg:w-5 max-lg:h-5 max-lg:rotate-90" />
+              <VeInput
+                disabled
+                value={pointToToken}
+                inputFieldClassName="text-right disabled:opacity-100"
+                className="w-full flex-row-reverse max-lg:-mt-3"
+                placeholder="0.00"
+                icon={
+                  <img
+                    src="/velix-token.png"
+                    alt="velix-icon"
+                    className="w-5 h-5"
+                  />
+                }
+                tokenName="VELIX Token"
+              />
+              <Button
+                onClick={openEcosystemDialog}
+                disabled={isPending || !address}
+                className="py-8 w-fit dark:bg-velix-dark-white px-24 max-lg:py-5 max-lg:w-full max-lg:mt-3 font-space-grotesk disabled:opacity-60"
+              >
+                Claim
+              </Button>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
+            <div className="flex items-center gap-8">
+              <img
+                src="/velix-icon.png"
+                alt="velix-icon"
+                className="max-lg:w-10 max-lg:h-10"
+              />
+              <div className="font-space-grotesk">
+                <h4 className="text-3xl font-bold max-lg:text-xl">
+                  Refferal points
+                </h4>
+                <p className="text-base text-velix-gray max-lg:text-sm">
+                Claim referral points
+                </p>
+              </div>
+            </div>
 
             <div className="flex gap-10 max-lg:flex-col max-lg:gap-5">
               <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
@@ -185,7 +299,10 @@ export default function VePoints() {
               <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
                 <CardContent className="p-7 space-y-2">
                   <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
-                    POINTS
+                    Staking point
+                  </div>
+                  <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
+                  4536774
                   </div>
                   <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
                     {staker?.stakingpoints}

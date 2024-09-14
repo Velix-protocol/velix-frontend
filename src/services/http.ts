@@ -63,7 +63,7 @@ class VelixApi {
   async redeemPoints(redeemData: RedeemPointDto) {
     if (!redeemData.walletAddress) return;
     return await this.api.post<ethers.TransactionResponse>(
-      "/redeem/points",
+      "/redeem/points/stakes",
       redeemData
     );
   }
