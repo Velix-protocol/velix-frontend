@@ -76,6 +76,60 @@ export const useRedeemPoints = () => {
   };
 };
 
+export const useRedeemReferralPoints = () => {
+  const {
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess,
+    address
+  } = useApiHookBaseState();
+  const { getStaker } = useStakersStore();
+  const [txHash, setTxHash] = useState("");
+  const { getBalances } = useMetisBalance();
+
+  const redeemReferralPoints = useCallback(
+    async (referralPoints: number) => {
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const res = await velixApi.api.post('/redeem/points/referral', {
+          walletAddress: address,
+          referralPoints
+        });
+        setTxHash(res?.data.hash ?? "");
+        setIsSuccess(true);
+        await getStaker(address);
+        await getBalances();
+      } catch (err: any) {
+        console.log(err.response);
+        setIsSuccess(false);
+        setError(err.response.data.message || err.message || "");
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [address, getBalances, getStaker, setError, setIsPending, setIsSuccess]
+  );
+
+  const cleanup = useCallback(() => {
+    setTxHash(""), setIsPending(false);
+    setIsSuccess(false);
+    setError(null);
+  }, [setError, setIsPending, setIsSuccess]);
+
+  return {
+    redeemReferralPoints,
+    isPending,
+    error,
+    isSuccess,
+    txHash,
+    cleanup
+  };
+};
+
 export const useFaucet = () => {
   const {
     isPending,

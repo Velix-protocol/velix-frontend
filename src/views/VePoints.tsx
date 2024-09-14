@@ -7,6 +7,7 @@ import Loader from "@/components/ui/velix/icons/Loader";
 import Modal from "@/components/ui/velix/Modal";
 import VeInput from "@/components/ui/velix/VeInput";
 import { useRedeemPoints } from "@/hooks/useHttp";
+import { useRedeemReferralPoints } from "@/hooks/useHttp";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { viewTransactionOnExplorer, throttle } from "@/utils/utils";
@@ -36,12 +37,15 @@ function VePointDescriptionSection({
 
 export default function VePoints() {
   const { staker, getStaker } = useStakersStore();
-  const { isPending, isSuccess, redeemPoints, cleanup, error, txHash } =
+  const { isPending, isSuccess, cleanup, error, txHash } =
     useRedeemPoints();
+  const {redeemReferralPoints} = useRedeemReferralPoints();
   const { address } = useAccount();
   const [showModal, setShowModal] = useState(false);
   const [pointsToRedeem, setPointsToRedeem] = useState("");
   const [pointToToken, setPointToToken] = useState(0);
+  const [referralPointsToRedeem, setReferralPointsToRedeem] = useState("");
+  const [referralPointsToToken, setReferralPointToToken] = useState(0);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleDialogClose = () => {
@@ -70,9 +74,25 @@ export default function VePoints() {
     }, 200)();
   };
 
+  const onReferralPointsChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    setReferralPointsToRedeem(e.target.value);
+
+    throttle(async () => {
+      const res = await velixApi.getAmountToRedeemFromPoints(
+        Number(e.target.value)
+      );
+      setReferralPointToToken(res.data.amountToRedeem);
+    }, 200)();
+  };
+
   const onSetMaxValue = () => {
     if (!staker?.stakingpoints) return;
     setPointsToRedeem(`${staker?.stakingpoints ?? 0}`);
+  };
+
+  const onReferralSetMaxValue = () => {
+    if (!staker?.referralPoints) return;
+    setReferralPointsToRedeem(`${staker?.referralPoints ?? 0}`);
   };
 
   const onClose = () => {
@@ -81,13 +101,17 @@ export default function VePoints() {
     setPointsToRedeem("0");
     cleanup();
   };
-
-  const onRedeemPoints = async () => {
-    if (Number(pointsToRedeem) === 0 || !address) return;
+//Do i have to use this on the claim button on the Claimdilog?
+  // const onRedeemPoints = async () => {
+  //   if (Number(pointsToRedeem) === 0 || !address) return;
+  //   setShowModal(true);
+  //   await redeemPoints(Number(pointsToRedeem));
+  // };
+  const onRedeemReferralPoints = async () => {
+    if (Number(referralPointsToRedeem) === 0 || !address) return;
     setShowModal(true);
-    await redeemPoints(Number(pointsToRedeem));
+    await redeemReferralPoints(Number(referralPointsToRedeem));
   };
-
   return (
     <>
       <ClaimDialog
@@ -170,7 +194,7 @@ export default function VePoints() {
                   VePoints/VELIX Token
                 </h4>
                 <p className="text-base text-velix-gray max-lg:text-sm">
-                  Claim VePoints after 3day
+                claim total of VePoints after 90 days
                 </p>
               </div>
             </div>
@@ -267,7 +291,7 @@ export default function VePoints() {
               />
               <div className="font-space-grotesk">
                 <h4 className="text-3xl font-bold max-lg:text-xl">
-                  Refferal points
+                  Referral points
                 </h4>
                 <p className="text-base text-velix-gray max-lg:text-sm">
                 Claim referral points
@@ -313,17 +337,17 @@ export default function VePoints() {
             <div className="flex items-center gap-5 max-lg:gap-2 max-lg:flex-col">
               <VeInput
                 className="w-full max-lg:-mb-3"
-                value={pointsToRedeem}
-                defaultValue={pointsToRedeem}
-                onChange={onRedeemPointsChange}
-                onMaxButtonClicked={onSetMaxValue}
+                value={referralPointsToRedeem}
+                defaultValue={referralPointsToRedeem}
+                onChange={onReferralPointsChange}
+                onMaxButtonClicked={onReferralSetMaxValue}
                 withMaxButton
                 error={
                   Number(pointsToRedeem) > Number(staker?.stakingpoints ?? 0)
                     ? "error"
                     : ""
                 }
-                placeholder="Points to claim"
+                placeholder="Referral points to claim"
                 icon={
                   <img
                     src="/velix-icon.png"
@@ -336,7 +360,7 @@ export default function VePoints() {
               <ArrowRightCircleFill className="fill-velix-blue dark:fill-white w-16 h-16 max-lg:w-5 max-lg:h-5 max-lg:rotate-90" />
               <VeInput
                 disabled
-                value={pointToToken}
+                value={referralPointsToToken}
                 inputFieldClassName="text-right disabled:opacity-100"
                 className="w-full flex-row-reverse max-lg:-mt-3"
                 placeholder="0.00"
@@ -350,7 +374,7 @@ export default function VePoints() {
                 tokenName="VELIX Token"
               />
               <Button
-                onClick={onRedeemPoints}
+                onClick={onRedeemReferralPoints}
                 disabled={isPending || !address}
                 className="py-8 w-fit dark:bg-velix-dark-white px-24 max-lg:py-5 max-lg:w-full max-lg:mt-3 font-space-grotesk disabled:opacity-60"
               >
