@@ -77,8 +77,8 @@ export default function Metrics() {
         icon={
           <FaGift className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
-        description="My staking points"
-        value={`${staker?.stakingpoints?.toFixed(3) ?? "--"}`}
+        description="My Referral points"
+        value={`${staker?.referralPoints?.toFixed(3) ?? "--"}`}
       />
     </div>
   );

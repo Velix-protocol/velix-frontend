@@ -161,9 +161,9 @@ export default function Dashboard() {
           ))}
           <Card className="bg-velix-slate-blue dark:bg-velix-light-dark">
             <CardContent className="p-7 space-y-2">
-              <div className="text-sm text-velix-gray">Staking points</div>
+              <div className="text-sm text-velix-gray">Referral points</div>
               <div className="text-lg font-semibold text-velix-primary dark:text-velix-dark-white">
-                {`${staker?.stakingpoints ?? "--"}`}
+                {`${staker?.referralPoints ?? "--"}`}
               </div>
             </CardContent>
           </Card>
