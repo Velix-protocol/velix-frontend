@@ -22,7 +22,7 @@ const useApiHookBaseState = () => {
   };
 };
 
-export const useRedeemPoints = () => {
+export const useClaimStakingPoints = () => {
   const {
     isPending,
     setIsPending,
@@ -36,14 +36,15 @@ export const useRedeemPoints = () => {
   const [txHash, setTxHash] = useState("");
   const { getBalances } = useMetisBalance();
 
-  const redeemPoints = useCallback(
-    async (points: number) => {
+  const claimStakingPoints = useCallback(
+    async (points: number, txHash: string) => {
       if (!address) return;
       try {
         setIsPending(true);
-        const res = await velixApi.api.post('/redeem/points/stakes', {
+        const res = await velixApi.api.post("/redeem/point/stakes", {
           walletAddress: address,
-          points
+          points,
+          txHash
         });
         setTxHash(res?.data.hash ?? "");
         setIsSuccess(true);
@@ -67,7 +68,7 @@ export const useRedeemPoints = () => {
   }, [setError, setIsPending, setIsSuccess]);
 
   return {
-    redeemPoints,
+    claimStakingPoints,
     isPending,
     error,
     isSuccess,
@@ -76,7 +77,7 @@ export const useRedeemPoints = () => {
   };
 };
 
-export const useRedeemReferralPoints = () => {
+export const useClaimReferralPoints = () => {
   const {
     isPending,
     setIsPending,
@@ -95,7 +96,7 @@ export const useRedeemReferralPoints = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const res = await velixApi.api.post('/redeem/points/referral', {
+        const res = await velixApi.api.post("/redeem/point/referral", {
           walletAddress: address,
           referralPoints
         });

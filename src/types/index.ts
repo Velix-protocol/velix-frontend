@@ -11,12 +11,22 @@ export type Staker = {
   id: string;
   createdAt: Date;
   walletAddress: string;
-  stakingpoints: number;
   referralPoints: number;
   referralCode: string;
   referralCodeCreationDate: Date;
   referrerCode: string;
   amount: number;
+};
+
+export type Stake = {
+  id: string;
+  createdAt: Date;
+  walletAddress: string;
+  amount: number;
+  txHash: string;
+  stakingPoints: number;
+  percentage: number;
+  redeemablePoints: number;
 };
 
 export type AppMode = "landingPage" | "app";
