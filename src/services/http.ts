@@ -1,4 +1,4 @@
-import { Staker } from "@/types";
+import { Stake, Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import {
   GetAmountToRedeemFromPointDto,
@@ -63,7 +63,7 @@ class VelixApi {
   async redeemPoints(redeemData: RedeemPointDto) {
     if (!redeemData.walletAddress) return;
     return await this.api.post<ethers.TransactionResponse>(
-      "/redeem/points",
+      "/redeem/points/stakes",
       redeemData
     );
   }
@@ -72,6 +72,11 @@ class VelixApi {
     return await this.api.get<GetAmountToRedeemFromPointDto>(
       `/redeem/convert/${points}`
     );
+  }
+
+  async getRedeemableStakeTransactions(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<Stake[]>(`/stake/redeemable/${walletAddress}`);
   }
 }
 
