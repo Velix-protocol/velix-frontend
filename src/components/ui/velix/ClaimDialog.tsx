@@ -80,7 +80,7 @@ export default function ClaimDialog({
                 <label className="w-full flex items-center justify-between px-3 sm:px-4 py-3 sm:py-4 bg-gray-100 hover:bg-gray-200 rounded-xl transition dark:bg-velix-claim-gray2 dark:hover:bg-velix-claim-gray3">
                   <div className="flex items-center space-x-2 sm:space-x-3">
                     <small
-                      className={`flex items-center justify-center rounded-full border text-${stakingColorAccordingToRedeemablePercentage?.[stake.percentage]} border-${stakingColorAccordingToRedeemablePercentage?.[stake.percentage]} dark:text-white  px-2 py-1 font-space-grotesk text-xs sm:text-sm`}
+                      className={`flex items-center justify-center text-${stakingColorAccordingToRedeemablePercentage?.[stake.percentage]} border-${stakingColorAccordingToRedeemablePercentage?.[stake.percentage]} dark:text-white  px-2 py-1 font-space-grotesk text-xs sm:text-sm`}
                     >
                       {stake.redeemablePoints} over {stake.stakingPoints}{" "}
                       {"points earned"}
