@@ -1,9 +1,9 @@
 import Section from "@/components/layouts/Section";
 import Cancel from "@/components/ui/velix/icons/Cancel";
 import VelixCard from "@/components/ui/velix/cards/VelixCard";
-import OfflineBolt from "@/components/svg/OfflineBolt";
+import OfflineBolt from "@/components/ui/velix/icons/OfflineBolt";
 import OutBond from "@/components/svg/Outbond";
-import World from "@/components/svg/WorldIcon";
+import World from "@/components/ui/velix/icons/WorldIcon";
 import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 
 const PROPERTIES = [
@@ -15,7 +15,7 @@ const PROPERTIES = [
       />
     ),
     title: "Any amount",
-    description: "Earn yield on any amount of veMetis staked"
+    description: "Earn yield on any amount of your native token staked"
   },
   {
     icon: (
@@ -25,8 +25,7 @@ const PROPERTIES = [
       />
     ),
     title: "Earn rewards",
-    description:
-      "Watch your veMETIS grow in value over time as it earns rewards"
+    description: "Watch your LST grow in value over time while it earns rewards"
   },
   {
     icon: (
@@ -63,18 +62,15 @@ const PROPERTIES = [
 
 export default function VelixProperties() {
   return (
-    <Section className="mt-6 px-5">
+    <Section className="mb-6 px-5">
       <div className="font-space-grotesk flex flex-col justify-center items-center">
         <h2 className="text-[1.25rem] lg:text-4xl font-bold">Velix LSD</h2>
         <p className="text-velix-gray mt-5 text-center">
-          Stake Metis ,earn rewards in VeMetis while contributing to METIS
-          decentralization
+          Stake your tokens, earn rewards, and contribute to the
+          decentralization of the network.
         </p>
       </div>
       <div className="grid grid-cols-1 relative sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-16">
-        {/* <p className="absolute -top-5 lg:top-[unset] text-xs lg:-bottom-5 text-velix-slate-green font-medium bg-velix-slate-green/20 z-50 right-0 left-0 font-space-grotesk px-10 rounded-[5px] mx-auto py-2 w-fit">
-          Coming Soon
-        </p> */}
         {PROPERTIES.map((property) => {
           return (
             <VelixCard

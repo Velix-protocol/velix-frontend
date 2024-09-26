@@ -1,7 +1,6 @@
 import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 import { cn } from "@/utils/utils";
 import { ReactNode } from "react";
-import HermesProtocolIcon from "@/components/svg/hermes-protocol.svg?react";
 
 function DefiIconCard({
   children,
@@ -49,31 +48,19 @@ export default function DefiIntegration() {
           </span>
         </h2>
         <div className="grid max-[380px]:grid-cols-3 grid-cols-3 grid-rows-3 lg:max-w-[21rem] gap-5 mt-16 justify-center items-center">
-          <div className="row-span-3 flex flex-col justify-center  items-center gap-10">
+          <div className="row-span-3 flex flex-col justify-center items-center gap-10"> 
             <DefiIconCard>
-              <img src="/svg/defi1.svg" alt="defDeFi integration icon 1" />
-            </DefiIconCard>
-            <DefiIconCard>
-              <img src="/svg/tettys1.svg" alt="Tettys stack icon" />
-            </DefiIconCard>
-          </div>
-          <div className="row-span-3 flex flex-col gap-10  justify-center  items-center">
-            <DefiIconCard>
-              <img src="/svg/wagmi.svg" alt="wagmi logo" />
-            </DefiIconCard>
-            <DefiIconCard imageContainerClassName="w-14 h-14">
-              <img src="/svg/herculeProtocol.svg" alt="hercule protocol logo" />
-            </DefiIconCard>
-            <DefiIconCard imageContainerClassName="w-14 h-14">
-              <HermesProtocolIcon />
+              <img src="/svg/shoebillIcon.svg" alt="Tettys stack icon" />
             </DefiIconCard>
           </div>
           <div className="row-span-3 flex flex-col gap-10 justify-center items-center">
-            <DefiIconCard>
-              <img src="/svg/pinkHead.svg" alt="pink Head icon" />
+            <DefiIconCard imageContainerClassName="w-14 h-14">
+              <img src="/svg/herculeProtocol.svg" alt="hercule protocol logo" />
             </DefiIconCard>
+          </div>
+          <div className="row-span-3 flex flex-col gap-10 justify-center items-center"> 
             <DefiIconCard>
-              <img src="/svg/defi-velix.svg" alt="DeFi Velix icon" />
+              <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>
           </div>
         </div>

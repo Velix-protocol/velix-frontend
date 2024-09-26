@@ -22,6 +22,19 @@ const config = {
         "space-grotesk": "space-grotesk"
       },
       colors: {
+        "velix-claim":"#F5F7FF",
+        "velix-claim-green":"#2EA857",
+        "velix-claim-blue":"#12CBE5",
+        "velix-claim-grey":"#90919C",
+        "velix-claim-red":"#FF1723",
+        "velix-claim-gray":"#272727",
+        "velix-claim-gray2":"#343434",
+        "velix-claim-gray3":"#3F3F3F",
+        "velix-text-gray":"#54616B",
+        "velix-claim-green-bg":"#E6FAED",
+        "velix-claim-blue-bg":"#ECFBFD",
+        "velix-claim-grey-bg":"#F7F7F7",
+        "velix-claim-red-bg":"#FFF3F0",
         "velix-blue": "#0000fe",
         "velix-primary": "var(--velix-primary)",
         "velix-yellow": "var(--velix-yellow)",
@@ -74,7 +87,10 @@ const config = {
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)"
+        sm: "calc(var(--radius) - 4px)",
+        "custom-lg": "60px",
+        "custom-md": "30px",
+        "custom-sm": "16px"
       },
       keyframes: {
         "accordion-down": {

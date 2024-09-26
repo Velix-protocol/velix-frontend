@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
+import StartIcon from "../ui/velix/icons/StartIcon";
 
 function NavigationMenuCard({
   isNotFound,
@@ -90,6 +91,11 @@ function NavigationMenuCard({
       <AnalyticsIcon
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
+    ),
+    vepoints: (
+      <StartIcon
+        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+      />
     )
   } as const;
 
@@ -121,7 +127,7 @@ function NavigationMenuCard({
   );
 }
 
-export default function BottomBar({
+export default function NavigationMenus({
   isNotFound = false
 }: {
   isNotFound?: boolean;
@@ -133,6 +139,11 @@ export default function BottomBar({
       <NavigationMenuCard
         path="unstake"
         label="Unstake"
+        isNotFound={isNotFound}
+      />
+      <NavigationMenuCard
+        path="vepoints"
+        label="VePoints"
         isNotFound={isNotFound}
       />
       {/* <NavigationMenuCard

@@ -6,9 +6,9 @@ import { VerticalBorderComponent } from "../ui/velix/VerticalBorder";
 import { cn } from "@/utils/utils";
 
 const steps = [
-  "Stake METIS at Velix and earn 1x points everyday",
-  "Supply at shoebill and earn additional 1x points everyday",
-  "Invite friends too deposit and earn up to 20% more points everyday"
+  "Stake METIS at Velix and earn 1x points <br/> everyday",
+  "Supply at shoebill and earn additional 1x points <br/> everyday",
+  "Invite friends too deposit and earn up <br/> to 20% more points everyday"
 ];
 
 const HowToGetVelixPoints = () => {
@@ -17,15 +17,16 @@ const HowToGetVelixPoints = () => {
       <div>
         <div className="font-space-grotesk">
           <Title
-            containerClassName="items-center"
-            name="How to earn points"
-            subtitle="Learn how you can easily earn point"
+            containerClassName="items-center text-center"
+            subTitleClassName="max-sm:max-w-full max-w-[60%]"
+            name="Enjoy Velix Protocol Incentives with vPoints"
+            subtitle="Accumulate vPoints redeemable for VELIX tokens by staking, and boost your earnings through first and second generation referrals. Earn additional points by providing liquidity and participating in governance voting."
           />
         </div>
         <div className="py-16 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
           <div className="relative p-0.25 w-full">
             <GradientBorder className="rounded-[0.9375rem] z-0 via-white/35" />
-            <div className="w-full grid max-md:grid-rows-2 md:grid-cols-2 h-fit py-20 px-10 flex-row items-center font-space-grotesk dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
+            <div className="w-full grid max-md:grid-rows-2 md:grid-cols-2 h-fit max-md:py-4 py-20 px-10 flex-row items-center font-space-grotesk dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
               <div className="flex justify-center items-center h-fit">
                 <img
                   src={"./svg/giftbox.svg"}
@@ -33,7 +34,7 @@ const HowToGetVelixPoints = () => {
                   alt="git box"
                 />
               </div>
-              <div className="mt-16">
+              <div className="mt-2 md:mt-16 max-md:px-5">
                 {steps.map((step, index) => (
                   <div
                     key={`${step}-${index}`}
@@ -52,7 +53,10 @@ const HowToGetVelixPoints = () => {
                         )}
                       </div>
 
-                      <p className="text-xl my-0 py-0 -mt-1">{step}</p>
+                      <p
+                        className="text-xl my-0 py-0 -mt-1"
+                        dangerouslySetInnerHTML={{ __html: step }}
+                      />
                     </div>
                   </div>
                 ))}

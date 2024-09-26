@@ -1,6 +1,6 @@
 const STEPS = [
   {
-    title: "1. Mint veMETIS Tokens",
+    title: "1. Mint your LST",
     description:
       "Mint your liquid staked token, get access to Velix protocol, participate in node staking across several chains."
   },
@@ -10,7 +10,7 @@ const STEPS = [
       "Stake your your LST with our carefully selected validator/sequencer node runners  and start accumulating your staking rewards."
   },
   {
-    title: "3. Receive veMETIS",
+    title: "3. Receive your yield bearing token",
     description:
       "Receive your LST,earn yield, liquidity pool rewards and protocol fees by deploying LST  to decentralized exchange."
   },
@@ -30,7 +30,6 @@ export default function Steps() {
             key={`stpes-${index}`}
             className="relative w-full h-full bg-[#D9D9D9]/10 p-10 rounded-md"
           >
-            {/* {steps.length - 1 !== index && <StepLink />} */}
             <div className="font-space-grotesk w-full h-full rounded-[0.9375rem]">
               <div className="flex flex-col justify-start max-w-[26.8125rem]">
                 <h3 className="font-bold text-[1.25rem] lg:text-2xl">

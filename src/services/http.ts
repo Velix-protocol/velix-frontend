@@ -1,6 +1,11 @@
-import { Staker } from "@/types";
+import { Stake, Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
-import { RedeemPointDto, saveActionDto, saveStakerDto } from "@/utils/dto";
+import {
+  GetAmountToRedeemFromPointDto,
+  RedeemPointDto,
+  saveActionDto,
+  saveStakerDto
+} from "@/utils/dto";
 import axios, { AxiosInstance } from "axios";
 import { ethers } from "ethers";
 
@@ -58,9 +63,20 @@ class VelixApi {
   async redeemPoints(redeemData: RedeemPointDto) {
     if (!redeemData.walletAddress) return;
     return await this.api.post<ethers.TransactionResponse>(
-      "/redeem/points",
+      "/redeem/points/stakes",
       redeemData
     );
+  }
+
+  async getAmountToRedeemFromPoints(points: number) {
+    return await this.api.get<GetAmountToRedeemFromPointDto>(
+      `/redeem/convert/${points}`
+    );
+  }
+
+  async getRedeemableStakeTransactions(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<Stake[]>(`/stake/redeemable/${walletAddress}`);
   }
 }
 
