@@ -1,5 +1,32 @@
 # Changelog
 
+## [1.28.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.27.0...v1.28.0) (2024-09-28)
+
+
+### Features
+
+* add deployment workflow ([1d93d9b](https://github.com/Velix-protocol/velix-frontend/commit/1d93d9b2c71e3e200f74882fcdd1d02887a321f6))
+* add redeem UI ([#85](https://github.com/Velix-protocol/velix-frontend/issues/85)) ([e85674e](https://github.com/Velix-protocol/velix-frontend/commit/e85674ee0c76f69fc57385a65f64e1904d9cdda6))
+* add toggle menu one mobile devices ([#90](https://github.com/Velix-protocol/velix-frontend/issues/90)) ([841ca26](https://github.com/Velix-protocol/velix-frontend/commit/841ca26380b6531e5c15a364f7d76713b9a4c5a7))
+* add toggle menu one mobile devices ([#90](https://github.com/Velix-protocol/velix-frontend/issues/90)) ([#92](https://github.com/Velix-protocol/velix-frontend/issues/92)) ([95a90a9](https://github.com/Velix-protocol/velix-frontend/commit/95a90a960d2843116d1c5c9a445a15296f273526))
+* add toggle menu one mobile devices ([#90](https://github.com/Velix-protocol/velix-frontend/issues/90)) ([#92](https://github.com/Velix-protocol/velix-frontend/issues/92)) ([#93](https://github.com/Velix-protocol/velix-frontend/issues/93)) ([0484715](https://github.com/Velix-protocol/velix-frontend/commit/0484715b60f9b51b6f0bb42d0b24c3c22bfd817e))
+* change docs and audit icons ([3173f6a](https://github.com/Velix-protocol/velix-frontend/commit/3173f6a3514e306240443b5e4678b19e17b55e39))
+* change docs and audit icons ([4c52740](https://github.com/Velix-protocol/velix-frontend/commit/4c52740eb993acc5121d76a8f84df0bf68eeffff))
+* handle referral code on frontend ([77cb979](https://github.com/Velix-protocol/velix-frontend/commit/77cb979a9ab44d8cedb222edca71512c957035a6))
+* handle referral code on frontend ([#82](https://github.com/Velix-protocol/velix-frontend/issues/82)) ([53d3e1c](https://github.com/Velix-protocol/velix-frontend/commit/53d3e1c8e9b8333f111abef543ccee32a77eaf26))
+* improved SEO ([#84](https://github.com/Velix-protocol/velix-frontend/issues/84)) ([62c6d76](https://github.com/Velix-protocol/velix-frontend/commit/62c6d76a7629fed27d8ba3954bc21360c1be5731))
+* refactor ([d0ddc67](https://github.com/Velix-protocol/velix-frontend/commit/d0ddc67216c608c179bc2e8aac89d09b98ae666d))
+
+
+### Bug Fixes
+
+* add referralCode key ([1d9246f](https://github.com/Velix-protocol/velix-frontend/commit/1d9246fcbef776e03d1ffe2a8b3f5bc55566df74))
+* **chains:** add check for existing referral code display ([b52693a](https://github.com/Velix-protocol/velix-frontend/commit/b52693ad4eeaffbf75888f27e068caa9cb47b456))
+* fix the number to 3 after the comma ([223b2e8](https://github.com/Velix-protocol/velix-frontend/commit/223b2e89bccd9a74fa6693c182cb1f015e1898c8))
+* **metrics:** add null check for staking points ([3351bee](https://github.com/Velix-protocol/velix-frontend/commit/3351bee5c9a659d9151a3aef7f8eda2eec330b28))
+* **staking:** remove sveMETISBalance usage in stake operation ([3abaf1d](https://github.com/Velix-protocol/velix-frontend/commit/3abaf1d6e3117d591d94342f110fe3375da408b6))
+* stringify app mode env variable in vite config ([efb81bd](https://github.com/Velix-protocol/velix-frontend/commit/efb81bdb15c33d132a88e65122ece75d335fcec5))
+
 ## [1.27.0](https://github.com/Velix-protocol/velix-frontend/compare/v1.26.0...v1.27.0) (2024-07-21)
 
 
