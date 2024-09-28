@@ -9,18 +9,27 @@ permissions:
 
 
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     steps:
-      - uses: googleapis/release-please-action@v4
-        id: release
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          release-type: node
-          target-branch: dev
+          node-version: "20.8.1"
 
-      - name: Get release tag
-        run: |
-          echo RELEASE_TAG=${ steps.release.outputs.releases_created } >> $GITHUB_ENV
+      - name: Check Node.js version
+        run: node -v
 
-      - name: Use release tag
-        run: echo "The release tag is ${{ env.RELEASE_TAG }}"
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run release
+        run: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
