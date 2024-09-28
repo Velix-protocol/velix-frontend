@@ -12,11 +12,11 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         id: release
         with:
           release-type: node
-          target-branch: main
+          target-branch: dev
 
       - name: Get release tag
         run: |
