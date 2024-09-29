@@ -1,4 +1,4 @@
-name: release-please
+name: release
 
 on:
   workflow_dispatch:
@@ -31,3 +31,6 @@ jobs:
         run: npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get release tag
+        run: echo "The release tag is ${{ env.NEXT_RELEASE_VERSION }}"
