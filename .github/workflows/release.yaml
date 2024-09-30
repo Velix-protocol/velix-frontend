@@ -22,7 +22,7 @@ jobs:
           node-version: "20.8.1"
 
       - name: Set credentials of the current actor
-        uses: ./.github/workflows/actions/setup-git-credentials.yaml
+        uses: ./.github/workflows/actions/setup-git-credentials
 
       - name: Check Node.js version
         run: node -v
