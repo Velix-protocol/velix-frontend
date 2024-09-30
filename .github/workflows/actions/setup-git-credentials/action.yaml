@@ -1,7 +1,7 @@
 name: Setup git credentials
 inputs:
   token:
-    required: true;
+    required: true
     description: "github token"
 runs:
   using: "composite"
