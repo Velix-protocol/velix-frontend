@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Get release tag
-        run: echo "The release tag is ${{ env.NEXT_RELEASE_VERSION }}"
+        run: echo "The release tag is ${{ needs.release.outputs.release_version }}"
 
       - name: deploy velix-frontend
         uses: appleboy/ssh-action@v1.0.3
@@ -23,10 +23,13 @@ jobs:
           host: ${{secrets.SSH_STAGE_HOST}}
           key: ${{secrets.SSH_STAGE_KEY}}
           username: ${{secrets.SSH_STAGE_USER_NAME}}
+        env:
+          NEXT_RELEASE_VERSION: ${{ needs.release.outputs.release_version }}
+
           script_stop: true
           script: |
             cd velix-frontend
             git fetch -v
-            git checkout "releases/${{ needs.release.outputs.release_version }}"
+            git checkout "releases/$NEXT_RELEASE_VERSION"
             git pull
             sh .github/workflows/scripts/deploy-stage.sh
