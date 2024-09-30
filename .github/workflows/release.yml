@@ -28,7 +28,9 @@ jobs:
         run: npm install
 
       - name: Run release
-        run: npm run release
+        run: | 
+          echo "token is ${{ secrets.GITHUB_TOKEN }}"
+          npm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
