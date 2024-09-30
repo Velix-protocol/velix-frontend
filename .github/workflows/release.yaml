@@ -23,6 +23,8 @@ jobs:
 
       - name: Set credentials of the current actor
         uses: ./.github/workflows/actions/setup-git-credentials
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Node.js version
         run: node -v
