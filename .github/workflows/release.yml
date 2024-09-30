@@ -35,3 +35,10 @@ jobs:
 
       - name: Get release tag
         run: echo "The release tag is ${{ env.NEXT_RELEASE_VERSION }}"
+
+      - name: Create release branch
+        run: |
+         branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
+         git checkout -b $branch_name
+         git push -u $branch_name
+        
