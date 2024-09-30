@@ -22,7 +22,7 @@ jobs:
           node-version: "20.8.1"
 
       - name: Set credentials of the current actor
-        uses: .././velix-frontend/.github/workflows/actions/setup-git-credentials
+        uses: .github/workflows/actions/setup-git-credentials
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
