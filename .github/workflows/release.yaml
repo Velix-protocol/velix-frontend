@@ -29,7 +29,7 @@ jobs:
       - name: Check Node.js version
         run: node -v
 
-      - name: Install dependenci./.es
+      - name: Install dependencies
         run: npm install
 
       - name: Run release
