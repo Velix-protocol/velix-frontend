@@ -45,5 +45,5 @@ jobs:
         run: |
          branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
          git checkout -b $branch_name
-         git push -u $branch_name
+         git push origin $branch_name
         
