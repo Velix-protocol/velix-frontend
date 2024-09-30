@@ -1,0 +1,9 @@
+name: Setup git credentials
+runs:
+  using: "composite"
+  steps:
+    - name: Set up Git credentials
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "$(git log -1 --pretty=format:'%ae')"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git

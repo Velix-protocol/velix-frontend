@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: "20.8.1"
 
+      - name: Set credentials of the current actor
+        uses: .github/workflows/actions/setup-git-credentials.yaml
+
       - name: Check Node.js version
         run: node -v
 
@@ -34,12 +37,6 @@ jobs:
 
       - name: Get release tag
         run: echo "The release tag is ${{ env.NEXT_RELEASE_VERSION }}"
-
-      - name: Set up Git credentials
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "$(git log -1 --pretty=format:'%ae')"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
       - name: Create release branch
         run: |

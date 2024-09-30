@@ -1,14 +1,12 @@
 name: deploy dev
 
 on:
- workflow_run:
-   workflows: ["release"]
-   type:
-     - completed
+  push:
+    branches:
+      - dev
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,6 +21,6 @@ jobs:
           script_stop: true
           script: |
             cd velix-frontend
-            git fetch --all
+            git fetch -v
             git pull
             sh .github/workflows/scripts/deploy-dev.sh

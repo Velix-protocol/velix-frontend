@@ -1,0 +1,36 @@
+name: deploy production
+
+on:
+ workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set credentials of the current actor
+        uses: .github/workflows/actions/setup-git-credentials.yaml
+
+      - name: deploy velix-frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.SSH_PROD_HOST}}
+          key: ${{secrets.SSH_PROD_KEY}}
+          username: ${{secrets.SSH_PROD_USER_NAME}}
+          script_stop: true
+          script: |
+            cd velix-frontend
+            git fetch -v
+            git checkout "releases/${{env.NEXT_RELEASE_VERSION}}"
+            git pull
+            sh .github/workflows/scripts/deploy-prod.sh
+
+      - name: Archive the release
+        run: |
+          branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
+          new_branch_name="archive/$branch_name"
+          git checkout $branch_name
+          git branch -M $branch_name "archive/$branch_name"
+          git push -u origin $new_branch_name
