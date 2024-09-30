@@ -22,14 +22,14 @@ jobs:
           node-version: "20.8.1"
 
       - name: Set credentials of the current actor
-        uses: ./.github/workflows/actions/setup-git-credentials
+        uses: .././velix-frontend/.github/workflows/actions/setup-git-credentials
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check Node.js version
         run: node -v
 
-      - name: Install dependencies
+      - name: Install dependenci./.es
         run: npm install
 
       - name: Run release
