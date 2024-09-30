@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set credentials of the current actor
-        uses: .github/workflows/actions/setup-git-credentials
+        uses: ./.github/actions/setup-git-credentials
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
