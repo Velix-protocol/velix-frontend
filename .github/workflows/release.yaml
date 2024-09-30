@@ -12,6 +12,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    outputs:
+      release_version: ${{ steps.set_release_version.outputs.NEXT_RELEASE_VERSION }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -37,8 +39,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get release tag
-        run: echo "The release tag is ${{ env.NEXT_RELEASE_VERSION }}"
+      - name: Set release tag as output
+        id: set_release_version
+        run: |
+          echo "::set-output name=NEXT_RELEASE_VERSION::${{env.NEXT_RELEASE_VERSION}}"
 
       - name: Create release branch
         run: |

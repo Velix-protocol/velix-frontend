@@ -27,6 +27,6 @@ jobs:
           script: |
             cd velix-frontend
             git fetch -v
-            git checkout "releases/${{env.NEXT_RELEASE_VERSION}}"
+            git checkout "releases/${{ needs.release.outputs.release_version }}"
             git pull
             sh .github/workflows/scripts/deploy-stage.sh
