@@ -19,8 +19,6 @@
     "build": "pnpm run build:landingPage:prod && pnpm run build:app:prod",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
     "preview": "vite preview",
-    "branch-name-check": "./branch-name-check.sh",
-    "prepare": "npx husky install",
     "release": "semantic-release"
   },
   "dependencies": {
