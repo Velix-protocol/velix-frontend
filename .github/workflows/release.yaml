@@ -8,18 +8,15 @@ permissions:
   pull-requests: write
   issues: write
 
-
 jobs:
   release:
     runs-on: ubuntu-latest
-    outputs:
-      release_version: ${{ steps.set_release_version.outputs.NEXT_RELEASE_VERSION }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "20.8.1"
 
@@ -31,22 +28,30 @@ jobs:
       - name: Check Node.js version
         run: node -v
 
+      - name: Install and cache pnpm
+        uses: ./.github/actions/install-and-cache-pnpm
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Run release
-        run: npm run release
+        run: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set release tag as output
-        id: set_release_version
-        run: |
-          echo "::set-output name=NEXT_RELEASE_VERSION::${{env.NEXT_RELEASE_VERSION}}"
-
       - name: Create release branch
         run: |
-         branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
-         git checkout -b $branch_name
-         git push origin $branch_name
+          branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
+          git checkout -b $branch_name
+          git push origin $branch_name
+
+      - name: Set repository variable
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/actions/variables/NEXT_RELEASE_VERSION \
+            -d '{"name":"NEXT_RELEASE_VERSION","value":"${{ env.NEXT_RELEASE_VERSION }}"}'
         
