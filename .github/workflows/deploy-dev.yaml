@@ -12,15 +12,27 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: deploy velix-frontend
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build:dev
+
+      - name: Clean up the old deployment
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{secrets.SSH_HOST}}
-          key: ${{secrets.SSH_KEY}}
-          username: ${{secrets.SSH_USERNAME}}
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
           script_stop: true
           script: |
-            cd velix-frontend
-            git fetch -v
-            git pull
-            sh .github/workflows/scripts/deploy-dev.sh
+            rm -rf /var/www/velix-frontend/*
+
+      - name: Upload new version to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          source: "velix-frontend/dist/*"
+          target: "/var/www/velix-frontend/"
