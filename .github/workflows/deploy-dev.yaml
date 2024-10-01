@@ -18,15 +18,29 @@ jobs:
           node-version: "20.8.1"
 
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build project
-        run: |
-          cd velix-frontend
-          pnpm run build
+        run: pnpm run build:dev
 
       - name: Clean up the old deployment
         uses: appleboy/ssh-action@v1.0.3
@@ -36,7 +50,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           script_stop: true
           script: |
+            # Remove contents of the directory without deleting the directory itself
             rm -rf /var/www/velix-frontend/*
+            # Ensure the directory exists (in case it was accidentally deleted)
+            mkdir -p /var/www/velix-frontend
 
       - name: Upload new version to server
         uses: appleboy/scp-action@v0.1.3
