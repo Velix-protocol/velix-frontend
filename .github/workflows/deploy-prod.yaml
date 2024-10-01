@@ -1,21 +1,63 @@
-name: deploy production
+name: Deploy on production
 
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set credentials of the current actor
-        uses: ./.github/actions/setup-git-credentials
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '20.8.1'
 
-      - name: deploy velix-frontend
+      - name: Install pnpm
+        uses: ./.github/actions/install-and-cache-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Checkout to the release branch
+        run: |
+          git fetch --tags
+          NEXT_RELEASE_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          release_branch="releases/$NEXT_RELEASE_VERSION"
+          git fetch origin $release_branch
+          git checkout $release_branch
+
+      - name: Build project
+        run: NODE_ENV=production pnpm run build
+
+      - name: Debug - List build output
+        run: ls -R dist
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+      - name: Debug Check branch
+        run: git branch --show-current
+
+      - name: Debug - List downloaded artifact
+        run: ls -R dist
+
+      - name: Clean and deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{secrets.SSH_PROD_HOST}}
@@ -23,16 +65,33 @@ jobs:
           username: ${{secrets.SSH_PROD_USER_NAME}}
           script_stop: true
           script: |
-            cd velix-frontend
-            git fetch -v
-            git checkout "releases/${{env.NEXT_RELEASE_VERSION}}"
-            git pull
-            sh .github/workflows/scripts/deploy-prod.sh
+            rm -rf /var/www/velix-frontend/*
+            mkdir -p /var/www/velix-frontend
+
+      - name: Upload new version to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{secrets.SSH_PROD_HOST}}
+          key: ${{secrets.SSH_PROD_KEY}}
+          username: ${{secrets.SSH_PROD_USER_NAME}}
+          source: "dist/*"
+          target: "/var/www/velix-frontend/"
+          strip_components: 1
+
+  archive:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug Check branch
+        run: git branch --show-current
 
       - name: Archive the release
         run: |
-          branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
-          new_branch_name="archive/$branch_name"
-          git checkout $branch_name
-          git branch -M $branch_name "archive/$branch_name"
+          git fetch --tags
+          NEXT_RELEASE_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          old_branch_name="releases/$NEXT_RELEASE_VERSION"
+          new_branch_name="archive/$old_branch_name"
+          git checkout $old_branch_name
+          git branch -M $old_branch_name new_branch_name
+          git push origin --delete $old_branch_name
           git push -u origin $new_branch_name
