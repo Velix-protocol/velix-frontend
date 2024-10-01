@@ -26,18 +26,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Download NEXT_RELEASE_VERSION artifact
-        uses: actions/download-artifact@v3
-        with:
-           name: next-release-version
-
-      - name: Read and Checkout to the release branch with NEXT_RELEASE_VERSION
+      - name: Checkout to the release branch
         run: |
-          source next_version.txt
+          git fetch --tags
+          NEXT_RELEASE_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
           release_branch="releases/$NEXT_RELEASE_VERSION"
           git fetch origin $release_branch
           git checkout $release_branch
-          echo "Next release version is $NEXT_RELEASE_VERSION"
 
       - name: Build project
         run: pnpm run build:stage
@@ -84,7 +79,3 @@ jobs:
           source: "dist/*"
           target: "/var/www/velix-frontend/"
           strip_components: 1
-
-      - name: Log deployment
-        run: |
-          echo "Deployed version ${{ vars.NEXT_RELEASE_VERSION }} to staging"

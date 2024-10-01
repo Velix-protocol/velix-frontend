@@ -45,12 +45,3 @@ jobs:
           git checkout -b $branch_name
           git push origin $branch_name
 
-      - name: Set NEXT_RELEASE_VERSION
-        run: echo "NEXT_RELEASE_VERSION=${{ env.NEXT_RELEASE_VERSION }}" > next_version.txt
-
-      - name: Upload NEXT_RELEASE_VERSION artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: next-release-version
-          path: next_version.txt
-
