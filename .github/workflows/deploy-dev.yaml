@@ -24,7 +24,9 @@ jobs:
         run: pnpm install
 
       - name: Build project
-        run: pnpm run build:dev
+        run: |
+          cd velix-frontend
+          pnpm run build
 
       - name: Clean up the old deployment
         uses: appleboy/ssh-action@v1.0.3
