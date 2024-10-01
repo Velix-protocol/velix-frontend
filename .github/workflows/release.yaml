@@ -45,13 +45,12 @@ jobs:
           git checkout -b $branch_name
           git push origin $branch_name
 
-      - name: Set repository variable
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          curl -X PATCH \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            https://api.github.com/repos/${{ github.repository }}/actions/variables/NEXT_RELEASE_VERSION \
-            -d '{"name":"NEXT_RELEASE_VERSION","value":"${{ env.NEXT_RELEASE_VERSION }}"}'
-        
+      - name: Set NEXT_RELEASE_VERSION
+        run: echo "NEXT_RELEASE_VERSION=${{ env.NEXT_RELEASE_VERSION }}" > next_version.txt
+
+      - name: Upload NEXT_RELEASE_VERSION artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: next-release-version
+          path: next_version.txt
+

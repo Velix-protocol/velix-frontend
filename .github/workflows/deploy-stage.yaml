@@ -26,11 +26,18 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Checkout to the release branch
+      - name: Download NEXT_RELEASE_VERSION artifact
+        uses: actions/download-artifact@v3
+        with:
+           name: next-release-version
+
+      - name: Read and Checkout to the release branch with NEXT_RELEASE_VERSION
         run: |
-          release_branch="releases/${{ vars.NEXT_RELEASE_VERSION }}"
+          source next_version.txt
+          release_branch="releases/$NEXT_RELEASE_VERSION"
           git fetch origin $release_branch
           git checkout $release_branch
+          echo "Next release version is $NEXT_RELEASE_VERSION"
 
       - name: Build project
         run: pnpm run build:stage
