@@ -12,6 +12,7 @@ import useChainBalance from "@/hooks/useChainBalance";
 export default function AppHeader() {
   const { open } = useConnectWallet();
   const { isConnected, address } = useChainAccount();
+
   const { data } = useChainBalance({
     address: address as `0x${string}`
   });

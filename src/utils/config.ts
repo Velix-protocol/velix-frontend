@@ -6,6 +6,8 @@ import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/RewardDispatcher.ts";
 import { CONFIG_CONTRACT_ABI } from "@/abi/config.ts";
 import { FAUCET_CONTRACT_ABI } from "@/abi/faucet.ts";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft.ts";
+import { STARKET_TESTNET_VAULT_ABI } from "@/abi/starknet/testnetVault.ts";
+import { TESTNET_STARKNET_TOKEN } from "@/abi/starknet/testnetStrk.ts";
 
 export const velixEnvironmentUrls = {
   production: {
@@ -23,7 +25,33 @@ export const velixEnvironmentUrls = {
 };
 
 export const supportedChains = {
-  starknet: {},
+  starknet: {
+    explorerUrls: {
+      testnet: {
+        txUrl: "https://sepolia.starkscan.co/tx/",
+        addressUrl: "https://sepolia.starkscan.co/address-book/"
+      },
+      mainnet: {
+        txUrl: "#",
+        addressUrl: "#"
+      }
+    },
+    contracts: {
+      mainnet: {},
+      testnet: {
+        VAULT: {
+          address:
+            "0x4b061ff4d941c6fd36a62e12b86eb3114620004136944ebd4b42b100be70203",
+          abi: STARKET_TESTNET_VAULT_ABI
+        },
+        STRK_TOKEN: {
+          address:
+            "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d",
+          abi: TESTNET_STARKNET_TOKEN
+        }
+      }
+    }
+  },
   metis: {
     explorerUrls: {
       testnet: {

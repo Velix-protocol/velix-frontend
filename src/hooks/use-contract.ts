@@ -16,6 +16,9 @@ import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
 import { supportedChains } from "@/utils/config.ts";
 import useChainAccount from "./useChainAccount";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import { waitForTransaction } from "@/utils/utils.ts";
+import { SupportedChains } from "@/types/index.ts";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -37,15 +40,27 @@ const useContractHookState = () => {
   };
 };
 
-export type ContractName = keyof typeof supportedChains.metis.contracts.testnet;
+export type MetisContractName =
+  keyof typeof supportedChains.metis.contracts.testnet;
 
-export const useContract = (contactName: ContractName) => {
+export type StarknetContractName =
+  keyof typeof supportedChains.starknet.contracts.testnet;
+
+export const useContract = (
+  contactName: MetisContractName | StarknetContractName
+) => {
   const { address } = useChainAccount();
+  const chain = useSupportedChain();
+  if (!chain) return;
   if (!address) return;
-  const contractData = supportedChains.metis.contracts.testnet[contactName];
-  if (!contractData.abi || !contractData.address) return;
 
-  return new Web3Service("metis").contract(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const contractData = supportedChains[chain].contracts.testnet[contactName];
+  console.log({ contractData });
+  if (!contractData?.abi || !contractData?.address) return;
+
+  return new Web3Service(chain).contract(
     contractData.address as `0x${string}`,
     contractData.abi,
     address as `0x${string}`
@@ -197,7 +212,10 @@ export const useApproveStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VEMETIS");
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "STRK_TOKEN" : "VEMETIS"
+  );
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
@@ -206,12 +224,17 @@ export const useApproveStaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
+        const approveAddress =
+          chain === "starknet"
+            ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
+            : supportedChains.metis.contracts.testnet.SVEMETIS.address;
+
         const tx = await contract.approve(
-          supportedChains.metis.contracts.testnet.SVEMETIS,
+          approveAddress,
           parseUnits(amountToStake)
         );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
+        const txhash = waitForTransaction(chain as SupportedChains, tx);
+        setData(txhash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -223,7 +246,15 @@ export const useApproveStaking = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess
+    ]
   );
 
   const reset = useCallback(() => {
@@ -259,7 +290,11 @@ export const useStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
+  const chain = useSupportedChain();
+
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "SVEMETIS"
+  );
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -269,13 +304,15 @@ export const useStaking = () => {
       try {
         setIsPending(true);
         const tx = await contract.deposit(parseUnits(amountToStake), address);
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        const txhash = await waitForTransaction(chain as SupportedChains, tx);
         await velixApi.saveAction("stake", {
           amount: Number(amountToStake),
           walletAddress: address,
-          txHash: txhash.hash
+          txHash: txhash,
+          chain: chain as SupportedChains
         });
-        setData(txhash.hash);
+
+        setData(txhash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -289,7 +326,15 @@ export const useStaking = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess
+    ]
   );
 
   const reset = useCallback(() => {
@@ -325,7 +370,10 @@ export const useApproveUnstaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "SVEMETIS"
+  );
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
@@ -334,12 +382,14 @@ export const useApproveUnstaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.approve(
-          supportedChains.metis.contracts.testnet.SVEMETIS,
-          parseUnits(amount)
-        );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
+        const approveAddress =
+          chain === "starknet"
+            ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
+            : supportedChains.metis.contracts.testnet.SVEMETIS.address;
+
+        const tx = await contract.approve(approveAddress, parseUnits(amount));
+        const txhash = waitForTransaction(chain as SupportedChains, tx);
+        setData(txhash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -351,7 +401,15 @@ export const useApproveUnstaking = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess
+    ]
   );
 
   const reset = useCallback(() => {
@@ -388,8 +446,12 @@ export const useUnstake = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "SVEMETIS"
+  );
 
+  const unstakeContractFunction = chain === "starknet" ? "withdraw" : "redeem";
   const unstake = useCallback(
     async (amount: string) => {
       const contract = await contractInstance;
@@ -397,14 +459,19 @@ export const useUnstake = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.redeem(parseUnits(amount), address, address);
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        const tx = await contract?.[unstakeContractFunction](
+          parseUnits(amount),
+          address,
+          address
+        );
+        const txhash = await waitForTransaction(chain as SupportedChains, tx);
         await velixApi.saveAction("unstake", {
           amount: Number(amount),
           walletAddress: address,
-          txHash: txhash.hash
+          txHash: txhash,
+          chain: chain as SupportedChains
         });
-        setData(txhash.hash);
+        setData(txhash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -418,7 +485,16 @@ export const useUnstake = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess,
+      unstakeContractFunction
+    ]
   );
 
   const reset = useCallback(() => {
@@ -536,7 +612,10 @@ export const useMintNft = () => {
  * */
 export const useGetTotalVeMetisAssets = () => {
   const { address } = useChainAccount();
-  const contractInstance = useContract("SVEMETIS");
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "SVEMETIS"
+  );
   const { setTotalValueLocked } = useMetricsStore();
 
   const getTotalLocked = useCallback(async () => {
@@ -545,7 +624,9 @@ export const useGetTotalVeMetisAssets = () => {
     if (!address) return;
 
     try {
-      const totalValueLocked = await contract.totalAssets();
+      const functionToGetTotalSupply =
+        chain === "starknet" ? "contract_total_supply" : "totalAssets";
+      const totalValueLocked = await contract?.[functionToGetTotalSupply]();
       setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
     } catch (err) {
       console.log(err);

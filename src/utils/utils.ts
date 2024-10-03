@@ -3,6 +3,9 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { APP_MODE } from "./constant";
 import { supportedChains } from "@/utils/config.ts";
+import { SupportedChains } from "@/types/index.ts";
+import { RpcProvider } from "starknet";
+import { STARKNET_RPC_PROVIDER } from "@/services/web3Service.ts";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -59,3 +62,14 @@ export function throttle<T extends (...args: any[]) => any>(
 }
 
 export const isApp = () => APP_MODE === "app";
+
+export const waitForTransaction = async (chain: SupportedChains, res: any) => {
+  if (chain === "starknet") {
+    const provider = new RpcProvider({ nodeUrl: STARKNET_RPC_PROVIDER });
+    await provider.waitForTransaction(res.transaction_hash);
+    return res.transaction_hash;
+  }
+  if (chain === "metis") {
+    return (await res.wait()).tx_hash;
+  }
+};

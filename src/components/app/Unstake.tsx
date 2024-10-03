@@ -70,9 +70,12 @@ export default function Unstake() {
     document.body.style.overflow = "auto";
   }, [showModal]);
 
-  const onViewTransaction = () => {
-    window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txhash}`);
-  };
+  const onViewTransaction = useCallback(() => {
+    if (!chain) return;
+    window.open(
+      `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${txhash}`
+    );
+  }, [chain, txhash]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToUnstake(

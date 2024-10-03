@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import StarknetProviderContext from "./StarknetProvider";
 import WagmiProviderContext from "./WagmiProvider";
 import useGetChain from "@/hooks/useGetChain";
+import { SupportedChains } from "@/types/index.ts";
 
-const SupportedChainsContext = createContext("");
+const SupportedChainsContext = createContext<SupportedChains | "">("");
 
 export const useSupportedChain = () => useContext(SupportedChainsContext);
 

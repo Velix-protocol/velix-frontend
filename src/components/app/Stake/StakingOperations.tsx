@@ -24,12 +24,12 @@ import useReferralCode from "@/hooks/useReferralCode";
 import { supportedChains } from "@/utils/config";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
   const [stakebridge, setStakeBrigde] = useState(false);
-  // const [vestment, setVestment] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
@@ -54,6 +54,7 @@ export default function StakingOperations() {
   const { setStakers, getStaker } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
   const chainToken = useChainTokens();
+  const chain = useSupportedChain();
 
   useEffect(() => {
     if (isSuccess) {
@@ -75,9 +76,12 @@ export default function StakingOperations() {
     document.body.style.overflow = "auto";
   }, [showModal]);
 
-  const onViewTransaction = async () => {
-    window.open(`${supportedChains.metis.explorerUrls.testnet.txUrl}${txhash}`);
-  };
+  const onViewTransaction = useCallback(async () => {
+    if (!chain) return;
+    window.open(
+      `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${txhash}`
+    );
+  }, [chain, txhash]);
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const value =
@@ -206,10 +210,6 @@ export default function StakingOperations() {
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
                       Start earning within 7 days
                     </p>
-                    {/* <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
-                      <CheckCircle2 className="fill-velix-primary w-8 h-8 stroke-white" />
-                      Start earning
-                    </p> */}
                   </div>
                 </div>
                 <div className="space-y-10 mt-10 w-full">
@@ -294,7 +294,6 @@ export default function StakingOperations() {
             title="Exchange Rate"
             value={`1 ${chainToken.derivedToken} = 1 ${chainToken.stakedToken}`}
           />
-          {/* <StakingDetails title="Average return" value={"--"} /> */}
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}
