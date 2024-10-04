@@ -3,20 +3,24 @@ import { useBalance as useEvmBalance } from "wagmi";
 import useGetChain from "./useGetChain";
 import { useMemo } from "react";
 
-const useChainBalance = ({ address }: { address: string }) => {
+const useChainBalance = (address: string) => {
   const chain = useGetChain();
+
   const starknetBalance = useStarknetBalance({
-    address
+    address,
+    retry: 2
   });
 
   const evmBalance = useEvmBalance({
     address: address as `0x${string}`
   });
 
-  const strkBalance = useMemo(() => starknetBalance, [starknetBalance]);
-  const ehtBalance = useMemo(() => evmBalance, [evmBalance]);
-  if (chain === "starknet") return strkBalance;
-  return ehtBalance;
+  const balance = useMemo(() => {
+    if (chain === "starknet") return starknetBalance;
+    return evmBalance;
+  }, [chain, starknetBalance, evmBalance]);
+
+  return balance;
 };
 
 export default useChainBalance;

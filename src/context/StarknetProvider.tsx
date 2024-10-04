@@ -5,9 +5,17 @@ import {
   braavos,
   useInjectedConnectors,
   voyager,
-  publicProvider
+  jsonRpcProvider
 } from "@starknet-react/core";
+import { STARKNET_RPC_PROVIDER } from "@/services/web3Service.ts";
 
+function rpc() {
+  return {
+    nodeUrl: STARKNET_RPC_PROVIDER
+  };
+}
+
+const provider = jsonRpcProvider({ rpc });
 export default function StarknetProviderContext({
   children
 }: {
@@ -26,7 +34,7 @@ export default function StarknetProviderContext({
   return (
     <StarknetConfig
       chains={[sepolia]}
-      provider={publicProvider()}
+      provider={provider}
       connectors={connectors}
       autoConnect={true}
       explorer={voyager}
