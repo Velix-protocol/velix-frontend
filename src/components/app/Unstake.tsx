@@ -9,7 +9,7 @@ import Title from "../ui/velix/Title";
 import Statitics from "./Statitics";
 import {
   useApproveUnstaking,
-  useMetisBalance,
+  useMetisBalances,
   useUnstake
 } from "@/hooks/use-contract";
 import Modal from "../ui/velix/Modal";
@@ -46,7 +46,7 @@ export default function Unstake() {
     txhash
   } = useUnstake();
   const { address: walletAddress, isConnected } = useChainAccount();
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
   const { sveMETISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
   const chainToken = useChainTokens();

@@ -5,7 +5,7 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
 import {
   useApproveStaking,
-  useMetisBalance,
+  useMetisBalances,
   useStaking
 } from "@/hooks/use-contract";
 import Modal from "@/components/ui/velix/Modal";
@@ -49,7 +49,7 @@ export default function StakingOperations() {
     txhash
   } = useStaking();
   const { address: walletAddress, isConnected } = useChainAccount();
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
   const { veMETISBalance } = useBalanceStore();
   const { setStakers, getStaker } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();

@@ -11,7 +11,7 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import Modal from "../ui/velix/Modal";
 import {
   useApproveMinting,
-  useMetisBalance,
+  useMetisBalances,
   useMint
 } from "@/hooks/use-contract";
 import { useBalanceStore } from "@/store/balanceState";
@@ -43,7 +43,7 @@ export default function Mint() {
     txhash
   } = useMint();
   const { address: walletAddress, isConnected } = useChainAccount();
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
   const { METISBalance } = useBalanceStore();
 
   useEffect(() => {

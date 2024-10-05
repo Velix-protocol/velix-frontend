@@ -17,8 +17,9 @@ import { AxiosError } from "axios";
 import { supportedChains } from "@/utils/config.ts";
 import useChainAccount from "./useChainAccount";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
-import { waitForTransaction } from "@/utils/utils.ts";
+import { converGweiToEth, waitForTransaction } from "@/utils/utils.ts";
 import { SupportedChains } from "@/types/index.ts";
+import { useStarknetBalance } from "@/hooks/useStarknetBalance.ts";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -664,7 +665,38 @@ export const useGetConvertToShareValue = () => {
   );
 };
 
-export const useMetisBalance = () => {
+export const useStarknetBalances = () => {
+  const { address } = useChainAccount();
+  const { setStrkBalance, setveStrkBalance } = useBalanceStore();
+  const chain = useSupportedChain();
+  const { data } = useStarknetBalance();
+
+  useEffect(() => {
+    if (chain === "metis") return;
+    setStrkBalance(data?.formatted ?? "0.0");
+  }, [data?.formatted, setStrkBalance]);
+
+  const getBalances = useCallback(async () => {
+    if (!address) return;
+    if (chain === "metis") return;
+    const web3Service = new Web3Service("starknet");
+    const contract = await web3Service.contract(
+      supportedChains.starknet.contracts.testnet.VAULT.address as `0x${string}`,
+      supportedChains.starknet.contracts.testnet.VAULT.abi,
+      address
+    );
+
+    const balance = await contract.user_balance_of(address);
+    const formattedBalance = converGweiToEth(balance);
+    setveStrkBalance(formattedBalance);
+  }, [address, setveStrkBalance]);
+
+  return {
+    getBalances
+  };
+};
+
+export const useMetisBalances = () => {
   const { address } = useChainAccount();
   const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
     useBalanceStore();

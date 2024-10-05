@@ -1,5 +1,5 @@
 import Section from "../layouts/Section";
-import { useMetisBalance } from "@/hooks/use-contract";
+import { useMetisBalances } from "@/hooks/use-contract";
 import {
   Table,
   TableBody,
@@ -39,7 +39,7 @@ type UnstakeActivity = {
 };
 
 export default function Dashboard() {
-  useMetisBalance();
+  useMetisBalances();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
   const { address } = useChainAccount();
   const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);

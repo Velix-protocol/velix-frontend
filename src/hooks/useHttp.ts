@@ -2,7 +2,7 @@
 import { claimFaucetToken, velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { useCallback, useState } from "react";
-import { useMetisBalance } from "./use-contract";
+import { useMetisBalances } from "./use-contract";
 import useChainAccount from "./useChainAccount";
 
 const useApiHookBaseState = () => {
@@ -34,7 +34,7 @@ export const useRedeemPoints = () => {
   } = useApiHookBaseState();
   const { getStaker } = useStakersStore();
   const [txHash, setTxHash] = useState("");
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
 
   const redeemPoints = useCallback(
     async (points: number) => {
