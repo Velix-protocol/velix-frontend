@@ -20,6 +20,8 @@ import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 import { converGweiToEth, waitForTransaction } from "@/utils/utils.ts";
 import { SupportedChains } from "@/types/index.ts";
 import { useStarknetBalance } from "@/hooks/useStarknetBalance.ts";
+import { useAccount } from "@starknet-react/core";
+import { cairo, constants } from "starknet";
 
 const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -60,7 +62,8 @@ export const useContract = (
   const contractData = supportedChains[chain].contracts.testnet[contactName];
   if (!contractData?.abi || !contractData?.address) return;
 
-  return new Web3Service(chain).contract(
+  const web3Service = new Web3Service(chain);
+  return web3Service.contract(
     contractData.address as `0x${string}`,
     contractData.abi,
     address as `0x${string}`
@@ -213,10 +216,12 @@ export const useApproveStaking = () => {
     setIsSuccess
   } = useContractHookState();
   const chain = useSupportedChain();
+
   const contractInstance = useContract(
     chain === "starknet" ? "STRK_TOKEN" : "VEMETIS"
   );
 
+  const { account: starknetAccount } = useAccount();
   const approveStaking = useCallback(
     async (amountToStake: string) => {
       const contract = await contractInstance;
@@ -229,11 +234,29 @@ export const useApproveStaking = () => {
             ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
             : supportedChains.metis.contracts.testnet.SVEMETIS.address;
 
-        const tx = await contract.approve(
-          approveAddress,
-          parseUnits(amountToStake)
-        );
-        const txhash = waitForTransaction(chain as SupportedChains, tx);
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amountToStake));
+          tx = await starknetAccount?.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
+              entrypoint: "approve",
+              calldata: [approveAddress, starknetAmount]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.approve(
+            approveAddress,
+            parseUnits(amountToStake)
+          );
+        }
+
+        const txhash = await waitForTransaction(chain as SupportedChains, tx);
+        console.log({ txhash });
         setData(txhash);
         setError(null);
         setIsSuccess(true);
@@ -241,7 +264,9 @@ export const useApproveStaking = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        if (chain !== "starknet") {
+          setError({ message: e.shortMessage ?? e });
+        }
       } finally {
         setIsPending(false);
       }
@@ -253,7 +278,8 @@ export const useApproveStaking = () => {
       setData,
       setError,
       setIsPending,
-      setIsSuccess
+      setIsSuccess,
+      starknetAccount
     ]
   );
 
@@ -295,6 +321,7 @@ export const useStaking = () => {
   const contractInstance = useContract(
     chain === "starknet" ? "VAULT" : "SVEMETIS"
   );
+  const { account: starknetAccount } = useAccount();
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -303,7 +330,24 @@ export const useStaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.deposit(parseUnits(amountToStake), address);
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amountToStake));
+          tx = await starknetAccount.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.VAULT.address,
+              entrypoint: "deposit",
+              calldata: [starknetAmount]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.deposit(parseUnits(amountToStake), address);
+        }
+
         const txhash = await waitForTransaction(chain as SupportedChains, tx);
         await velixApi.saveAction("stake", {
           amount: Number(amountToStake),
@@ -319,9 +363,11 @@ export const useStaking = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({
-          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
-        });
+        if (chain !== "starknet") {
+          setError({
+            message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+          });
+        }
       } finally {
         setIsPending(false);
       }
@@ -333,7 +379,8 @@ export const useStaking = () => {
       setData,
       setError,
       setIsPending,
-      setIsSuccess
+      setIsSuccess,
+      starknetAccount
     ]
   );
 
@@ -374,6 +421,7 @@ export const useApproveUnstaking = () => {
   const contractInstance = useContract(
     chain === "starknet" ? "VAULT" : "SVEMETIS"
   );
+  const { account: starknetAccount } = useAccount();
 
   const approveUnstaking = useCallback(
     async (amount: string) => {
@@ -387,7 +435,23 @@ export const useApproveUnstaking = () => {
             ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
             : supportedChains.metis.contracts.testnet.SVEMETIS.address;
 
-        const tx = await contract.approve(approveAddress, parseUnits(amount));
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amount));
+          tx = await starknetAccount.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
+              entrypoint: "approve",
+              calldata: [approveAddress, starknetAmount]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.approve(approveAddress, parseUnits(amount));
+        }
         const txhash = waitForTransaction(chain as SupportedChains, tx);
         setData(txhash);
         setError(null);
@@ -396,7 +460,9 @@ export const useApproveUnstaking = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        if (chain !== "starknet") {
+          setError({ message: e.shortMessage ?? e });
+        }
       } finally {
         setIsPending(false);
       }
@@ -408,7 +474,8 @@ export const useApproveUnstaking = () => {
       setData,
       setError,
       setIsPending,
-      setIsSuccess
+      setIsSuccess,
+      starknetAccount
     ]
   );
 
@@ -451,7 +518,8 @@ export const useUnstake = () => {
     chain === "starknet" ? "VAULT" : "SVEMETIS"
   );
 
-  const unstakeContractFunction = chain === "starknet" ? "withdraw" : "redeem";
+  const { account: starknetAccount } = useAccount();
+
   const unstake = useCallback(
     async (amount: string) => {
       const contract = await contractInstance;
@@ -459,11 +527,24 @@ export const useUnstake = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract?.[unstakeContractFunction](
-          parseUnits(amount),
-          address,
-          address
-        );
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amount));
+          tx = await starknetAccount.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
+              entrypoint: "withdraw",
+              calldata: [starknetAmount]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.redeem(parseUnits(amount), address, address);
+        }
+
         const txhash = await waitForTransaction(chain as SupportedChains, tx);
         await velixApi.saveAction("unstake", {
           amount: Number(amount),
@@ -478,9 +559,11 @@ export const useUnstake = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({
-          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
-        });
+        if (chain !== "starknet") {
+          setError({
+            message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+          });
+        }
       } finally {
         setIsPending(false);
       }
@@ -493,7 +576,7 @@ export const useUnstake = () => {
       setError,
       setIsPending,
       setIsSuccess,
-      unstakeContractFunction
+      starknetAccount
     ]
   );
 
@@ -674,7 +757,7 @@ export const useStarknetBalances = () => {
   useEffect(() => {
     if (chain === "metis") return;
     setStrkBalance(data?.formatted ?? "0.0");
-  }, [data?.formatted, setStrkBalance]);
+  }, [chain, data?.formatted, setStrkBalance]);
 
   const getBalances = useCallback(async () => {
     if (!address) return;

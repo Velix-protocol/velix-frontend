@@ -6,7 +6,8 @@ import StakeLayout from "@/components/layouts/StakeLayout";
 import {
   useApproveStaking,
   useMetisBalances,
-  useStaking
+  useStaking,
+  useStarknetBalances
 } from "@/hooks/use-contract";
 import Modal from "@/components/ui/velix/Modal";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
@@ -50,11 +51,17 @@ export default function StakingOperations() {
   } = useStaking();
   const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances } = useMetisBalances();
-  const { veMETISBalance } = useBalanceStore();
+  const { getBalances: getStarknetBalances } = useStarknetBalances();
+  const { veMETISBalance, strkBalance } = useBalanceStore();
   const { setStakers, getStaker } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
+
+  const totalBalanceToStake = useMemo(
+    () => (chain === "metis" ? veMETISBalance : strkBalance),
+    [chain, strkBalance, veMETISBalance]
+  );
 
   useEffect(() => {
     if (isSuccess) {
@@ -62,7 +69,11 @@ export default function StakingOperations() {
     }
     if (isStaked) {
       setAmountToStake("");
-      getBalances();
+      if (chain === "metis") {
+        getBalances();
+      } else {
+        getStarknetBalances();
+      }
       getStaker(walletAddress as string);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -159,9 +170,9 @@ export default function StakingOperations() {
       stakePending ||
       !amountToStake ||
       !Number(amountToStake) ||
-      Number(amountToStake) > Number(veMETISBalance)
+      Number(amountToStake) > Number(totalBalanceToStake)
     );
-  }, [amountToStake, isPending, stakePending, veMETISBalance]);
+  }, [amountToStake, isPending, stakePending, totalBalanceToStake]);
 
   const renderStakeButtonTitle = () => {
     if (stakePending) return "Staking...";
@@ -255,9 +266,9 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
-        onSetMaxValue={() => setAmountToStake(veMETISBalance)}
+        onSetMaxValue={() => setAmountToStake(totalBalanceToStake)}
         error={
-          Number(amountToStake) > Number(veMETISBalance)
+          Number(amountToStake) > Number(totalBalanceToStake)
             ? `Entered amount exceeds your ${chainToken.derivedToken} balance`
             : ""
         }
