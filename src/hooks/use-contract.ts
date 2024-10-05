@@ -57,7 +57,6 @@ export const useContract = (
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   const contractData = supportedChains[chain].contracts.testnet[contactName];
-  console.log({ contractData });
   if (!contractData?.abi || !contractData?.address) return;
 
   return new Web3Service(chain).contract(
@@ -672,6 +671,7 @@ export const useMetisBalance = () => {
   const { data, refetch: fetchMETISBalance } = useBalance({
     address: address as `0x${string}`
   });
+  const chain = useSupportedChain();
 
   const provider = useMemo(
     () => new ethers.JsonRpcProvider("https://sepolia.metisdevops.link/"),
@@ -704,19 +704,21 @@ export const useMetisBalance = () => {
   );
 
   const getBalances = useCallback(async () => {
-    try {
-      const balances = await Promise.all([
-        contracts[0].balanceOf(address),
-        contracts[1].balanceOf(address),
-        fetchMETISBalance()
-      ]);
-      setsveMETISBalance(formatEther(balances[1]));
-      setveMETISBalance(formatEther(balances[0]));
-    } catch (err) {
-      console.log(err);
-    }
+    if (chain === "metis")
+      try {
+        const balances = await Promise.all([
+          contracts[0].balanceOf(address),
+          contracts[1].balanceOf(address),
+          fetchMETISBalance()
+        ]);
+        setsveMETISBalance(formatEther(balances[1]));
+        setveMETISBalance(formatEther(balances[0]));
+      } catch (err) {
+        console.log(err);
+      }
   }, [
     address,
+    chain,
     contracts,
     fetchMETISBalance,
     setsveMETISBalance,
@@ -728,8 +730,8 @@ export const useMetisBalance = () => {
   }, [data, setMETISBalance]);
 
   useEffect(() => {
-    if (address) getBalances();
-  }, [address, getBalances, setsveMETISBalance, setveMETISBalance]);
+    if (address && chain === "metis") getBalances();
+  }, [address, chain, getBalances, setsveMETISBalance, setveMETISBalance]);
 
   return { getBalances };
 };

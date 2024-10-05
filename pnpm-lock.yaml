@@ -30,8 +30,8 @@ dependencies:
     specifier: ^0.1.7
     version: 0.1.7
   '@starknet-react/core':
-    specifier: ^2.9.0
-    version: 2.9.0(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1)
+    specifier: 3.0.1
+    version: 3.0.1(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1)(typescript@5.3.3)
   '@supabase/supabase-js':
     specifier: ^2.42.0
     version: 2.42.0
@@ -3002,6 +3002,12 @@ packages:
       '@noble/hashes': 1.3.3
     dev: false
 
+  /@noble/curves@1.4.0:
+    resolution: {integrity: sha512-p+4cb332SFCrReJkCYe8Xzm0OWi4Jji5jVdIZRL/PmacmDkFNw6MrrV+gGpiPxLHbV+zKFRywUWbaseT+tZRXg==}
+    dependencies:
+      '@noble/hashes': 1.4.0
+    dev: false
+
   /@noble/curves@1.4.2:
     resolution: {integrity: sha512-TavHr8qycMChk8UwMld0ZDRvatedkzWfH8IiaeGCfymOP5i0hSCozz9vHOL0nkwk7HRMlFnAiKpS2jrUmSybcw==}
     dependencies:
@@ -3021,6 +3027,11 @@ packages:
   /@noble/hashes@1.4.0:
     resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
     engines: {node: '>= 16'}
+    dev: false
+
+  /@noble/hashes@1.5.0:
+    resolution: {integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==}
+    engines: {node: ^14.21.3 || >=16}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -4413,6 +4424,10 @@ packages:
     resolution: {integrity: sha512-Brj9FiG2W1MRQSTB212YVPRrcbjkv48FoZi/u4l/zds/ieRrqsh7aUf6CLwkAq61oKXr/ZlTzlY66gLIj3TFTQ==}
     dev: false
 
+  /@scure/base@1.1.9:
+    resolution: {integrity: sha512-8YKhl8GHiNI/pU2VMaofa2Tor7PJRAjwQLBBuilkJ9L5+13yVbC7JO/wS7piioAvPSwR3JKM1IJ/u4xQzbcXKg==}
+    dev: false
+
   /@scure/bip32@1.3.2:
     resolution: {integrity: sha512-N1ZhksgwD3OBlwTv3R6KFEcPojl/W4ElJOeCZdi+vuI5QmTFwLq3OFf2zd2ROpKvxFdgZ6hUpb0dx9bVNEwYCA==}
     dependencies:
@@ -4429,6 +4444,14 @@ packages:
       '@scure/base': 1.1.5
     dev: false
 
+  /@scure/bip32@1.4.0:
+    resolution: {integrity: sha512-sVUpc0Vq3tXCkDGYVWGIZTRfnvu8LoTDaev7vbwh0omSvVORONr960MQWdKqJDCReIEmTj3PAr73O3aoxz7OPg==}
+    dependencies:
+      '@noble/curves': 1.4.2
+      '@noble/hashes': 1.4.0
+      '@scure/base': 1.1.9
+    dev: false
+
   /@scure/bip39@1.2.1:
     resolution: {integrity: sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==}
     dependencies:
@@ -4441,6 +4464,13 @@ packages:
     dependencies:
       '@noble/hashes': 1.3.3
       '@scure/base': 1.1.5
+    dev: false
+
+  /@scure/bip39@1.4.0:
+    resolution: {integrity: sha512-BEEm6p8IueV/ZTfQLp/0vhw4NPnT9oWf5+28nvmeUICjP99f4vr2d+qc7AVGDDtwRep6ifR43Yed9ERVmiITzw==}
+    dependencies:
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.9
     dev: false
 
   /@scure/starknet@1.0.0:
@@ -4608,21 +4638,30 @@ packages:
     resolution: {integrity: sha512-UNh97I1SvuJKaAhKOmpEk8JcWuZWMlPG/ba2HcvFYL9x/47BKndJ+Da9V+iJFtkHUjreVnajT1snsaz1XMG+UQ==}
     dev: false
 
-  /@starknet-react/core@2.9.0(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1):
-    resolution: {integrity: sha512-UdRo454/g2lb0YsNAUJohJ2w21LlahcEXQlkWrddoKFubRY6Q0b39hec0eZOCqfU0Z1Sh7kF1XYvI5t9xL4yTQ==}
+  /@starknet-react/chains@3.0.0:
+    resolution: {integrity: sha512-+XulhJZMSDAEX9JXHI5qJetHlf1Xr0nc7K2+efUMotGxXM31ovKWc/0JFlJh9Jwjgik/UO859Dh4yLkb92PAhw==}
+    dev: false
+
+  /@starknet-react/core@3.0.1(get-starknet-core@3.3.3)(react@18.2.0)(starknet@6.12.1)(typescript@5.3.3):
+    resolution: {integrity: sha512-LBWEDmZRVy90exHSCaG/h9SqolpnkBfCo/bWQDLv1tYLgVcZDMz4FqYlY8zIHOyhappHEIQ6pIclVR/P3OC/2Q==}
     peerDependencies:
-      get-starknet-core: ^3.2.0
+      get-starknet-core: ^4.0.0
       react: ^18.0
-      starknet: ^5.25.0
+      starknet: ^6.11.0
     dependencies:
-      '@starknet-react/chains': 0.1.7
-      '@tanstack/react-query': 5.20.5(react@18.2.0)
+      '@starknet-io/types-js': 0.7.7
+      '@starknet-react/chains': 3.0.0
+      '@tanstack/react-query': 5.59.0(react@18.2.0)
       eventemitter3: 5.0.1
       get-starknet-core: 3.3.3(starknet@6.12.1)
-      immutable: 4.3.7
       react: 18.2.0
       starknet: 6.12.1
+      viem: 2.21.18(typescript@5.3.3)(zod@3.22.4)
       zod: 3.22.4
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
     dev: false
 
   /@supabase/auth-js@2.63.0:
@@ -4960,12 +4999,25 @@ packages:
     resolution: {integrity: sha512-T1W28gGgWn0A++tH3lxj3ZuUVZZorsiKcv+R50RwmPYz62YoDEkG4/aXHZELGkRp4DfrW07dyq2K5dvJ4Wl1aA==}
     dev: false
 
+  /@tanstack/query-core@5.59.0:
+    resolution: {integrity: sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==}
+    dev: false
+
   /@tanstack/react-query@5.20.5(react@18.2.0):
     resolution: {integrity: sha512-6MHwJ8G9cnOC/XKrwt56QMc91vN7hLlAQNUA0ubP7h9Jj3a/CmkUwT6ALdFbnVP+PsYdhW3WONa8WQ4VcTaSLQ==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
       '@tanstack/query-core': 5.20.5
+      react: 18.2.0
+    dev: false
+
+  /@tanstack/react-query@5.59.0(react@18.2.0):
+    resolution: {integrity: sha512-YDXp3OORbYR+8HNQx+lf4F73NoiCmCcSvZvgxE29OifmQFk0sBlO26NWLHpcNERo92tVk3w+JQ53/vkcRUY1hA==}
+    peerDependencies:
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-core': 5.59.0
       react: 18.2.0
     dev: false
 
@@ -6048,6 +6100,21 @@ packages:
         optional: true
     dependencies:
       typescript: 5.3.3
+    dev: false
+
+  /abitype@1.0.5(typescript@5.3.3)(zod@3.22.4):
+    resolution: {integrity: sha512-YzDhti7cjlfaBhHutMaboYB21Ha3rXR9QTkNJFzYC4kC8YclaiwPBBBJY8ejFdu2wnJeZCVZSMlQJ7fi8S6hsw==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+      zod: ^3 >=3.22.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      zod:
+        optional: true
+    dependencies:
+      typescript: 5.3.3
+      zod: 3.22.4
     dev: false
 
   /abort-controller@3.0.0:
@@ -8978,10 +9045,6 @@ packages:
       queue: 6.0.2
     dev: false
 
-  /immutable@4.3.7:
-    resolution: {integrity: sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==}
-    dev: false
-
   /import-fresh@2.0.0:
     resolution: {integrity: sha512-eZ5H8rcgYazHbKC3PG4ClHNykCSxtAhxSSEM+2mb+7evD2CKF5V7c0dNum7AdpDh0ZdICwZY9sRSn8f+KH96sg==}
     engines: {node: '>=4'}
@@ -9404,6 +9467,14 @@ packages:
       ws: '*'
     dependencies:
       ws: 8.13.0
+    dev: false
+
+  /isows@1.0.4(ws@8.17.1):
+    resolution: {integrity: sha512-hEzjY+x9u9hPmBom9IIAqdJCwNLax+xrPb51vEPpERoFlIxgmZcHzsT5jKG06nvInKOBGvReAVz80Umed5CczQ==}
+    peerDependencies:
+      ws: '*'
+    dependencies:
+      ws: 8.17.1
     dev: false
 
   /iterator.prototype@1.1.2:
@@ -13304,6 +13375,30 @@ packages:
       - zod
     dev: false
 
+  /viem@2.21.18(typescript@5.3.3)(zod@3.22.4):
+    resolution: {integrity: sha512-CuZpymwBsuK2/YNDJE06EXxpfYs71X4v5ZwiGV5RczLKOwfHa/XuM3+GKbAoKCVeQ/tFt5n8XeHsMnbvEAauTg==}
+    peerDependencies:
+      typescript: '>=5.0.4'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@adraffy/ens-normalize': 1.10.0
+      '@noble/curves': 1.4.0
+      '@noble/hashes': 1.4.0
+      '@scure/bip32': 1.4.0
+      '@scure/bip39': 1.4.0
+      abitype: 1.0.5(typescript@5.3.3)(zod@3.22.4)
+      isows: 1.0.4(ws@8.17.1)
+      typescript: 5.3.3
+      webauthn-p256: 0.0.5
+      ws: 8.17.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+      - zod
+    dev: false
+
   /viem@2.7.9(typescript@5.3.3):
     resolution: {integrity: sha512-iDfc8TwaZFp1K95zlsxYh6Cs0OWCt35Tqs8uYgXKSxtz7w075mZ0H5SJ8zSyJGoEaticVDhtdmRRX6TtcW9EeQ==}
     peerDependencies:
@@ -13475,6 +13570,13 @@ packages:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
     dependencies:
       defaults: 1.0.4
+    dev: false
+
+  /webauthn-p256@0.0.5:
+    resolution: {integrity: sha512-drMGNWKdaixZNobeORVIqq7k5DsRC9FnG201K2QjeOoQLmtSDaSsVZdkg6n5jUALJKcAG++zBPJXmv6hy0nWFg==}
+    dependencies:
+      '@noble/curves': 1.4.2
+      '@noble/hashes': 1.4.0
     dev: false
 
   /webextension-polyfill-ts@0.25.0:
@@ -13675,6 +13777,19 @@ packages:
 
   /ws@8.16.0:
     resolution: {integrity: sha512-HS0c//TP7Ina87TfiPUz1rQzMhHrl/SG2guqRcTOIUYD2q8uhUdNHZYJUaQ8aTGPzCh+c6oawMKW35nFl1dxyQ==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  /ws@8.17.1:
+    resolution: {integrity: sha512-6XQFvXTkbfUOZOKKILFG1PDK2NDQs4azKQl26T0YS5CxqWLgXajbPZ+h4gZekJyRqFU8pvnbAbbs/3TgRPy+GQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
