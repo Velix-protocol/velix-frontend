@@ -2,7 +2,7 @@ import Section from "@/components/layouts/Section";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
-import { truncateString } from "@/utils/utils";
+import { prettifyBalance, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
 import useChainAccount from "@/hooks/useChainAccount";
@@ -28,8 +28,8 @@ export default function AppHeader() {
 
   const balance = useMemo(() => {
     return chain === "metis"
-      ? `${evmBalance?.formatted} ${evmBalance?.symbol}`
-      : `${starknetBalance?.formatted} ${starknetBalance?.symbol}`;
+      ? `${prettifyBalance(evmBalance?.formatted ?? "0")} ${evmBalance?.symbol}`
+      : `${prettifyBalance(starknetBalance?.formatted ?? "0")} ${starknetBalance?.symbol}`;
   }, [
     chain,
     evmBalance?.formatted,

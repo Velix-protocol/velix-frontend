@@ -49,12 +49,12 @@ function LandingPage() {
             }
           />
           <Route path="vepoints" element={<VePoints />} />
-          {/*<Route path="mint" element={<MintPage />} />*/}
-          {/*<Route path="unstake" element={<UnstakePage />} />*/}
+          <Route path="mint" element={<MintPage />} />
+          <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />
-          {/*<Route path="dashboard" element={<DashboardPage />} />*/}
-          {/*<Route path="redeem" element={<Redeem />} />*/}
-          {/*<Route path="reward" element={<Reward />} />*/}
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="redeem" element={<Redeem />} />
+          <Route path="reward" element={<Reward />} />
         </Route>
       </Routes>
     </BrowserRouter>

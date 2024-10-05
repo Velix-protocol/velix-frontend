@@ -3,6 +3,7 @@ import { useBalanceStore } from "@/store/balanceState";
 import { Role } from "@/types";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import { prettifyBalance } from "@/utils/utils.ts";
 
 export default function Balance({
   isConnected,
@@ -25,17 +26,17 @@ export default function Balance({
 
   const renderBalance = () => {
     if (role === "mint") {
-      return `${METISBalance} ${chainToken.nativeToken}`;
+      return `${prettifyBalance(METISBalance)} ${chainToken.nativeToken}`;
     }
     if (role === "stake") {
       if (chain === "starknet")
-        return `${strkBalance} ${chainToken.derivedToken}`;
-      return `${veMETISBalance} ${chainToken.derivedToken}`;
+        return `${prettifyBalance(strkBalance)} ${chainToken.derivedToken}`;
+      return `${prettifyBalance(veMETISBalance)} ${chainToken.derivedToken}`;
     }
     if (role === "unstake") {
       if (chain === "starknet")
-        return `${veStrkBalance} ${chainToken.stakedToken}`;
-      return `${sveMETISBalance} ${chainToken.stakedToken}`;
+        return `${prettifyBalance(veStrkBalance)} ${chainToken.stakedToken}`;
+      return `${prettifyBalance(sveMETISBalance)} ${chainToken.stakedToken}`;
     }
     return "0.0";
   };
@@ -57,9 +58,9 @@ export default function Balance({
     switch (role) {
       case "mint":
       case "unstake":
-        return `${veMETISBalance} ${chainToken.derivedToken}`;
+        return `${prettifyBalance(veMETISBalance)} ${chainToken.derivedToken}`;
       case "stake":
-        return `${sveMETISBalance} ${chainToken.stakedToken}`;
+        return `${prettifyBalance(sveMETISBalance)} ${chainToken.stakedToken}`;
       default:
         "";
     }

@@ -73,3 +73,7 @@ export const waitForTransaction = async (chain: SupportedChains, res: any) => {
     return (await res.wait()).tx_hash;
   }
 };
+
+export const prettifyBalance = (balance: string) => {
+  return Number(balance).toFixed(2);
+};
