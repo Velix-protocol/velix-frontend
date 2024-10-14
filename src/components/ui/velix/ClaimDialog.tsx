@@ -13,12 +13,6 @@ type ClaimDialogProps = {
   redeemableStakeTransactions: Stake[];
 };
 
-// const stakingColorAccordingToRedeemablePercentage: { [key: number]: string } = {
-//   20: "red-500",
-//   30: "orange-500",
-//   100: "green-500",
-// };
-
 export default function ClaimDialog({
   onClose,
   redeemableStakeTransactions
@@ -84,12 +78,9 @@ export default function ClaimDialog({
                       className={classNames(
                         "flex items-center justify-center px-2 py-1 font-space-grotesk text-xs sm:text-sm dark:text-white",
                         {
-                          "text-red-500":
-                            stake.percentage === 20,
-                          "text-orange-500":
-                            stake.percentage === 30,
-                          "text-green-500":
-                            stake.percentage === 100,
+                          "text-red-500": stake.percentage === 20,
+                          "text-orange-500": stake.percentage === 30,
+                          "text-green-500": stake.percentage === 100
                         }
                       )}
                     >
