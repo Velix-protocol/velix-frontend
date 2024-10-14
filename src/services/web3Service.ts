@@ -6,7 +6,7 @@ import {
   JsonRpcProvider,
   ethers
 } from "ethers";
-import { RpcProvider, Contract, Abi } from "starknet";
+import { RpcProvider, Contract, Abi, AccountInterface } from "starknet";
 import { SupportedChains } from "@/types/index.ts";
 
 export const STARKNET_RPC_PROVIDER =
@@ -32,13 +32,14 @@ export default class Web3Service {
   async contract(
     contractAddress: `0x${string}`,
     ABI: Interface | InterfaceAbi | Abi,
-    connectedWalletAddress: `0x${string}`
+    connectedWalletAddress: `0x${string}`,
+    account?: AccountInterface
   ) {
     if (this.ecosystem === "starknet") {
       return new Contract(
         ABI as Abi,
         contractAddress,
-        this.provider as RpcProvider
+        account ? account : (this.provider as RpcProvider)
       );
     }
 
