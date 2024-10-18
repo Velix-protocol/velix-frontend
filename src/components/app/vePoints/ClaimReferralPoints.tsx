@@ -91,9 +91,10 @@ export default function ClaimReferralPoints() {
       <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
         <div className="flex items-center gap-8">
           <img
-            src="/velix-icon.png"
+            src="/velix-referral-icon.png"
             alt="velix-icon"
-            className="max-lg:w-10 max-lg:h-10"
+            className="max-lg:w-10 max-lg:h-10 border bg-velix-claim-icon dark:border-bg-velix-dark-white border-velix-claim-icon-bg dark:bg-velix-light-dark lg:py-3 lg:px-5 p-3 rounded-[10px]"
+            style={{ borderStyle: 'dashed' }}
           />
           <div className="font-space-grotesk">
             <h4 className="text-3xl font-bold max-lg:text-xl">

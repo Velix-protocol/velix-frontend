@@ -23,6 +23,8 @@ const config = {
       },
       colors: {
         "velix-claim":"#F5F7FF",
+        "velix-claim-icon":"#FBFBFF",
+        "velix-claim-icon-bg":"#D9D8D8",
         "velix-claim-green":"#2EA857",
         "velix-claim-blue":"#12CBE5",
         "velix-claim-grey":"#90919C",
