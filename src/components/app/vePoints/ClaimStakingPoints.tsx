@@ -73,17 +73,17 @@ export default function ClaimStakingPoints() {
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
             <img
-              src="/velix-stake-icon.png"
+              src="/svg/velix-stake-icon.svg"
               alt="velix-icon"
-              className="max-lg:w-10 max-lg:h-10 border bg-velix-claim-icon dark:border-bg-velix-dark-white border-velix-claim-icon-bg dark:bg-velix-light-dark lg:py-3 lg:px-5 p-3 rounded-[10px]"
+              className="max-lg:w-10 max-lg:h-10 border mt-[-3.5rem] bg-velix-stake-icon dark:border-bg-velix-dark-white border-velix-stake-icon-bg dark:bg-velix-light-dark lg:py-3 lg:px-5 p-3 rounded-[10px]"
               style={{ borderStyle: 'dashed' }}
             />
             <div className="font-space-grotesk">
               <h4 className="text-3xl font-bold max-lg:text-xl">
                 Staking points/VELIX Token
               </h4>
-              <p className="text-base text-velix-gray max-lg:text-sm">
-                claim total of points earned by staking after 90 days
+              <p className="text-base text-velix-gray max-lg:text-sm]">
+                Claim total staking rewards after 90 days
               </p>
             </div>
           </div>

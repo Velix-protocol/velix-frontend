@@ -37,7 +37,7 @@ export default function DefiIntegration() {
       <img
         src="/svg/defi-integration1.svg"
         alt="defi integration"
-        className="scale-75 xl:scale-90 mt-[5rem]"
+        className="scale-75 xl:scale-90 mt-[5rem] lg:ml-[3rem]"
       />
       <div className="max-w-sm- lg:max-w-[25rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
         <h2 className="font-space-grotesk mt-5 font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
@@ -58,7 +58,7 @@ export default function DefiIntegration() {
               <img src="/svg/herculeProtocol.svg" alt="hercule protocol logo" />
             </DefiIconCard>
           </div>
-          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:mr-[2rem] md:mr-[3rem]"> 
+          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:mr-0.25 md:mr-0.25"> 
             <DefiIconCard>
               <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>

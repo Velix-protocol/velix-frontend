@@ -21,10 +21,24 @@ const config = {
       fontFamily: {
         "space-grotesk": "space-grotesk"
       },
+      width: {
+        'md-custom': '20.537rem',  
+        'lg-custom': '27.537rem',
+        'lg-custom-w': '24.537rem',  
+        'sm-custom-w': '14.537rem',  
+        'sm-custom-w-hero': '19.537rem',  
+      },
+      height: {
+        'md-custom': '20.8125rem', 
+        'lg-custom': '27.8125rem', 
+        'lg-custom-h': '24.8125rem', 
+        'sm-custom-h': '14.8125rem', 
+        'sm-custom-h-hero': '19.8125rem', 
+      },
       colors: {
         "velix-claim":"#F5F7FF",
-        "velix-claim-icon":"#FBFBFF",
-        "velix-claim-icon-bg":"#D9D8D8",
+        "velix-stake-icon":"#FBFBFF",
+        "velix-stake-icon-bg":"#D9D8D8",
         "velix-claim-green":"#2EA857",
         "velix-claim-blue":"#12CBE5",
         "velix-claim-grey":"#90919C",

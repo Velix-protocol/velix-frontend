@@ -30,7 +30,7 @@ const HowToGetVelixPoints = () => {
               <div className="flex justify-center items-center h-fit">
                 <img
                   src={"./svg/giftbox1.svg"}
-                  className=" w-[14.537rem] h-[14.8125rem] md:w-[20.537rem] md:h-[20.8125rem] lg:w-[24.537rem] lg:h-[24.8125rem] lg:mr-[9rem] md:mr-[3rem] mb-[5rem] "
+                  className="w-sm-custom-w h-sm-custom-h md:w-md-custom md:h-md-custom lg:w-lg-custom-w lg:h-lg-custom-h lg:mr-[6rem] md:mr-[3rem] mb-[5rem] "
                   alt="gift box"
                 />
               </div>

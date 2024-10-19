@@ -33,7 +33,7 @@ export default function Hero() {
           <img
             src="/svg/hero-image1.svg"
             alt="hero image"
-            className="w-[19.537rem] h-[19.8125rem] md:w-[20.537rem] md:h-[20.8125rem] lg:w-[24.537rem] lg:h-[24.8125rem] lg:ml-[15rem] pb-[5rem] mt-[5rem] transition-transform"
+            className="w-sm-custom-w-hero h-sm-custom-h-hero md:w-md-custom md:h-md-custom lg:w-lg-custom lg:h-lg-custom lg:mt-[7rem] lg:ml-[13rem] pb-[5rem] mt-[5rem] transition-transform"
           />
         </div>
       </Section>
