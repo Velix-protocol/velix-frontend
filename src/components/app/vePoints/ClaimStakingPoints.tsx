@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ClaimDialog from "@/components/ui/velix/ClaimDialog.tsx";
 import { velixApi } from "@/services/http.ts";
+import VelixStakingIcon from "@/components/ui/velix/icons/VelixStakingIcon";
 
 export default function ClaimStakingPoints() {
   const { getStaker } = useStakersStore();
@@ -72,12 +73,9 @@ export default function ClaimStakingPoints() {
 
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
-            <img
-              src="/svg/velix-stake-icon.svg"
-              alt="velix-icon"
-              className="max-lg:w-10 max-lg:h-10 border mt-[-3.5rem] bg-velix-stake-icon dark:border-bg-velix-dark-white border-velix-stake-icon-bg dark:bg-velix-light-dark lg:py-3 lg:px-5 p-3 rounded-[10px]"
-              style={{ borderStyle: 'dashed' }}
-            />
+          <div className="bg-velix-blue rounded-lg mb-7 lg:p-4 sm:mb-7 lg:mb-3 md:mb-0 p-4 sm:p-3 flex items-center justify-center">
+            <VelixStakingIcon className="w-[25px] h-[25px]" />
+          </div>
             <div className="font-space-grotesk">
               <h4 className="text-3xl font-bold max-lg:text-xl">
                 Staking points/VELIX Token

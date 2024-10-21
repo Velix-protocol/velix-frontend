@@ -37,7 +37,7 @@ export default function DefiIntegration() {
       <img
         src="/svg/defi-integration1.svg"
         alt="defi integration"
-        className="scale-75 xl:scale-90 mt-[5rem] lg:ml-[3rem]"
+        className="scale-75 xl:scale-75 mt-5"
       />
       <div className="max-w-sm- lg:max-w-[25rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
         <h2 className="font-space-grotesk mt-5 font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
@@ -48,7 +48,7 @@ export default function DefiIntegration() {
           </span>
         </h2>
         <div className="grid max-[380px]:grid-cols-3 grid-cols-3 grid-rows-3 lg:max-w-[21rem] mt-20 justify-center items-center">
-          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:ml-[2rem] md:ml-[3rem]"> 
+          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:ml-8 md:ml-12"> 
             <DefiIconCard>
               <img src="/svg/shoebillIcon.svg" alt="Tettys stack icon" />
             </DefiIconCard>
@@ -58,7 +58,7 @@ export default function DefiIntegration() {
               <img src="/svg/herculeProtocol.svg" alt="hercule protocol logo" />
             </DefiIconCard>
           </div>
-          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:mr-0.25 md:mr-0.25"> 
+          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:mr-8 md:mr-12"> 
             <DefiIconCard>
               <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>

@@ -12,6 +12,7 @@ import { velixApi } from "@/services/http.ts";
 import Modal from "@/components/ui/velix/Modal.tsx";
 import Loader from "@/components/ui/velix/icons/Loader.tsx";
 import SuccessModal from "@/components/app/SuccessModal.tsx";
+import VelixReferralIcon from "@/components/ui/velix/icons/VelixReferralIcon";
 
 export default function ClaimReferralPoints() {
   const { staker, getStaker } = useStakersStore();
@@ -90,12 +91,9 @@ export default function ClaimReferralPoints() {
 
       <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
         <div className="flex items-center gap-8">
-          <img
-            src="/svg/velix-referral-icon.svg"
-            alt="velix-icon"
-            className="max-lg:w-10 max-lg:h-10 border mt-[-1.8rem] bg-velix-stake-icon dark:border-bg-velix-dark-white border-velix-stake-icon-bg dark:bg-velix-light-dark lg:py-3 lg:px-5 p-3 rounded-[10px]"
-            style={{ borderStyle: 'dashed' }}
-          />
+        <div className="bg-velix-blue rounded-lg lg:p-4 p-4 sm:p-3 flex items-center justify-center">
+          <VelixReferralIcon className="w-[25px] h-[25px]" />
+        </div>
           <div className="font-space-grotesk">
             <h4 className="text-3xl font-bold max-lg:text-xl">
               Referral points/VELIX Token
