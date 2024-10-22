@@ -86,6 +86,5 @@ jobs:
           old_branch_name="releases/$NEXT_RELEASE_VERSION"
           new_branch_name="archive/$old_branch_name"
           git checkout $old_branch_name
-          git branch -M $old_branch_name new_branch_name
-          git push origin --delete $old_branch_name
+          git branch -M $old_branch_name $new_branch_name
           git push -u origin $new_branch_name
