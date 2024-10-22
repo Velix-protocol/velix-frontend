@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ClaimDialog from "@/components/ui/velix/ClaimDialog.tsx";
 import { velixApi } from "@/services/http.ts";
+import VelixStakingIcon from "@/components/ui/velix/icons/VelixStakingIcon";
 
 export default function ClaimStakingPoints() {
   const { getStaker } = useStakersStore();
@@ -72,17 +73,15 @@ export default function ClaimStakingPoints() {
 
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
-            <img
-              src="/velix-icon.png"
-              alt="velix-icon"
-              className="max-lg:w-10 max-lg:h-10"
-            />
+          <div className="bg-velix-blue rounded-lg mb-7 lg:p-4 sm:mb-7 lg:mb-3 md:mb-0 p-4 sm:p-3 flex items-center justify-center">
+            <VelixStakingIcon className="w-6 h-6" />
+          </div>
             <div className="font-space-grotesk">
               <h4 className="text-3xl font-bold max-lg:text-xl">
                 Staking points/VELIX Token
               </h4>
               <p className="text-base text-velix-gray max-lg:text-sm">
-                claim total of points earned by staking after 90 days
+                Claim total staking rewards after 90 days
               </p>
             </div>
           </div>

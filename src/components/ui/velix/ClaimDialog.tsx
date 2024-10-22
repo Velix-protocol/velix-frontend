@@ -65,8 +65,8 @@ export default function ClaimDialog({
       <Modal onClose={onClose}>
         <div className="w-full max-h-[30rem] overflow-y-auto">
           <p className="mb-6 sm:mb-10 font-space-grotesk text-sm sm:text-md text-velix-text-gray dark:text-gray-300">
-            Be aware that you cannot claim the total points for each transaction
-            before 90 days vetting period.
+            Be aware that the total points accumulated during staking period can only be 
+            claimed after a 90day vesting period.
           </p>
 
           <div className="space-y-4 sm:space-y-6">

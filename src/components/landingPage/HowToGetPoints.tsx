@@ -8,7 +8,7 @@ import { cn } from "@/utils/utils";
 const steps = [
   "Stake METIS at Velix and earn 1x points <br/> everyday",
   "Supply at shoebill and earn additional 1x points <br/> everyday",
-  "Invite friends too deposit and earn up <br/> to 20% more points everyday"
+  "Invite friends to deposit and earn up to 20% <br/> more points everyday"
 ];
 
 const HowToGetVelixPoints = () => {
@@ -29,12 +29,12 @@ const HowToGetVelixPoints = () => {
             <div className="w-full grid max-md:grid-rows-2 md:grid-cols-2 h-fit max-md:py-4 py-20 px-10 flex-row items-center font-space-grotesk dark:bg-gradient-to-r to-[#313131] from-[#1D1D1D] rounded-[0.9375rem] overflow-hidden relative bg-velix-slate-blue">
               <div className="flex justify-center items-center h-fit">
                 <img
-                  src={"./svg/giftbox.svg"}
-                  className="w-full lg:w-[25.8125rem] md:h-[28.25rem] -mt-14"
-                  alt="git box"
+                  src={"./svg/giftbox1.svg"}
+                  alt="gift box"
+                  className="scale-75 xl:scale-90"
                 />
               </div>
-              <div className="mt-2 md:mt-16 max-md:px-5">
+              <div className="mt-[-8] md:mt-16 px-5 max-md:px-5">
                 {steps.map((step, index) => (
                   <div
                     key={`${step}-${index}`}
@@ -44,7 +44,7 @@ const HowToGetVelixPoints = () => {
                       <div className="flex flex-col justify-start items-center h-32">
                         <FaCheckCircle
                           className={cn(
-                            "dark:text-primary w-6 h-6 text-velix-primary",
+                            "dark:text-primary w-6 h-6 text-velix-primary text-sm",
                             index === steps.length - 1 && "w-5 h-5"
                           )}
                         />
@@ -54,7 +54,7 @@ const HowToGetVelixPoints = () => {
                       </div>
 
                       <p
-                        className="text-xl my-0 py-0 -mt-1"
+                        className="lg:text-lg text-md sm:text-sm my-0 py-0 -mt-1"
                         dangerouslySetInnerHTML={{ __html: step }}
                       />
                     </div>
