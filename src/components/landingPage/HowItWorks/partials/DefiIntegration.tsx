@@ -48,17 +48,17 @@ export default function DefiIntegration() {
           </span>
         </h2>
         <div className="grid max-sm:grid-cols-3 grid-cols-3 grid-rows-3 lg:max-w-lg mt-20 justify-center items-center">
-          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:-mr-5 md:ml-12"> 
+          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:-ml-16 md:ml-12"> 
             <DefiIconCard>
               <img src="/svg/shoebillIcon.svg" alt="Tettys stack icon" />
             </DefiIconCard>
           </div>
-          <div className="row-span-3 flex flex-col gap-10 justify-center items-center">
+          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:-ml-32">
             <DefiIconCard imageContainerClassName="w-14 h-14">
               <img src="/svg/herculeProtocol.svg" alt="hercule protocol logo" />
             </DefiIconCard>
           </div>
-          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:-ml-5 md:mr-12"> 
+          <div className="row-span-3 flex flex-col gap-10 justify-center items-center lg:-ml-36 md:mr-12"> 
             <DefiIconCard>
               <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>

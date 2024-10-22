@@ -47,8 +47,8 @@ export default function FAQ() {
     <div>
       <Section className="mt-28 max-lg:px-5">
         <div className="font-space-grotesk flex flex-col justify-center items-center">
-          <h2 className="text-[1.25rem] lg:text-4xl font-bold">
-            Frequently Asked Questions About Velix
+          <h2 className="text-[1.25rem] lg:text-4xl font-bold text-center">
+            Frequently Asked Questions<br/> About Velix
           </h2>
           <p className="text-velix-gray mt-5 text-center">
             Everything you need to know about velix
