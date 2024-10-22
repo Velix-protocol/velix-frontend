@@ -41,7 +41,11 @@ jobs:
 
       - name: Create release branch
         run: |
-          branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
-          git checkout -b $branch_name
-          git push origin $branch_name
-
+            if [ -z "${{ env.NEXT_RELEASE_VERSION }}" ]; then
+              echo "NEXT_RELEASE_VERSION is not set."
+              exit 1
+            else
+              branch_name="releases/${{ env.NEXT_RELEASE_VERSION }}"
+              git checkout -b $branch_name
+              git push origin $branch_name
+            fi
