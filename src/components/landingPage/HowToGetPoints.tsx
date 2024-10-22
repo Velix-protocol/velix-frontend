@@ -34,7 +34,7 @@ const HowToGetVelixPoints = () => {
                   className="scale-75 xl:scale-90"
                 />
               </div>
-              <div className="mt-[-2rem] md:mt-16 max-md:px-5">
+              <div className="mt-[-8] md:mt-16 px-5 max-md:px-5">
                 {steps.map((step, index) => (
                   <div
                     key={`${step}-${index}`}

@@ -33,7 +33,7 @@ export default function Hero() {
           <img
             src="/svg/hero-image1.svg"
             alt="hero image"
-            className="max-md:w-96 max-md:h-96 xl:scale-90 transition-transform lg:ml-44 lg:mt-9"
+            className="max-md:w-96 max-md:h-96 xl:scale-90 transition-transform lg:ml-44 lg:mt-9 md:mt-12"
           />
         </div>
       </Section>
