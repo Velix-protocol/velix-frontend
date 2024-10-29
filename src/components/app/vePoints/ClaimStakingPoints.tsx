@@ -73,7 +73,7 @@ export default function ClaimStakingPoints() {
 
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
-          <div className="bg-velix-blue rounded-lg mb-7 lg:p-4 sm:mb-7 lg:mb-3 md:mb-0 p-4 sm:p-3 flex items-center justify-center">
+          <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg mb-7 lg:p-4 sm:mb-7 lg:mb-3 md:mb-0 p-4 sm:p-3 flex items-center justify-center">
             <VelixStakingIcon className="w-6 h-6" />
           </div>
             <div className="font-space-grotesk">
@@ -88,7 +88,7 @@ export default function ClaimStakingPoints() {
           <div className="flex gap-10 max-lg:flex-col max-lg:gap-5">
             <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
               <CardContent className="p-7 space-y-2">
-                <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                <div className="max-lg:text-sm text-base text-velix-gray font-normal">
                   Amount staked
                 </div>
                 <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
@@ -98,7 +98,7 @@ export default function ClaimStakingPoints() {
             </Card>
             <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
               <CardContent className="p-7 space-y-2">
-                <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                <div className="max-lg:text-sm text-base text-velix-gray font-normal">
                   Total points earned
                 </div>
                 <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">
@@ -108,7 +108,7 @@ export default function ClaimStakingPoints() {
             </Card>
             <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
               <CardContent className="p-7 space-y-2">
-                <div className="max-lg:text-sm text-xl text-velix-gray font-bold">
+                <div className="max-lg:text-sm text-base text-velix-gray font-normal">
                   Total points to claim
                 </div>
                 <div className="max-lg:text-lg font-semibold text-velix-primary dark:text-velix-dark-white text-2xl">

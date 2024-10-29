@@ -31,7 +31,7 @@ const HowToGetVelixPoints = () => {
                 <img
                   src={"./svg/giftbox1.svg"}
                   alt="gift box"
-                  className="scale-75 xl:scale-90"
+                  className="md:scale-75 sm:scale-90 xl:scale-90 mb-12"
                 />
               </div>
               <div className="mt-[-8] md:mt-16 px-5 max-md:px-5">
