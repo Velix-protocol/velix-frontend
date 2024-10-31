@@ -1,32 +1,5 @@
 export const REWARD_DISPATCHER_CONTRACT_ABI = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "target",
-        type: "address"
-      }
-    ],
-    name: "AddressEmptyCode",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address"
-      }
-    ],
-    name: "AddressInsufficientBalance",
-    type: "error"
-  },
-  {
-    inputs: [],
-    name: "FailedInnerCall",
-    type: "error"
-  },
-  {
     inputs: [],
     name: "InvalidInitialization",
     type: "error"
@@ -34,6 +7,11 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   {
     inputs: [],
     name: "NotInitializing",
+    type: "error"
+  },
+  {
+    inputs: [],
+    name: "ReentrancyGuardReentrantCall",
     type: "error"
   },
   {
@@ -48,6 +26,22 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
     type: "error"
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "length",
+        type: "uint256"
+      }
+    ],
+    name: "StringsInsufficientHexLength",
+    type: "error"
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -59,13 +53,13 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "protocolTreasuryAmount",
+        name: "toTreasuryAmount",
         type: "uint256"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "sveMetisAmount",
+        name: "toVaultAmount",
         type: "uint256"
       }
     ],
@@ -87,7 +81,20 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "BETA_USER_ROLE",
+    name: "ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "BACKEND_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -113,12 +120,12 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "INTERNAL_ROLE",
+    name: "FEE_PRECISION",
     outputs: [
       {
-        internalType: "bytes32",
+        internalType: "uint64",
         name: "",
-        type: "bytes32"
+        type: "uint64"
       }
     ],
     stateMutability: "view",
@@ -126,12 +133,25 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "bridge",
+    name: "INITIAL_DEPOSIT_AMOUNT",
     outputs: [
       {
-        internalType: "address",
+        internalType: "uint256",
         name: "",
-        type: "address"
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "TIMELOCK_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
       }
     ],
     stateMutability: "view",
@@ -152,25 +172,6 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "crossDomainMessenger",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "metisAmount",
-        type: "uint256"
-      }
-    ],
     name: "dispatch",
     outputs: [],
     stateMutability: "nonpayable",
@@ -191,25 +192,12 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "metis",
+    name: "treasuryBalance",
     outputs: [
       {
-        internalType: "address",
+        internalType: "uint256",
         name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "sveMetis",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -220,7 +208,7 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
     name: "veMetis",
     outputs: [
       {
-        internalType: "address",
+        internalType: "contract IERC20",
         name: "",
         type: "address"
       }
@@ -229,16 +217,25 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "veMetisMinter",
-    outputs: [
+    inputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address"
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      },
+      {
+        internalType: "bool",
+        name: "redeem",
+        type: "bool"
       }
     ],
-    stateMutability: "view",
+    name: "withdrawTreasury",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function"
+  },
+  {
+    stateMutability: "payable",
+    type: "receive"
   }
 ] as const;

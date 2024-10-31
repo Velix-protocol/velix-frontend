@@ -10,6 +10,11 @@ export const CONFIG_CONTRACT_ABI = [
     type: "error"
   },
   {
+    inputs: [],
+    name: "ReentrancyGuardReentrantCall",
+    type: "error"
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -31,11 +36,125 @@ export const CONFIG_CONTRACT_ABI = [
       {
         indexed: false,
         internalType: "uint64",
+        name: "oldValue",
+        type: "uint64"
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "newValue",
+        type: "uint64"
+      }
+    ],
+    name: "CancelRedemptionFeeSet",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint64",
         name: "version",
         type: "uint64"
       }
     ],
     name: "Initialized",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "oldValue",
+        type: "uint64"
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "newValue",
+        type: "uint64"
+      }
+    ],
+    name: "MinQueueLengthSecs",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "oldValue",
+        type: "bool"
+      },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "newValue",
+        type: "bool"
+      }
+    ],
+    name: "PausedSet",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "oldValue",
+        type: "uint64"
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "newValue",
+        type: "uint64"
+      }
+    ],
+    name: "QueueLengthSecsSet",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "oldValue",
+        type: "uint64"
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "newValue",
+        type: "uint64"
+      }
+    ],
+    name: "RedemptionFeeSet",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "oldValue",
+        type: "uint64"
+      },
+      {
+        indexed: false,
+        internalType: "uint64",
+        name: "newValue",
+        type: "uint64"
+      }
+    ],
+    name: "ReduceMaturityStakeSecsSet",
     type: "event"
   },
   {
@@ -81,7 +200,7 @@ export const CONFIG_CONTRACT_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "sender",
+        name: "senderFini",
         type: "address"
       }
     ],
@@ -167,6 +286,19 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
+    name: "ADDRESS_REDEMPTION_QUEUE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
     name: "ADDRESS_REWARD_DISPATCHER",
     outputs: [
       {
@@ -219,7 +351,20 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "BETA_USER_ROLE",
+    name: "ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "BACKEND_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -245,7 +390,33 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "INTERNAL_ROLE",
+    name: "FEE_PRECISION",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "INITIAL_DEPOSIT_AMOUNT",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "TIMELOCK_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -259,6 +430,71 @@ export const CONFIG_CONTRACT_ABI = [
   {
     inputs: [],
     name: "UINT32_PROTOCOL_TREASURY_RATIO",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UINT64_CANCEL_REDEMPTION_FEE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UINT64_MIN_QUEUE_LENGTH_SECS",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UINT64_QUEUE_LENGTH_SECS",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UINT64_REDEMPTION_FEE",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "UINT64_REDUCE_MATURITY_STAKE_SECS",
     outputs: [
       {
         internalType: "uint256",
@@ -294,24 +530,6 @@ export const CONFIG_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "role",
-        type: "bytes32"
-      },
-      {
-        internalType: "bool",
-        name: "allow",
-        type: "bool"
-      }
-    ],
-    name: "allowAll",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
     inputs: [],
     name: "bridge",
     outputs: [
@@ -319,6 +537,19 @@ export const CONFIG_CONTRACT_ABI = [
         internalType: "address",
         name: "",
         type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "cancelRedemptionFee",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
       }
     ],
     stateMutability: "view",
@@ -452,6 +683,19 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
+    name: "minQueueLengthSecs",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
     name: "protocolTreasury",
     outputs: [
       {
@@ -471,6 +715,58 @@ export const CONFIG_CONTRACT_ABI = [
         internalType: "uint32",
         name: "",
         type: "uint32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "queueLengthSecs",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "redemptionFee",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "redemptionQueue",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "reduceMaturityStakeSecs",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
       }
     ],
     stateMutability: "view",
@@ -528,6 +824,19 @@ export const CONFIG_CONTRACT_ABI = [
   {
     inputs: [
       {
+        internalType: "uint64",
+        name: "_cancelRedemptionFee",
+        type: "uint64"
+      }
+    ],
+    name: "setCancelRedemptionFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_metis",
         type: "address"
@@ -569,6 +878,19 @@ export const CONFIG_CONTRACT_ABI = [
   {
     inputs: [
       {
+        internalType: "uint64",
+        name: "_minQueueLengthSecs",
+        type: "uint64"
+      }
+    ],
+    name: "setMinQueueLengthSecs",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "_protocolTreasury",
         type: "address"
@@ -588,6 +910,58 @@ export const CONFIG_CONTRACT_ABI = [
       }
     ],
     name: "setProtocolTreasuryRatio",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint64",
+        name: "_queueLengthSecs",
+        type: "uint64"
+      }
+    ],
+    name: "setQueueLengthSecs",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint64",
+        name: "_redemptionFee",
+        type: "uint64"
+      }
+    ],
+    name: "setRedemptionFee",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_redemptionQueueAddress",
+        type: "address"
+      }
+    ],
+    name: "setRedemptionQueue",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint64",
+        name: "_reduceMaturityStakeSecs",
+        type: "uint64"
+      }
+    ],
+    name: "setReduceMaturityStakeSecs",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -700,5 +1074,9 @@ export const CONFIG_CONTRACT_ABI = [
     ],
     stateMutability: "view",
     type: "function"
+  },
+  {
+    stateMutability: "payable",
+    type: "receive"
   }
 ] as const;

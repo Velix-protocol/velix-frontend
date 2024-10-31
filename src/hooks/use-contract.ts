@@ -25,7 +25,7 @@ import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
 
-const useContractHookState = () => {
+export const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<any>(null);
