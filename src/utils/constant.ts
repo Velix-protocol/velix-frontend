@@ -50,7 +50,7 @@ export const velixContracts = {
     abi: METIS_TOKEN_CONTRACT_ABI
   },
   VEMETIS_MINTER: {
-    address: VEMETIS_CONTRACT_ADDRESS,
+    address: VEMETIS_MINTER_CONTRACT_ADDRESS,
     abi: VEMETIS_MINTER_CONTRACT_ABI
   },
   REDEMPTION_QUEUE: {

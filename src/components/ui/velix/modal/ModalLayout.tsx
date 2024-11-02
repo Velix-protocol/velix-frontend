@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
-import CancelIcon from "./icons/CancelIcon";
-import GradientBorder from "./GradientBorder";
+import CancelIcon from "../icons/CancelIcon";
+import GradientBorder from "../GradientBorder";
 import { cn } from "@/utils/utils.ts";
 
-export default function Modal({
+export default function ModalLayout({
   children,
   onClose,
   className = ""

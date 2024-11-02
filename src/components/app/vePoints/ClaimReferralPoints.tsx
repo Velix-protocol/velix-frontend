@@ -9,10 +9,11 @@ import { useClaimReferralPoints } from "@/hooks/useHttp.ts";
 import { ChangeEvent, Fragment, useState } from "react";
 import { throttle, viewTransactionOnExplorer } from "@/utils/utils.ts";
 import { velixApi } from "@/services/http.ts";
-import Modal from "@/components/ui/velix/Modal.tsx";
+import Modal from "@/components/ui/velix/modal/ModalLayout";
 import Loader from "@/components/ui/velix/icons/Loader.tsx";
-import SuccessModal from "@/components/app/SuccessModal.tsx";
+// import SuccessModal from "@/components/app/SuccessModal.tsx";
 import VelixReferralIcon from "@/components/ui/velix/icons/VelixReferralIcon";
+import SuccessModal from "@/components/ui/velix/modal/SuccessModal";
 
 export default function ClaimReferralPoints() {
   const { staker, getStaker } = useStakersStore();
@@ -91,15 +92,16 @@ export default function ClaimReferralPoints() {
 
       <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
         <div className="flex items-center gap-8">
-        <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg lg:p-4 p-4 sm:p-3  sm:-mb-3 xl:mb-0 lg:mb-0 flex items-center justify-center"> 
-          <VelixReferralIcon className="w-6 h-6" />
-        </div>
-          <div className="font-space-grotesk mt-3 lg:mt-0 md:mt-0">
+          <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg lg:p-4 p-4 sm:p-3 flex items-center justify-center">
+            <VelixReferralIcon className="w-6 h-6" />
+          </div>
+          <div className="font-space-grotesk">
             <h4 className="text-3xl font-bold max-lg:text-xl">
               Referral points
             </h4>
             <p className="text-base text-velix-gray max-lg:text-sm">
-              Claim Referral vePoints, redeem for VELIX Token rewards after 90 days
+              Claim Referral vePoints, redeem for VELIX Token rewards after 90
+              days
             </p>
           </div>
         </div>

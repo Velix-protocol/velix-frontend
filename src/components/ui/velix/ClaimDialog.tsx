@@ -1,12 +1,13 @@
 import ClaimButton from "./ClaimButton";
-import Modal from "@/components/ui/velix/Modal.tsx";
+import Modal from "@/components/ui/velix/modal/ModalLayout";
 import { truncateString, viewTransactionOnExplorer } from "@/utils/utils.ts";
 import { useClaimStakingPoints } from "@/hooks/useHttp.ts";
 import { Fragment, useEffect, useState } from "react";
 import Loader from "@/components/ui/velix/icons/Loader.tsx";
-import SuccessModal from "@/components/app/SuccessModal.tsx";
+// import SuccessModal from "@/components/app/SuccessModal.tsx";
 import { Stake } from "@/types/index.ts";
 import classNames from "classnames";
+import SuccessModal from "./modal/SuccessModal";
 
 type ClaimDialogProps = {
   onClose: () => void;
@@ -65,8 +66,8 @@ export default function ClaimDialog({
       <Modal onClose={onClose}>
         <div className="w-full max-h-[30rem] overflow-y-auto">
           <p className="mb-6 sm:mb-10 font-space-grotesk text-sm sm:text-md text-velix-text-gray dark:text-gray-300">
-            Be aware that the total points accumulated during staking period can only be 
-            claimed after a 90day vesting period.
+            Be aware that the total points accumulated during staking period can
+            only be claimed after a 90day vesting period.
           </p>
 
           <div className="space-y-4 sm:space-y-6">

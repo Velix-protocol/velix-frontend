@@ -7,7 +7,7 @@ import { useCallback, useLayoutEffect, useState } from "react";
 import { retreiveActionsActivity, retreiveClaims } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import WaitingModal from "@/components/app/WaitingForApprovalModal";
-import Modal from "@/components/ui/velix/Modal";
+import Modal from "@/components/ui/velix/modal/ModalLayout";
 import SuccessModal from "@/components/app/SuccessModal";
 import { useMintNft } from "@/hooks/use-contract";
 import { EXPLORER_TX_URL } from "@/utils/constant";
