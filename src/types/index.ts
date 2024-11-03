@@ -16,6 +16,7 @@ export type Staker = {
   referralCodeCreationDate: Date;
   referrerCode: string;
   amount: number;
+  stakingpoints: number;
 };
 
 export type Stake = {

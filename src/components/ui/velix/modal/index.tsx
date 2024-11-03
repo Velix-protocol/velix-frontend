@@ -1,19 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ModalLayout from "./ModalLayout";
 import Loader from "../icons/Loader";
 import ModalButtons from "./ModalButtons";
 import Steps from "../../Steps";
 import SuccessModal from "./SuccessModal";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 
 type ModalProps = {
-  showLoader?: boolean;
   onClose: () => void;
-  errorMessage: string;
-  step1Error: boolean;
+  step1Error: any;
   step1Success: boolean;
   step2Sucesss: boolean;
-  step2Error: boolean;
+  step2Error: any;
   step1Pending: boolean;
   step2Pending: boolean;
   onStep1Click: () => void;
@@ -23,8 +22,7 @@ type ModalProps = {
   flowname: "stake" | "mint" | "unstake" | "redeem";
 };
 
-export default function Modal({
-  showLoader,
+export default function TransactionModal({
   onClose,
   step1Error,
   step1Success,
@@ -33,8 +31,8 @@ export default function Modal({
   onStep2Click,
   step1Pending,
   step2Pending,
+  onStep1Click,
   flowname,
-  errorMessage,
   renderButtonTitle,
   txHash
 }: ModalProps) {
@@ -55,9 +53,15 @@ export default function Modal({
     if (currentStep === 2 && step2Pending) return "Waiting for confirmation.";
   };
 
-  const onViewTransaction = () => {
+  const onViewTransaction = useCallback(() => {
     window.open(`${EXPLORER_TX_URL}${txHash}`);
-  };
+  }, [txHash]);
+
+  const renderErrorMessage = useCallback(() => {
+    if (step1Error) return step1Error.message.split(".")[0] as string;
+    if (step2Error) return step2Error.message.split(".")[0] as string;
+    return "";
+  }, [step1Error, step2Error]);
 
   return (
     <ModalLayout
@@ -67,9 +71,9 @@ export default function Modal({
       }}
     >
       <div className="flex flex-col gap-3 items-center">
-        {step1Pending ||
-          step1Pending ||
-          (showLoader && <Loader className="w-20 h-20 mb-6 animate-spin" />)}
+        {(step1Pending || step2Pending) && (
+          <Loader className="w-20 h-20 mb-6 animate-spin" />
+        )}
         <p className="font-bold text-center text-2xl lg:text-4xl">
           {renderModalTitle()}
         </p>
@@ -81,7 +85,9 @@ export default function Modal({
           </p>
         )}
         {(step1Error || step2Error) && (
-          <p className="text-red-600 text-center text-base">{errorMessage}</p>
+          <p className="text-red-600 text-center text-base">
+            {renderErrorMessage()}
+          </p>
         )}
 
         {step2Sucesss && currentStep === 2 && (
@@ -95,7 +101,7 @@ export default function Modal({
             isApproveButtonDisabled={step1Pending || step1Success}
             title={renderButtonTitle()}
             onLastStepClick={onStep2Click}
-            onClickApproveButton={onStep2Click}
+            onClickApproveButton={onStep1Click}
           />
         )}
         <Steps

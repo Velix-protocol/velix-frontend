@@ -649,7 +649,7 @@ export const useMetisBalance = () => {
 
   useEffect(() => {
     if (address) getBalances();
-  }, [address, getBalances, setsveMETISBalance, setveMETISBalance]);
+  }, [address, getBalances]);
 
   return { getBalances };
 };
