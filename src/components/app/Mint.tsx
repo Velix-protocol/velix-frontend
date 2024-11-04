@@ -18,7 +18,6 @@ import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "../ui/velix/modal/ModalButtons";
-// import SuccessModal from "./SuccessModal";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
 import SuccessModal from "../ui/velix/modal/SuccessModal";
