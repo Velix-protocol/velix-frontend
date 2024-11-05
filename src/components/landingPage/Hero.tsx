@@ -18,7 +18,7 @@ export default function Hero() {
             <div className="flex items-center gap-2 max-sm:flex-col">
               <Link
                 to="/app/stake"
-                className="bg-velix-yellow hover:bg-velix-yellow text-white px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold dark:bg-velix-dark-yellow dark:hover:bg-velix-dark-yellow dark:text-black"
+                className="bg-velix-yellow hover:bg-velix-yellow text-velix-blue px-10 py-3 rounded-sm w-fit mt-4 max-sm:mt-10 lg:mt-16 font-semibold dark:bg-velix-dark-yellow dark:hover:bg-velix-dark-yellow dark:text-black"
               >
                 Stake now
               </Link>
@@ -31,9 +31,10 @@ export default function Hero() {
             </div>
           </div>
           <img
-            src="/svg/hero-image1.svg"
+            src="/svg/hero-image2.svg"
             alt="hero image"
-            className="max-md:w-96 max-md:h-96 xl:scale-90 transition-transform lg:ml-44 lg:mt-9 md:mt-12"
+            // className="max-md:w-96 max-md:h-96  xl:scale-90 transition-transform xl:ml-[10rem] lg:ml-5 lg:mt-9 md:mt-12"
+            className="max-md:w-96 max-md:h-96 xl:scale-90 transition-transform lg:ml-44 lg:mt-5 md:mt-12"
           />
         </div>
       </Section>

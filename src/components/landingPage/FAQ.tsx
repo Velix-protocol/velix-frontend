@@ -36,9 +36,9 @@ const FAQs = [
   //   )
   // },
   {
-    question: "How to get veMETIS?",
+    question: "What are cross-chain rewards ?",
     answer:
-      "Mint veMETIS with METIS using the mint button or acquire veMETIS from decentralized exchanges."
+      "Earn rewards from multiple networks when you join Velix Genesis pool."
   }
 ];
 
@@ -48,7 +48,7 @@ export default function FAQ() {
       <Section className="mt-28 max-lg:px-5">
         <div className="font-space-grotesk flex flex-col justify-center items-center">
         <h2 className="text-[1.25rem] lg:text-4xl font-bold text-center">
-          Frequently Asked Questions<br/> About Velix
+          Frequently Asked Questions
         </h2>  
           <p className="text-velix-gray mt-5 text-center">
             Everything you need to know about velix
