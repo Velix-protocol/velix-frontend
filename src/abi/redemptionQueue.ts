@@ -347,7 +347,7 @@ export const REDEMPTION_QUEUE_ABI = [
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountEMetisRedeemed",
+        name: "amountVeMetisRedeemed",
         type: "uint256"
       },
       {
@@ -758,6 +758,80 @@ export const REDEMPTION_QUEUE_ABI = [
         internalType: "address",
         name: "",
         type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getNftId",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_nftId",
+        type: "uint256"
+      }
+    ],
+    name: "getNftInformation",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "hasBeenRedeemed",
+            type: "bool"
+          },
+          {
+            internalType: "uint64",
+            name: "maturity",
+            type: "uint64"
+          },
+          {
+            internalType: "uint120",
+            name: "amount",
+            type: "uint120"
+          },
+          {
+            internalType: "uint64",
+            name: "cancelRedemptionFee",
+            type: "uint64"
+          },
+          {
+            internalType: "uint64",
+            name: "lpLockMaturity",
+            type: "uint64"
+          },
+          {
+            internalType: "address",
+            name: "lpLockToken",
+            type: "address"
+          },
+          {
+            internalType: "uint256",
+            name: "lpLockAmount",
+            type: "uint256"
+          },
+          {
+            internalType: "bool",
+            name: "lpClaimed",
+            type: "bool"
+          }
+        ],
+        internalType: "struct RedemptionQueue.RedemptionQueueItem",
+        name: "",
+        type: "tuple"
       }
     ],
     stateMutability: "view",

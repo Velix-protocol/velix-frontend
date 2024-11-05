@@ -230,6 +230,19 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "getVeMetisMinterAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -297,32 +310,6 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
     name: "redeemToTreasury",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "sveMetis",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "veMetis",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
     type: "function"
   },
   {
