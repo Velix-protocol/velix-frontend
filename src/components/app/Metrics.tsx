@@ -8,7 +8,7 @@ import { useAccount } from "wagmi";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
-import { FaGift } from "react-icons/fa6";
+import VelixReferralIcon1 from "../ui/velix/icons/VelixReferralIcon1";
 
 export default function Metrics() {
   const { isConnected, address } = useAccount();
@@ -75,7 +75,7 @@ export default function Metrics() {
       />
       <MetricsCard
         icon={
-          <FaGift className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <VelixReferralIcon1 className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
         description="My Referral points"
         value={`${staker?.referralPoints?.toFixed(3) ?? "--"}`}

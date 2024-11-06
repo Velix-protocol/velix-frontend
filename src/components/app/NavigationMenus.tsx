@@ -84,7 +84,7 @@ function NavigationMenuCard({
     ),
     redeem: (
       <FaucetIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-[1.35rem] h-[1.35rem]" })}
       />
     ),
     reward: (
