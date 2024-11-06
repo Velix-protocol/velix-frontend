@@ -9,7 +9,7 @@ import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
 import MoreIcon from "../ui/velix/icons/MoreIcon";
-import CloseIcon from "../ui/velix/icons/CloseIcon"; // Assuming CloseIcon is available
+import CloseIcon from "../ui/velix/icons/CloseIcon"; 
 
 interface NavigationMenuCardProps {
   isNotFound: boolean;

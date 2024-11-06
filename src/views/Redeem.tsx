@@ -18,8 +18,8 @@ export default function Redeem() {
         </div>
         <div className="w-full">
           <Title
-            name="Swap"
-            subtitle="Swap your sveMETIS to veMETIS with a panality of 1%."
+            name="Reedem ticket"
+            subtitle="You can now redeem."
           />
         </div>
       </StakeTitleWrapper>
@@ -51,25 +51,17 @@ export default function Redeem() {
 
         <div className="w-full lg:hidden">
           <Title
-            name="Swap"
-            subtitle="Swap your sveMETIS to veMETIS with a panality of 1%."
+            name="Reedem ticket"
+            subtitle="You can now redeem."
           />
         </div>
-        <StakeLayout
-          onSetMaxValue={() => null}
-          error={""}
-          value={"0.00"}
-          role="mint"
-          onFromValueChange={() => null}
-          showSwapIcon={false}
-        >
-          <StakingFormButtom
-            isLoading={false}
-            disabled={false}
-            onMint={() => null}
-            role="swap"
+        <div className="dark:bg-velix-claim-gray w-full h-[25rem] dark:mt-[4rem] mt-[5rem] rounded-xl bg-white flex justify-center items-center">
+          <img
+            src="/svg/redeem-ticket.svg"
+            alt="redeem ticket"
           />
-        </StakeLayout>
+        </div>
+
       </AppContent>
     </Section>
   );
