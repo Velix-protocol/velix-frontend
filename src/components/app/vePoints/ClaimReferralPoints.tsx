@@ -94,12 +94,12 @@ export default function ClaimReferralPoints() {
         <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg lg:p-4 p-4 sm:p-3 flex items-center justify-center"> 
           <VelixReferralIcon className="w-6 h-6" />
         </div>
-          <div className="font-space-grotesk">
+          <div className="font-space-grotesk mt-3 lg:mt-0 md:mt-0">
             <h4 className="text-3xl font-bold max-lg:text-xl">
-              Referral points/VELIX Token
+              Referral points
             </h4>
             <p className="text-base text-velix-gray max-lg:text-sm">
-              Claim referral points
+              Claim Referral vePoints, redeem for VELIX Token rewards after 90 days
             </p>
           </div>
         </div>
