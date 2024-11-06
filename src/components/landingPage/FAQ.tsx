@@ -23,18 +23,6 @@ const FAQs = [
       </span>
     )
   },
-  // {
-  //   question: "What is the difference between METIS, veMETIS, and sveMETIS?",
-  //   answer: (
-  //     <span>
-  //       - <b>METIS</b> is the native token of the Metis Network. <br />-{" "}
-  //       <b>veMETIS</b> gives you access to the velix protocol to participate in
-  //       sequencer node staking. <br />-<b> sveMETIS</b> is staked veMETIS that
-  //       automatically accumulates and compounds staking rewards in the form of
-  //       veMETIS.
-  //     </span>
-  //   )
-  // },
   {
     question: "What are cross-chain rewards ?",
     answer:
@@ -47,9 +35,9 @@ export default function FAQ() {
     <div>
       <Section className="mt-28 max-lg:px-5">
         <div className="font-space-grotesk flex flex-col justify-center items-center">
-        <h2 className="text-[1.25rem] lg:text-4xl font-bold text-center">
-          Frequently Asked Questions
-        </h2>  
+          <h2 className="text-[1.25rem] lg:text-4xl font-bold text-center">
+            Frequently Asked Questions
+          </h2>
           <p className="text-velix-gray mt-5 text-center">
             Everything you need to know about velix
           </p>

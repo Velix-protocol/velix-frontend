@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 function DescTitle({
   title,
-  description,
+  description
 }: {
   title: string;
   description: ReactNode;
