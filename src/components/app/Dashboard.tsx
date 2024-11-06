@@ -172,7 +172,7 @@ export default function Dashboard() {
           <MenubarMenu>
             <MenubarTrigger
               onClick={() => setActionToRetreive("mint")}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              className={`py-3 px-4 cursor-pointer dark:text-velix-dark-white ${
                 actionToRetreive === "mint" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
@@ -183,7 +183,7 @@ export default function Dashboard() {
               onClick={() => {
                 setActionToRetreive("stake");
               }}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              className={`py-3 px-4 cursor-pointer dark:text-velix-dark-white ${
                 actionToRetreive === "stake" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
@@ -192,7 +192,7 @@ export default function Dashboard() {
             </MenubarTrigger>
             <MenubarTrigger
               onClick={() => setActionToRetreive("unstake")}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              className={`py-3 px-4 cursor-pointer dark:text-velix-dark-white ${
                 actionToRetreive === "unstake" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
@@ -201,15 +201,13 @@ export default function Dashboard() {
             </MenubarTrigger>
             <MenubarTrigger
               onClick={() => setActionToRetreive("reward")}
-              className={`py-3 px-7 w-fit items-center justify-center flex cursor-pointer dark:text-velix-dark-white ${
+              className={`py-3 px-4 w-fit items-center justify-center flex cursor-pointer dark:text-velix-dark-white ${
                 actionToRetreive === "reward" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
             >
               Redeem{" "}
-              <small className="rounded-full shrink-0 ml-2 border border-green-500 px-2">
-                Coming soon
-              </small>
+              
             </MenubarTrigger>
           </MenubarMenu>
         </Menubar>
