@@ -190,7 +190,7 @@ export default function Mint() {
               <Title
                 name="Mint"
                 subtitle={
-                  <p className="flex items-start justify-start gap-4">
+                  <p className="flex items-center lg:items-start justify-start gap-4">
                     <span>
                       <InfoIcon
                         className="h-6 w-6 text-white fill-velix-primary"
@@ -215,7 +215,7 @@ export default function Mint() {
                 <Title
                   name="Mint"
                   subtitle={
-                    <p className="flex items-start justify-start gap-4">
+                    <p className="flex items-center lg:items-start justify-start gap-4">
                       <span>
                         <InfoIcon
                           className="h-6 w-6 text-white fill-velix-primary"

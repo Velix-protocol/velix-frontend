@@ -78,7 +78,6 @@ export const useApproveMinting = () => {
     async (amount: string) => {
       const contract = await contractInstance;
       if (!contract) return;
-      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
@@ -143,7 +142,6 @@ export const useMint = () => {
   const mint = useCallback(
     async (amount: string) => {
       const contract = await contractInstance;
-      if (!contract) return;
       if (!contract) return;
       if (!address) return;
       try {
