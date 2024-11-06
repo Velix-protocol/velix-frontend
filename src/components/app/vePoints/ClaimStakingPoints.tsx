@@ -78,10 +78,10 @@ export default function ClaimStakingPoints() {
           </div>
             <div className="font-space-grotesk">
               <h4 className="text-3xl font-bold max-lg:text-xl">
-                Staking points/VELIX Token
+                Staking points
               </h4>
               <p className="text-base text-velix-gray max-lg:text-sm">
-                Claim total staking rewards after 90 days
+              Claim Staking vePoints, redeem for VELIX Token rewards after 90 days
               </p>
             </div>
           </div>
