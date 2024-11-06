@@ -52,7 +52,7 @@ export default function Navigation({
         </div>
         <Button
           onClick={navigateToApp}
-          className="hidden lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
+          className="hidden text-velix-blue dark:text-velix-claim-gray lg:block font-space-grotesk bg-velix-yellow px-10 hover:bg-velix-yellow"
         >
           Launch
         </Button>

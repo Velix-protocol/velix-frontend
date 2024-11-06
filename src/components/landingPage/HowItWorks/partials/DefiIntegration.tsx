@@ -14,7 +14,7 @@ function DefiIconCard({
   return (
     <div
       className={cn(
-        "flex flex-col items-center w-20 h-20 justify-center p-3 rounded-[15px] overflow-hidden relative dark:border dark:bg-black dark:border-white/20 bg-velix-slate-blue",
+        "flex flex-col items-center w-20 h-20 justify-center p-3 rounded-[15px] overflow-hidden relative dark:border dark:bg-black dark:border-white/20 bg-velix-blue/5",
         className
       )}
     >
@@ -33,13 +33,16 @@ function DefiIconCard({
 
 export default function DefiIntegration() {
   return (
-    <div className="flex flex-col lg:grid grid-cols-2 pb-16 px-10 justify-center items-center dark:bg-velix-primary bg-transparent dark:rounded-lg">
+    <div className="flex flex-col lg:grid grid-cols-2 pb-16 justify-center items-center dark:bg-velix-primary bg-transparent gap-10 dark:rounded-lg">
+      <div className="bg-velix-blue rounded-xl dark:bg-transparent w-full h-full flex items-center justify-center">
       <img
-        src="/svg/defi-integration1.svg"
+        src="/svg/defi-integration3.svg"
         alt="defi integration"
-        className="scale-75 xl:scale-75 mt-5"
+        className="scale-75 xl:scale-75"
       />
-      <div className="max-w-sm- lg:max-w-[25rem] max-w-[23rem] max-lg:mx-auto lg:ml-20">
+    </div>
+      <div className="w-full h-full flex items-center justify-center bg-velix-claim rounded-xl dark:bg-transparent py-10 ">
+        <div className="max-w-sm lg:max-w-[25rem] max-lg:mx-auto lg:-ml-10 mt-10">
         <h2 className="font-space-grotesk mt-5 font-bold text-[1.25rem] lg:text-4xl flex flex-col max-lg:text-center w-fit">
           Defi Integration
           <span className="text-velix-gray text-base font-normal mt-8">
@@ -48,7 +51,7 @@ export default function DefiIntegration() {
           </span>
         </h2>
         <div className="grid max-sm:grid-cols-3 grid-cols-3 grid-rows-3 lg:max-w-lg mt-20 justify-center items-center">
-          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:-ml-16 md:ml-12">  
+          <div className="row-span-3 flex flex-col justify-center items-center gap-10 lg:-ml-16 md:ml-12">
             <DefiIconCard>
               <img src="/svg/shoebillIcon.svg" alt="Tettys stack icon" />
             </DefiIconCard>
@@ -62,6 +65,7 @@ export default function DefiIntegration() {
             <DefiIconCard>
               <img src="/svg/ceresLogo.svg" alt="DeFi Velix icon" />
             </DefiIconCard>
+            </div>
           </div>
         </div>
       </div>
