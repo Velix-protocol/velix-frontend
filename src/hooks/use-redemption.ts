@@ -82,7 +82,6 @@ export const useEnterRedemptionQueue = () => {
     async (walletAddress: `0x${string}`, amount: number) => {
       const contract = await contractInstance;
       if (!contract) return;
-      if (!contract) return;
       if (!address) return;
       try {
         setIsPending(true);
