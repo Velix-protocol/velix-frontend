@@ -9,8 +9,8 @@ function DescTitle({
 }) {
   return (
     <div>
-      <h3 className="font-space-grotesk font-bold lg:text-2xl mb-3">{title}</h3>
-      <p className="font-space-grotesk text-white font-normal lg:text-base md:text-xs md:">
+      <h3 className="font-space-grotesk font-bold text-black lg:text-2xl mb-3">{title}</h3>
+      <p className="font-space-grotesk text-velix-text-gray font-normal lg:text-base md:text-xs md:">
         {description}
       </p>
     </div>

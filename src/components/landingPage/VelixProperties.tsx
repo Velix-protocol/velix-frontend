@@ -62,9 +62,9 @@ const PROPERTIES = [
 
 export default function VelixProperties() {
   return (
-    <Section className="mb-6 px-5">
-      <div className="font-space-grotesk flex flex-col justify-center items-center">
-        <h2 className="text-[1.25rem] lg:text-4xl font-bold">Velix LSD</h2>
+    <Section className="mb-6 sm:mb-3 px-5">
+      <div className="font-space-grotesk lg:mt-0 md:mt-0 mt-10 flex flex-col justify-center items-center">
+        <h2 className="text-[1.25rem] lg:text-4xl font-bold ">Velix LSD</h2>
         <p className="text-velix-gray mt-5 text-center">
           Stake your tokens, earn rewards, and contribute to the
           decentralization of the network.
