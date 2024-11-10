@@ -8,18 +8,22 @@ import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
+import MoreIcon from "../ui/velix/icons/MoreIcon";
+import CloseIcon from "../ui/velix/icons/CloseIcon"; 
+
+interface NavigationMenuCardProps {
+  isNotFound: boolean;
+  label: string;
+  path: string;
+  className?: string;
+}
 
 function NavigationMenuCard({
   isNotFound,
   path,
   label,
-  className
-}: {
-  isNotFound: boolean;
-  label: string;
-  path: string;
-  className?: string;
-}) {
+  className,
+}: NavigationMenuCardProps) {
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname.split("/").at(-1));
 
@@ -29,12 +33,13 @@ function NavigationMenuCard({
 
   const applyActiveStyles = useCallback(
     (path: string, option?: { className?: string }) => {
-      if (isNotFound)
+      if (isNotFound) {
         return (
           option?.className +
           " " +
           "text-velix-gray fill-velix-gray dark:fill-velix-icon-dark dark:text-velix-icon-dark"
         );
+      }
 
       if (activePath === "/" && path === "mint" && isApp()) {
         return (
@@ -79,7 +84,7 @@ function NavigationMenuCard({
     ),
     redeem: (
       <FaucetIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-[1.35rem] h-[1.35rem]" })}
       />
     ),
     reward: (
@@ -96,7 +101,7 @@ function NavigationMenuCard({
       <StartIcon
         className={applyActiveStyles(path, { className: "w-5 h-5" })}
       />
-    )
+    ),
   } as const;
 
   const getTo = (path: string) => {
@@ -115,10 +120,10 @@ function NavigationMenuCard({
         className
       )}
     >
-      <span>{menuIcons?.[path as never]}</span>
+      <span>{menuIcons?.[path as keyof typeof menuIcons]}</span>
       <span
         className={applyActiveStyles(path, {
-          className: "lg:font-bold text-[0.625rem] lg:text-base"
+          className: "lg:font-bold text-[0.625rem] lg:text-base",
         })}
       >
         {label}
@@ -128,41 +133,50 @@ function NavigationMenuCard({
 }
 
 export default function NavigationMenus({
-  isNotFound = false
+  isNotFound = false,
 }: {
   isNotFound?: boolean;
 }) {
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+
+  const toggleMore = () => {
+    setIsMoreOpen((prev) => !prev);
+  };
+
   return (
     <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
-      <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
-      <NavigationMenuCard path="stake" label="Stake" isNotFound={isNotFound} />
-      <NavigationMenuCard
-        path="unstake"
-        label="Unstake"
-        isNotFound={isNotFound}
-      />
-      <NavigationMenuCard
-        path="vepoints"
-        label="VePoints"
-        isNotFound={isNotFound}
-      />
-      {/* <NavigationMenuCard
-        path="redeem"
-        label="Redeem"
-        isNotFound={isNotFound}
-        className=""
-      />
-      <NavigationMenuCard
-        className="max-lg:hidden"
-        path="reward"
-        label="Reward"
-        isNotFound={isNotFound}
-      /> */}
-      <NavigationMenuCard
-        path="dashboard"
-        label="Dashboard"
-        isNotFound={isNotFound}
-      />
+      {isMoreOpen ? (
+        <>
+          <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} />
+          <NavigationMenuCard path="dashboard" label="Dashboard" isNotFound={isNotFound} />
+        </>
+      ) : (
+        <>
+          <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
+          <NavigationMenuCard path="stake" label="Stake" isNotFound={isNotFound} />
+          <NavigationMenuCard path="unstake" label="Unstake" isNotFound={isNotFound} />
+          <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} className="hidden lg:flex md:flex" />
+          <NavigationMenuCard path="vepoints" label="VePoints" isNotFound={isNotFound} />
+          <NavigationMenuCard path="dashboard" label="Dashboard" isNotFound={isNotFound} className="hidden lg:flex md:flex"/>
+
+        </>
+      )}
+
+      <div className="lg:hidden md:hidden sm:flex flex-col items-center relative">
+        <button
+          onClick={toggleMore}
+          className="flex flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk text-velix-gray dark:text-velix-icon-dark"
+        >
+          {isMoreOpen ? (
+            <CloseIcon className="w-5 h-5" />
+          ) : (
+            <MoreIcon className="w-5 h-5" />
+          )}
+          <span className="lg:font-bold text-[0.625rem] lg:text-base">
+            {isMoreOpen ? "Close" : "More"}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
