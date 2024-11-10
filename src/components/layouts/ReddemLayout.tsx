@@ -1,11 +1,7 @@
 import { useAccount } from "wagmi";
 import Balance from "../app/Balance";
 
-import {
-  ChangeEvent,
-  ReactNode,
-
-} from "react";
+import { ChangeEvent, ReactNode } from "react";
 import { Role } from "@/types";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import VeInput from "../ui/velix/VeInput";
@@ -27,7 +23,7 @@ const RedeemLayout = ({
   value,
   role,
   error,
-  onSetMaxValue,
+  onSetMaxValue
 }: RedeemLayoutProps) => {
   const { isConnected } = useAccount();
   const renderFromTitles = () => {
@@ -38,16 +34,16 @@ const RedeemLayout = ({
   };
 
   const icons = {
-
-
-    veMETIS: <VelixBlueLogo className="w-5 h-5 fill-velix-blue dark:fill-white" />
+    veMETIS: (
+      <VelixBlueLogo className="w-5 h-5 fill-velix-blue dark:fill-white" />
+    )
   };
 
   return (
     <div
-      className={`mt-10 w-full lg:mt-20 ${
+      className={`mt-10 w-full lg:mt-20 rounded-2xl ${
         isConnected && "bg-velix-primary"
-      } rounded-2xl`}
+      }`}
     >
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white dark:-mt-5  dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">

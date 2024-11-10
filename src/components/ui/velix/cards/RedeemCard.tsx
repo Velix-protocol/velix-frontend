@@ -1,6 +1,6 @@
-import { FaClock } from 'react-icons/fa';
-import { Button } from '../ui/button';
-import TicketLogo from '../ui/velix/icons/TicketLogo';
+import { FaClock } from "react-icons/fa";
+import TicketLogo from "../icons/TicketLogo";
+import { Button } from "../../button";
 
 const RedeemCard = () => {
   return (
@@ -8,17 +8,23 @@ const RedeemCard = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 lg:gap-8 xl:gap-12">
         <div className="flex-1 sm:flex-none lg:flex-none xl:flex-none lg:mr-24 md:mr-[8rem]">
           <p className="text-velix-claim-grey dark:text-velix-claim text-sm lg:text-base font-space-grotesk">
-            Redeem: <span className="font-bold text-black font-space-grotesk dark:text-velix-claim mr-1">0.0200</span> VeMetis
+            Redeem:{" "}
+            <span className="font-bold text-black font-space-grotesk dark:text-velix-claim mr-1">
+              0.0200
+            </span>{" "}
+            VeMetis
           </p>
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <div className="flex items-center text-velix-blue text-sm lg:text-base font-space-grotesk font-bold dark:text-white">
-              <TicketLogo className='dark:fill-white mr-1 w-5 h-5'/>
-              Ticket ID 
-              <span className="text-velix-blue dark:text-white font-bold ml-1 font-space-grotesk">#456</span>
+              <TicketLogo className="dark:fill-white mr-1 w-5 h-5" />
+              Ticket ID
+              <span className="text-velix-blue dark:text-white font-bold ml-1 font-space-grotesk">
+                #456
+              </span>
             </div>
             <div className="flex items-center text-gray-600 text-sm lg:text-base font-medium dark:text-white">
-              <FaClock className="mr-1 text-velix-blue dark:text-white" /> 
-              2 days, 10 : 20 : 54 
+              <FaClock className="mr-1 text-velix-blue dark:text-white" />2
+              days, 10 : 20 : 54
             </div>
           </div>
         </div>
