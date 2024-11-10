@@ -5,7 +5,7 @@ import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
 import Title from "@/components/ui/velix/Title";
 import { Button } from "@/components/ui/button";
 import RedeemLayout from "@/components/layouts/ReddemLayout";
-import RedeemCard from "@/components/layouts/RedeemCard";
+import RedeemCard from "@/components/ui/velix/RedeemCard";
 
 export default function Redeem() {
   const [approved, setApproved] = useState(false);
@@ -14,7 +14,10 @@ export default function Redeem() {
     <Section className="px-5 pb-32 lg:pb-16">
       <StakeTitleWrapper>
         <div className="w-full">
-          <Title name="Redeem" subtitle="Only redeem with a counter of 21 day." />
+          <Title
+            name="Redeem"
+            subtitle="Only redeem with a counter of 21 day."
+          />
         </div>
         <div className="w-full">
           <Title name="Reedem ticket" subtitle="You can now redeem." />
@@ -22,7 +25,10 @@ export default function Redeem() {
       </StakeTitleWrapper>
       <AppContent>
         <div className="w-full lg:hidden pt-32">
-          <Title name="Redeem" subtitle="Only redeem with a counter of 21 day." />
+          <Title
+            name="Redeem"
+            subtitle="Only redeem with a counter of 21 day."
+          />
         </div>
 
         <div className="w-full lg:hidden">
@@ -56,17 +62,26 @@ export default function Redeem() {
         <div className="flex flex-col dark:bg-velix-claim-gray w-full h-56 mt-[5rem] rounded-xl dark:mt-[3.7rem] bg-white justify-center items-center ">
           {approved ? (
             <>
-            <RedeemCard/>              
+              <RedeemCard />
             </>
           ) : (
             <>
-              <img src="/svg/redeem-ticket.svg" alt="redeem ticket" className="dark:hidden" />
-              <img src="/svg/redeem-ticket-dark.svg" alt="redeem ticket dark" className="hidden dark:block" />
-              <p className="font-space-grotesk font-normal mt-5">You have no ticket to redeem</p>
+              <img
+                src="/svg/redeem-ticket.svg"
+                alt="redeem ticket"
+                className="dark:hidden"
+              />
+              <img
+                src="/svg/redeem-ticket-dark.svg"
+                alt="redeem ticket dark"
+                className="hidden dark:block"
+              />
+              <p className="font-space-grotesk font-normal mt-5">
+                You have no ticket to redeem
+              </p>
             </>
           )}
         </div>
-
       </AppContent>
     </Section>
   );

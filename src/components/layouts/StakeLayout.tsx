@@ -107,9 +107,9 @@ const StakeLayout = ({
 
   return (
     <div
-      className={`mt-10 w-full lg:mt-20 ${
+      className={`mt-10 w-full lg:mt-20 rounded-2xl ${
         isConnected && "bg-velix-primary"
-      } rounded-2xl`}
+      }`}
     >
       <Balance role={role} isConnected={isConnected} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
