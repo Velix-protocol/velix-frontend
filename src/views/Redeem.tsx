@@ -5,7 +5,7 @@ import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
 import Title from "@/components/ui/velix/Title";
 import { Button } from "@/components/ui/button";
 import RedeemLayout from "@/components/layouts/ReddemLayout";
-import RedeemTicket from "@/components/layouts/RedeemTicket";
+import RedeemCard from "@/components/layouts/RedeemCard";
 
 export default function Redeem() {
   const [approved, setApproved] = useState(false);
@@ -53,10 +53,10 @@ export default function Redeem() {
           <Title name="Reedem ticket" subtitle="You can now redeem." />
         </div>
 
-        <div className="flex flex-col dark:bg-velix-claim-gray w-full  rounded-xl bg-white justify-center items-center">
+        <div className="flex flex-col dark:bg-velix-claim-gray w-full h-56 mt-[5rem] rounded-xl dark:mt-[3.7rem] bg-white justify-center items-center ">
           {approved ? (
             <>
-              <RedeemTicket/>
+            <RedeemCard/>              
             </>
           ) : (
             <>
