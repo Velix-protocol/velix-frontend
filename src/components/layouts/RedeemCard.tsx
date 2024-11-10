@@ -1,5 +1,6 @@
-import { FaTicketAlt, FaClock } from 'react-icons/fa';
+import { FaClock } from 'react-icons/fa';
 import { Button } from '../ui/button';
+import TicketLogo from '../ui/velix/icons/TicketLogo';
 
 const RedeemCard = () => {
   return (
@@ -11,7 +12,7 @@ const RedeemCard = () => {
           </p>
           <div className="flex flex-wrap items-center gap-4 mt-2">
             <div className="flex items-center text-velix-blue text-sm lg:text-base font-space-grotesk font-bold dark:text-white">
-              <FaTicketAlt className="mr-1 text-velix-blue dark:text-white" /> 
+              <TicketLogo className='dark:fill-white mr-1 w-5 h-5'/>
               Ticket ID 
               <span className="text-velix-blue dark:text-white font-bold ml-1 font-space-grotesk">#456</span>
             </div>
