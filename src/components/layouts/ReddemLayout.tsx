@@ -26,18 +26,6 @@ const RedeemLayout = ({
   onSetMaxValue
 }: RedeemLayoutProps) => {
   const { isConnected } = useAccount();
-  const renderFromTitles = () => {
-    switch (role) {
-      case "mint":
-        return "veMETIS";
-    }
-  };
-
-  const icons = {
-    veMETIS: (
-      <VelixBlueLogo className="w-5 h-5 fill-velix-blue dark:fill-white" />
-    )
-  };
 
   return (
     <div
@@ -53,9 +41,11 @@ const RedeemLayout = ({
             onMaxButtonClicked={onSetMaxValue}
             value={value}
             onChange={onFromValueChange}
-            icon={icons?.[renderFromTitles() as never]}
-            tokenName={`${renderFromTitles()} Amount`}
-            placeholder={`0.00 ${renderFromTitles()}`}
+            icon={
+              <VelixBlueLogo className="w-5 h-5 fill-velix-blue dark:fill-white" />
+            }
+            tokenName="veMETIS Amount"
+            placeholder="0.00 veMETIS"
             error={error}
           />
           {error && (

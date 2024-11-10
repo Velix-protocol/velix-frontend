@@ -9,6 +9,7 @@ import RedeemCard from "@/components/ui/velix/cards/RedeemCard";
 
 export default function Redeem() {
   const [approved, setApproved] = useState(false);
+  const [valueToRedeem, setValueToRedeem] = useState("0");
 
   return (
     <Section className="px-5 pb-32 lg:pb-16">
@@ -37,9 +38,9 @@ export default function Redeem() {
         <RedeemLayout
           onSetMaxValue={() => null}
           error=""
-          value="0.00"
-          role="mint"
-          onFromValueChange={() => null}
+          value={valueToRedeem}
+          role="stake"
+          onFromValueChange={(e) => setValueToRedeem(e.target.value)}
           showSwapIcon={false}
         >
           <div className="flex flex-row justify-between gap-5 mt-5">

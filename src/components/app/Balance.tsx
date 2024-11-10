@@ -50,7 +50,6 @@ export default function Balance({
     }
   };
 
-  if (!isConnected) return <>{""}</>;
   return (
     <div className="bg-velix-primary dark:pb-16 dark:bg-[#383838] p-5 lg:p-10 space-y-5 lg:space-y-10 text-white font-space-grotesk rounded-2xl">
       <div className="flex gap-2 md:gap-5 max-md:flex-col lg:gap-10 md:justify-center md:items-center">
