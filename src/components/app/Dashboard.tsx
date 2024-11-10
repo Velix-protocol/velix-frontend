@@ -11,7 +11,7 @@ import {
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Action } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
@@ -19,15 +19,6 @@ import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
-import { Input } from "../ui/input";
-import MaxButton from "../ui/velix/MaxButton";
-import { Button } from "../ui/button";
-import TransactionModal from "../ui/velix/modal";
-
-import {
-  useApproveRedeem,
-  useEnterRedemptionQueue
-} from "@/hooks/use-redemption";
 
 type UnstakeActivity = {
   id: string;
@@ -46,24 +37,8 @@ export default function Dashboard() {
   const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
     "mint"
   );
-  const [amountToRedeem, setAmountToRedeem] = useState(0);
-  const [showModal, setShowModal] = useState(false);
+
   const { staker, getStaker } = useStakersStore();
-  const {
-    isPending: approvePending,
-    isSuccess: approveSuccess,
-    reset: resetApproveStates,
-    error: approveError,
-    approveRedemption
-  } = useApproveRedeem();
-  const {
-    isPending: enterRedemptionQueuePending,
-    isSuccess: enterRedemptionQueueSuccess,
-    reset: setEnterRedemptionQueueStates,
-    error: rendemptionQueueError,
-    data: txHash,
-    enterRedemptionQueue
-  } = useEnterRedemptionQueue();
 
   useEffect(() => {
     getStaker(address as string);
@@ -85,13 +60,6 @@ export default function Dashboard() {
     void getUnstakeActivity();
   }, [actionToRetreive, address]);
 
-  useEffect(() => {
-    if (enterRedemptionQueueSuccess) {
-      setAmountToRedeem(0);
-      setEnterRedemptionQueueStates();
-    }
-  }, [enterRedemptionQueueSuccess, setEnterRedemptionQueueStates]);
-
   const velixBalances = [
     {
       name: "METIS",
@@ -111,52 +79,8 @@ export default function Dashboard() {
     }
   ];
 
-  const onRedeemPointsChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAmountToRedeem(Number(e.target.value));
-  };
-
-  const onSetMaxValue = () => {
-    if (!staker?.stakingpoints) return;
-    setAmountToRedeem(Number(staker?.stakingpoints));
-  };
-
-  const onRedeemPoints = async () => {
-    if (!address) return;
-    if (amountToRedeem === 0) return;
-    await enterRedemptionQueue(address, amountToRedeem);
-  };
-
-  const onClose = () => {
-    if (approvePending) return;
-    setShowModal(false);
-    setAmountToRedeem(0);
-    resetApproveStates();
-  };
-
-  const renderUnstakeButtonTitle = () => {
-    if (enterRedemptionQueuePending) return "Entering redemption queue...";
-    if (enterRedemptionQueueSuccess) return "Entered";
-    return "Enter redemption queue";
-  };
-
   return (
     <>
-      {showModal && (
-        <TransactionModal
-          onClose={onClose}
-          flowname="redeem"
-          onStep1Click={() => approveRedemption(amountToRedeem)}
-          onStep2Click={onRedeemPoints}
-          renderButtonTitle={renderUnstakeButtonTitle}
-          step1Error={approveError}
-          step2Error={rendemptionQueueError}
-          step1Pending={approvePending}
-          step2Pending={enterRedemptionQueuePending}
-          step1Success={approveSuccess}
-          step2Sucesss={enterRedemptionQueueSuccess}
-          txHash={txHash}
-        />
-      )}
       <Section className="mt-36 md:mt-48 px-5 pb-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
           {velixBalances.map((balance, index) => (
@@ -222,7 +146,6 @@ export default function Dashboard() {
               }`}
             >
               Redeem{" "}
-              
             </MenubarTrigger>
           </MenubarMenu>
         </Menubar>
@@ -236,27 +159,6 @@ export default function Dashboard() {
                 <p className="bg-velix-slate-blue w-full dark:bg-velix-light-dark p-4 rounded-lg">
                   Est Monthly 2023 : <b>0.000000 VeMetis</b>
                 </p>
-              </div>
-              <div className="flex gap-3 w-full lg:w-1/2">
-                <div className="flex w-full items-center bg-velix-slate-blue rounded-md dark:bg-velix-form-input-dark p-2 data-[isamountvalid=false]:border data-[isamountvalid=false]:border-red-500">
-                  <Input
-                    onChange={onRedeemPointsChange}
-                    defaultValue={amountToRedeem}
-                    type="number"
-                    placeholder="Points to redeem"
-                    className="bg-transparent text-base lg:h-max border-none focus-visible:ring-transparent focus-visible:ring-offset-0 focus-visible:rin"
-                  />
-                  <MaxButton onClick={onSetMaxValue} className="!py-3">
-                    max
-                  </MaxButton>
-                </div>
-                <Button
-                  onClick={() => setShowModal(true)}
-                  disabled={approvePending}
-                  className="py-8 dark:bg-velix-dark-white dark:text-velix-primary disabled:bg-velix-primary/60 w-fit px-10 text-xs lg:text-base font-bold bg-velix-primary font-space-grotesk hover:bg-velix-primary"
-                >
-                  Redeem
-                </Button>
               </div>
             </div>
           )}
