@@ -30,4 +30,15 @@ export type Stake = {
   redeemablePoints: number;
 };
 
+export type RedeemTicket = {
+  id: string;
+  amount: number;
+  maturity: number;
+  hasBeenRedeemed: boolean;
+  redemptionFeeAmount: number;
+  canceled: boolean;
+  owner: string;
+  nftId: string;
+};
+
 export type AppMode = "landingPage" | "app";

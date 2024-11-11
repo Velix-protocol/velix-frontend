@@ -13,6 +13,8 @@ import {
 import TransactionModal from "@/components/ui/velix/modal";
 import { useStakersStore } from "@/store/stakers";
 import { useAccount } from "wagmi";
+import { useQuery } from "@tanstack/react-query";
+import { velixApi } from "@/services/http";
 
 export default function Redeem() {
   const [approved, setApproved] = useState(false);
@@ -37,10 +39,20 @@ export default function Redeem() {
   const { staker } = useStakersStore();
   const { address, isConnected: isWalletConnected } = useAccount();
 
+  const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
+    queryKey: ["redeem-ticket"],
+    queryFn: () =>
+      velixApi.getRedeemTicketsOwnedByWalletAddress(address as string),
+    enabled: isWalletConnected,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false
+  });
+
   const onRedeemPoints = async () => {
     if (!address) return;
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
+    refetchRedeemTickets();
   };
 
   const onClose = () => {
@@ -126,11 +138,11 @@ export default function Redeem() {
             <Title name="Reedem ticket" subtitle="You can now redeem." />
           </div>
 
-          <div className="flex flex-col dark:bg-velix-claim-gray w-full h-56 mt-[5rem] rounded-xl dark:mt-[3.7rem] bg-white justify-center items-center ">
-            {approved ? (
-              <>
-                <RedeemCard />
-              </>
+          <div className="flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ">
+            {redeemTickets?.data.length ? (
+              redeemTickets?.data.map((redeemTicket) => (
+                <RedeemCard key={redeemTicket.id} redeemTicket={redeemTicket} />
+              ))
             ) : (
               <>
                 <img
