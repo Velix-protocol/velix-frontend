@@ -179,3 +179,61 @@ export const useRedeemRedemptionTicketNft = () => {
     data
   };
 };
+
+export const useCancelRedeemNftTicket = () => {
+  const {
+    address,
+    data,
+    setData,
+    isPending,
+    setIsPending,
+    error,
+    setError,
+    isSuccess,
+    setIsSuccess
+  } = useContractHookState();
+  const contractInstance = useContract("REDEMPTION_QUEUE");
+
+  const cancelRedeemNftTicket = useCallback(
+    async (nftId: number, walletAddress: `0x${string}`) => {
+      const contract = await contractInstance;
+      if (!contract) return;
+      if (!address) return;
+      try {
+        setIsPending(true);
+        const tx = await contract.cancelRedemptionTicketNft(
+          walletAddress,
+          parseUnits(String(nftId))
+        );
+        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txhash.hash);
+        setError(null);
+        setIsSuccess(true);
+      } catch (e: any) {
+        console.log(e);
+        setData(null);
+        setIsSuccess(false);
+        setError({ message: e.shortMessage ?? e });
+      } finally {
+        setIsPending(false);
+      }
+    },
+    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+  );
+
+  const reset = useCallback(() => {
+    setData(null);
+    setIsSuccess(false);
+    setError(null);
+    setIsPending(false);
+  }, [setData, setError, setIsPending, setIsSuccess]);
+
+  return {
+    isPending,
+    isSuccess,
+    reset,
+    cancelRedeemNftTicket,
+    error,
+    data
+  };
+};

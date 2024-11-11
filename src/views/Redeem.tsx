@@ -141,7 +141,11 @@ export default function Redeem() {
           <div className="flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ">
             {redeemTickets?.data.length ? (
               redeemTickets?.data.map((redeemTicket) => (
-                <RedeemCard key={redeemTicket.id} redeemTicket={redeemTicket} />
+                <RedeemCard
+                  key={redeemTicket.id}
+                  redeemTicket={redeemTicket}
+                  refetchRedeemNfts={refetchRedeemTickets}
+                />
               ))
             ) : (
               <>
