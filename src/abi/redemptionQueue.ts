@@ -140,11 +140,6 @@ export const REDEMPTION_QUEUE_ABI = [
   },
   {
     inputs: [],
-    name: "LpTokenNotLocked",
-    type: "error"
-  },
-  {
-    inputs: [],
     name: "NotInitializing",
     type: "error"
   },
@@ -166,28 +161,7 @@ export const REDEMPTION_QUEUE_ABI = [
   },
   {
     inputs: [],
-    name: "ReduceTimeExceedsLimit",
-    type: "error"
-  },
-  {
-    inputs: [],
     name: "ReentrancyGuardReentrantCall",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint8",
-        name: "bits",
-        type: "uint8"
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      }
-    ],
-    name: "SafeCastOverflowedUintDowncast",
     type: "error"
   },
   {
@@ -199,22 +173,6 @@ export const REDEMPTION_QUEUE_ABI = [
       }
     ],
     name: "SafeERC20FailedOperation",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "length",
-        type: "uint256"
-      }
-    ],
-    name: "StringsInsufficientHexLength",
     type: "error"
   },
   {
@@ -290,82 +248,14 @@ export const REDEMPTION_QUEUE_ABI = [
       },
       {
         indexed: false,
-        internalType: "uint120",
-        name: "veMetisOut",
-        type: "uint120"
-      },
-      {
-        indexed: false,
-        internalType: "uint120",
-        name: "cancelRedemptionFee",
-        type: "uint120"
-      }
-    ],
-    name: "CancelRedemptionTicketNft",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "address",
-        name: "recipient",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint128",
-        name: "collectAmount",
-        type: "uint128"
-      }
-    ],
-    name: "CollectRedemptionFees",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "nftId",
-        type: "uint256"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "recipient",
-        type: "address"
-      },
-      {
-        indexed: false,
         internalType: "uint256",
         name: "amountVeMetisRedeemed",
         type: "uint256"
       },
       {
         indexed: false,
-        internalType: "uint120",
-        name: "redemptionFeeAmount",
-        type: "uint120"
-      },
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "maturityTimestamp",
-        type: "uint64"
-      },
-      {
-        indexed: false,
         internalType: "uint256",
-        name: "cancelRedemptionFee",
+        name: "maturityTimestamp",
         type: "uint256"
       }
     ],
@@ -421,43 +311,6 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         indexed: true,
-        internalType: "uint256",
-        name: "nftId",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "lpLockToken",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "lpLockAmount",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "reduceTime",
-        type: "uint64"
-      },
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "newMaturityTimestamp",
-        type: "uint64"
-      }
-    ],
-    name: "ReduceRedemptionMaturity",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
         internalType: "address",
         name: "from",
         type: "address"
@@ -476,31 +329,6 @@ export const REDEMPTION_QUEUE_ABI = [
       }
     ],
     name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "nftId",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "lpToken",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "lpAmount",
-        type: "uint256"
-      }
-    ],
-    name: "UnlockLpToken",
     type: "event"
   },
   {
@@ -632,43 +460,6 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "function"
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_recipient",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "_nftId",
-        type: "uint256"
-      }
-    ],
-    name: "cancelRedemptionTicketNft",
-    outputs: [
-      {
-        internalType: "uint120",
-        name: "_veMetisOut",
-        type: "uint120"
-      }
-    ],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint128",
-        name: "_collectAmount",
-        type: "uint128"
-      }
-    ],
-    name: "collectRedemptionFees",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
     inputs: [],
     name: "config",
     outputs: [
@@ -708,51 +499,25 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "lpToken",
-        type: "address"
-      },
-      {
-        internalType: "uint64",
-        name: "reduceTime",
-        type: "uint64"
-      },
-      {
-        internalType: "uint256",
-        name: "redeemAmount",
-        type: "uint256"
-      }
-    ],
-    name: "estimateLpAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "lpAmount",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount0",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "amount1",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
         internalType: "uint256",
         name: "tokenId",
         type: "uint256"
       }
     ],
     name: "getApproved",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getMetisAddress",
     outputs: [
       {
         internalType: "address",
@@ -802,65 +567,11 @@ export const REDEMPTION_QUEUE_ABI = [
             internalType: "uint120",
             name: "amount",
             type: "uint120"
-          },
-          {
-            internalType: "uint64",
-            name: "cancelRedemptionFee",
-            type: "uint64"
-          },
-          {
-            internalType: "uint64",
-            name: "lpLockMaturity",
-            type: "uint64"
-          },
-          {
-            internalType: "address",
-            name: "lpLockToken",
-            type: "address"
-          },
-          {
-            internalType: "uint256",
-            name: "lpLockAmount",
-            type: "uint256"
-          },
-          {
-            internalType: "bool",
-            name: "lpClaimed",
-            type: "bool"
           }
         ],
         internalType: "struct RedemptionQueue.RedemptionQueueItem",
         name: "",
         type: "tuple"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "lpToken",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "lpAmount",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "redeemAmount",
-        type: "uint256"
-      }
-    ],
-    name: "getReduceTime",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
       }
     ],
     stateMutability: "view",
@@ -904,25 +615,6 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "function"
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "lpFactors",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [],
     name: "name",
     outputs: [
@@ -959,31 +651,6 @@ export const REDEMPTION_QUEUE_ABI = [
         internalType: "uint120",
         name: "amount",
         type: "uint120"
-      },
-      {
-        internalType: "uint64",
-        name: "cancelRedemptionFee",
-        type: "uint64"
-      },
-      {
-        internalType: "uint64",
-        name: "lpLockMaturity",
-        type: "uint64"
-      },
-      {
-        internalType: "address",
-        name: "lpLockToken",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "lpLockAmount",
-        type: "uint256"
-      },
-      {
-        internalType: "bool",
-        name: "lpClaimed",
-        type: "bool"
       }
     ],
     stateMutability: "view",
@@ -1042,29 +709,6 @@ export const REDEMPTION_QUEUE_ABI = [
       }
     ],
     stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_nftId",
-        type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "lpToken",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "lpAmount",
-        type: "uint256"
-      }
-    ],
-    name: "reduceRedemptionMaturity",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -1139,24 +783,6 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "lpToken",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "factor",
-        type: "uint256"
-      }
-    ],
-    name: "setLpFactor",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
         internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4"
@@ -1224,19 +850,6 @@ export const REDEMPTION_QUEUE_ABI = [
       }
     ],
     name: "transferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_nftId",
-        type: "uint256"
-      }
-    ],
-    name: "unlockLpToken",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"

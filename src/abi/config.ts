@@ -135,25 +135,6 @@ export const CONFIG_CONTRACT_ABI = [
         type: "uint64"
       }
     ],
-    name: "RedemptionFeeSet",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "oldValue",
-        type: "uint64"
-      },
-      {
-        indexed: false,
-        internalType: "uint64",
-        name: "newValue",
-        type: "uint64"
-      }
-    ],
     name: "ReduceMaturityStakeSecsSet",
     type: "event"
   },
@@ -544,19 +525,6 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "cancelRedemptionFee",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "config",
     outputs: [
       {
@@ -683,19 +651,6 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "minQueueLengthSecs",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "protocolTreasury",
     outputs: [
       {
@@ -735,38 +690,12 @@ export const CONFIG_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "redemptionFee",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "redemptionQueue",
     outputs: [
       {
         internalType: "address",
         name: "",
         type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "reduceMaturityStakeSecs",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
       }
     ],
     stateMutability: "view",
@@ -824,19 +753,6 @@ export const CONFIG_CONTRACT_ABI = [
   {
     inputs: [
       {
-        internalType: "uint64",
-        name: "_cancelRedemptionFee",
-        type: "uint64"
-      }
-    ],
-    name: "setCancelRedemptionFee",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "_metis",
         type: "address"
@@ -871,19 +787,6 @@ export const CONFIG_CONTRACT_ABI = [
       }
     ],
     name: "setL1Dealer",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint64",
-        name: "_minQueueLengthSecs",
-        type: "uint64"
-      }
-    ],
-    name: "setMinQueueLengthSecs",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -930,38 +833,12 @@ export const CONFIG_CONTRACT_ABI = [
   {
     inputs: [
       {
-        internalType: "uint64",
-        name: "_redemptionFee",
-        type: "uint64"
-      }
-    ],
-    name: "setRedemptionFee",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
         name: "_redemptionQueueAddress",
         type: "address"
       }
     ],
     name: "setRedemptionQueue",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint64",
-        name: "_reduceMaturityStakeSecs",
-        type: "uint64"
-      }
-    ],
-    name: "setReduceMaturityStakeSecs",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"

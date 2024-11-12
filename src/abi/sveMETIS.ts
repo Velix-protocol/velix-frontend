@@ -978,19 +978,6 @@ export const SVMETIS_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "updateEnabled",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [
       {
         internalType: "uint256",

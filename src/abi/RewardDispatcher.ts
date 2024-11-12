@@ -204,19 +204,6 @@ export const REWARD_DISPATCHER_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "veMetis",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [
       {
         internalType: "uint256",
