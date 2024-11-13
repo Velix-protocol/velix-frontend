@@ -11,13 +11,13 @@ import {
   useEnterRedemptionQueue
 } from "@/hooks/use-redemption";
 import TransactionModal from "@/components/ui/velix/modal";
-import { useStakersStore } from "@/store/stakers";
+// import { useStakersStore } from "@/store/stakers";
 import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 
 export default function Redeem() {
-  const [approved, setApproved] = useState(false);
+  // const [approved, setApproved] = useState(false);
 
   const {
     isPending: approvePending,
@@ -36,7 +36,7 @@ export default function Redeem() {
   } = useEnterRedemptionQueue();
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
-  const { staker } = useStakersStore();
+  // const { staker } = useStakersStore();
   const { address, isConnected: isWalletConnected } = useAccount();
 
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
@@ -69,10 +69,10 @@ export default function Redeem() {
     return "Enter redemption queue";
   };
 
-  const onSetMaxValue = () => {
-    if (!staker?.stakingpoints) return;
-    setAmountToRedeem(String(staker?.stakingpoints));
-  };
+  // const onSetMaxValue = () => {
+  //   if (!staker?.stakingpoints) return;
+  //   setAmountToRedeem(String(staker?.stakingpoints));
+  // };
 
   return (
     <>

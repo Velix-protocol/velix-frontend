@@ -102,7 +102,7 @@ const RedeemCard = ({
             </p>
             <div className="flex flex-col xl:flex-row items-start xl:items-center gap-4 mt-2">
               <div className="flex items-center text-velix-blue text-sm lg:text-base font-space-grotesk font-bold dark:text-white">
-                <TicketLogo className="dark:fill-white mr-1 w-5 h-5" />
+                <TicketLogo className="dark:fill-white fill-velix-blue mr-1 w-5 h-5" />
                 Ticket ID
                 <span className="text-velix-blue dark:text-white font-bold ml-1 font-space-grotesk">
                   #{redeemTicket.nftId}
@@ -110,7 +110,9 @@ const RedeemCard = ({
               </div>
               <div className="flex items-center text-gray-600 text-sm lg:text-base font-medium dark:text-white">
                 <FaClock className="mr-1 text-velix-blue dark:text-white" />
-                {dayjs(redeemTicket.maturity).format("DD-MMM-YYYY HH:mm:ss")}
+                {dayjs(redeemTicket.maturity * 1000).format(
+                  "YYYY-MMM-DD HH:mm:ss"
+                )}
               </div>
             </div>
           </div>
