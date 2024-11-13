@@ -111,7 +111,7 @@ const StakeLayout = ({
         isConnected && "bg-velix-primary"
       }`}
     >
-      <Balance role={role} isConnected={isConnected} />
+      <Balance role={role} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
           <VeInput

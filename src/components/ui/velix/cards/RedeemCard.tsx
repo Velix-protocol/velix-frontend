@@ -50,7 +50,7 @@ const RedeemCard = ({
     setShowModal(false);
     reset();
     resetCancelRedeemNftStates();
-  }, []);
+  }, [isPending, reset, resetCancelRedeemNftStates]);
 
   const renderModalTitle = useCallback(() => {
     if (cancelRedeemNftPending) return "Canceling...";
