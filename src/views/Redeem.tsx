@@ -79,6 +79,7 @@ export default function Redeem() {
       {showModal && (
         <TransactionModal
           onClose={onClose}
+          step2Description="Enter redemption queue"
           flowname="redeem"
           onStep1Click={() => approveRedemption(Number(amountToRedeem))}
           onStep2Click={onRedeemPoints}

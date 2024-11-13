@@ -20,6 +20,8 @@ type ModalProps = {
   renderButtonTitle: () => string;
   txHash: string;
   flowname: "stake" | "mint" | "unstake" | "redeem";
+  step1Description?: string;
+  step2Description?: string;
 };
 
 export default function TransactionModal({
@@ -34,7 +36,9 @@ export default function TransactionModal({
   onStep1Click,
   flowname,
   renderButtonTitle,
-  txHash
+  txHash,
+  step1Description = "Confirm this transaction on your wallet.",
+  step2Description = "unstake sveMETIS"
 }: ModalProps) {
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
 
@@ -79,9 +83,7 @@ export default function TransactionModal({
         </p>
         {!step1Error && !step2Error && !step2Sucesss && (
           <p className="text-velix-gray text-center text-base">
-            {currentStep === 1
-              ? "Confirm this transaction on your wallet."
-              : "unstake sveMETIS"}
+            {currentStep === 1 ? step1Description : step2Description}
           </p>
         )}
         {(step1Error || step2Error) && (
