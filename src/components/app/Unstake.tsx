@@ -13,20 +13,15 @@ import {
   useUnstake
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
-import Modal from "../ui/velix/Modal";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
-import Loader from "../ui/velix/icons/Loader";
-import SuccessModal from "./SuccessModal";
-import ModalButtons from "../ui/velix/ModalButtons";
-import Steps from "../ui/Steps";
+import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import { recordStaker } from "@/utils/supabase";
 import { useStakersStore } from "@/store/stakers";
+import TransactionModal from "../ui/velix/modal";
 
 export default function Unstake() {
   const [amountToUnstake, setAmountToUnstake] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const {
     approveUnstaking,
     isPending,
@@ -48,9 +43,6 @@ export default function Unstake() {
   const { setStakers } = useStakersStore();
 
   useEffect(() => {
-    if (isSuccess) {
-      setCurrentStep(2);
-    }
     if (isunStaked) {
       setAmountToUnstake("");
       getBalances();
@@ -64,10 +56,6 @@ export default function Unstake() {
     }
     document.body.style.overflow = "auto";
   }, [showModal]);
-
-  const onViewTransaction = () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
-  };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAmountToUnstake(
@@ -98,26 +86,11 @@ export default function Unstake() {
     setStakers(stakers ?? 0);
   };
 
-  const renderModalTitle = () => {
-    if (currentStep === 1 && !error) return "Waiting for Approval.";
-    if (currentStep === 1 && error) return "Approval failed.";
-    if (currentStep === 2 && !unstakeError && !isunStaked)
-      return "Approved, you can now unstake.";
-    if (currentStep === 2 && unstakeError) return "Failed to unstake.";
-    if (currentStep === 2 && unstakePending) return "Waiting for confirmation.";
-  };
-
-  const renderErrorMessage = () => {
-    if (error) return error.message.split(".")[0];
-    if (unstakeError) return unstakeError.message.split(".")[0];
-  };
-
   const onClose = useCallback(() => {
     if (isPending || unstakePending) return;
     setShowModal(false);
     resetApproveState();
     resetUnstakeState();
-    setCurrentStep(1);
   }, [isPending, resetApproveState, resetUnstakeState, unstakePending]);
 
   useEffect(() => {
@@ -143,53 +116,20 @@ export default function Unstake() {
   return (
     <>
       {showModal && (
-        <Modal onClose={onClose}>
-          <div className="flex flex-col gap-3 items-center">
-            {(isPending || unstakePending) && (
-              <Loader className="w-20 h-20 mb-6 animate-spin" />
-            )}
-            <p className="font-bold text-center text-2xl lg:text-4xl">
-              {renderModalTitle()}
-            </p>
-            {!error && !unstakeError && !isunStaked && (
-              <p className="text-velix-gray text-center text-base">
-                {currentStep === 1
-                  ? "Confirm this transaction on your wallet."
-                  : "unstake sveMETIS"}
-              </p>
-            )}
-            {(error || unstakeError) && (
-              <p className="text-red-600 text-center text-base">
-                {renderErrorMessage()}
-              </p>
-            )}
-
-            {isunStaked && currentStep === 2 && (
-              <SuccessModal
-                onViewOnExploer={onViewTransaction}
-                onClose={onClose}
-              />
-            )}
-            {!isunStaked && (
-              <ModalButtons
-                isApprovalPending={isPending}
-                isApprovalSuccess={isSuccess}
-                isLastStepDisabled={unstakePending || currentStep !== 2}
-                isApproveButtonDisabled={isPending || isSuccess}
-                title={renderUnstakeButtonTitle()}
-                onLastStepClick={onUnstake}
-                onClickApproveButton={onApproveUnstaking}
-              />
-            )}
-            <Steps
-              currentStep={currentStep}
-              step1Error={error}
-              step1Success={isSuccess}
-              step2Sucesss={isunStaked}
-              step2Error={unstakeError}
-            />
-          </div>
-        </Modal>
+        <TransactionModal
+          onClose={onClose}
+          onStep1Click={onApproveUnstaking}
+          onStep2Click={onUnstake}
+          renderButtonTitle={renderUnstakeButtonTitle}
+          step1Error={error}
+          step2Error={unstakeError}
+          step1Pending={isPending}
+          step2Pending={unstakePending}
+          step1Success={isSuccess}
+          step2Sucesss={isunStaked}
+          txHash={txhash}
+          flowname="unstake"
+        />
       )}
       <div>
         <Section className="px-5 pb-32 lg:pb-16">

@@ -1,32 +1,5 @@
 export const VEMETIS_MINTER_CONTRACT_ABI = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "target",
-        type: "address"
-      }
-    ],
-    name: "AddressEmptyCode",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address"
-      }
-    ],
-    name: "AddressInsufficientBalance",
-    type: "error"
-  },
-  {
-    inputs: [],
-    name: "FailedInnerCall",
-    type: "error"
-  },
-  {
     inputs: [],
     name: "InvalidInitialization",
     type: "error"
@@ -34,6 +7,11 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
   {
     inputs: [],
     name: "NotInitializing",
+    type: "error"
+  },
+  {
+    inputs: [],
+    name: "ReentrancyGuardReentrantCall",
     type: "error"
   },
   {
@@ -68,6 +46,19 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
     inputs: [
       {
         indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "DepositToL1Dealer",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
         internalType: "uint64",
         name: "version",
         type: "uint64"
@@ -80,18 +71,37 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
     anonymous: false,
     inputs: [
       {
+        indexed: true,
+        internalType: "address",
+        name: "account",
+        type: "address"
+      },
+      {
         indexed: false,
         internalType: "uint256",
         name: "amount",
         type: "uint256"
       }
     ],
-    name: "Staked",
+    name: "Minted",
     type: "event"
   },
   {
     inputs: [],
-    name: "BETA_USER_ROLE",
+    name: "ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "BACKEND_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -117,7 +127,33 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "INTERNAL_ROLE",
+    name: "FEE_PRECISION",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "INITIAL_DEPOSIT_AMOUNT",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "TIMELOCK_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -157,6 +193,45 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
   {
     inputs: [],
     name: "crossDomainMessenger",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "depositToL1Dealer",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "depositToRedemptionQueue",
+    outputs: [],
+    stateMutability: "payable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getVeMetisMinterAddress",
     outputs: [
       {
         internalType: "address",
@@ -225,26 +300,6 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "rewardDispatcher",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "setRewardDispatcher",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
     inputs: [
       {
         internalType: "uint256",
@@ -252,35 +307,9 @@ export const VEMETIS_MINTER_CONTRACT_ABI = [
         type: "uint256"
       }
     ],
-    name: "stake",
+    name: "redeemToTreasury",
     outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "sveMetis",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "veMetis",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
