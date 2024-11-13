@@ -139,7 +139,7 @@ const RedeemCard = ({
                 );
               }}
               disabled={
-                dayjs().diff(dayjs(redeemTicket.maturity), "seconds") <= 0 ||
+                dayjs().diff(redeemTicket.maturity * 1000, "seconds") <= 0 ||
                 !address
               }
               className="bg-velix-blue disabled:cursor-not-allowed dark:bg-velix-gray disabled:opacity-50 dark:text-black hover:bg-velix-blue text-white font-medium py-2 rounded-md"
