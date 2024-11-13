@@ -1,4 +1,3 @@
-import SuccessModal from "@/components/app/SuccessModal";
 import WaitingModal from "@/components/app/WaitingForApprovalModal";
 import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
@@ -9,6 +8,7 @@ import { useCallback, useLayoutEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
 import { useFaucet } from "@/hooks/useHttp";
+import SuccessModal from "@/components/ui/velix/modal/SuccessModal.tsx";
 
 export default function Faucet() {
   const { claim, isPending, isSuccess, reset } = useFaucet();

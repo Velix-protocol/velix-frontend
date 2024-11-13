@@ -8,11 +8,11 @@ import { retreiveActionsActivity, retreiveClaims } from "@/utils/supabase";
 import { useAccount } from "wagmi";
 import WaitingModal from "@/components/app/WaitingForApprovalModal";
 import Modal from "@/components/ui/velix/modal/ModalLayout";
-import SuccessModal from "@/components/app/SuccessModal";
 import { useMintNft } from "@/hooks/use-contract";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
+import SuccessModal from "@/components/ui/velix/modal/SuccessModal.tsx";
 
 function Requirement({
   title,
