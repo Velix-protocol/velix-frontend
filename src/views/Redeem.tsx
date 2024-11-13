@@ -31,10 +31,6 @@ export default function Redeem() {
             subtitle="Only redeem with a counter of 21 day."
           />
         </div>
-
-        <div className="w-full lg:hidden">
-          <Title name="Reedem ticket" subtitle="You can now redeem." />
-        </div>
         <RedeemLayout
           onSetMaxValue={() => null}
           error=""
@@ -60,29 +56,25 @@ export default function Redeem() {
           <Title name="Reedem ticket" subtitle="You can now redeem." />
         </div>
 
-        <div className="flex flex-col dark:bg-velix-claim-gray w-full h-56 mt-[5rem] rounded-xl dark:mt-[3.7rem] bg-white justify-center items-center ">
-          {approved ? (
-            <>
-              <RedeemCard />
-            </>
-          ) : (
-            <>
-              <img
-                src="/svg/redeem-ticket.svg"
-                alt="redeem ticket"
-                className="dark:hidden"
-              />
-              <img
-                src="/svg/redeem-ticket-dark.svg"
-                alt="redeem ticket dark"
-                className="hidden dark:block"
-              />
-              <p className="font-space-grotesk font-normal mt-5">
-                You have no ticket to redeem
-              </p>
-            </>
-          )}
-        </div>
+        {approved ? (
+  <RedeemCard />
+    ) : (
+      <div className="flex flex-col dark:bg-velix-claim-gray w-full h-56 mt-[5rem] rounded-xl dark:mt-[3.7rem] bg-white justify-center items-center">
+        <img
+          src="/svg/redeem-ticket.svg"
+          alt="redeem ticket"
+          className="dark:hidden"
+        />
+        <img
+          src="/svg/redeem-ticket-dark.svg"
+          alt="redeem ticket dark"
+          className="hidden dark:block"
+        />
+        <p className="font-space-grotesk font-normal mt-5">
+          You have no ticket to redeem
+        </p>
+      </div>
+    )}
       </AppContent>
     </Section>
   );
