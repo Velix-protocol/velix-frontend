@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import Section from "../../layouts/Section";
 import VelixEclips from "@/components/ui/velix/icons/VelixEclips";
 import GradientBorder from "@/components/ui/velix/GradientBorder";
@@ -9,30 +8,6 @@ import MeduimArrow from '@/components/ui/velix/icons/MeduimArrow';
 import SmallArrow from "@/components/ui/velix/icons/SmallArrow";
 
 export default function HowItWorks() {
-  const [arrowImage, setArrowImage] = useState('/svg/receive-arrow.svg');
-  const [arrowImage1, setArrowImage1] = useState('/svg/ArrowSteps1.svg');
-
-  useEffect(() => {
-    const handleThemeChange = () => {
-      const isDarkMode = document.documentElement.classList.contains('dark');
-      if (isDarkMode) {
-        setArrowImage('/svg/BigArrow-receive.svg');  
-        setArrowImage1('/svg/BigArrow-yellow.svg');  
-      } else {
-        setArrowImage('/svg/receive-arrow.svg');  
-        setArrowImage1('/svg/ArrowSteps1.svg');  
-      }
-    };
-
-    handleThemeChange();
-
-    const themeObserver = new MutationObserver(handleThemeChange);
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-    return () => {
-      themeObserver.disconnect();
-    };
-  }, []);
-
   return (
     <Section className="py-28 px-5 max-md:pb-0 max-md:pt-10">
       <div className="relative">
@@ -40,12 +15,12 @@ export default function HowItWorks() {
         <div className="items-center text-white rounded-lg relative overflow-hidden">
           <GradientBorder />
           <div className="bg-[#F5F7FF] dark:bg-[#1A1A1A] m-0.25 p-5 lg:p-16 rounded-lg relative overflow-hidden">
-            <h2 className="font-space-grotesk text-black dark:text-white font-bold text-2xl lg:text-4xl text-center mt-5 md:mt-0 lg:text-start">
+            <h2 className="font-space-grotesk text-black dark:text-white font-bold text-2xl lg:text-4xl text-center mt-5 md:mt-0 ">
               How Velix Works
             </h2>
             <div className="lg:flex md:flex sm:flex-row gap-4 items-start">
               {/* Step 1 */}
-              <div className="flex lg:flex-col md:flex-col sm:flex-row justify-start mt-20 lg:w-1/3 gap-4">
+              <div className="flex lg:flex-col md:flex-col sm:flex-row justify-start md:mr-7 xl:mr-0 lg:-mr-0 mt-20 lg:w-1/3 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 p-2 rounded-lg w-fit h-fit flex items-start">
                   <StepsSpan
                     number={1}
@@ -59,8 +34,7 @@ export default function HowItWorks() {
                   title="Mint/Stake"
                   description={
                     <>
-                      Mint/stake tokens on your
-                      <br />
+                      Mint/stake tokens on <br />your                     
                       preferred chain
                     </>
                   }
@@ -68,14 +42,20 @@ export default function HowItWorks() {
               </div>
 
               <img
-                src={arrowImage1}
+                src="/svg/ArrowSteps1.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] -ml-[20.5rem] xl:block hidden lg:hidden "
+                className="mt-[7.5rem] -ml-[20.5rem] xl:block hidden lg:hidden dark:hidden"
+              />
+                <img
+                src="/svg/BigArrow-yellow.svg"  
+                alt="Receive arrow"
+                className="mt-[7.5rem] w-auto h-auto -ml-[20.4rem] hidden dark:lg:hidden dark:md:hidden dark:sm:hidden dark:hidden dark:xl:block"
               />
 
               <SmallArrow className="ml-8 sm:block lg:hidden md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="ml-[-6rem] lg:ml-[-14rem] mt-[7rem] w-[12rem] lg:w-[18rem] md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
-              <div className="flex lg:flex-col md:flex-col sm:flex-row lg:mt-[rem] xl:mt-[15rem] md:mt-20 mb-5 gap-4">
+              <MeduimArrow className="ml-[-6rem] lg:ml-[-15rem] lg:mr-[0.2rem] mt-[7rem] w-[8rem]  md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
+
+              <div className="flex lg:flex-col md:flex-col md:mr-2 lg:mr-0 sm:flex-row lg:mt-[rem] xl:mt-[15rem] md:mt-20 mb-5 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 lg:-ml-4 md:-ml-4 p-2 rounded-lg w-fit h-fit flex items-start">
                   <StepsSpan
                     number={2}
@@ -90,8 +70,7 @@ export default function HowItWorks() {
                     title="Receive"
                     description={
                       <>
-                        Receive veToken and get
-                        <br />
+                        Receive veToken and <br />get
                         rewards and points
                       </>
                     }
@@ -99,13 +78,20 @@ export default function HowItWorks() {
                 </div>
               </div>            
               <img
-                src={arrowImage}  
+                src="/svg/receive-arrow.svg"  
                 alt="Receive arrow"
-                className="mt-[7.5rem] w-auto h-auto -ml-[8.4rem] xl:block hidden lg:hidden"
+                className="mt-[7.5rem] w-auto h-auto -ml-[8.4rem] xl:block hidden lg:hidden dark:hidden"
+              />
+              <img
+                src="/svg/BigArrow-receive.svg"  
+                alt="Receive arrow"
+                className="mt-[7.5rem] w-auto h-auto -ml-[7.7rem] hidden dark:lg:hidden dark:md:hidden dark:hidden dark:xl:block"
               />
 
+
               <SmallArrow className="ml-8 sm:block lg:hidden mt-[-1.2rem] md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="ml-[-5.4rem] lg:ml-[-8rem] mt-[7rem] lg:w-[15rem] md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
+              <MeduimArrow className="ml-[-5.4rem] lg:ml-[-7.6rem] mt-[7rem]  md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
+
               <div className="flex lg:flex-col md:flex-col sm:flex-row items-center lg:mt-20 md:mt-20 md:ml-[-1rem] lg:ml-[-1.3rem]">
                 <StepsSpan
                   number={3}
