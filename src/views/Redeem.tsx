@@ -11,14 +11,13 @@ import {
   useEnterRedemptionQueue
 } from "@/hooks/use-redemption";
 import TransactionModal from "@/components/ui/velix/modal";
-// import { useStakersStore } from "@/store/stakers";
 import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
+import { useBalanceStore } from "@/store/balanceState.ts";
 
 export default function Redeem() {
-  // const [approved, setApproved] = useState(false);
-
+  const { veMETISBalance } = useBalanceStore();
   const {
     isPending: approvePending,
     isSuccess: approveSuccess,
@@ -69,10 +68,9 @@ export default function Redeem() {
     return "Enter redemption queue";
   };
 
-  // const onSetMaxValue = () => {
-  //   if (!staker?.stakingpoints) return;
-  //   setAmountToRedeem(String(staker?.stakingpoints));
-  // };
+  const onSetMaxValue = () => {
+    setAmountToRedeem(veMETISBalance);
+  };
 
   return (
     <>
@@ -118,7 +116,7 @@ export default function Redeem() {
             <Title name="Reedem ticket" subtitle="You can now redeem." />
           </div>
           <RedeemLayout
-            onSetMaxValue={() => null}
+            onSetMaxValue={onSetMaxValue}
             error=""
             value={amountToRedeem}
             role="stake"
