@@ -116,7 +116,7 @@ function NavigationMenuCard({
       relative="path"
       to={getTo(path)}
       className={cn(
-        "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk",
+        "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-1 xl:gap-3 font-space-grotesk",
         className
       )}
     >
@@ -144,7 +144,7 @@ export default function NavigationMenus({
   };
 
   return (
-    <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
+    <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
       {isMoreOpen ? (
         <>
           <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} />
