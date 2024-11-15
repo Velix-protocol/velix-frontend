@@ -19,7 +19,6 @@ export default function HowItWorks() {
               How Velix Works
             </h2>
             <div className="lg:flex md:flex sm:flex-row gap-4 items-start">
-              {/* Step 1 */}
               <div className="flex lg:flex-col md:flex-col sm:flex-row justify-start md:mr-7 xl:mr-0 lg:-mr-0 mt-20 lg:w-1/3 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 p-2 rounded-lg w-fit h-fit flex items-start">
                   <StepsSpan
