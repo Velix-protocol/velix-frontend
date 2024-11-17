@@ -176,9 +176,15 @@ export default function ClaimReferralPoints() {
           />
           <Button
             onClick={onClaimReferralPoints}
-            disabled={isPending || !address}
-            className="py-8 w-fit dark:bg-velix-dark-white px-24 max-lg:py-5 max-lg:w-full max-lg:mt-3 font-space-grotesk disabled:opacity-60"
+            disabled
+            className="py-8 w-fit dark:bg-velix-dark-white px-24 max-lg:py-5 max-lg:w-full max-lg:mt-3 font-space-grotesk disabled:opacity-60 relative"
           >
+            <span
+              className={`absolute bg-velix-green rounded-full lg: flex font-space-grotesk text-white lg:font-semibold font-normal text-xs items-center justify-center
+                lg:ml-1 ml-[-1rem] mt-[-2.5rem] lg:mt-[-4rem] py-1 px-2`}
+            >
+              coming soon
+            </span>
             Claim
           </Button>
         </div>
