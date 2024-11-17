@@ -2,13 +2,7 @@ import { useMetisBalance } from "@/hooks/use-contract";
 import { useBalanceStore } from "@/store/balanceState";
 import { Role } from "@/types";
 
-export default function Balance({
-  isConnected,
-  role
-}: {
-  isConnected: boolean;
-  role: Role;
-}) {
+export default function Balance({ role }: { role: Role }) {
   useMetisBalance();
   const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
 
@@ -22,6 +16,9 @@ export default function Balance({
     if (role === "unstake") {
       return `${sveMETISBalance} sveMETIS`;
     }
+    if (role === "redeem") {
+      return `${veMETISBalance} veMETIS`;
+    }
     return "0.0";
   };
 
@@ -30,9 +27,11 @@ export default function Balance({
       case "mint":
         return "veMETIS";
       case "stake":
-        return "Staked";
+        return "METIS";
       case "unstake":
         return "Unstaked";
+      case "redeem":
+        return "METIS";
       default:
         "";
     }
@@ -45,6 +44,9 @@ export default function Balance({
         return `${veMETISBalance} veMETIS`;
       case "stake":
         return `${sveMETISBalance} sveMETIS`;
+      case "redeem":
+        return `${METISBalance} METIS`;
+      case "swap":
       default:
         "";
     }

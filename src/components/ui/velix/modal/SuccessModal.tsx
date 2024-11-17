@@ -1,5 +1,5 @@
-import SuccessIcon from "../ui/velix/icons/SuccessIcon";
-import { Button } from "../ui/button";
+import { Button } from "../../button";
+import SuccessIcon from "../icons/SuccessIcon";
 
 export default function SuccessModal({
   onViewOnExploer,

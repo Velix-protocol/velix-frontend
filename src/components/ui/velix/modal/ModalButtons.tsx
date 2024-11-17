@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { Button } from "../button";
+import { Button } from "../../button";
 
 interface IModalButtons {
   isApprovalPending: boolean;

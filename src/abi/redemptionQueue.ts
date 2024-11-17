@@ -1,23 +1,12 @@
-export const SVMETIS_CONTRACT_ABI = [
+export const REDEMPTION_QUEUE_ABI = [
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "allowance",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "needed",
-        type: "uint256"
-      }
-    ],
-    name: "ERC20InsufficientAllowance",
+    inputs: [],
+    name: "AlreadyRedeemed",
+    type: "error"
+  },
+  {
+    inputs: [],
+    name: "AlreadyReducedMaturity",
     type: "error"
   },
   {
@@ -29,16 +18,32 @@ export const SVMETIS_CONTRACT_ABI = [
       },
       {
         internalType: "uint256",
-        name: "balance",
+        name: "tokenId",
         type: "uint256"
       },
       {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "ERC721IncorrectOwner",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
         internalType: "uint256",
-        name: "needed",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "ERC20InsufficientBalance",
+    name: "ERC721InsufficientApproval",
     type: "error"
   },
   {
@@ -49,7 +54,29 @@ export const SVMETIS_CONTRACT_ABI = [
         type: "address"
       }
     ],
-    name: "ERC20InvalidApprover",
+    name: "ERC721InvalidApprover",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      }
+    ],
+    name: "ERC721InvalidOperator",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "ERC721InvalidOwner",
     type: "error"
   },
   {
@@ -60,7 +87,7 @@ export const SVMETIS_CONTRACT_ABI = [
         type: "address"
       }
     ],
-    name: "ERC20InvalidReceiver",
+    name: "ERC721InvalidReceiver",
     type: "error"
   },
   {
@@ -71,102 +98,39 @@ export const SVMETIS_CONTRACT_ABI = [
         type: "address"
       }
     ],
-    name: "ERC20InvalidSender",
+    name: "ERC721InvalidSender",
     type: "error"
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "spender",
-        type: "address"
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256"
       }
     ],
-    name: "ERC20InvalidSpender",
+    name: "ERC721NonexistentToken",
+    type: "error"
+  },
+  {
+    inputs: [],
+    name: "Erc721CallerNotOwnerOrApproved",
     type: "error"
   },
   {
     inputs: [
       {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
+        internalType: "uint128",
+        name: "collectAmount",
+        type: "uint128"
       },
       {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "max",
-        type: "uint256"
+        internalType: "uint128",
+        name: "accruedAmount",
+        type: "uint128"
       }
     ],
-    name: "ERC4626ExceededMaxDeposit",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "shares",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "max",
-        type: "uint256"
-      }
-    ],
-    name: "ERC4626ExceededMaxMint",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "shares",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "max",
-        type: "uint256"
-      }
-    ],
-    name: "ERC4626ExceededMaxRedeem",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "max",
-        type: "uint256"
-      }
-    ],
-    name: "ERC4626ExceededMaxWithdraw",
+    name: "ExceedsCollectedFees",
     type: "error"
   },
   {
@@ -177,6 +141,22 @@ export const SVMETIS_CONTRACT_ABI = [
   {
     inputs: [],
     name: "NotInitializing",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "currentTime",
+        type: "uint256"
+      },
+      {
+        internalType: "uint64",
+        name: "maturity",
+        type: "uint64"
+      }
+    ],
+    name: "NotMatureYet",
     type: "error"
   },
   {
@@ -207,13 +187,13 @@ export const SVMETIS_CONTRACT_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "spender",
+        name: "approved",
         type: "address"
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
-        name: "value",
+        name: "tokenId",
         type: "uint256"
       }
     ],
@@ -226,22 +206,34 @@ export const SVMETIS_CONTRACT_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "caller",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "operator",
         type: "address"
       },
       {
         indexed: false,
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
       }
     ],
-    name: "AssetsAdded",
+    name: "ApprovalForAll",
     type: "event"
   },
   {
     anonymous: false,
     inputs: [
+      {
+        indexed: true,
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256"
+      },
       {
         indexed: true,
         internalType: "address",
@@ -251,23 +243,23 @@ export const SVMETIS_CONTRACT_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "owner",
+        name: "recipient",
         type: "address"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "assets",
+        name: "amountVeMetisRedeemed",
         type: "uint256"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "shares",
+        name: "maturityTimestamp",
         type: "uint256"
       }
     ],
-    name: "Deposit",
+    name: "EnterRedemptionQueue",
     type: "event"
   },
   {
@@ -288,6 +280,37 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         indexed: true,
+        internalType: "uint256",
+        name: "nftId",
+        type: "uint256"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "recipient",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint120",
+        name: "amountOut",
+        type: "uint120"
+      }
+    ],
+    name: "RedeemRedemptionTicketNft",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
         internalType: "address",
         name: "from",
         type: "address"
@@ -299,50 +322,13 @@ export const SVMETIS_CONTRACT_ABI = [
         type: "address"
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: "uint256",
-        name: "value",
+        name: "tokenId",
         type: "uint256"
       }
     ],
     name: "Transfer",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "receiver",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "shares",
-        type: "uint256"
-      }
-    ],
-    name: "Withdraw",
     type: "event"
   },
   {
@@ -412,6 +398,19 @@ export const SVMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
+    name: "METIS",
+    outputs: [
+      {
+        internalType: "contract IERC20",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
     name: "TIMELOCK_ROLE",
     outputs: [
       {
@@ -424,27 +423,19 @@ export const SVMETIS_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "_totalAssets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
     inputs: [
       {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
         internalType: "uint256",
-        name: "assets",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "addAssets",
+    name: "approve",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -454,67 +445,6 @@ export const SVMETIS_CONTRACT_ABI = [
       {
         internalType: "address",
         name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      }
-    ],
-    name: "allowance",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      }
-    ],
-    name: "approve",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "asset",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
         type: "address"
       }
     ],
@@ -545,85 +475,21 @@ export const SVMETIS_CONTRACT_ABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "shares",
-        type: "uint256"
-      }
-    ],
-    name: "convertToAssets",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      }
-    ],
-    name: "convertToShares",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "decimals",
-    outputs: [
-      {
-        internalType: "uint8",
-        name: "",
-        type: "uint8"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "deployer",
-    outputs: [
-      {
         internalType: "address",
-        name: "",
+        name: "_recipient",
         type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
       },
       {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
+        internalType: "uint120",
+        name: "_amountToRedeem",
+        type: "uint120"
       }
     ],
-    name: "deposit",
+    name: "enterRedemptionQueue",
     outputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "_nftId",
         type: "uint256"
       }
     ],
@@ -634,24 +500,81 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "assets",
+        name: "tokenId",
         type: "uint256"
-      },
+      }
+    ],
+    name: "getApproved",
+    outputs: [
       {
         internalType: "address",
-        name: "receiver",
+        name: "",
         type: "address"
       }
     ],
-    name: "depositFromVeMetisMinter",
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getMetisAddress",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "address",
         name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getNftId",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_nftId",
         type: "uint256"
       }
     ],
-    stateMutability: "nonpayable",
+    name: "getNftInformation",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "hasBeenRedeemed",
+            type: "bool"
+          },
+          {
+            internalType: "uint64",
+            name: "maturity",
+            type: "uint64"
+          },
+          {
+            internalType: "uint120",
+            name: "amount",
+            type: "uint120"
+          }
+        ],
+        internalType: "struct RedemptionQueue.RedemptionQueueItem",
+        name: "",
+        type: "tuple"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -671,100 +594,24 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "maxDeposit",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "maxMint",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "owner",
         type: "address"
-      }
-    ],
-    name: "maxRedeem",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "maxWithdraw",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "shares",
-        type: "uint256"
       },
       {
         internalType: "address",
-        name: "receiver",
+        name: "operator",
         type: "address"
       }
     ],
-    name: "mint",
+    name: "isApprovedForAll",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "bool",
         name: "",
-        type: "uint256"
+        type: "bool"
       }
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     type: "function"
   },
   {
@@ -784,16 +631,26 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "assets",
+        name: "nftId",
         type: "uint256"
       }
     ],
-    name: "previewDeposit",
+    name: "nftInformation",
     outputs: [
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        internalType: "bool",
+        name: "hasBeenRedeemed",
+        type: "bool"
+      },
+      {
+        internalType: "uint64",
+        name: "maturity",
+        type: "uint64"
+      },
+      {
+        internalType: "uint120",
+        name: "amount",
+        type: "uint120"
       }
     ],
     stateMutability: "view",
@@ -803,16 +660,16 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "shares",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "previewMint",
+    name: "ownerOf",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "address",
         name: "",
-        type: "uint256"
+        type: "address"
       }
     ],
     stateMutability: "view",
@@ -822,103 +679,33 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "shares",
-        type: "uint256"
-      }
-    ],
-    name: "previewRedeem",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      }
-    ],
-    name: "previewWithdraw",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "shares",
+        name: "_nftId",
         type: "uint256"
       },
       {
         internalType: "address",
-        name: "receiver",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "owner",
+        name: "_recipient",
         type: "address"
       }
     ],
-    name: "redeem",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
+    name: "redeemRedemptionTicketNft",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function"
   },
   {
     inputs: [],
-    name: "symbol",
+    name: "redemptionQueueAccounting",
     outputs: [
       {
-        internalType: "string",
-        name: "",
-        type: "string"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "totalAssets",
-    outputs: [
+        internalType: "uint128",
+        name: "etherLiabilities",
+        type: "uint128"
+      },
       {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "totalSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
+        internalType: "uint128",
+        name: "unclaimedFees",
+        type: "uint128"
       }
     ],
     stateMutability: "view",
@@ -926,6 +713,11 @@ export const SVMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
       {
         internalType: "address",
         name: "to",
@@ -933,18 +725,12 @@ export const SVMETIS_CONTRACT_ABI = [
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "tokenId",
         type: "uint256"
       }
     ],
-    name: "transfer",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
+    name: "safeTransferFrom",
+    outputs: [],
     stateMutability: "nonpayable",
     type: "function"
   },
@@ -962,11 +748,47 @@ export const SVMETIS_CONTRACT_ABI = [
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "tokenId",
         type: "uint256"
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes"
       }
     ],
-    name: "transferFrom",
+    name: "safeTransferFrom",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "operator",
+        type: "address"
+      },
+      {
+        internalType: "bool",
+        name: "approved",
+        type: "bool"
+      }
+    ],
+    name: "setApprovalForAll",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes4",
+        name: "interfaceId",
+        type: "bytes4"
+      }
+    ],
+    name: "supportsInterface",
     outputs: [
       {
         internalType: "bool",
@@ -974,36 +796,75 @@ export const SVMETIS_CONTRACT_ABI = [
         type: "bool"
       }
     ],
-    stateMutability: "nonpayable",
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "symbol",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {
     inputs: [
       {
         internalType: "uint256",
-        name: "assets",
+        name: "tokenId",
         type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
       }
     ],
-    name: "withdraw",
+    name: "tokenURI",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "string",
         name: "",
+        type: "string"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "tokenId",
         type: "uint256"
       }
     ],
+    name: "transferFrom",
+    outputs: [],
     stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "veMetis",
+    outputs: [
+      {
+        internalType: "contract IERC20",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {

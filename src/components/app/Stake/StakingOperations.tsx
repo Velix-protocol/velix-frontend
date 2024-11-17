@@ -9,19 +9,20 @@ import {
   useStaking
 } from "@/hooks/use-contract";
 import { useAccount } from "wagmi";
-import Modal from "@/components/ui/velix/Modal";
+import Modal from "@/components/ui/velix/modal/ModalLayout";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
-import ModalButtons from "@/components/ui/velix/ModalButtons";
+import ModalButtons from "@/components/ui/velix/modal/ModalButtons";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
-import SuccessModal from "@/components/app/SuccessModal";
+// import SuccessModal from "@/components/app/SuccessModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
+import SuccessModal from "@/components/ui/velix/modal/SuccessModal";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =

@@ -1,116 +1,29 @@
 export const METIS_TOKEN_CONTRACT_ABI = [
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: "address",
+        name: "_l2Bridge",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "_l1Token",
+        type: "address"
+      },
+      {
+        internalType: "string",
+        name: "_name",
+        type: "string"
+      },
+      {
+        internalType: "string",
+        name: "_symbol",
+        type: "string"
+      }
+    ],
     stateMutability: "nonpayable",
     type: "constructor"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "allowance",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "needed",
-        type: "uint256"
-      }
-    ],
-    name: "ERC20InsufficientAllowance",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "balance",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "needed",
-        type: "uint256"
-      }
-    ],
-    name: "ERC20InsufficientBalance",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "approver",
-        type: "address"
-      }
-    ],
-    name: "ERC20InvalidApprover",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
-      }
-    ],
-    name: "ERC20InvalidReceiver",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "sender",
-        type: "address"
-      }
-    ],
-    name: "ERC20InvalidSender",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "spender",
-        type: "address"
-      }
-    ],
-    name: "ERC20InvalidSpender",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "OwnableInvalidOwner",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address"
-      }
-    ],
-    name: "OwnableUnauthorizedAccount",
-    type: "error"
   },
   {
     anonymous: false,
@@ -143,17 +56,36 @@ export const METIS_TOKEN_CONTRACT_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "previousOwner",
+        name: "_account",
         type: "address"
       },
       {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
+        indexed: false,
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
       }
     ],
-    name: "OwnershipTransferred",
+    name: "Burn",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "_account",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "Mint",
     type: "event"
   },
   {
@@ -180,19 +112,6 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     ],
     name: "Transfer",
     type: "event"
-  },
-  {
-    inputs: [],
-    name: "MAX_SUPPLY",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
   },
   {
     inputs: [
@@ -227,7 +146,7 @@ export const METIS_TOKEN_CONTRACT_ABI = [
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256"
       }
     ],
@@ -262,6 +181,24 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     type: "function"
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_from",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "burn",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
     inputs: [],
     name: "decimals",
     outputs: [
@@ -272,6 +209,98 @@ export const METIS_TOKEN_CONTRACT_ABI = [
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "subtractedValue",
+        type: "uint256"
+      }
+    ],
+    name: "decreaseAllowance",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "addedValue",
+        type: "uint256"
+      }
+    ],
+    name: "increaseAllowance",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "l1Token",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "l2Bridge",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "mint",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -288,23 +317,22 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     type: "function"
   },
   {
-    inputs: [],
-    name: "owner",
-    outputs: [
+    inputs: [
       {
-        internalType: "address",
-        name: "",
-        type: "address"
+        internalType: "bytes4",
+        name: "_interfaceId",
+        type: "bytes4"
       }
     ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "supportsInterface",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "pure",
     type: "function"
   },
   {
@@ -337,12 +365,12 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "to",
+        name: "recipient",
         type: "address"
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256"
       }
     ],
@@ -361,17 +389,17 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "from",
+        name: "sender",
         type: "address"
       },
       {
         internalType: "address",
-        name: "to",
+        name: "recipient",
         type: "address"
       },
       {
         internalType: "uint256",
-        name: "value",
+        name: "amount",
         type: "uint256"
       }
     ],
@@ -385,22 +413,5 @@ export const METIS_TOKEN_CONTRACT_ABI = [
     ],
     stateMutability: "nonpayable",
     type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
-      }
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    stateMutability: "payable",
-    type: "receive"
   }
 ] as const;

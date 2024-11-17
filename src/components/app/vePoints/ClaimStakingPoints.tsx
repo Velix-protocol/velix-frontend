@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/DashboardCard.tsx";
-import { Button } from "@/components/ui/button.tsx";
+// import { Button } from "@/components/ui/button.tsx";
 import { useStakersStore } from "@/store/stakers.ts";
 import { useAccount } from "wagmi";
 import { useState } from "react";
@@ -31,9 +31,9 @@ export default function ClaimStakingPoints() {
     setIsDialogOpen(false);
   };
 
-  const onClaimDialog = () => {
-    setIsDialogOpen(true);
-  };
+  // const onClaimDialog = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const totalPointToClaim = redeemableStakeTransactions?.data.reduce(
     (acc, stake) => acc + stake.redeemablePoints,
@@ -73,15 +73,16 @@ export default function ClaimStakingPoints() {
 
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
-          <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg mb-7 lg:p-4 sm:-mb-3 xl:mb-0 lg:mb-0 p-4 sm:p-3 flex items-center justify-center">
-            <VelixStakingIcon className="w-6 h-6" />
-          </div>
+            <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg mb-7 lg:p-4 sm:-mb-3 xl:mb-0 lg:mb-0 p-4 sm:p-3 flex items-center justify-center">
+              <VelixStakingIcon className="w-6 h-6" />
+            </div>
             <div className="font-space-grotesk">
               <h4 className="text-3xl font-bold max-lg:text-xl">
                 Staking points
               </h4>
               <p className="text-base text-velix-gray max-lg:text-sm">
-              Claim Staking vePoints, redeem for VELIX Token rewards after 90 days
+                Claim Staking vePoints, redeem for VELIX Token rewards after 90
+                days
               </p>
             </div>
           </div>
@@ -118,7 +119,7 @@ export default function ClaimStakingPoints() {
               </CardContent>
             </Card>
           </div>
-          <div className="flex items-center gap-5 max-lg:gap-2 max-lg:flex-col">
+          {/* <div className="flex items-center gap-5 max-lg:gap-2 max-lg:flex-col ">
             <Button
               onClick={onClaimDialog}
               disabled={!address || !totalPointToClaim}
@@ -126,7 +127,7 @@ export default function ClaimStakingPoints() {
             >
               Claim
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

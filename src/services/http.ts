@@ -1,4 +1,4 @@
-import { Stake, Staker } from "@/types";
+import { RedeemTicket, Stake, Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import {
   GetAmountToRedeemFromPointDto,
@@ -77,6 +77,13 @@ class VelixApi {
   async getRedeemableStakeTransactions(walletAddress: string) {
     if (!walletAddress) return;
     return await this.api.get<Stake[]>(`/stake/redeemable/${walletAddress}`);
+  }
+
+  async getRedeemTicketsOwnedByWalletAddress(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<RedeemTicket[]>(
+      `/redeem/nft-tickets/${walletAddress}`
+    );
   }
 }
 

@@ -8,7 +8,7 @@ import StakeLayout from "../layouts/StakeLayout";
 import Statitics from "./Statitics";
 import StakeTitleWrapper from "../layouts/StakeTitleWrapper";
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
-import Modal from "../ui/velix/Modal";
+import Modal from "../ui/velix/modal/ModalLayout";
 import {
   useApproveMinting,
   useMetisBalance,
@@ -17,10 +17,10 @@ import {
 import { useAccount } from "wagmi";
 import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
-import ModalButtons from "../ui/velix/ModalButtons";
-import SuccessModal from "./SuccessModal";
+import ModalButtons from "../ui/velix/modal/ModalButtons";
 import Loader from "../ui/velix/icons/Loader";
 import Steps from "../ui/Steps";
+import SuccessModal from "../ui/velix/modal/SuccessModal";
 
 export default function Mint() {
   const [amountToMint, setAmountToMint] = useState("");
