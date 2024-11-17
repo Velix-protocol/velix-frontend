@@ -137,7 +137,10 @@ export default function Redeem() {
             <Title name="Reedem ticket" subtitle="You can now redeem." />
           </div>
 
-          <div className="flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ">
+          <div
+            className={`flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ${
+              isWalletConnected ? 'h-[440px]' : 'h-auto' 
+            }`}>
             {redeemTickets?.data.length ? (
               redeemTickets?.data.map((redeemTicket) => (
                 <RedeemCard
