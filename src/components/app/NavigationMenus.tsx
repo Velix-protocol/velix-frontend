@@ -69,37 +69,37 @@ function NavigationMenuCard({
   const menuIcons = {
     mint: (
       <TwigLightIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     stake: (
       <WalletIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     unstake: (
       <UnstakeIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     redeem: (
       <FaucetIcon
-        className={applyActiveStyles(path, { className: "w-[1.35rem] h-[1.35rem]" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     reward: (
       <ImageIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     dashboard: (
       <AnalyticsIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
     vepoints: (
       <StartIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5" })}
+        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
       />
     ),
   } as const;
@@ -116,14 +116,14 @@ function NavigationMenuCard({
       relative="path"
       to={getTo(path)}
       className={cn(
-        "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk",
+        "flex lg:flex-row flex-col justify-center items-center gap-1 lg:gap-1 xl:gap-3 font-space-grotesk",
         className
       )}
     >
       <span>{menuIcons?.[path as keyof typeof menuIcons]}</span>
       <span
         className={applyActiveStyles(path, {
-          className: "lg:font-bold text-[0.625rem] lg:text-base",
+          className: "lg:font-bold text-[0.625rem] xl:text-base lg:text-sm",
         })}
       >
         {label}
@@ -144,7 +144,7 @@ export default function NavigationMenus({
   };
 
   return (
-    <div className="flex justify-evenly lg:justify-normal items-center space-x-10 text-base">
+    <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
       {isMoreOpen ? (
         <>
           <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} />
