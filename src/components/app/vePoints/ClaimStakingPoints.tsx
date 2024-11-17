@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/DashboardCard.tsx";
-import { Button } from "@/components/ui/button.tsx";
+// import { Button } from "@/components/ui/button.tsx";
 import { useStakersStore } from "@/store/stakers.ts";
 import { useAccount } from "wagmi";
 import { useState } from "react";
@@ -31,9 +31,9 @@ export default function ClaimStakingPoints() {
     setIsDialogOpen(false);
   };
 
-  const onClaimDialog = () => {
-    setIsDialogOpen(true);
-  };
+  // const onClaimDialog = () => {
+  //   setIsDialogOpen(true);
+  // };
 
   const totalPointToClaim = redeemableStakeTransactions?.data.reduce(
     (acc, stake) => acc + stake.redeemablePoints,
