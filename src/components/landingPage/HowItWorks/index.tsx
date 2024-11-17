@@ -79,7 +79,7 @@ export default function HowItWorks() {
               <img
                 src="/svg/receive-arrow.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] w-auto h-auto -ml-[8.4rem] xl:block hidden lg:hidden dark:hidden"
+                className="mt-[7.5rem] w-auto h-auto -ml-[7.8rem] xl:block hidden lg:hidden dark:hidden"
               />
               <img
                 src="/svg/BigArrow-receive.svg"
