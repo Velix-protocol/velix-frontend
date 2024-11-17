@@ -4,7 +4,7 @@ import GradientBorder from "@/components/ui/velix/GradientBorder";
 import StepsSpan from "@/components/ui/StepsSpan";
 import DescTitle from "@/components/ui/DescTitle";
 import HowItWorksCard from "./partials/HowItWorksCard";
-import MeduimArrow from '@/components/ui/velix/icons/MeduimArrow';
+import MeduimArrow from "@/components/ui/velix/icons/MeduimArrow";
 import SmallArrow from "@/components/ui/velix/icons/SmallArrow";
 
 export default function HowItWorks() {
@@ -33,8 +33,8 @@ export default function HowItWorks() {
                   title="Mint/Stake"
                   description={
                     <>
-                      Mint/stake tokens on <br />your                     
-                      preferred chain
+                      Mint/stake tokens on <br />
+                      your preferred chain
                     </>
                   }
                 />
@@ -45,20 +45,20 @@ export default function HowItWorks() {
                 alt="Receive arrow"
                 className="mt-[7.5rem] -ml-[20.5rem] xl:block hidden lg:hidden dark:hidden"
               />
-                <img
-                src="/svg/BigArrow-yellow.svg"  
+              <img
+                src="/svg/BigArrow-yellow.svg"
                 alt="Receive arrow"
                 className="mt-[7.5rem] w-auto h-auto -ml-[20.4rem] hidden dark:lg:hidden dark:md:hidden dark:sm:hidden dark:hidden dark:xl:block"
               />
 
               <SmallArrow className="ml-8 sm:block lg:hidden md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="ml-[-6rem] lg:ml-[-15rem] lg:mr-[0.2rem] mt-[7rem] w-[8rem]  md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
+              <MeduimArrow className="-ml-[6rem] lg:-ml-[15rem] lg:mr-[0.2rem] mt-[7rem] w-[8rem]  md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
 
               <div className="flex lg:flex-col md:flex-col md:mr-2 lg:mr-0 sm:flex-row lg:mt-[rem] xl:mt-[15rem] md:mt-20 mb-5 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 lg:-ml-4 md:-ml-4 p-2 rounded-lg w-fit h-fit flex items-start">
                   <StepsSpan
                     number={2}
-                    className="lg:ml-12 ml-[-1rem] mr-[4rem] mt-[-1rem] lg:mt-[-1.3rem]"
+                    className="lg:ml-12 -ml-4 mr-16 -mt-4 lg:mt-[-1.3rem]"
                   />
                   <HowItWorksCard className="flex-shrink-0 px">
                     <img src="/svg/recieve.svg" alt="Receive" />
@@ -69,39 +69,41 @@ export default function HowItWorks() {
                     title="Receive"
                     description={
                       <>
-                        Receive veToken and <br />get
-                        rewards and points
+                        Receive veToken and <br />
+                        get rewards and points
                       </>
                     }
                   />
                 </div>
-              </div>            
+              </div>
               <img
-                src="/svg/receive-arrow.svg"  
+                src="/svg/receive-arrow.svg"
                 alt="Receive arrow"
                 className="mt-[7.5rem] w-auto h-auto -ml-[8.4rem] xl:block hidden lg:hidden dark:hidden"
               />
               <img
-                src="/svg/BigArrow-receive.svg"  
+                src="/svg/BigArrow-receive.svg"
                 alt="Receive arrow"
                 className="mt-[7.5rem] w-auto h-auto -ml-[7.7rem] hidden dark:lg:hidden dark:md:hidden dark:hidden dark:xl:block"
               />
 
+              <SmallArrow className="ml-8 sm:block lg:hidden -mt-[1.2rem] md:hidden fill-velix-blue dark:fill-velix-yellow" />
+              <MeduimArrow className="ml-[-5.4rem] lg:-ml-[7.6rem] mt-[7rem]  md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
 
-              <SmallArrow className="ml-8 sm:block lg:hidden mt-[-1.2rem] md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="ml-[-5.4rem] lg:ml-[-7.6rem] mt-[7rem]  md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
-
-              <div className="flex lg:flex-col md:flex-col sm:flex-row items-center lg:mt-20 md:mt-20 md:ml-[-1rem] lg:ml-[-1.3rem]">
+              <div className="flex lg:flex-col md:flex-col sm:flex-row items-center lg:mt-20 md:mt-20 md:-ml-4 lg:-ml-[1.3rem]">
                 <StepsSpan
                   number={3}
-                  className="lg:ml-[16.8rem] ml-[-0.3rem] md:ml-[-18rem] md:mt-[-0.6rem] lg:mt-[-0.8rem] mb-[17rem]"
+                  className="lg:ml-[16.8rem] -ml-[0.3rem] md:-ml-[18rem] md:-mt-[0.6rem] lg:-mt-[0.8rem] mb-[17rem]"
                 />
-                <div className="flex sm:flex-col flex-col md:flex-row gap-3 lg:ml-1 md:ml-[-1rem] bg-velix-icon-bg dark:bg-velix-claim-gray2 p-2 rounded-lg">
+                <div className="flex sm:flex-col flex-col md:flex-row gap-3 lg:ml-1 md:-ml-[1rem] bg-velix-icon-bg dark:bg-velix-claim-gray2 p-2 rounded-lg">
                   <HowItWorksCard>
                     <img src="/svg/shoebillIcon.svg" alt="Shoebill Icon" />
                   </HowItWorksCard>
                   <HowItWorksCard>
-                    <img src="/svg/herculeProtocol.svg" alt="Hercule Protocol" />
+                    <img
+                      src="/svg/herculeProtocol.svg"
+                      alt="Hercule Protocol"
+                    />
                   </HowItWorksCard>
                   <HowItWorksCard>
                     <img src="/svg/ceresLogo.svg" alt="Ceres Logo" />
@@ -110,7 +112,7 @@ export default function HowItWorks() {
                     <img src="/svg/defipartener.svg" alt="DeFi Partner" />
                   </HowItWorksCard>
                 </div>
-                <div className="lg:mt-4 md:mt-4 -mt-[4rem] mb-[8rem] lg:px-4 lg:mr-0 md:mr-[9rem] md:ml-0 lg:ml-[-4.2rem] ml-4">
+                <div className="lg:mt-4 md:mt-4 -mt-[4rem] mb-[8rem] lg:px-4 lg:mr-0 md:mr-[9rem] md:ml-0 lg:-ml-[4.2rem] ml-4">
                   <DescTitle
                     title="Use veToken"
                     description={
