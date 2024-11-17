@@ -16,6 +16,9 @@ export default function Balance({ role }: { role: Role }) {
     if (role === "unstake") {
       return `${sveMETISBalance} sveMETIS`;
     }
+    if (role === "redeem") {
+      return `${veMETISBalance} veMETIS`;
+    }
     return "0.0";
   };
 
@@ -24,9 +27,11 @@ export default function Balance({ role }: { role: Role }) {
       case "mint":
         return "veMETIS";
       case "stake":
-        return "Staked";
+        return "METIS";
       case "unstake":
         return "Unstaked";
+      case "redeem":
+        return "METIS";
       default:
         "";
     }
@@ -39,6 +44,9 @@ export default function Balance({ role }: { role: Role }) {
         return `${veMETISBalance} veMETIS`;
       case "stake":
         return `${sveMETISBalance} sveMETIS`;
+      case "redeem":
+        return `${METISBalance} METIS`;
+      case "swap":
       default:
         "";
     }

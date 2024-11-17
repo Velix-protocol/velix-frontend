@@ -97,7 +97,7 @@ export default function Redeem() {
           <div className="w-full">
             <Title
               name="Redeem"
-              subtitle="Only redeem with a counter of 21 day."
+              subtitle="Only redeem with a counter of 3 to 5 days."
             />
           </div>
           <div className="w-full">
@@ -108,7 +108,7 @@ export default function Redeem() {
           <div className="w-full lg:hidden pt-32">
             <Title
               name="Redeem"
-              subtitle="Only redeem with a counter of 21 day."
+              subtitle="Only redeem with a counter of 3 to 5 days."
             />
           </div>
 
@@ -119,7 +119,7 @@ export default function Redeem() {
             onSetMaxValue={onSetMaxValue}
             error=""
             value={amountToRedeem}
-            role="stake"
+            role="redeem"
             onFromValueChange={(e) => setAmountToRedeem(e.target.value)}
             showSwapIcon={false}
           >

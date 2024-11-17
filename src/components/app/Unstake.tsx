@@ -162,7 +162,7 @@ export default function Unstake() {
               >
                 <div className="mt-9 flex flex-col gap-7">
                   <StakingDetails
-                    title="Max unlock cost"
+                    title="Max unl cost"
                     value={
                       <p className="bg-velix-slate-green/20 text-velix-slate-green p-2 rounded-lg text-xs uppercase">
                         Free
