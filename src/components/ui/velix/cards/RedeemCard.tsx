@@ -98,7 +98,7 @@ const RedeemCard = ({
               <span className="font-bold text-black font-space-grotesk dark:text-velix-claim mr-1">
                 {redeemTicket.amount}
               </span>{" "}
-              VeMETIS
+              METIS
             </p>
             <div className="flex flex-col xl:flex-row items-start xl:items-center gap-4 mt-2">
               <div className="flex items-center text-velix-blue text-sm lg:text-base font-space-grotesk font-bold dark:text-white">
