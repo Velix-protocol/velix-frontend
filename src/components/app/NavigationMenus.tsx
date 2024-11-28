@@ -66,40 +66,42 @@ function NavigationMenuCard({
     [activePath, isNotFound]
   );
 
+  const defaultIconClassName = "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4";
+
   const menuIcons = {
     mint: (
       <TwigLightIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     stake: (
       <WalletIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     unstake: (
       <UnstakeIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     redeem: (
       <FaucetIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     reward: (
       <ImageIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     dashboard: (
       <AnalyticsIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
     vepoints: (
       <StartIcon
-        className={applyActiveStyles(path, { className: "w-5 h-5 xl:w-5 xl:h-5 lg:w-4 lg:h-4" })}
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
   } as const;
