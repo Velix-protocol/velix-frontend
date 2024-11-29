@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 import { useContract, useContractHookState } from "./use-contract";
 import { REDEMPTION_QUEUE_CONTRACT_ADDRESS } from "@/utils/constant";
-import { ContractTransactionReceipt, parseUnits } from "ethers";
+import { ContractTransactionReceipt, parseEther, parseUnits } from "ethers";
 
 export const useApproveRedeem = () => {
   const {
@@ -21,7 +21,6 @@ export const useApproveRedeem = () => {
   const approveRedemption = useCallback(
     async (amount: number) => {
       const contract = await contractInstance;
-      console.log("CLICCCCCCCCCCCCCCCCCCCCCCCCKED");
       if (!contract) return;
       if (!address) return;
 
@@ -144,7 +143,7 @@ export const useRedeemRedemptionTicketNft = () => {
       try {
         setIsPending(true);
         const tx = await contract.redeemRedemptionTicketNft(
-          parseUnits(String(nftId)),
+          parseEther(String(nftId)),
           walletAddress
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -203,7 +202,7 @@ export const useCancelRedeemNftTicket = () => {
         setIsPending(true);
         const tx = await contract.cancelRedemptionTicketNft(
           walletAddress,
-          parseUnits(String(nftId))
+          parseEther(String(nftId))
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         setData(txhash.hash);
