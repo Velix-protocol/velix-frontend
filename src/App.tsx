@@ -1,7 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./views/Home";
-import MintPage from "./views/Mint";
-import UnstakePage from "./views/Unskate";
 import StakePage from "./views/Staking";
 import DashboardPage from "./views/Dashboard";
 import Page from "./components/layouts/Page";
@@ -19,9 +17,7 @@ function App() {
       <Routes>
         <Route path="*" element={<Notfound />} />
         <Route path="/" element={<Page />}>
-          <Route index element={<MintPage />} />
           <Route path="vepoints" element={<VePoints />} />
-          <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />
@@ -46,8 +42,6 @@ function LandingPage() {
             }
           />
           <Route path="vepoints" element={<VePoints />} />
-          <Route path="mint" element={<MintPage />} />
-          <Route path="unstake" element={<UnstakePage />} />
           <Route path="stake" element={<StakePage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />

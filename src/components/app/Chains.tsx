@@ -1,9 +1,6 @@
-import SveMETIS from "@/components/ui/velix/icons/SveMETIS";
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
-import { useTheme } from "@/context/theme-provider";
 import {
   EXPLORER_ADDRESS_URL,
-  SVEMETIS_CONTRACT_ADDRESS,
   VEMETIS_CONTRACT_ADDRESS
 } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
@@ -16,7 +13,6 @@ import {
   PlusCircle
 } from "lucide-react";
 import { useState } from "react";
-import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import { useStakersStore } from "@/store/stakers";
 
 export default function Chains() {
@@ -27,7 +23,6 @@ export default function Chains() {
   >(null);
   const [copied, setCopied] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState("");
-  const { theme } = useTheme();
   const { staker } = useStakersStore();
 
   const addMetisToMetamaskBrowserWallet = async (
@@ -89,20 +84,6 @@ export default function Chains() {
       ),
       image:
         "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Layer_1%20(1).svg?alt=media&token=5cec6dd9-95a9-47ec-8381-cf22927bf644"
-    },
-    {
-      address: SVEMETIS_CONTRACT_ADDRESS,
-      symbol: "sveMETIS",
-      decimals: 18,
-      name: "sveMETIS",
-      logo:
-        theme === "dark" ? (
-          <Svedarkmode className="w-8 h-8" />
-        ) : (
-          <SveMETIS className="w-8 h-8" />
-        ),
-      image:
-        "https://firebasestorage.googleapis.com/v0/b/butik004.appspot.com/o/Sve%404x.png?alt=media&token=678c31d7-c9d2-4c51-b5e7-3eac25e31482"
     }
   ];
 

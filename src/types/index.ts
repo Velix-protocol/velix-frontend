@@ -42,3 +42,4 @@ export type RedeemTicket = {
 };
 
 export type AppMode = "landingPage" | "app";
+export type Action = "stake" | "redeem";

@@ -29,7 +29,7 @@ const RedeemLayout = ({
 
   return (
     <div
-      className={`mt-10 w-full lg:mt-20 rounded-2xl ${
+      className={`mt-10 w-full lg:mt-20 lg:sticky lg:top-36 rounded-2xl ${
         isConnected && "bg-velix-primary"
       }`}
     >

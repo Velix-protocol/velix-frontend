@@ -36,7 +36,7 @@ export default function Header() {
       case "development":
       case "local":
       default:
-        return navigate("/app/mint");
+        return navigate("/app/stake");
     }
   };
 

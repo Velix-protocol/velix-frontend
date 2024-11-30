@@ -13,7 +13,7 @@ export default function Stake() {
           <div className="w-full">
             <Title
               name="Stake METIS"
-              subtitle="Stake veMetis and receive sveMetis"
+              subtitle="Stake METIS and receive veMETIS"
             />
           </div>
           <div className="w-full">

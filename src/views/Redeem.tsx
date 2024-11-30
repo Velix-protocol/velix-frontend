@@ -47,7 +47,7 @@ export default function Redeem() {
     refetchOnMount: false
   });
 
-  const onRedeemPoints = async () => {
+  const onEnterRedemptionQueue = async () => {
     if (!address) return;
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
@@ -62,7 +62,7 @@ export default function Redeem() {
     setEnterRedemptionQueueStates();
   };
 
-  const renderUnstakeButtonTitle = () => {
+  const renderRedemptionQueueModalTitle = () => {
     if (enterRedemptionQueuePending) return "Entering redemption queue...";
     if (enterRedemptionQueueSuccess) return "Entered";
     return "Enter redemption queue";
@@ -80,8 +80,8 @@ export default function Redeem() {
           step2Description="Enter redemption queue"
           flowname="redeem"
           onStep1Click={() => approveRedemption(Number(amountToRedeem))}
-          onStep2Click={onRedeemPoints}
-          renderButtonTitle={renderUnstakeButtonTitle}
+          onStep2Click={onEnterRedemptionQueue}
+          renderButtonTitle={renderRedemptionQueueModalTitle}
           step1Error={approveError}
           step2Error={rendemptionQueueError}
           step1Pending={approvePending}
@@ -139,8 +139,9 @@ export default function Redeem() {
 
           <div
             className={`flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ${
-              isWalletConnected ? 'h-[440px]' : 'h-auto' 
-            }`}>
+              isWalletConnected ? "" : "h-auto"
+            }`}
+          >
             {redeemTickets?.data.length ? (
               redeemTickets?.data.map((redeemTicket) => (
                 <RedeemCard

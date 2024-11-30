@@ -1,4 +1,4 @@
-import { RedeemTicket, Stake, Staker } from "@/types";
+import { Action, RedeemTicket, Stake, Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import {
   GetAmountToRedeemFromPointDto,
@@ -8,8 +8,6 @@ import {
 } from "@/utils/dto";
 import axios, { AxiosInstance } from "axios";
 import { ethers } from "ethers";
-
-export type Action = "mint" | "stake" | "unstake";
 
 const api = axios.create({
   baseURL: VELIX_API_URL
@@ -28,12 +26,10 @@ class VelixApi {
 
   private actionEndpoint(action: Action) {
     switch (action) {
-      case "mint":
-        return "/mints";
       case "stake":
         return "/stake";
-      case "unstake":
-        return "/unstakes";
+      default:
+        return "";
     }
   }
 
