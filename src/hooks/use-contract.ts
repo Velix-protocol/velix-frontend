@@ -2,11 +2,9 @@
 import { useAccount, useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  VEMETIS_CONTRACT_ADDRESS,
   velixContracts,
   VELIX_METIS_VAULT_CONTRACT_ADDRESS
 } from "@/utils/constant";
-import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import {
   ContractTransactionReceipt,
   ethers,
@@ -18,6 +16,7 @@ import Web3Service from "@/services/web3Service";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
 
 export const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -251,7 +250,13 @@ export const useMetisBalance = () => {
   );
 
   const contractsDetails = useMemo(
-    () => [[VEMETIS_CONTRACT_ADDRESS, VEMETIS_CONTRACT_ABI, provider] as any],
+    () => [
+      [
+        VELIX_METIS_VAULT_CONTRACT_ADDRESS,
+        VELIX_METIS_VAULT_ABI,
+        provider
+      ] as any
+    ],
     [provider]
   );
 

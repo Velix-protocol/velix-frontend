@@ -1,7 +1,7 @@
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
 import {
   EXPLORER_ADDRESS_URL,
-  VEMETIS_CONTRACT_ADDRESS
+  VELIX_METIS_VAULT_CONTRACT_ADDRESS
 } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
 import {
@@ -75,7 +75,7 @@ export default function Chains() {
 
   const avalableChains = [
     {
-      address: VEMETIS_CONTRACT_ADDRESS,
+      address: VELIX_METIS_VAULT_CONTRACT_ADDRESS,
       symbol: "veMETIS",
       decimals: 18,
       name: "veMETIS",

@@ -24,6 +24,7 @@ export const useApproveRedeem = () => {
       if (!contract) return;
       if (!address) return;
 
+      console.log({ amount });
       try {
         setIsPending(true);
         const tx = await contract.approve(
@@ -84,10 +85,15 @@ export const useEnterRedemptionQueue = () => {
       if (!address) return;
       try {
         setIsPending(true);
+        console.log({
+          amount: parseUnits(String(amount)),
+          amount_: amount,
+          walletAddress
+        });
         const tx = await contract.redeem(
           parseUnits(String(amount)),
+          walletAddress,
           walletAddress
-          // walletAddress
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         setData(txhash.hash);
@@ -144,7 +150,7 @@ export const useRedeemRedemptionTicketNft = () => {
       try {
         setIsPending(true);
         const tx = await contract.redeemRedemptionTicketNft(
-          parseEther(String(nftId)),
+          parseUnits(String(nftId)),
           walletAddress
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;

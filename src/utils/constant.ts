@@ -1,5 +1,4 @@
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
-import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 import { CONFIG_CONTRACT_ABI } from "@/abi/config";
 import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/RewardDispatcher";
@@ -13,10 +12,6 @@ export const VELIX_API_URL = import.meta.env.VITE_VELIX_API_URL;
 
 export const METIS_TOKEN_CONTRACT_ADDRESS =
   "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;
-export const VEMETIS_CONTRACT_ADDRESS =
-  "0xc467683d79CEa75abF3C9181BbEcaA20B6d5aED1" as const;
-export const SVEMETIS_CONTRACT_ADDRESS =
-  "0xc0bCCbeB4091B525C50Bd75d10C7eB2161affA6a" as const;
 export const REWARD_DISPATCHER_CONTRACT_ADDRESS =
   "0xC4708854dB13492C9411C17B97DC41bB9370eCD5" as const;
 export const CONFIG_CONTRACT_ADDRESS =
@@ -46,10 +41,6 @@ export const velixContracts = {
   REDEMPTION_QUEUE: {
     address: REDEMPTION_QUEUE_CONTRACT_ADDRESS,
     abi: REDEMPTION_QUEUE_ABI
-  },
-  VEMETIS: {
-    address: VEMETIS_CONTRACT_ADDRESS,
-    abi: VEMETIS_CONTRACT_ABI
   },
   REWARD_DISPATCHER: {
     address: REWARD_DISPATCHER_CONTRACT_ADDRESS,
