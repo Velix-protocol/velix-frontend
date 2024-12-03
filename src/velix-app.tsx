@@ -1,6 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MintPage from "./views/Mint";
-import UnstakePage from "./views/Unskate";
 import StakePage from "./views/Staking";
 import DashboardPage from "./views/Dashboard";
 import Page from "./components/layouts/Page";
@@ -18,8 +16,6 @@ const VelixApp = () => {
         <Routes>
           <Route path="/" element={<Page />}>
             <Route path="*" element={<Notfound />} />
-            <Route path="mint" element={<MintPage />} />
-            <Route path="unstake" element={<UnstakePage />} />
             <Route path="stake" element={<StakePage />} />
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="redeem" element={<Redeem />} />
