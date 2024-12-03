@@ -15,6 +15,7 @@ import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
+import { useMetisBalance } from "@/hooks/use-contract.ts";
 
 export default function Redeem() {
   const { veMETISBalance } = useBalanceStore();
@@ -35,7 +36,7 @@ export default function Redeem() {
   } = useEnterRedemptionQueue();
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
-  // const { staker } = useStakersStore();
+  const { getBalances } = useMetisBalance();
   const { address, isConnected: isWalletConnected } = useAccount();
 
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
@@ -51,7 +52,8 @@ export default function Redeem() {
     if (!address) return;
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
-    refetchRedeemTickets();
+    await refetchRedeemTickets();
+    await getBalances();
   };
 
   const onClose = () => {

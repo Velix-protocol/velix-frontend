@@ -5,11 +5,6 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "error"
   },
   {
-    inputs: [],
-    name: "AlreadyReducedMaturity",
-    type: "error"
-  },
-  {
     inputs: [
       {
         internalType: "address",
@@ -115,22 +110,6 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [],
     name: "Erc721CallerNotOwnerOrApproved",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint128",
-        name: "collectAmount",
-        type: "uint128"
-      },
-      {
-        internalType: "uint128",
-        name: "accruedAmount",
-        type: "uint128"
-      }
-    ],
-    name: "ExceedsCollectedFees",
     type: "error"
   },
   {
@@ -298,9 +277,9 @@ export const REDEMPTION_QUEUE_ABI = [
       },
       {
         indexed: false,
-        internalType: "uint120",
+        internalType: "uint256",
         name: "amountOut",
-        type: "uint120"
+        type: "uint256"
       }
     ],
     name: "RedeemRedemptionTicketNft",
@@ -423,6 +402,19 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "_totalAssets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -480,9 +472,9 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "address"
       },
       {
-        internalType: "uint120",
+        internalType: "uint256",
         name: "_amountToRedeem",
-        type: "uint120"
+        type: "uint256"
       }
     ],
     name: "enterRedemptionQueue",
@@ -564,12 +556,12 @@ export const REDEMPTION_QUEUE_ABI = [
             type: "uint64"
           },
           {
-            internalType: "uint120",
+            internalType: "uint256",
             name: "amount",
-            type: "uint120"
+            type: "uint256"
           }
         ],
-        internalType: "struct RedemptionQueue.RedemptionQueueItem",
+        internalType: "struct IRedemptionQueue.RedemptionQueueItem",
         name: "",
         type: "tuple"
       }
@@ -648,9 +640,9 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "uint64"
       },
       {
-        internalType: "uint120",
+        internalType: "uint256",
         name: "amount",
-        type: "uint120"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -691,24 +683,6 @@ export const REDEMPTION_QUEUE_ABI = [
     name: "redeemRedemptionTicketNft",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "redemptionQueueAccounting",
-    outputs: [
-      {
-        internalType: "uint128",
-        name: "etherLiabilities",
-        type: "uint128"
-      },
-      {
-        internalType: "uint128",
-        name: "unclaimedFees",
-        type: "uint128"
-      }
-    ],
-    stateMutability: "view",
     type: "function"
   },
   {
@@ -856,10 +830,10 @@ export const REDEMPTION_QUEUE_ABI = [
   },
   {
     inputs: [],
-    name: "veMetis",
+    name: "velixVault",
     outputs: [
       {
-        internalType: "contract IERC20",
+        internalType: "contract IVelixVault",
         name: "",
         type: "address"
       }
