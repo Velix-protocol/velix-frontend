@@ -1,5 +1,4 @@
 import WalletIcon from "../ui/velix/icons/WalletIcon";
-import UnstakeIcon from "../ui/velix/icons/UnstakeIcon";
 import TwigLightIcon from "../ui/velix/icons/TwigLightIcon";
 import AnalyticsIcon from "../ui/velix/icons/AnalyticsIcon";
 import { NavLink, useLocation } from "react-router-dom";
@@ -9,7 +8,7 @@ import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
 import MoreIcon from "../ui/velix/icons/MoreIcon";
-import CloseIcon from "../ui/velix/icons/CloseIcon"; 
+import CloseIcon from "../ui/velix/icons/CloseIcon";
 
 interface NavigationMenuCardProps {
   isNotFound: boolean;
@@ -22,7 +21,7 @@ function NavigationMenuCard({
   isNotFound,
   path,
   label,
-  className,
+  className
 }: NavigationMenuCardProps) {
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname.split("/").at(-1));
@@ -79,11 +78,6 @@ function NavigationMenuCard({
         className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
-    unstake: (
-      <UnstakeIcon
-        className={applyActiveStyles(path, { className: defaultIconClassName })}
-      />
-    ),
     redeem: (
       <FaucetIcon
         className={applyActiveStyles(path, { className: defaultIconClassName })}
@@ -135,7 +129,7 @@ function NavigationMenuCard({
 }
 
 export default function NavigationMenus({
-  isNotFound = false,
+  isNotFound = false
 }: {
   isNotFound?: boolean;
 }) {
@@ -149,18 +143,41 @@ export default function NavigationMenus({
     <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
       {isMoreOpen ? (
         <>
-          <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} />
-          <NavigationMenuCard path="dashboard" label="Dashboard" isNotFound={isNotFound} />
+          <NavigationMenuCard
+            path="redeem"
+            label="Redeem"
+            isNotFound={isNotFound}
+          />
+          <NavigationMenuCard
+            path="dashboard"
+            label="Dashboard"
+            isNotFound={isNotFound}
+          />
         </>
       ) : (
         <>
-          <NavigationMenuCard path="mint" label="Mint" isNotFound={isNotFound} />
-          <NavigationMenuCard path="stake" label="Stake" isNotFound={isNotFound} />
-          <NavigationMenuCard path="unstake" label="Unstake" isNotFound={isNotFound} />
-          <NavigationMenuCard path="redeem" label="Redeem" isNotFound={isNotFound} className="hidden lg:flex md:flex" />
-          <NavigationMenuCard path="vepoints" label="VePoints" isNotFound={isNotFound} />
-          <NavigationMenuCard path="dashboard" label="Dashboard" isNotFound={isNotFound} className="hidden lg:flex md:flex"/>
-
+          <NavigationMenuCard
+            path="stake"
+            label="Stake"
+            isNotFound={isNotFound}
+          />
+          <NavigationMenuCard
+            path="redeem"
+            label="Redeem"
+            isNotFound={isNotFound}
+            className="hidden lg:flex md:flex"
+          />
+          <NavigationMenuCard
+            path="vepoints"
+            label="VePoints"
+            isNotFound={isNotFound}
+          />
+          <NavigationMenuCard
+            path="dashboard"
+            label="Dashboard"
+            isNotFound={isNotFound}
+            className="hidden lg:flex md:flex"
+          />
         </>
       )}
 

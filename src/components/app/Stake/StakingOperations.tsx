@@ -18,7 +18,6 @@ import { useBalanceStore } from "@/store/balanceState";
 import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/modal/ModalButtons";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
-// import SuccessModal from "@/components/app/SuccessModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
@@ -28,7 +27,6 @@ export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
   const [stakebridge, setStakeBrigde] = useState(false);
-  // const [vestment, setVestment] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
@@ -205,10 +203,6 @@ export default function StakingOperations() {
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
                       Start earning after 7 days
                     </p>
-                    {/* <p className="flex w-full items-center gap-2 bg-velix-slate-blue p-5 rounded-lg ">
-                      <CheckCircle2 className="fill-velix-primary w-8 h-8 stroke-white" />
-                      Start earning
-                    </p> */}
                   </div>
                 </div>
                 <div className="space-y-10 mt-10 w-full">
@@ -286,14 +280,10 @@ export default function StakingOperations() {
             <StakingDetails
               className="bg-velix-slate-blue dark:bg-velix-form-input-dark p-6 rounded-lg"
               title=""
-              value="Be aware of both minting and deposit fee that will be deducted when the transaction is done."
+              value="Be aware of both staking and redeeming fees that will be deducted when the transaction is done."
             />
           )}
-          <StakingDetails
-            title="Exchange Rate"
-            value="1 veMETIS = 1 sveMETIS"
-          />
-          {/* <StakingDetails title="Average return" value={"--"} /> */}
+          <StakingDetails title="Exchange Rate" value="1 METIS = 1 veMETIS" />
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}

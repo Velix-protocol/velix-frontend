@@ -2,15 +2,9 @@
 import { useAccount, useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  SVEMETIS_CONTRACT_ADDRESS,
-  VEMETIS_MINTER_CONTRACT_ADDRESS,
-  VEMETIS_CONTRACT_ADDRESS,
-  VELIX_NFT_CONTRACT_ADDRESS,
   velixContracts,
-  VELIX_SUPER_NFT_URL
+  VELIX_METIS_VAULT_CONTRACT_ADDRESS
 } from "@/utils/constant";
-import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS";
-import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS";
 import {
   ContractTransactionReceipt,
   ethers,
@@ -19,11 +13,10 @@ import {
 } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
-import { saveClaimNftAction } from "@/utils/supabase";
-import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
 
 export const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -60,133 +53,6 @@ export const useContract = (contactName: ContractName) => {
   );
 };
 
-export const useApproveMinting = () => {
-  const {
-    address,
-    data,
-    setData,
-    isPending,
-    setIsPending,
-    error,
-    setError,
-    isSuccess,
-    setIsSuccess
-  } = useContractHookState();
-  const contractInstance = useContract("METIS_TOKEN");
-
-  const approveMinting = useCallback(
-    async (amount: string) => {
-      const contract = await contractInstance;
-      if (!contract) return;
-      if (!address) return;
-      try {
-        setIsPending(true);
-        const tx = await contract.approve(
-          VEMETIS_MINTER_CONTRACT_ADDRESS,
-          parseUnits(amount)
-        );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
-        setError(null);
-        setIsSuccess(true);
-      } catch (e: any) {
-        console.log(e);
-        setData(null);
-        setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
-      } finally {
-        setIsPending(false);
-      }
-    },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
-  );
-
-  const reset = useCallback(() => {
-    setData(null);
-    setIsSuccess(false);
-    setError(null);
-    setIsPending(false);
-  }, [setData, setError, setIsPending, setIsSuccess]);
-
-  return {
-    isPending,
-    isSuccess,
-    reset,
-    approveMinting,
-    error,
-    data
-  };
-};
-
-/**
- * useMint mints the METIS
- *  - The arguments of the mint function should be the same as the one use for approving the minting process
- * @date 3/5/2024 - 12:42:02 AM
- *
- * @returns {*}
- */
-export const useMint = () => {
-  const {
-    address,
-    data,
-    setData,
-    isPending,
-    setIsPending,
-    error,
-    setError,
-    isSuccess,
-    setIsSuccess
-  } = useContractHookState();
-  const contractInstance = useContract("VEMETIS_MINTER");
-
-  const mint = useCallback(
-    async (amount: string) => {
-      const contract = await contractInstance;
-      if (!contract) return;
-      if (!address) return;
-      try {
-        setIsPending(true);
-        const tx = await contract.mint(address, parseUnits(amount));
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await velixApi.saveAction("mint", {
-          amount: Number(amount),
-          walletAddress: address,
-          txHash: txhash.hash
-        });
-        setData(txhash.hash);
-        setError(null);
-        setIsSuccess(true);
-      } catch (e: any) {
-        console.log(e);
-        setData(null);
-        setIsSuccess(false);
-        setError({
-          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
-        });
-      } finally {
-        setIsPending(false);
-      }
-    },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
-  );
-
-  const reset = useCallback(() => {
-    setData(null);
-    setIsSuccess(false);
-    setError(null);
-    setIsPending(false);
-  }, [setData, setError, setIsPending, setIsSuccess]);
-
-  return {
-    isPending,
-    isSuccess,
-    reset,
-    mint,
-    error,
-    txhash: data
-  };
-};
-
 /**
  * Approve the staking on veMETIS
  * @date 3/5/2024 - 10:46:39 AM
@@ -205,7 +71,7 @@ export const useApproveStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VEMETIS");
+  const contractInstance = useContract("METIS_TOKEN");
 
   const approveStaking = useCallback(
     async (amountToStake: string) => {
@@ -215,7 +81,7 @@ export const useApproveStaking = () => {
       try {
         setIsPending(true);
         const tx = await contract.approve(
-          SVEMETIS_CONTRACT_ADDRESS,
+          VELIX_METIS_VAULT_CONTRACT_ADDRESS,
           parseUnits(amountToStake)
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -267,7 +133,7 @@ export const useStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
+  const contractInstance = useContract("VELIX_VAULT");
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -318,234 +184,12 @@ export const useStaking = () => {
 };
 
 /**
- * Approve unstaking/withrow
- * @returns
- */
-export const useApproveUnstaking = () => {
-  const {
-    address,
-    data,
-    setData,
-    isPending,
-    setIsPending,
-    error,
-    setError,
-    isSuccess,
-    setIsSuccess
-  } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
-
-  const approveUnstaking = useCallback(
-    async (amount: string) => {
-      const contract = await contractInstance;
-      if (!contract) return;
-      if (!address) return;
-      try {
-        setIsPending(true);
-        const tx = await contract.approve(
-          SVEMETIS_CONTRACT_ADDRESS,
-          parseUnits(amount)
-        );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
-        setError(null);
-        setIsSuccess(true);
-      } catch (e: any) {
-        console.log(e);
-        setData(null);
-        setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
-      } finally {
-        setIsPending(false);
-      }
-    },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
-  );
-
-  const reset = useCallback(() => {
-    setData(null);
-    setIsSuccess(false);
-    setError(null);
-    setIsPending(false);
-  }, [setData, setError, setIsPending, setIsSuccess]);
-
-  return {
-    isPending,
-    isSuccess,
-    reset,
-    approveUnstaking,
-    error,
-    data
-  };
-};
-
-/**
- * Unstake hook
- * Should be called after approving the unstaking process
- * @returns
- */
-export const useUnstake = () => {
-  const {
-    address,
-    data,
-    setData,
-    isPending,
-    setIsPending,
-    error,
-    setError,
-    isSuccess,
-    setIsSuccess
-  } = useContractHookState();
-  const contractInstance = useContract("SVEMETIS");
-
-  const unstake = useCallback(
-    async (amount: string) => {
-      const contract = await contractInstance;
-      if (!contract) return;
-      if (!address) return;
-      try {
-        setIsPending(true);
-        const tx = await contract.redeem(parseUnits(amount), address, address);
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        await velixApi.saveAction("unstake", {
-          amount: Number(amount),
-          walletAddress: address,
-          txHash: txhash.hash
-        });
-        setData(txhash.hash);
-        setError(null);
-        setIsSuccess(true);
-      } catch (e: any) {
-        console.log(e);
-        setData(null);
-        setIsSuccess(false);
-        setError({
-          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
-        });
-      } finally {
-        setIsPending(false);
-      }
-    },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
-  );
-
-  const reset = useCallback(() => {
-    setData(null);
-    setIsSuccess(false);
-    setError(null);
-    setIsPending(false);
-  }, [setData, setError, setIsPending, setIsSuccess]);
-
-  return {
-    isPending,
-    isSuccess,
-    reset,
-    unstake,
-    error,
-    txhash: data
-  };
-};
-
-export const useMintNft = () => {
-  const {
-    address,
-    data,
-    setData,
-    isPending,
-    setIsPending,
-    error,
-    setError,
-    isSuccess,
-    setIsSuccess
-  } = useContractHookState();
-  const contractInstance = useContract("VELIX_NFT");
-
-  const addEligibleAddress = useCallback(async () => {
-    const contract = await contractInstance;
-    if (!contract) return;
-    if (!address) return;
-    try {
-      const tx = await contract.addEligibleAddress(address);
-      await tx.wait();
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }, [address, contractInstance]);
-
-  const mintNft = useCallback(async () => {
-    if (!address) return;
-    try {
-      setIsPending(true);
-      const contract = await new Web3Service().contract(
-        VELIX_NFT_CONTRACT_ADDRESS,
-        VELIX_NFT_CONTRACT_ABI,
-        address
-      );
-
-      // 3332 is a random number for now is just to satisfy the contract requirement,
-      // when the contract is update that parameter should be removed
-      await addEligibleAddress();
-      const tx = await contract.safeMint(
-        address,
-        parseUnits("3332"),
-        VELIX_SUPER_NFT_URL,
-        { from: address }
-      );
-
-      console.log(tx);
-
-      const txhash = (await tx.wait()) as ContractTransactionReceipt;
-      console.log(txhash);
-      const { error } = await saveClaimNftAction(address, "3332", txhash.hash);
-      console.log(error);
-      if (error) throw error;
-
-      setData(txhash.hash);
-      setError(null);
-      setIsSuccess(true);
-    } catch (e: any) {
-      console.log(e);
-      setData(null);
-      setIsSuccess(false);
-      setError({ message: e.shortMessage ?? e });
-    } finally {
-      setIsPending(false);
-    }
-  }, [
-    addEligibleAddress,
-    address,
-    setData,
-    setError,
-    setIsPending,
-    setIsSuccess
-  ]);
-
-  const reset = useCallback(() => {
-    setData(null);
-    setIsSuccess(false);
-    setError(null);
-    setIsPending(false);
-  }, [setData, setError, setIsPending, setIsSuccess]);
-
-  return {
-    isPending,
-    addEligibleAddress,
-    isSuccess,
-    reset,
-    mintNft,
-    error,
-    txhash: data
-  };
-};
-
-/**
  * This hook returns the total amount of underlying (veMetis) assets held by the vault.
  *
  * */
 export const useGetTotalVeMetisAssets = () => {
   const { address } = useAccount();
-  const contractInstance = useContract("SVEMETIS");
+  const contractInstance = useContract("VELIX_VAULT");
   const { setTotalValueLocked } = useMetricsStore();
 
   const getTotalLocked = useCallback(async () => {
@@ -573,7 +217,7 @@ export const useGetTotalVeMetisAssets = () => {
  */
 export const useGetConvertToShareValue = () => {
   const { address } = useAccount();
-  const contractInstance = useContract("SVEMETIS");
+  const contractInstance = useContract("VELIX_VAULT");
 
   return useCallback(
     async (assets: string) => {
@@ -595,8 +239,7 @@ export const useGetConvertToShareValue = () => {
 
 export const useMetisBalance = () => {
   const { address } = useAccount();
-  const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
-    useBalanceStore();
+  const { setveMETISBalance, setMETISBalance } = useBalanceStore();
   const { data, refetch: fetchMETISBalance } = useBalance({
     address: address as `0x${string}`
   });
@@ -608,8 +251,11 @@ export const useMetisBalance = () => {
 
   const contractsDetails = useMemo(
     () => [
-      [VEMETIS_CONTRACT_ADDRESS, VEMETIS_CONTRACT_ABI, provider] as any,
-      [SVEMETIS_CONTRACT_ADDRESS, SVMETIS_CONTRACT_ABI, provider] as any
+      [
+        VELIX_METIS_VAULT_CONTRACT_ADDRESS,
+        VELIX_METIS_VAULT_ABI,
+        provider
+      ] as any
     ],
     [provider]
   );
@@ -627,21 +273,13 @@ export const useMetisBalance = () => {
     try {
       const balances = await Promise.all([
         contracts[0].balanceOf(address),
-        contracts[1].balanceOf(address),
         fetchMETISBalance()
       ]);
-      setsveMETISBalance(formatEther(balances[1]));
       setveMETISBalance(formatEther(balances[0]));
     } catch (err) {
       console.log(err);
     }
-  }, [
-    address,
-    contracts,
-    fetchMETISBalance,
-    setsveMETISBalance,
-    setveMETISBalance
-  ]);
+  }, [address, contracts, fetchMETISBalance, setveMETISBalance]);
 
   useEffect(() => {
     if (data) return setMETISBalance(formatEther(data.value));

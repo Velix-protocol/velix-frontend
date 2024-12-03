@@ -15,6 +15,7 @@ import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
+import { useMetisBalance } from "@/hooks/use-contract.ts";
 
 export default function Redeem() {
   const { veMETISBalance } = useBalanceStore();
@@ -35,7 +36,7 @@ export default function Redeem() {
   } = useEnterRedemptionQueue();
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
-  // const { staker } = useStakersStore();
+  const { getBalances } = useMetisBalance();
   const { address, isConnected: isWalletConnected } = useAccount();
 
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
@@ -47,11 +48,12 @@ export default function Redeem() {
     refetchOnMount: false
   });
 
-  const onRedeemPoints = async () => {
+  const onEnterRedemptionQueue = async () => {
     if (!address) return;
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
-    refetchRedeemTickets();
+    await refetchRedeemTickets();
+    await getBalances();
   };
 
   const onClose = () => {
@@ -62,7 +64,7 @@ export default function Redeem() {
     setEnterRedemptionQueueStates();
   };
 
-  const renderUnstakeButtonTitle = () => {
+  const renderRedemptionQueueModalTitle = () => {
     if (enterRedemptionQueuePending) return "Entering redemption queue...";
     if (enterRedemptionQueueSuccess) return "Entered";
     return "Enter redemption queue";
@@ -80,8 +82,8 @@ export default function Redeem() {
           step2Description="Enter redemption queue"
           flowname="redeem"
           onStep1Click={() => approveRedemption(Number(amountToRedeem))}
-          onStep2Click={onRedeemPoints}
-          renderButtonTitle={renderUnstakeButtonTitle}
+          onStep2Click={onEnterRedemptionQueue}
+          renderButtonTitle={renderRedemptionQueueModalTitle}
           step1Error={approveError}
           step2Error={rendemptionQueueError}
           step1Pending={approvePending}
@@ -139,8 +141,9 @@ export default function Redeem() {
 
           <div
             className={`flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ${
-              isWalletConnected ? 'h-[440px]' : 'h-auto' 
-            }`}>
+              isWalletConnected ? "" : "h-auto"
+            }`}
+          >
             {redeemTickets?.data.length ? (
               redeemTickets?.data.map((redeemTicket) => (
                 <RedeemCard

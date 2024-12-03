@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback } from "react";
 import { useContract, useContractHookState } from "./use-contract";
-import { REDEMPTION_QUEUE_CONTRACT_ADDRESS } from "@/utils/constant";
+import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { ContractTransactionReceipt, parseEther, parseUnits } from "ethers";
 
 export const useApproveRedeem = () => {
@@ -16,7 +16,7 @@ export const useApproveRedeem = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VEMETIS");
+  const contractInstance = useContract("VELIX_VAULT");
 
   const approveRedemption = useCallback(
     async (amount: number) => {
@@ -24,10 +24,11 @@ export const useApproveRedeem = () => {
       if (!contract) return;
       if (!address) return;
 
+      console.log({ amount });
       try {
         setIsPending(true);
         const tx = await contract.approve(
-          REDEMPTION_QUEUE_CONTRACT_ADDRESS,
+          VELIX_METIS_VAULT_CONTRACT_ADDRESS,
           parseUnits(String(amount))
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
@@ -75,7 +76,7 @@ export const useEnterRedemptionQueue = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("REDEMPTION_QUEUE");
+  const contractInstance = useContract("VELIX_VAULT");
 
   const enterRedemptionQueue = useCallback(
     async (walletAddress: `0x${string}`, amount: number) => {
@@ -84,9 +85,15 @@ export const useEnterRedemptionQueue = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.enterRedemptionQueue(
+        console.log({
+          amount: parseUnits(String(amount)),
+          amount_: amount,
+          walletAddress
+        });
+        const tx = await contract.redeem(
+          parseUnits(String(amount)),
           walletAddress,
-          parseUnits(String(amount))
+          walletAddress
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;
         setData(txhash.hash);
@@ -143,7 +150,7 @@ export const useRedeemRedemptionTicketNft = () => {
       try {
         setIsPending(true);
         const tx = await contract.redeemRedemptionTicketNft(
-          parseEther(String(nftId)),
+          parseUnits(String(nftId)),
           walletAddress
         );
         const txhash = (await tx.wait()) as ContractTransactionReceipt;

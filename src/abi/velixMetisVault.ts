@@ -1,7 +1,23 @@
-export const REDEMPTION_QUEUE_ABI = [
+export const VELIX_METIS_VAULT_ABI = [
   {
-    inputs: [],
-    name: "AlreadyRedeemed",
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "allowance",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "needed",
+        type: "uint256"
+      }
+    ],
+    name: "ERC20InsufficientAllowance",
     type: "error"
   },
   {
@@ -13,32 +29,16 @@ export const REDEMPTION_QUEUE_ABI = [
       },
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "balance",
         type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "ERC721IncorrectOwner",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "operator",
-        type: "address"
       },
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "needed",
         type: "uint256"
       }
     ],
-    name: "ERC721InsufficientApproval",
+    name: "ERC20InsufficientBalance",
     type: "error"
   },
   {
@@ -49,29 +49,7 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "address"
       }
     ],
-    name: "ERC721InvalidApprover",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "operator",
-        type: "address"
-      }
-    ],
-    name: "ERC721InvalidOperator",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address"
-      }
-    ],
-    name: "ERC721InvalidOwner",
+    name: "ERC20InvalidApprover",
     type: "error"
   },
   {
@@ -82,7 +60,7 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "address"
       }
     ],
-    name: "ERC721InvalidReceiver",
+    name: "ERC20InvalidReceiver",
     type: "error"
   },
   {
@@ -93,23 +71,102 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "address"
       }
     ],
-    name: "ERC721InvalidSender",
+    name: "ERC20InvalidSender",
     type: "error"
   },
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
+        internalType: "address",
+        name: "spender",
+        type: "address"
       }
     ],
-    name: "ERC721NonexistentToken",
+    name: "ERC20InvalidSpender",
     type: "error"
   },
   {
-    inputs: [],
-    name: "Erc721CallerNotOwnerOrApproved",
+    inputs: [
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "max",
+        type: "uint256"
+      }
+    ],
+    name: "ERC4626ExceededMaxDeposit",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "max",
+        type: "uint256"
+      }
+    ],
+    name: "ERC4626ExceededMaxMint",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "max",
+        type: "uint256"
+      }
+    ],
+    name: "ERC4626ExceededMaxRedeem",
+    type: "error"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "max",
+        type: "uint256"
+      }
+    ],
+    name: "ERC4626ExceededMaxWithdraw",
     type: "error"
   },
   {
@@ -120,22 +177,6 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [],
     name: "NotInitializing",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "currentTime",
-        type: "uint256"
-      },
-      {
-        internalType: "uint64",
-        name: "maturity",
-        type: "uint64"
-      }
-    ],
-    name: "NotMatureYet",
     type: "error"
   },
   {
@@ -155,6 +196,22 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "error"
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "length",
+        type: "uint256"
+      }
+    ],
+    name: "StringsInsufficientHexLength",
+    type: "error"
+  },
+  {
     anonymous: false,
     inputs: [
       {
@@ -166,13 +223,13 @@ export const REDEMPTION_QUEUE_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "approved",
+        name: "spender",
         type: "address"
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
-        name: "tokenId",
+        name: "value",
         type: "uint256"
       }
     ],
@@ -185,34 +242,22 @@ export const REDEMPTION_QUEUE_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "operator",
+        name: "caller",
         type: "address"
       },
       {
         indexed: false,
-        internalType: "bool",
-        name: "approved",
-        type: "bool"
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
       }
     ],
-    name: "ApprovalForAll",
+    name: "AssetsAdded",
     type: "event"
   },
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "nftId",
-        type: "uint256"
-      },
       {
         indexed: true,
         internalType: "address",
@@ -222,23 +267,36 @@ export const REDEMPTION_QUEUE_ABI = [
       {
         indexed: true,
         internalType: "address",
-        name: "recipient",
+        name: "owner",
         type: "address"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountVeMetisRedeemed",
+        name: "assets",
         type: "uint256"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "maturityTimestamp",
+        name: "shares",
         type: "uint256"
       }
     ],
-    name: "EnterRedemptionQueue",
+    name: "Deposit",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256"
+      }
+    ],
+    name: "DepositToL1Dealer",
     type: "event"
   },
   {
@@ -259,30 +317,18 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         indexed: true,
-        internalType: "uint256",
-        name: "nftId",
-        type: "uint256"
-      },
-      {
-        indexed: true,
         internalType: "address",
-        name: "sender",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "recipient",
+        name: "account",
         type: "address"
       },
       {
         indexed: false,
         internalType: "uint256",
-        name: "amountOut",
+        name: "amount",
         type: "uint256"
       }
     ],
-    name: "RedeemRedemptionTicketNft",
+    name: "Minted",
     type: "event"
   },
   {
@@ -301,13 +347,50 @@ export const REDEMPTION_QUEUE_ABI = [
         type: "address"
       },
       {
-        indexed: true,
+        indexed: false,
         internalType: "uint256",
-        name: "tokenId",
+        name: "value",
         type: "uint256"
       }
     ],
     name: "Transfer",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "sender",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      }
+    ],
+    name: "Withdraw",
     type: "event"
   },
   {
@@ -377,19 +460,6 @@ export const REDEMPTION_QUEUE_ABI = [
   },
   {
     inputs: [],
-    name: "METIS",
-    outputs: [
-      {
-        internalType: "contract IERC20",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "TIMELOCK_ROLE",
     outputs: [
       {
@@ -417,17 +487,12 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
         internalType: "uint256",
-        name: "tokenId",
+        name: "assets",
         type: "uint256"
       }
     ],
-    name: "approve",
+    name: "addAssets",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -437,6 +502,67 @@ export const REDEMPTION_QUEUE_ABI = [
       {
         internalType: "address",
         name: "owner",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      }
+    ],
+    name: "allowance",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "spender",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "approve",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "asset",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "account",
         type: "address"
       }
     ],
@@ -449,6 +575,24 @@ export const REDEMPTION_QUEUE_ABI = [
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_from",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "burn",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -467,21 +611,72 @@ export const REDEMPTION_QUEUE_ABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "_recipient",
-        type: "address"
-      },
-      {
         internalType: "uint256",
-        name: "_amountToRedeem",
+        name: "shares",
         type: "uint256"
       }
     ],
-    name: "enterRedemptionQueue",
+    name: "convertToAssets",
     outputs: [
       {
         internalType: "uint256",
-        name: "_nftId",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      }
+    ],
+    name: "convertToShares",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "decimals",
+    outputs: [
+      {
+        internalType: "uint8",
+        name: "",
+        type: "uint8"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      }
+    ],
+    name: "deposit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
         type: "uint256"
       }
     ],
@@ -492,81 +687,13 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "amount",
         type: "uint256"
       }
     ],
-    name: "getApproved",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "getMetisAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "getNftId",
-    outputs: [
-      {
-        internalType: "uint64",
-        name: "",
-        type: "uint64"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_nftId",
-        type: "uint256"
-      }
-    ],
-    name: "getNftInformation",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "bool",
-            name: "hasBeenRedeemed",
-            type: "bool"
-          },
-          {
-            internalType: "uint64",
-            name: "maturity",
-            type: "uint64"
-          },
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256"
-          }
-        ],
-        internalType: "struct IRedemptionQueue.RedemptionQueueItem",
-        name: "",
-        type: "tuple"
-      }
-    ],
-    stateMutability: "view",
+    name: "depositToL1Dealer",
+    outputs: [],
+    stateMutability: "payable",
     type: "function"
   },
   {
@@ -586,24 +713,100 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "owner",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "operator",
+        name: "",
         type: "address"
       }
     ],
-    name: "isApprovedForAll",
+    name: "maxDeposit",
     outputs: [
       {
-        internalType: "bool",
+        internalType: "uint256",
         name: "",
-        type: "bool"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "maxMint",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "maxRedeem",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "maxWithdraw",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      }
+    ],
+    name: "mint",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -623,45 +826,16 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "nftId",
+        name: "assets",
         type: "uint256"
       }
     ],
-    name: "nftInformation",
+    name: "previewDeposit",
     outputs: [
       {
-        internalType: "bool",
-        name: "hasBeenRedeemed",
-        type: "bool"
-      },
-      {
-        internalType: "uint64",
-        name: "maturity",
-        type: "uint64"
-      },
-      {
         internalType: "uint256",
-        name: "amount",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
-      }
-    ],
-    name: "ownerOf",
-    outputs: [
-      {
-        internalType: "address",
         name: "",
-        type: "address"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -671,106 +845,99 @@ export const REDEMPTION_QUEUE_ABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "_nftId",
-        type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "_recipient",
-        type: "address"
-      }
-    ],
-    name: "redeemRedemptionTicketNft",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
+        name: "shares",
         type: "uint256"
       }
     ],
-    name: "safeTransferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "to",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256"
-      },
-      {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes"
-      }
-    ],
-    name: "safeTransferFrom",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "operator",
-        type: "address"
-      },
-      {
-        internalType: "bool",
-        name: "approved",
-        type: "bool"
-      }
-    ],
-    name: "setApprovalForAll",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "bytes4",
-        name: "interfaceId",
-        type: "bytes4"
-      }
-    ],
-    name: "supportsInterface",
+    name: "previewMint",
     outputs: [
       {
-        internalType: "bool",
+        internalType: "uint256",
         name: "",
-        type: "bool"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      }
+    ],
+    name: "previewRedeem",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      }
+    ],
+    name: "previewWithdraw",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "shares",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "owner",
+        type: "address"
+      }
+    ],
+    name: "redeem",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "sendMetisRewards",
+    outputs: [],
+    stateMutability: "payable",
     type: "function"
   },
   {
@@ -787,22 +954,53 @@ export const REDEMPTION_QUEUE_ABI = [
     type: "function"
   },
   {
-    inputs: [
+    inputs: [],
+    name: "totalAssets",
+    outputs: [
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "",
         type: "uint256"
       }
     ],
-    name: "tokenURI",
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "totalSupply",
     outputs: [
       {
-        internalType: "string",
+        internalType: "uint256",
         name: "",
-        type: "string"
+        type: "uint256"
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "value",
+        type: "uint256"
+      }
+    ],
+    name: "transfer",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -819,26 +1017,48 @@ export const REDEMPTION_QUEUE_ABI = [
       },
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "value",
         type: "uint256"
       }
     ],
     name: "transferFrom",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool"
+      }
+    ],
     stateMutability: "nonpayable",
     type: "function"
   },
   {
-    inputs: [],
-    name: "velixVault",
-    outputs: [
+    inputs: [
       {
-        internalType: "contract IVelixVault",
-        name: "",
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "owner",
         type: "address"
       }
     ],
-    stateMutability: "view",
+    name: "withdraw",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
