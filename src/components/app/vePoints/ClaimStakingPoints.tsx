@@ -19,8 +19,6 @@ export default function ClaimStakingPoints() {
     enabled: !!address
   });
 
-  console.log({ redeemableStakeTransactions });
-
   useQuery({
     queryKey: ["getStaker", address],
     queryFn: () => getStaker(address as string),
