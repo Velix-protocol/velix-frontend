@@ -47,7 +47,7 @@ export default function StakingOperations() {
   } = useStaking();
   const { address: walletAddress, isConnected } = useAccount();
   const { getBalances } = useMetisBalance();
-  const { veMETISBalance } = useBalanceStore();
+  const { METISBalance } = useBalanceStore();
   const { setStakers } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
   const { getStaker } = useStakersStore();
@@ -152,9 +152,9 @@ export default function StakingOperations() {
       stakePending ||
       !amountToStake ||
       !Number(amountToStake) ||
-      Number(amountToStake) > Number(veMETISBalance)
+      Number(amountToStake) > Number(METISBalance)
     );
-  }, [amountToStake, isPending, stakePending, veMETISBalance]);
+  }, [amountToStake, isPending, stakePending, METISBalance]);
 
   const renderStakeButtonTitle = () => {
     if (stakePending) return "Staking...";
@@ -248,9 +248,9 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
-        onSetMaxValue={() => setAmountToStake(veMETISBalance)}
+        onSetMaxValue={() => setAmountToStake(METISBalance)}
         error={
-          Number(amountToStake) > Number(veMETISBalance)
+          Number(amountToStake) > Number(METISBalance)
             ? "Entered amount exceeds your veMETIS balance"
             : ""
         }
