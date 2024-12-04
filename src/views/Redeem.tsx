@@ -114,7 +114,7 @@ export default function Redeem() {
             />
           </div>
 
-          <div className="w-full lg:hidden">
+          <div className="w-full hidden">
             <Title name="Reedem ticket" subtitle="You can now redeem." />
           </div>
           <RedeemLayout
@@ -166,7 +166,7 @@ export default function Redeem() {
                 />
                 <p className="font-space-grotesk font-normal mt-5">
                   You have no ticket to redeem
-                </p>
+                </p> 
               </>
             )}
           </div>
