@@ -30,10 +30,10 @@ export default function HowItWorks() {
                   </HowItWorksCard>
                 </div>
                 <DescTitle
-                  title="Mint/Stake"
+                  title="Stake"
                   description={
                     <>
-                      Mint/stake tokens on <br />
+                      Stake tokens on <br />
                       your preferred chain
                     </>
                   }
