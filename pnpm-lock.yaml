@@ -74,6 +74,9 @@ dependencies:
   react-confetti:
     specifier: ^6.1.0
     version: 6.1.0(react@18.2.0)
+  react-countdown:
+    specifier: ^2.3.6
+    version: 2.3.6(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -12185,6 +12188,17 @@ packages:
     dependencies:
       react: 18.2.0
       tween-functions: 1.2.0
+    dev: false
+
+  /react-countdown@2.3.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ZfX6S08Hb6x6W6eCn1hMDvxPICI/T30fd+gaeVTCR/2cGZ2WJ3f26e4ImNIMX1fHkopJrUdnRpWXP13/D39+gg==}
+    peerDependencies:
+      react: '>= 15'
+      react-dom: '>= 15'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-devtools-core@4.28.5:

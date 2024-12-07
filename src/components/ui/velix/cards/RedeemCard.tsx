@@ -13,6 +13,7 @@ import Loader from "../icons/Loader";
 import { useCallback, useEffect, useState } from "react";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 import SuccessModal from "../modal/SuccessModal";
+import Countdown from "react-countdown";
 
 const RedeemCard = ({
   redeemTicket,
@@ -109,8 +110,8 @@ const RedeemCard = ({
                 </span>
               </div>
               <div className="flex items-center text-gray-600 text-sm lg:text-base font-medium dark:text-white">
-                <FaClock className="mr-1 text-velix-blue dark:text-white w-4 h-4" />
-                {dayjs(redeemTicket.maturity * 1000).format("YYYY-MMM-DD HH:mm:ss")}
+                <FaClock className="mr-1 text-velix-blue dark:text-white" />
+                {<Countdown date={redeemTicket.maturity * 1000} />}
               </div>
             </div>
           </div>
@@ -124,9 +125,10 @@ const RedeemCard = ({
                 );
               }}
               disabled={
-                dayjs(redeemTicket.maturity * 1000).diff(dayjs(), "seconds") >= 0 || !address
+                dayjs(redeemTicket.maturity * 1000).diff(dayjs(), "seconds") >=
+                  0 || !address
               }
-              className="bg-velix-blue w-full sm:w-auto disabled:cursor-not-allowed dark:bg-velix-gray disabled:opacity-50 dark:text-black hover:bg-velix-blue text-white font-medium py-2 rounded-md ml-auto sm:ml-none position:fixed"
+              className="bg-velix-blue disabled:cursor-not-allowed dark:bg-velix-gray disabled:opacity-50 dark:text-black hover:bg-velix-blue text-white font-medium py-2 rounded-md"
             >
               Redeem
             </Button>
