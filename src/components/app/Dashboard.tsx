@@ -19,6 +19,7 @@ import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { Action } from "@/types/index.ts";
+import { useQuery } from "@tanstack/react-query";
 
 type DashboardData = {
   id: string;
@@ -32,8 +33,6 @@ export default function Dashboard() {
   useMetisBalance();
   const { veMETISBalance, METISBalance } = useBalanceStore();
   const { address } = useAccount();
-  const [dashboardData, setDashboardData] = useState<DashboardData[]>([]);
-  const [loading, setLoading] = useState(false);
   const [actionToRetreive, setActionToRetreive] = useState<Action>("stake");
 
   const { staker, getStaker } = useStakersStore();
@@ -42,20 +41,17 @@ export default function Dashboard() {
     getStaker(address as string);
   }, [address, getStaker]);
 
-  useEffect(() => {
-    async function getUnstakeActivity() {
-      if (!address) return;
-      setLoading(true);
+  const { isLoading: loading, data: dashboardData } = useQuery({
+    queryKey: ["dashboardActivity", actionToRetreive, address],
+    queryFn: async () => {
       const { data } = await velixApi.retreiveActionsActivity(
         actionToRetreive,
-        address
+        address as string
       );
-      setDashboardData(data as unknown as DashboardData[]);
-      setLoading(false);
-    }
-
-    void getUnstakeActivity();
-  }, [actionToRetreive, address]);
+      return data as DashboardData[];
+    },
+    enabled: !!address
+  });
 
   const velixBalances = [
     {
@@ -158,13 +154,14 @@ export default function Dashboard() {
               })}
             {!loading &&
               dashboardData
-                .map((data) => {
+                ?.map((data, index) => {
+                  if (!data.txHash) return;
                   return (
                     <tr
                       onClick={() =>
                         window.open(`${EXPLORER_TX_URL}${data.txHash}`)
                       }
-                      key={data.amount}
+                      key={`row-${index}`}
                       className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
                     >
                       <TableCell>
@@ -181,7 +178,7 @@ export default function Dashboard() {
                 })
                 .reverse()}
           </TableBody>
-          {!loading && dashboardData.length === 0 && (
+          {!loading && dashboardData?.length === 0 && (
             <TableCaption>No transaction recorded</TableCaption>
           )}
         </Table>

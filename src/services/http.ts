@@ -9,13 +9,13 @@ import {
 import axios, { AxiosInstance } from "axios";
 import { ethers } from "ethers";
 
-const api = axios.create({
+const velixApiInstance = axios.create({
   baseURL: VELIX_API_URL
 });
 
 // ATTENTION: this function is not used and working anymore, should be remove whenever possible
 export async function claimFaucetToken(walletAddress: string) {
-  return await api.post("/faucet", { receiver: walletAddress });
+  return await velixApiInstance.post("/faucet", { receiver: walletAddress });
 }
 
 class VelixApi {
@@ -28,6 +28,8 @@ class VelixApi {
     switch (action) {
       case "stake":
         return "/stake";
+      case "redeem":
+        return "/redeem/nft-tickets";
       default:
         return "";
     }
@@ -81,6 +83,21 @@ class VelixApi {
       `/redeem/nft-tickets/${walletAddress}`
     );
   }
+
+  async saveRedeemTicketTransactionHash({
+    walletAddress,
+    txHash
+  }: {
+    walletAddress: string;
+    txHash: string;
+  }) {
+    if (!walletAddress) return;
+    if (!txHash) return;
+    return await this.api.patch("/redeem/nft-tickets", {
+      walletAddress,
+      txHash
+    });
+  }
 }
 
-export const velixApi = new VelixApi(api);
+export const velixApi = new VelixApi(velixApiInstance);

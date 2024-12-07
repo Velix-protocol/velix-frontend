@@ -3,6 +3,8 @@ import { useCallback } from "react";
 import { useContract, useContractHookState } from "./use-contract";
 import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { ContractTransactionReceipt, parseEther, parseUnits } from "ethers";
+import { velixApi } from "@/services/http.ts";
+import axios from "axios";
 
 export const useApproveRedeem = () => {
   const {
@@ -85,25 +87,31 @@ export const useEnterRedemptionQueue = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        console.log({
-          amount: parseUnits(String(amount)),
-          amount_: amount,
-          walletAddress
-        });
         const tx = await contract.redeem(
           parseUnits(String(amount)),
           walletAddress,
           walletAddress
         );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
+        const txReceipt = (await tx.wait()) as ContractTransactionReceipt;
+        setData(txReceipt.hash);
         setError(null);
         setIsSuccess(true);
+
+        await velixApi.saveRedeemTicketTransactionHash({
+          walletAddress: address,
+          txHash: txReceipt.hash
+        });
       } catch (e: any) {
+        if (e instanceof axios.AxiosError) {
+          console.log(e);
+          return;
+        }
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        setError({
+          message: e.shortMessage ?? "We could not process the call, try later!"
+        });
       } finally {
         setIsPending(false);
       }

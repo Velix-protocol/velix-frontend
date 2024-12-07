@@ -65,6 +65,8 @@ export const EXPLORER_TX_URL = "https://sepolia-explorer.metisdevops.link/tx/";
 export const EXPLORER_ADDRESS_URL =
   "https://sepolia-explorer.metisdevops.link/address/";
 export const MAX_INPUT_LENGTH = 10;
+export const METIS_API_URL =
+  "https://sepolia-explorer-api.metisdevops.link/api/v2";
 
 export const APP_MODE = __APP_MODE__;
 export const VELIX_APP_ENVIRONMENT = import.meta.env
