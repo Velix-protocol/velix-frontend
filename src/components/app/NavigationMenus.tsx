@@ -7,8 +7,6 @@ import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
-import MoreIcon from "../ui/velix/icons/MoreIcon";
-import CloseIcon from "../ui/velix/icons/CloseIcon";
 
 interface NavigationMenuCardProps {
   isNotFound: boolean;
@@ -133,28 +131,9 @@ export default function NavigationMenus({
 }: {
   isNotFound?: boolean;
 }) {
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
-
-  const toggleMore = () => {
-    setIsMoreOpen((prev) => !prev);
-  };
 
   return (
     <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
-      {isMoreOpen ? (
-        <>
-          <NavigationMenuCard
-            path="redeem"
-            label="Redeem"
-            isNotFound={isNotFound}
-          />
-          <NavigationMenuCard
-            path="dashboard"
-            label="Dashboard"
-            isNotFound={isNotFound}
-          />
-        </>
-      ) : (
         <>
           <NavigationMenuCard
             path="stake"
@@ -165,7 +144,7 @@ export default function NavigationMenus({
             path="redeem"
             label="Redeem"
             isNotFound={isNotFound}
-            className="hidden lg:flex md:flex"
+            className="lg:flex md:flex"
           />
           <NavigationMenuCard
             path="vepoints"
@@ -176,26 +155,10 @@ export default function NavigationMenus({
             path="dashboard"
             label="Dashboard"
             isNotFound={isNotFound}
-            className="hidden lg:flex md:flex"
+            className="lg:flex md:flex"
           />
         </>
-      )}
-
-      <div className="lg:hidden md:hidden sm:flex flex-col items-center relative">
-        <button
-          onClick={toggleMore}
-          className="flex flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk text-velix-gray dark:text-velix-icon-dark"
-        >
-          {isMoreOpen ? (
-            <CloseIcon className="w-5 h-5" />
-          ) : (
-            <MoreIcon className="w-5 h-5" />
-          )}
-          <span className="lg:font-bold text-[0.625rem] lg:text-base">
-            {isMoreOpen ? "Close" : "More"}
-          </span>
-        </button>
-      </div>
+  
     </div>
   );
 }
