@@ -1,4 +1,3 @@
-import { FaClock } from "react-icons/fa";
 import TicketLogo from "../icons/TicketLogo";
 import { Button } from "../../button";
 import { RedeemTicket } from "@/types";
@@ -14,6 +13,8 @@ import { useCallback, useEffect, useState } from "react";
 import { EXPLORER_TX_URL } from "@/utils/constant";
 import SuccessModal from "../modal/SuccessModal";
 import Countdown from "react-countdown";
+import ReadyIcon from "../icons/ReadyIcon";
+import { FaClock } from "react-icons/fa";
 
 const RedeemCard = ({
   redeemTicket,
@@ -23,6 +24,7 @@ const RedeemCard = ({
   refetchRedeemNfts: () => void;
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [isCountdownFinished, setIsCountdownFinished] = useState(false); 
   const { address } = useAccount();
   const {
     redeemRedemptionTicketNft,
@@ -34,7 +36,6 @@ const RedeemCard = ({
   } = useRedeemRedemptionTicketNft();
 
   const {
-    // cancelRedeemNftTicket,
     isPending: cancelRedeemNftPending,
     isSuccess: cancelRedeemNftSuccess,
     data: cancelRedeemNftTxHash,
@@ -66,6 +67,14 @@ const RedeemCard = ({
     }
   }, [isSuccess, cancelRedeemNftSuccess, refetchRedeemNfts]);
 
+  // Callback for when the countdown finishes
+  const onCountdownComplete = () => {
+    setIsCountdownFinished(true);
+  };
+
+  // Countdown set to 10 seconds from now
+  // const tenSecondsFromNow = dayjs().add(10, 'seconds').unix();
+
   return (
     <>
       {showModal && (
@@ -91,8 +100,12 @@ const RedeemCard = ({
           </div>
         </ModalLayout>
       )}
-      <div className="rounded-lg p-4 px-[2rem] xl:mt-0 sm:mt-2 lg:w-auto xl:max-w-auto lg:max-w-auto md:max-w-auto w-full">
-        <div className="flex bg-velix-claim dark:bg-velix-claim-gray2 p-6 rounded-lg flex-col sm:flex-row gap-4">
+      <div className="rounded-lg p-4 xl:mt-0 sm:mt-2 xl:max-w-auto lg:w-full md:max-w-auto w-full">
+        <div className={`${
+          isCountdownFinished
+          ? "flex bg-velix-claim dark:bg-velix-claim-gray2 border border-velix-claim-green dark:border-velix-claim p-6 rounded-lg flex-col sm:flex-row gap-4"
+          : "flex bg-velix-claim dark:bg-velix-claim-gray2 p-6 rounded-lg flex-col sm:flex-row"
+        }`}>
           <div className="flex-1 sm:flex-none lg:flex-none xl:flex-none lg:mr-24 md:mr-[20rem] sm:mr-[5rem]">
             <p className="text-velix-claim-grey dark:text-velix-claim text-sm lg:text-base font-space-grotesk">
               Redeem:{" "}
@@ -103,19 +116,33 @@ const RedeemCard = ({
             </p>
             <div className="flex flex-col md:flex-row sm:flex-row lg:flex-col xl:flex-row items-start xl:items-center gap-4 mt-4 sm:mt-2">
               <div className="flex md:flex-row items-center text-velix-blue text-sm lg:text-base font-space-grotesk font-bold dark:text-white">
-                <TicketLogo className="dark:fill-white fill-velix-blue mr-1 w-5 h-5" />
-                Ticket ID
-                <span className="text-velix-blue dark:text-white font-bold ml-1 font-space-grotesk">
+                <TicketLogo className="dark:fill-white fill-velix-blue mr-1 mt-4 w-5 h-5" />
+                <p className="mt-4">Ticket ID</p>
+                <span className="text-velix-blue dark:text-white font-bold mt-4 ml-1 font-space-grotesk">
                   #{redeemTicket.nftId}
                 </span>
               </div>
-              <div className="flex items-center text-gray-600 text-sm lg:text-base font-medium dark:text-white">
-                <FaClock className="mr-1 text-velix-blue dark:text-white" />
-                {<Countdown date={redeemTicket.maturity * 1000} />}
+              <div
+                className={`${
+                  isCountdownFinished
+                    ? "flex bg-velix-claim-green dark:bg-velix-claim rounded-md p-1 items-center text-gray-600 text-sm dark:text-white mt-4"
+                    : "flex items-center text-gray-600 text-sm lg:text-base mt-4 font-medium dark:text-white"
+                }`}
+              >
+                {isCountdownFinished ? (
+                  <ReadyIcon className="mr-1 w-4 h-4 text-velix-claim dark:text-velix-claim-gray2" />
+                ) : (
+                  <FaClock className="mr-1 text-velix-blue dark:text-white" />
+                )}
+                {isCountdownFinished ? (
+                  <span className="text-white dark:text-black">Ready to redeem</span>
+                ) : (
+                  <Countdown date={redeemTicket.maturity * 1000} onComplete={onCountdownComplete} />
+                )}
               </div>
             </div>
           </div>
-          <div className="flex sm:flex-row items-center justify-between w-full mt-2 lg:-mb-12 xl:-mb-0 sm:mt-0 sm:items-center">
+          <div className="flex sm:flex-row items-center justify-between mt-2 lg:-mb-16 xl:-mb-0 sm:mt-0 w-full">
             <Button
               onClick={() => {
                 setShowModal(true);
@@ -128,9 +155,13 @@ const RedeemCard = ({
                 dayjs(redeemTicket.maturity * 1000).diff(dayjs(), "seconds") >=
                   0 || !address
               }
-              className="bg-velix-blue disabled:cursor-not-allowed dark:bg-velix-gray disabled:opacity-50 dark:text-black hover:bg-velix-blue text-white font-medium py-2 rounded-md"
+              className={`${
+                isCountdownFinished
+                  ? "bg-velix-claim-green hover:velix-claim-green"
+                  : "bg-velix-blue hover:bg-velix-blue-dark"
+              } mt-7 xl:w-auto lg:w-auto disabled:cursor-not-allowed dark:bg-velix-gray disabled:opacity-50 dark:text-black text-white font-medium py-2 rounded-md w-full md:w-auto ml-auto`}
             >
-              Redeem
+              {isCountdownFinished ? "Redeem Now" : "Redeem"}
             </Button>
           </div>
         </div>

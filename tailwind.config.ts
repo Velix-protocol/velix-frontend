@@ -25,7 +25,7 @@ const config = {
       colors: {
         "velix-claim": "#F5F7FF",
         "velix-icon-bg": "#E9EBFF",
-        "velix-claim-green": "#2EA857",
+        "velix-claim-green": "#13C244",
         "velix-claim-blue": "#12CBE5",
         "velix-claim-grey": "#90919C",
         "velix-claim-red": "#FF1723",
