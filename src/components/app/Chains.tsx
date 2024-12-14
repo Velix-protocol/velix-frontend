@@ -1,8 +1,5 @@
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
-import {
-  EXPLORER_ADDRESS_URL,
-  VELIX_METIS_VAULT_CONTRACT_ADDRESS
-} from "@/utils/constant";
+import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
 import {
   ArrowUpRightFromSquare,
@@ -14,6 +11,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useStakersStore } from "@/store/stakers";
+import { supportedChains } from "@/utils/config.ts";
 
 export default function Chains() {
   const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =

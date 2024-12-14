@@ -9,16 +9,14 @@ import {
   useStaking,
   useStarknetBalances
 } from "@/hooks/use-contract";
-import Modal from "@/components/ui/velix/Modal";
+import Modal from "@/components/ui/velix/modal/ModalLayout";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/modal/ModalButtons";
 import { MAX_INPUT_LENGTH } from "@/utils/constant";
-import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";

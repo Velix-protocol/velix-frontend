@@ -1,13 +1,31 @@
 import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken.ts";
-import { VEMETIS_MINTER_CONTRACT_ABI } from "@/abi/veMetisMinter.ts";
-import { VEMETIS_CONTRACT_ABI } from "@/abi/veMETIS.ts";
-import { SVMETIS_CONTRACT_ABI } from "@/abi/sveMETIS.ts";
 import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/RewardDispatcher.ts";
 import { CONFIG_CONTRACT_ABI } from "@/abi/config.ts";
 import { FAUCET_CONTRACT_ABI } from "@/abi/faucet.ts";
 import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft.ts";
 import { STARKET_TESTNET_VAULT_ABI } from "@/abi/starknet/testnetVault.ts";
 import { TESTNET_STARKNET_TOKEN } from "@/abi/starknet/testnetStrk.ts";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
+import { REDEMPTION_QUEUE_ABI } from "@/abi/redemptionQueue.ts";
+
+export const METIS_TOKEN_CONTRACT_ADDRESS =
+  "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;
+export const REWARD_DISPATCHER_CONTRACT_ADDRESS =
+  "0x8D0629EE59E8a1DD984990975737511039399a15" as const;
+export const CONFIG_CONTRACT_ADDRESS =
+  "0x4F84E5882E6ef2bA953f1A2C6594855EB38F4c91" as const;
+export const DEALER_CONTRACT_ADDRESS =
+  "0x972C84B2d8a4678e4ee08DE19a027279847C6451" as const;
+export const REDEMPTION_QUEUE_CONTRACT_ADDRESS =
+  "0x5F38472BC3ad03eaadB93dC168b49A5871B0E128" as const;
+export const VELIX_METIS_VAULT_CONTRACT_ADDRESS =
+  "0xE8D82024A98D4A62780F5f52f74E02bCc3bEb5bc" as const;
+
+// These two contract are not relevant anymore
+export const FAUCET_CONTRACT_ADDRESS =
+  "0xCAfBeA96C9A96f59d2FB26175ef9Ec2Ec4F1f449" as const;
+export const VELIX_NFT_CONTRACT_ADDRESS =
+  "0xfe2bbF579004E10926c925001068CA3E6FCE90DC" as const;
 
 export const velixEnvironmentUrls = {
   production: {
@@ -67,43 +85,32 @@ export const supportedChains = {
       mainnet: {},
       testnet: {
         METIS_TOKEN: {
-          address: "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000",
+          address: METIS_TOKEN_CONTRACT_ADDRESS,
           abi: METIS_TOKEN_CONTRACT_ABI
         },
-        VEMETIS_MINTER: {
-          address: "0x12e9EEA4F9401bA1b6dE28b779cbE79042E8B847",
-          abi: VEMETIS_MINTER_CONTRACT_ABI
+        VELIX_VAULT: {
+          address: VELIX_METIS_VAULT_CONTRACT_ADDRESS,
+          abi: VELIX_METIS_VAULT_ABI
         },
-        VEMETIS: {
-          address: "0x4aff6784f9a8c63CD18aEe48550150835f2345E0",
-          abi: VEMETIS_CONTRACT_ABI
-        },
-        SVEMETIS: {
-          address: "0x33B7cdB39fE9bFe4fA71A3C1983bDF59B1138a09",
-          abi: SVMETIS_CONTRACT_ABI
+        REDEMPTION_QUEUE: {
+          address: REDEMPTION_QUEUE_CONTRACT_ADDRESS,
+          abi: REDEMPTION_QUEUE_ABI
         },
         REWARD_DISPATCHER: {
-          address: "0x9d78f67d0eC5914E499097b78d341E7476CD67B0",
+          address: REWARD_DISPATCHER_CONTRACT_ADDRESS,
           abi: REWARD_DISPATCHER_CONTRACT_ABI
         },
         CONFIG: {
-          address: "0xF578812d6D648fc007365f780894A9c13DDd5f93",
+          address: CONFIG_CONTRACT_ADDRESS,
           abi: CONFIG_CONTRACT_ABI
         },
-        DEALER: {
-          address: "0xfb23B1AC76c4932F9c28eCE33E26a5cAeaB58a9d",
-          abi: null
-        },
-        PROTOCOL_TREASURE: {
-          address: "0xc3BD53e8BB7F5a8f98C565aad28C9b618c84D8Fa",
-          abi: null
-        },
+        DEALER: { address: DEALER_CONTRACT_ADDRESS, abi: null },
         FAUCET: {
-          address: "0xCAfBeA96C9A96f59d2FB26175ef9Ec2Ec4F1f449",
+          address: FAUCET_CONTRACT_ADDRESS,
           abi: FAUCET_CONTRACT_ABI
         },
         VELIX_NFT: {
-          address: "0xfe2bbF579004E10926c925001068CA3E6FCE90DC",
+          address: VELIX_NFT_CONTRACT_ADDRESS,
           abi: VELIX_NFT_CONTRACT_ABI
         }
       }

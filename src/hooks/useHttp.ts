@@ -89,7 +89,7 @@ export const useClaimReferralPoints = () => {
   } = useApiHookBaseState();
   const { getStaker } = useStakersStore();
   const [txHash, setTxHash] = useState("");
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
 
   const redeemReferralPoints = useCallback(
     async (referralPoints: number) => {

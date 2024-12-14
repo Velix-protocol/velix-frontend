@@ -14,15 +14,14 @@ import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import dayjs from "dayjs";
-import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { Action } from "@/types/index.ts";
 import { useQuery } from "@tanstack/react-query";
 import { supportedChains } from "@/utils/config";
-import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 
 type DashboardData = {
   id: string;
@@ -33,11 +32,13 @@ type DashboardData = {
 };
 
 export default function Dashboard() {
-  useMetisBalance();
-  const { veMETISBalance, METISBalance } = useBalanceStore();
+  useMetisBalances();
+  const { veMETISBalance, METISBalance, strkBalance, veStrkBalance } =
+    useBalanceStore();
   const { address } = useAccount();
   const [actionToRetreive, setActionToRetreive] = useState<Action>("stake");
-
+  const chainToken = useChainTokens();
+  const chain = useSupportedChain();
   const { staker, getStaker } = useStakersStore();
 
   useEffect(() => {
@@ -59,11 +60,11 @@ export default function Dashboard() {
   const velixBalances = [
     {
       name: chainToken.nativeToken,
-      value: METISBalance
+      value: chain === "starknet" ? strkBalance : METISBalance
     },
     {
       name: chainToken.derivedToken,
-      value: veMETISBalance
+      value: chain === "starknet" ? veStrkBalance : veMETISBalance
     },
     {
       name: "APR",

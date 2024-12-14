@@ -1,16 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  velixContracts,
-  VELIX_METIS_VAULT_CONTRACT_ADDRESS
-} from "@/utils/constant";
-import {
-  ContractTransactionReceipt,
-  ethers,
-  formatEther,
-  parseUnits
-} from "ethers";
+import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
+import { ethers, formatEther, parseUnits } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { useMetricsStore } from "@/store/velixMetrics";
@@ -108,7 +100,7 @@ export const useApproveStaking = () => {
         const approveAddress =
           chain === "starknet"
             ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
-            : supportedChains.metis.contracts.testnet.SVEMETIS.address;
+            : supportedChains.metis.contracts.testnet.VELIX_VAULT.address;
 
         let tx = null;
         if (chain === "starknet" && starknetAccount) {
@@ -369,12 +361,10 @@ export const useStarknetBalances = () => {
 
 export const useMetisBalances = () => {
   const { address } = useChainAccount();
-  const { setsveMETISBalance, setveMETISBalance, setMETISBalance } =
-    useBalanceStore();
+  const { setveMETISBalance, setMETISBalance } = useBalanceStore();
   const { data, refetch: fetchMETISBalance } = useBalance({
     address: address as `0x${string}`
   });
-  const chain = useSupportedChain();
 
   const provider = useMemo(
     () => new ethers.JsonRpcProvider("https://sepolia.metisdevops.link/"),

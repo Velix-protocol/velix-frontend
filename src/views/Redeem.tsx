@@ -15,7 +15,7 @@ import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
-import { useMetisBalance } from "@/hooks/use-contract.ts";
+import { useMetisBalances } from "@/hooks/use-contract.ts";
 
 export default function Redeem() {
   const { veMETISBalance } = useBalanceStore();
@@ -36,7 +36,7 @@ export default function Redeem() {
   } = useEnterRedemptionQueue();
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
   const { address, isConnected: isWalletConnected } = useAccount();
 
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
@@ -166,7 +166,7 @@ export default function Redeem() {
                 />
                 <p className="font-space-grotesk font-normal mt-5">
                   You have no ticket to redeem
-                </p> 
+                </p>
               </>
             )}
           </div>

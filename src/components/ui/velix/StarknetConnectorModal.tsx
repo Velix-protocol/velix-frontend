@@ -1,5 +1,5 @@
 import { useConnect } from "@starknet-react/core";
-import Modal from "./Modal";
+import Modal from "./modal/ModalLayout";
 import { useStarknetConnectorStore } from "@/store/starknetConnectorStore";
 import { Button } from "../button";
 import useChainAccount from "@/hooks/useChainAccount";

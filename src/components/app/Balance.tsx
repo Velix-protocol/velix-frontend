@@ -3,10 +3,8 @@ import { useBalanceStore } from "@/store/balanceState";
 import { Role } from "@/types";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
-import { prettifyBalance } from "@/utils/utils.ts";
 
 export default function Balance({
-  isConnected,
   role
 }: {
   isConnected: boolean;
@@ -14,22 +12,17 @@ export default function Balance({
 }) {
   useMetisBalances();
   useStarknetBalances();
-  const {
-    sveMETISBalance,
-    veMETISBalance,
-    METISBalance,
-    strkBalance,
-    veStrkBalance
-  } = useBalanceStore();
+  const { veMETISBalance, METISBalance, strkBalance, veStrkBalance } =
+    useBalanceStore();
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
 
   const renderBalance = () => {
     if (role === "stake") {
-      return `${METISBalance} METIS`;
+      return `${chain === "starknet" ? strkBalance : METISBalance} ${chainToken.nativeToken}`;
     }
     if (role === "redeem") {
-      return `${veMETISBalance} veMETIS`;
+      return `${chain === "starknet" ? veStrkBalance : veMETISBalance} ${chainToken.derivedToken}`;
     }
     return "0.0";
   };

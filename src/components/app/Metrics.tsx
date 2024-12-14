@@ -7,7 +7,6 @@ import { useStakersStore } from "@/store/stakers";
 import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
-import { FaGift } from "react-icons/fa6";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import useGetChain from "@/hooks/useGetChain.ts";
