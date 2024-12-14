@@ -23,6 +23,19 @@ export default function Header({ onLaunchApp }: { onLaunchApp: () => void }) {
     { to: "/app/metis/vepoints", text: "VePoints" }
   ];
 
+  const navigateToApp = () => {
+    switch (VELIX_APP_ENVIRONMENT) {
+      case "production":
+        return (window.location.href = velixEnvironmentUrls.production.app);
+      case "staging":
+        return (window.location.href = velixEnvironmentUrls.staging.app);
+      case "development":
+      case "local":
+      default:
+        return navigate("/app/stake");
+    }
+  };
+
   return (
     <div>
       <header ref={ref} className="z-50 relative">

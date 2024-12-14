@@ -1,0 +1,70 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.8.1'
+
+      - name: Install pnpm
+        uses: ./.github/actions/install-and-cache-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build project
+        run: pnpm run build:dev
+
+      - name: Debug - List build output
+        run: ls -R dist
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+      - name: Debug - List downloaded artifact
+        run: ls -R dist
+
+      - name: Clean and deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script_stop: true
+          script: |
+            rm -rf /var/www/velix-frontend/*
+            mkdir -p /var/www/velix-frontend
+
+      - name: Upload new version to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          source: "dist/*"
+          target: "/var/www/velix-frontend/"
+          strip_components: 1

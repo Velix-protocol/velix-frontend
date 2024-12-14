@@ -3,28 +3,6 @@ export const SVMETIS_CONTRACT_ABI = [
     inputs: [
       {
         internalType: "address",
-        name: "target",
-        type: "address"
-      }
-    ],
-    name: "AddressEmptyCode",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address"
-      }
-    ],
-    name: "AddressInsufficientBalance",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
         name: "spender",
         type: "address"
       },
@@ -193,22 +171,17 @@ export const SVMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "FailedInnerCall",
-    type: "error"
-  },
-  {
-    inputs: [],
     name: "InvalidInitialization",
     type: "error"
   },
   {
     inputs: [],
-    name: "MathOverflowedMulDiv",
+    name: "NotInitializing",
     type: "error"
   },
   {
     inputs: [],
-    name: "NotInitializing",
+    name: "ReentrancyGuardReentrantCall",
     type: "error"
   },
   {
@@ -220,22 +193,6 @@ export const SVMETIS_CONTRACT_ABI = [
       }
     ],
     name: "SafeERC20FailedOperation",
-    type: "error"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "length",
-        type: "uint256"
-      }
-    ],
-    name: "StringsInsufficientHexLength",
     type: "error"
   },
   {
@@ -261,6 +218,25 @@ export const SVMETIS_CONTRACT_ABI = [
       }
     ],
     name: "Approval",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "caller",
+        type: "address"
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      }
+    ],
+    name: "AssetsAdded",
     type: "event"
   },
   {
@@ -371,7 +347,20 @@ export const SVMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "BETA_USER_ROLE",
+    name: "ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "BACKEND_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -397,7 +386,33 @@ export const SVMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "INTERNAL_ROLE",
+    name: "FEE_PRECISION",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "INITIAL_DEPOSIT_AMOUNT",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "TIMELOCK_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -406,6 +421,32 @@ export const SVMETIS_CONTRACT_ABI = [
       }
     ],
     stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "_totalAssets",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      }
+    ],
+    name: "addAssets",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -553,6 +594,19 @@ export const SVMETIS_CONTRACT_ABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "deployer",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -566,6 +620,30 @@ export const SVMETIS_CONTRACT_ABI = [
       }
     ],
     name: "deposit",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "assets",
+        type: "uint256"
+      },
+      {
+        internalType: "address",
+        name: "receiver",
+        type: "address"
+      }
+    ],
+    name: "depositFromVeMetisMinter",
     outputs: [
       {
         internalType: "uint256",
@@ -679,30 +757,6 @@ export const SVMETIS_CONTRACT_ABI = [
       }
     ],
     name: "mint",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "assets",
-        type: "uint256"
-      },
-      {
-        internalType: "address",
-        name: "receiver",
-        type: "address"
-      }
-    ],
-    name: "mintAndDeposit",
     outputs: [
       {
         internalType: "uint256",
@@ -951,5 +1005,9 @@ export const SVMETIS_CONTRACT_ABI = [
     ],
     stateMutability: "nonpayable",
     type: "function"
+  },
+  {
+    stateMutability: "payable",
+    type: "receive"
   }
 ] as const;

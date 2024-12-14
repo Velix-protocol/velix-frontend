@@ -1,4 +1,4 @@
-import { Staker } from "@/types";
+import { Action, RedeemTicket, Stake, Staker } from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import {
   GetAmountToRedeemFromPointDto,
@@ -9,15 +9,13 @@ import {
 import axios, { AxiosInstance } from "axios";
 import { ethers } from "ethers";
 
-export type Action = "mint" | "stake" | "unstake";
-
-const api = axios.create({
+const velixApiInstance = axios.create({
   baseURL: VELIX_API_URL
 });
 
 // ATTENTION: this function is not used and working anymore, should be remove whenever possible
 export async function claimFaucetToken(walletAddress: string) {
-  return await api.post("/faucet", { receiver: walletAddress });
+  return await velixApiInstance.post("/faucet", { receiver: walletAddress });
 }
 
 class VelixApi {
@@ -28,12 +26,12 @@ class VelixApi {
 
   private actionEndpoint(action: Action) {
     switch (action) {
-      case "mint":
-        return "/mints";
       case "stake":
         return "/stake";
-      case "unstake":
-        return "/unstakes";
+      case "redeem":
+        return "/redeem/nft-tickets";
+      default:
+        return "";
     }
   }
 
@@ -63,7 +61,7 @@ class VelixApi {
   async redeemPoints(redeemData: RedeemPointDto) {
     if (!redeemData.walletAddress) return;
     return await this.api.post<ethers.TransactionResponse>(
-      "/redeem/points",
+      "/redeem/points/stakes",
       redeemData
     );
   }
@@ -73,6 +71,33 @@ class VelixApi {
       `/redeem/convert/${points}`
     );
   }
+
+  async getRedeemableStakeTransactions(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<Stake[]>(`/stake/redeemable/${walletAddress}`);
+  }
+
+  async getRedeemTicketsOwnedByWalletAddress(walletAddress: string) {
+    if (!walletAddress) return;
+    return await this.api.get<RedeemTicket[]>(
+      `/redeem/nft-tickets/${walletAddress}`
+    );
+  }
+
+  async saveRedeemTicketTransactionHash({
+    walletAddress,
+    txHash
+  }: {
+    walletAddress: string;
+    txHash: string;
+  }) {
+    if (!walletAddress) return;
+    if (!txHash) return;
+    return await this.api.patch("/redeem/nft-tickets", {
+      walletAddress,
+      txHash
+    });
+  }
 }
 
-export const velixApi = new VelixApi(api);
+export const velixApi = new VelixApi(velixApiInstance);

@@ -25,48 +25,28 @@ export default function Balance({
   const chain = useSupportedChain();
 
   const renderBalance = () => {
-    if (role === "mint") {
-      return `${prettifyBalance(METISBalance)} ${chainToken.nativeToken}`;
-    }
     if (role === "stake") {
-      if (chain === "starknet")
-        return `${prettifyBalance(strkBalance)} ${chainToken.derivedToken}`;
-      return `${prettifyBalance(veMETISBalance)} ${chainToken.derivedToken}`;
+      return `${METISBalance} METIS`;
     }
-    if (role === "unstake") {
-      if (chain === "starknet")
-        return `${prettifyBalance(veStrkBalance)} ${chainToken.stakedToken}`;
-      return `${prettifyBalance(sveMETISBalance)} ${chainToken.stakedToken}`;
+    if (role === "redeem") {
+      return `${veMETISBalance} veMETIS`;
     }
     return "0.0";
   };
 
-  const renderBalanceTitle = () => {
-    switch (role) {
-      case "mint":
-        return `${chainToken.derivedToken}`;
-      case "stake":
-        return "Staked";
-      case "unstake":
-        return "Unstaked";
-      default:
-        "";
-    }
-  };
-
   const renderVelixProtocolBalanceUnits = () => {
     switch (role) {
-      case "mint":
-      case "unstake":
-        return `${prettifyBalance(veMETISBalance)} ${chainToken.derivedToken}`;
       case "stake":
-        return `${prettifyBalance(sveMETISBalance)} ${chainToken.stakedToken}`;
+        return `${veMETISBalance} veMETIS`;
+      case "redeem":
+        return `${METISBalance} METIS`;
+      case "swap":
       default:
         "";
     }
+    return "";
   };
 
-  if (!isConnected) return <>{""}</>;
   return (
     <div className="bg-velix-primary dark:pb-16 dark:bg-[#383838] p-5 lg:p-10 space-y-5 lg:space-y-10 text-white font-space-grotesk rounded-2xl">
       <div className="flex gap-2 md:gap-5 max-md:flex-col lg:gap-10 md:justify-center md:items-center">
@@ -79,7 +59,7 @@ export default function Balance({
         </div>
         <div className="bg-white/25 dark:bg-[#484848] p-3 gap-4 md:p-5 flex flex-row md:flex-col w-fit items-center md:items-start lg:p-7 rounded-lg h-full md:w-full md:space-y-2">
           <p className="text-xs lg:text-base flex">
-            {renderBalanceTitle()} Balance
+            {renderVelixProtocolBalanceUnits().split(" ")[1]} Balance{" "}
             <span className="block md:hidden">:</span>
           </p>
           <p className="font-bold text-base lg:text-xl">

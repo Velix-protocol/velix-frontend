@@ -47,14 +47,14 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-export function throttle<T extends (...args: any[]) => any>(
-  func: T,
-  limit: number
-) {
-  let inThrottle: boolean;
-  return function (...args: Parameters<T>) {
+type Func = (...args: any[]) => void;
+export function throttle(func: Func, limit: number): Func {
+  let inThrottle = false;
+  return function (this: any, ...args: any[]) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const context = this;
     if (!inThrottle) {
-      func(...args);
+      func.apply(context, args);
       inThrottle = true;
       setTimeout(() => (inThrottle = false), limit);
     }

@@ -19,14 +19,29 @@ const config = {
     },
     extend: {
       fontSize: {
-        'sm': '0.875rem',  
-        'md': '1rem',      
-        'lg': '1.125rem',  
+        'sm': '0.875rem',
+        'md': '1rem',
+        'lg': '1.125rem',
       },
       fontFamily: {
-        "space-grotesk": "space-grotesk"
+        "space-grotesk": "space-grotesk",
+        sans: "space-grotesk"
       },
       colors: {
+        "velix-claim": "#F5F7FF",
+        "velix-icon-bg": "#E9EBFF",
+        "velix-claim-green": "#13C244",
+        "velix-claim-blue": "#12CBE5",
+        "velix-claim-grey": "#90919C",
+        "velix-claim-red": "#FF1723",
+        "velix-claim-gray": "#272727",
+        "velix-claim-gray2": "#343434",
+        "velix-claim-gray3": "#3F3F3F",
+        "velix-text-gray": "#54616B",
+        "velix-claim-green-bg": "#E6FAED",
+        "velix-claim-blue-bg": "#ECFBFD",
+        "velix-claim-grey-bg": "#F7F7F7",
+        "velix-claim-red-bg": "#FFF3F0",
         "velix-Ecosystem": "#F5F7FF",
         "velix-gray-100":"#FFFFFF",
         "velix-gray-200":"#E9ECFF",

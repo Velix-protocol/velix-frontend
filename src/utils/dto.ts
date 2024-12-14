@@ -18,6 +18,12 @@ export type RedeemPointDto = {
   points: number;
 };
 
+export type ClaimStakingPointsDto = {
+  walletAddress: string;
+  points: number;
+  txHash: string;
+};
+
 export type GetAmountToRedeemFromPointDto = {
   amountToRedeem: number;
   metisPriceToUSD: number;

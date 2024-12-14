@@ -15,10 +15,11 @@ import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
+import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
+import ModalButtons from "@/components/ui/velix/modal/ModalButtons";
 import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/ModalButtons";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
-import SuccessModal from "@/components/app/SuccessModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
@@ -26,6 +27,7 @@ import { supportedChains } from "@/utils/config";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import SuccessModal from "@/components/ui/velix/modal/SuccessModal";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
@@ -112,6 +114,7 @@ export default function StakingOperations() {
   };
 
   const onApproveStaking = async () => {
+    console.log({ amountToStake });
     if (!amountToStake || !amountToStake.trim()) return;
     await approveStaking(amountToStake);
   };
@@ -219,7 +222,7 @@ export default function StakingOperations() {
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
                     <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
-                      Start earning within 7 days
+                      Start earning after 7 days
                     </p>
                   </div>
                 </div>
@@ -298,7 +301,7 @@ export default function StakingOperations() {
             <StakingDetails
               className="bg-velix-slate-blue dark:bg-velix-form-input-dark p-6 rounded-lg"
               title=""
-              value="Be aware of both minting and deposit fee that will be deducted when the transaction is done."
+              value="Be aware of both staking and redeeming fees that will be deducted when the transaction is done."
             />
           )}
           <StakingDetails

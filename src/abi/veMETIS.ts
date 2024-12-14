@@ -96,19 +96,8 @@ export const VEMETIS_CONTRACT_ABI = [
     type: "error"
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "value",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "length",
-        type: "uint256"
-      }
-    ],
-    name: "StringsInsufficientHexLength",
+    inputs: [],
+    name: "ReentrancyGuardReentrantCall",
     type: "error"
   },
   {
@@ -176,7 +165,20 @@ export const VEMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "BETA_USER_ROLE",
+    name: "ADMIN_ROLE",
+    outputs: [
+      {
+        internalType: "bytes32",
+        name: "",
+        type: "bytes32"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "BACKEND_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -202,7 +204,33 @@ export const VEMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "INTERNAL_ROLE",
+    name: "FEE_PRECISION",
+    outputs: [
+      {
+        internalType: "uint64",
+        name: "",
+        type: "uint64"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "INITIAL_DEPOSIT_AMOUNT",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "TIMELOCK_ROLE",
     outputs: [
       {
         internalType: "bytes32",
@@ -281,6 +309,24 @@ export const VEMETIS_CONTRACT_ABI = [
     type: "function"
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_from",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "_amount",
+        type: "uint256"
+      }
+    ],
+    name: "burn",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
     inputs: [],
     name: "config",
     outputs: [
@@ -339,19 +385,6 @@ export const VEMETIS_CONTRACT_ABI = [
   },
   {
     inputs: [],
-    name: "minter",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
     name: "name",
     outputs: [
       {
@@ -361,13 +394,6 @@ export const VEMETIS_CONTRACT_ABI = [
       }
     ],
     stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "setMinter",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function"
   },
   {
@@ -448,5 +474,9 @@ export const VEMETIS_CONTRACT_ABI = [
     ],
     stateMutability: "nonpayable",
     type: "function"
+  },
+  {
+    stateMutability: "payable",
+    type: "receive"
   }
 ] as const;

@@ -1,3 +1,4 @@
+import { useAccount } from "wagmi";
 import Balance from "../app/Balance";
 import {
   ChangeEvent,
@@ -8,12 +9,9 @@ import {
 } from "react";
 import { Role } from "@/types";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useTheme } from "@/context/theme-provider";
 import MetisIcon from "../ui/velix/icons/MetisIcon";
 import SwapIcon from "../ui/velix/icons/SwapIcon";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
-import SveMETIS from "../ui/velix/icons/SveMETIS";
-import Svedarkmode from "@/components/svg/Sve-darkmode.svg?react";
 import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
@@ -44,17 +42,12 @@ const StakeLayout = ({
   const { isConnected } = useChainAccount();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { theme } = useTheme();
   const [convertedValue, setConvertedValue] = useState<number | string>(0);
   const getConvertToShareValue = useGetConvertToShareValue();
   const chainToken = useChainTokens();
 
   const renderFromTitles = () => {
     switch (role) {
-      case "mint":
-        return chainToken.nativeToken;
-      case "unstake":
-        return chainToken.stakedToken;
       case "stake":
         return chainToken.derivedToken;
       default:
@@ -64,10 +57,6 @@ const StakeLayout = ({
 
   const renderToTitles = () => {
     switch (role) {
-      case "mint":
-        return chainToken.derivedToken;
-      case "unstake":
-        return chainToken.derivedToken;
       case "stake":
         return chainToken.stakedToken;
       default:
@@ -79,12 +68,8 @@ const StakeLayout = ({
     useCallback(async () => {
       if (!value) return "0.0";
       switch (role) {
-        case "mint":
-          return Number(value) * 1;
         case "stake":
           return Number(formatEther(await getConvertToShareValue(value))) * 1;
-        case "unstake":
-          return Number(value) * 1;
         default:
           return 0;
       }
@@ -95,12 +80,6 @@ const StakeLayout = ({
   }, [renderConvertedValue]);
 
   const icons = {
-    sveMETIS:
-      theme === "dark" ? (
-        <Svedarkmode className="w-8 h-8" />
-      ) : (
-        <SveMETIS className="w-8 h-8" />
-      ),
     veMETIS: (
       <VelixBlueLogo className="w-6 h-6 fill-velix-blue dark:fill-velix-dark-white" />
     ),
@@ -109,11 +88,11 @@ const StakeLayout = ({
 
   return (
     <div
-      className={`mt-10 w-full lg:mt-20 ${
+      className={`mt-10 w-full lg:mt-20 rounded-2xl ${
         isConnected && "bg-velix-primary"
-      } rounded-2xl`}
+      }`}
     >
-      <Balance role={role} isConnected={!!isConnected} />
+      <Balance role={role} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
           <VeInput
@@ -135,7 +114,7 @@ const StakeLayout = ({
             <button
               onClick={() =>
                 navigate(
-                  pathname.includes("unstake") ? "/app/stake" : "/app/unstake",
+                  pathname.includes("redeem") ? "/app/stake" : "/app/redeem",
                   {
                     relative: "path"
                   }

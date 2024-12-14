@@ -11,6 +11,7 @@ import { FaGift } from "react-icons/fa6";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import useGetChain from "@/hooks/useGetChain.ts";
+import VelixReferralIcon1 from "../ui/velix/icons/VelixReferralIcon1";
 
 export default function Metrics() {
   const { isConnected, address } = useChainAccount();
@@ -79,10 +80,10 @@ export default function Metrics() {
       />
       <MetricsCard
         icon={
-          <FaGift className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
+          <VelixReferralIcon1 className="fill-velix-primary dark:fill-velix-icon-dark h-6 w-6" />
         }
-        description="My staking points"
-        value={`${staker?.stakingpoints?.toFixed(3) ?? "--"}`}
+        description="My Referral points"
+        value={`${staker?.referralPoints?.toFixed(3) ?? "--"}`}
       />
     </div>
   );

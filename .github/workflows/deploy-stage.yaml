@@ -1,0 +1,85 @@
+name: Deploy on staging
+
+on:
+  workflow_run:
+    workflows:
+      - release
+    types:
+      - completed
+  push:
+    branches:
+      - "releases/[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.8.1'
+
+      - name: Install pnpm
+        uses: ./.github/actions/install-and-cache-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Checkout to the release branch
+        run: |
+          NEXT_RELEASE_VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          release_branch="releases/$NEXT_RELEASE_VERSION"
+          git fetch origin $release_branch
+          git checkout $release_branch
+
+      - name: Build project
+        run: pnpm run build:stage
+
+      - name: Debug - List build output
+        run: ls -R dist
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+      - name: Debug - List downloaded artifact
+        run: ls -R dist
+
+      - name: Clean and deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.SSH_STAGE_HOST}}
+          key: ${{secrets.SSH_STAGE_KEY}}
+          username: ${{secrets.SSH_STAGE_USER_NAME}}
+          script_stop: true
+          script: |
+            rm -rf /var/www/velix-frontend/*
+            mkdir -p /var/www/velix-frontend
+
+      - name: Upload new version to server
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{secrets.SSH_STAGE_HOST}}
+          key: ${{secrets.SSH_STAGE_KEY}}
+          username: ${{secrets.SSH_STAGE_USER_NAME}}
+          source: "dist/*"
+          target: "/var/www/velix-frontend/"
+          strip_components: 1

@@ -12,16 +12,19 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
-import { Action } from "@/utils/supabase";
+import { useAccount } from "wagmi";
 import dayjs from "dayjs";
+import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
+import { Action } from "@/types/index.ts";
+import { useQuery } from "@tanstack/react-query";
 import { supportedChains } from "@/utils/config";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 
-type UnstakeActivity = {
+type DashboardData = {
   id: string;
   walletAddress: string;
   txHash: string;
@@ -30,36 +33,28 @@ type UnstakeActivity = {
 };
 
 export default function Dashboard() {
-  useMetisBalances();
-  const { sveMETISBalance, veMETISBalance, METISBalance } = useBalanceStore();
-  const { address } = useChainAccount();
-  const [unstakeActivity, setUnstakeActivity] = useState<UnstakeActivity[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [actionToRetreive, setActionToRetreive] = useState<Action | "reward">(
-    "mint"
-  );
-  const chainToken = useChainTokens();
+  useMetisBalance();
+  const { veMETISBalance, METISBalance } = useBalanceStore();
+  const { address } = useAccount();
+  const [actionToRetreive, setActionToRetreive] = useState<Action>("stake");
+
   const { staker, getStaker } = useStakersStore();
 
   useEffect(() => {
     getStaker(address as string);
   }, [address, getStaker]);
 
-  useEffect(() => {
-    async function getUnstakeActivity() {
-      if (!address) return;
-      if (actionToRetreive === "reward") return;
-      setLoading(true);
+  const { isLoading: loading, data: dashboardData } = useQuery({
+    queryKey: ["dashboardActivity", actionToRetreive, address],
+    queryFn: async () => {
       const { data } = await velixApi.retreiveActionsActivity(
         actionToRetreive,
-        address
+        address as string
       );
-      setUnstakeActivity(data as unknown as UnstakeActivity[]);
-      setLoading(false);
-    }
-
-    void getUnstakeActivity();
-  }, [actionToRetreive, address]);
+      return data as DashboardData[];
+    },
+    enabled: !!address
+  });
 
   const velixBalances = [
     {
@@ -71,10 +66,6 @@ export default function Dashboard() {
       value: veMETISBalance
     },
     {
-      name: chainToken.stakedToken,
-      value: sveMETISBalance
-    },
-    {
       name: "APR",
       value: "20%"
     }
@@ -83,11 +74,11 @@ export default function Dashboard() {
   return (
     <>
       <Section className="mt-36 md:mt-48 px-5 pb-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
+        <div className="flex flex-col lg:flex-row gap-4 bg-white dark:bg-velix-form-input-dark p-5 lg:p-12 rounded-lg">
           {velixBalances.map((balance, index) => (
             <Card
               key={index}
-              className="bg-velix-slate-blue dark:bg-velix-light-dark"
+              className="bg-velix-slate-blue dark:bg-velix-light-dark w-full"
             >
               <CardContent className="p-7 space-y-2">
                 <div className="text-sm text-velix-gray">
@@ -99,11 +90,11 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           ))}
-          <Card className="bg-velix-slate-blue dark:bg-velix-light-dark">
+          <Card className="bg-velix-slate-blue dark:bg-velix-light-dark w-full">
             <CardContent className="p-7 space-y-2">
-              <div className="text-sm text-velix-gray">Staking points</div>
+              <div className="text-sm text-velix-gray">Referral points</div>
               <div className="text-lg font-semibold text-velix-primary dark:text-velix-dark-white">
-                {`${staker?.stakingpoints ?? "--"}`}
+                {`${staker?.referralPoints ?? "--"}`}
               </div>
             </CardContent>
           </Card>
@@ -111,19 +102,10 @@ export default function Dashboard() {
         <Menubar className="mt-10 w-full overflow-x-auto overflow-y-hidden py-10 px-5 md:p-10 border-none rounded-lg bg-white dark:bg-velix-form-input-dark text-velix-primary font-space-grotesk font-bold text-base">
           <MenubarMenu>
             <MenubarTrigger
-              onClick={() => setActionToRetreive("mint")}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
-                actionToRetreive === "mint" &&
-                "bg-velix-slate-blue dark:bg-velix-light-dark"
-              }`}
-            >
-              Mint
-            </MenubarTrigger>
-            <MenubarTrigger
               onClick={() => {
                 setActionToRetreive("stake");
               }}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
+              className={`py-3 px-4 cursor-pointer dark:text-velix-dark-white ${
                 actionToRetreive === "stake" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
@@ -131,42 +113,19 @@ export default function Dashboard() {
               Stake
             </MenubarTrigger>
             <MenubarTrigger
-              onClick={() => setActionToRetreive("unstake")}
-              className={`py-3 px-7 cursor-pointer dark:text-velix-dark-white ${
-                actionToRetreive === "unstake" &&
+              onClick={() => {
+                setActionToRetreive("redeem");
+              }}
+              className={`py-3 px-4 cursor-pointer dark:text-velix-dark-white ${
+                actionToRetreive === "redeem" &&
                 "bg-velix-slate-blue dark:bg-velix-light-dark"
               }`}
             >
-              Unstake
-            </MenubarTrigger>
-            <MenubarTrigger
-              onClick={() => setActionToRetreive("reward")}
-              className={`py-3 px-7 w-fit items-center justify-center flex cursor-pointer dark:text-velix-dark-white ${
-                actionToRetreive === "reward" &&
-                "bg-velix-slate-blue dark:bg-velix-light-dark"
-              }`}
-            >
-              Redeem{" "}
-              <small className="rounded-full shrink-0 ml-2 border border-green-500 px-2">
-                Coming soon
-              </small>
+              Redeem
             </MenubarTrigger>
           </MenubarMenu>
         </Menubar>
         <Table className="p-10 font-space-grotesk mt-10">
-          {actionToRetreive === "reward" && (
-            <div className="flex text-velix-blue dark:text-velix-dark-white flex-col rounded-t-lg -mb-2.5 bg-white dark:bg-velix-form-dark-background gap-3 px-8 py-8">
-              <div className="flex max-lg:flex-col gap-3 w-full lg:w-1/2">
-                <p className="bg-velix-slate-blue w-full dark:bg-velix-light-dark p-4 rounded-lg">
-                  Est Rewards 2023 : <b>0.000000 ${chainToken.derivedToken}</b>
-                </p>
-                <p className="bg-velix-slate-blue w-full dark:bg-velix-light-dark p-4 rounded-lg">
-                  Est Monthly 2023 : <b>0.000000 ${chainToken.derivedToken}</b>
-                </p>
-              </div>
-            </div>
-          )}
-
           <TableHeader className="bg-velix-primary dark:bg-velix-form-input-dark pb-14 pt-10 rounded-t-xl grid grid-cols-3 justify-between w-full text-white px-8">
             <TableHead className="w-[100px] text-white font-bold h-fit">
               Date
@@ -197,8 +156,9 @@ export default function Dashboard() {
                 );
               })}
             {!loading &&
-              unstakeActivity
-                .map((data) => {
+              dashboardData
+                ?.map((data, index) => {
+                  if (!data.txHash) return;
                   return (
                     <tr
                       onClick={() =>
@@ -206,7 +166,7 @@ export default function Dashboard() {
                           `${supportedChains.metis.explorerUrls.testnet.txUrl}${data.txHash}`
                         )
                       }
-                      key={data.amount}
+                      key={`row-${index}`}
                       className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"
                     >
                       <TableCell>
@@ -223,7 +183,7 @@ export default function Dashboard() {
                 })
                 .reverse()}
           </TableBody>
-          {!loading && unstakeActivity.length === 0 && (
+          {!loading && dashboardData?.length === 0 && (
             <TableCaption>No transaction recorded</TableCaption>
           )}
         </Table>
