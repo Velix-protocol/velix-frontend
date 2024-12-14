@@ -1,12 +1,13 @@
-import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken.ts";
-import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/RewardDispatcher.ts";
-import { CONFIG_CONTRACT_ABI } from "@/abi/config.ts";
-import { FAUCET_CONTRACT_ABI } from "@/abi/faucet.ts";
-import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft.ts";
-import { STARKET_TESTNET_VAULT_ABI } from "@/abi/starknet/testnetVault.ts";
-import { TESTNET_STARKNET_TOKEN } from "@/abi/starknet/testnetStrk.ts";
-import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
-import { REDEMPTION_QUEUE_ABI } from "@/abi/redemptionQueue.ts";
+import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metis/metisToken.ts";
+import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/metis/RewardDispatcher.ts";
+import { CONFIG_CONTRACT_ABI } from "@/abi/metis/config.ts";
+import { FAUCET_CONTRACT_ABI } from "@/abi/metis/faucet.ts";
+import { VELIX_NFT_CONTRACT_ABI } from "@/abi/metis/velixNft.ts";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/metis/velixMetisVault.ts";
+import { REDEMPTION_QUEUE_ABI } from "@/abi/metis/redemptionQueue.ts";
+import { VESTRK_TOKEN_ABI } from "@/abi/starknet/veStrkToken.ts";
+import { STARKET_TESTNET_VAULT_ABI } from "@/abi/starknet/velixStarknetVault.ts";
+import { TESTNET_STARKNET_TOKEN } from "@/abi/starknet/strkToken.ts";
 
 export const METIS_TOKEN_CONTRACT_ADDRESS =
   "0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000" as const;
@@ -57,9 +58,14 @@ export const supportedChains = {
     contracts: {
       mainnet: {},
       testnet: {
+        VESTRK_TOKEN: {
+          address:
+            "0x1e2aed46c5616779a3f4dffb1cf30c21857abe07a6507d9cdc280b93fed1a24",
+          abi: VESTRK_TOKEN_ABI
+        },
         VAULT: {
           address:
-            "0x4b061ff4d941c6fd36a62e12b86eb3114620004136944ebd4b42b100be70203",
+            "0xc6b2a6dfa9de939813e9daee6e0758e486aacaa17217e6aad4149d7dcf67ff",
           abi: STARKET_TESTNET_VAULT_ABI
         },
         STRK_TOKEN: {
@@ -121,12 +127,10 @@ export const supportedChains = {
 export const tokenNames = {
   metis: {
     nativeToken: "METIS",
-    derivedToken: "veMETIS",
-    stakedToken: "sveMETIS"
+    stakedToken: "veMETIS"
   },
   starknet: {
     nativeToken: "STRK",
-    derivedToken: "STRK",
     stakedToken: "veSTRK"
   }
 } as const;

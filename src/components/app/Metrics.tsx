@@ -9,7 +9,6 @@ import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
-import useGetChain from "@/hooks/useGetChain.ts";
 import VelixReferralIcon1 from "../ui/velix/icons/VelixReferralIcon1";
 
 export default function Metrics() {
@@ -18,7 +17,6 @@ export default function Metrics() {
   const { totalValueLocked } = useMetricsStore();
   useGetTotalVeMetisAssets();
   const chainToken = useChainTokens();
-  const chain = useGetChain();
 
   useEffect(() => {
     getStaker(address as string);
@@ -54,7 +52,7 @@ export default function Metrics() {
             aria-label="ChatIcon Icon"
           />
         }
-        description={`${chain === "metis" ? chainToken.derivedToken : chainToken.stakedToken} market cap`}
+        description={`${chainToken.stakedToken} market cap`}
         value="--"
       />
       <MetricsCard
@@ -64,7 +62,7 @@ export default function Metrics() {
             aria-label="ChatIcon Icon"
           />
         }
-        description={`${chain === "metis" ? chainToken.derivedToken : chainToken.stakedToken} TVL`}
+        description={`${chainToken.stakedToken} TVL`}
         value={totalValueLocked}
       />
       <MetricsCard

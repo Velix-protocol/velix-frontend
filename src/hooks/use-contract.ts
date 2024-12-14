@@ -8,7 +8,7 @@ import Web3Service from "@/services/web3Service";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
-import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/metis/velixMetisVault.ts";
 import { supportedChains } from "@/utils/config.ts";
 import useChainAccount from "./useChainAccount";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
@@ -97,9 +97,9 @@ export const useApproveStaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const approveAddress =
+        const spender =
           chain === "starknet"
-            ? supportedChains.starknet.contracts.testnet.STRK_TOKEN.address
+            ? supportedChains.starknet.contracts.testnet.VAULT.address
             : supportedChains.metis.contracts.testnet.VELIX_VAULT.address;
 
         let tx = null;
@@ -110,17 +110,14 @@ export const useApproveStaking = () => {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
               entrypoint: "approve",
-              calldata: [approveAddress, starknetAmount]
+              calldata: [spender, starknetAmount]
             },
             {
               version: constants.TRANSACTION_VERSION.V3
             }
           );
         } else {
-          tx = await contract.approve(
-            approveAddress,
-            parseUnits(amountToStake)
-          );
+          tx = await contract.approve(spender, parseUnits(amountToStake));
         }
 
         const txhash = await waitForTransaction(chain as SupportedChains, tx);
@@ -205,8 +202,8 @@ export const useStaking = () => {
             {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.VAULT.address,
-              entrypoint: "deposit",
-              calldata: [starknetAmount]
+              entrypoint: "deposit_strk",
+              calldata: [starknetAmount, starknetAccount.address]
             },
             {
               version: constants.TRANSACTION_VERSION.V3
@@ -295,7 +292,7 @@ export const useGetTotalVeMetisAssets = () => {
       console.log(err);
       throw err;
     }
-  }, [address, contractInstance, setTotalValueLocked]);
+  }, [address, chain, contractInstance, setTotalValueLocked]);
 
   useEffect(() => {
     getTotalLocked();
@@ -332,27 +329,30 @@ export const useStarknetBalances = () => {
   const { address } = useChainAccount();
   const { setStrkBalance, setveStrkBalance } = useBalanceStore();
   const chain = useSupportedChain();
-  const { data } = useStarknetBalance();
-
-  useEffect(() => {
-    if (chain === "metis") return;
-    setStrkBalance(data?.formatted ?? "0.0");
-  }, [chain, data?.formatted, setStrkBalance]);
+  const { data, refetch } = useStarknetBalance();
 
   const getBalances = useCallback(async () => {
     if (!address) return;
     if (chain === "metis") return;
     const web3Service = new Web3Service("starknet");
     const contract = await web3Service.contract(
-      supportedChains.starknet.contracts.testnet.VAULT.address as `0x${string}`,
-      supportedChains.starknet.contracts.testnet.VAULT.abi,
+      supportedChains.starknet.contracts.testnet.VESTRK_TOKEN
+        .address as `0x${string}`,
+      supportedChains.starknet.contracts.testnet.VESTRK_TOKEN.abi,
       address
     );
 
-    const balance = await contract.user_balance_of(address);
+    const balance = await contract.balance_of(address);
     const formattedBalance = converGweiToEth(balance);
     setveStrkBalance(formattedBalance);
-  }, [address, setveStrkBalance]);
+    refetch();
+  }, [address, chain, refetch, setveStrkBalance]);
+
+  useEffect(() => {
+    if (chain === "metis") return;
+    setStrkBalance(data?.formatted ?? "0.0");
+    getBalances();
+  }, [chain, data?.formatted, getBalances, setStrkBalance]);
 
   return {
     getBalances

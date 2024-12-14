@@ -48,7 +48,7 @@ const StakeLayout = ({
   const renderFromTitles = () => {
     switch (role) {
       case "stake":
-        return chainToken.derivedToken;
+        return chainToken.nativeToken;
       default:
         return "";
     }

@@ -50,7 +50,7 @@ export default function StakingOperations() {
     txhash
   } = useStaking();
   const { address: walletAddress, isConnected } = useChainAccount();
-  const { getBalances } = useMetisBalances();
+  const { getBalances: getMetisBalances } = useMetisBalances();
   const { getBalances: getStarknetBalances } = useStarknetBalances();
   const { veMETISBalance, strkBalance } = useBalanceStore();
   const { setStakers, getStaker } = useStakersStore();
@@ -70,7 +70,7 @@ export default function StakingOperations() {
     if (isStaked) {
       setAmountToStake("");
       if (chain === "metis") {
-        getBalances();
+        getMetisBalances();
       } else {
         getStarknetBalances();
       }
@@ -121,6 +121,13 @@ export default function StakingOperations() {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
     resetStakeState();
     await stake(amountToStake);
+
+    if (chain === "starknet") {
+      getStarknetBalances();
+    } else {
+      getMetisBalances();
+    }
+
     await velixApi.saveStaker({
       walletAddress: walletAddress as `0x${string}`,
       amount: Number(amountToStake),
@@ -215,7 +222,7 @@ export default function StakingOperations() {
                 <div className="flex flex-col gap-5 w-full">
                   <div className="bg-velix-slate-blue dark:text-velix-dark-white p-5 text-velix-gray flex gap-2 items-center rounded-lg">
                     <MetisIcon className="w-6 h-6 fill-velix-primary dark:fill-velix-icon-dark" />
-                    Receive {amountToStake} {chainToken.derivedToken}
+                    Receive {amountToStake} {chainToken.stakedToken}
                   </div>
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
                     <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
@@ -270,7 +277,7 @@ export default function StakingOperations() {
         onSetMaxValue={() => setAmountToStake(totalBalanceToStake)}
         error={
           Number(amountToStake) > Number(totalBalanceToStake)
-            ? `Entered amount exceeds your ${chainToken.derivedToken} balance`
+            ? `Entered amount exceeds your ${chainToken.nativeToken} balance`
             : ""
         }
         value={amountToStake}
@@ -304,7 +311,7 @@ export default function StakingOperations() {
           )}
           <StakingDetails
             title="Exchange Rate"
-            value={`1 ${chainToken.derivedToken} = 1 ${chainToken.stakedToken}`}
+            value={`1 ${chainToken.nativeToken} = 1 ${chainToken.stakedToken}`}
           />
         </div>
         <StakingFormButtom

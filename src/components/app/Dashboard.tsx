@@ -63,7 +63,7 @@ export default function Dashboard() {
       value: chain === "starknet" ? strkBalance : METISBalance
     },
     {
-      name: chainToken.derivedToken,
+      name: chainToken.stakedToken,
       value: chain === "starknet" ? veStrkBalance : veMETISBalance
     },
     {
