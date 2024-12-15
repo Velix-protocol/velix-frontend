@@ -16,6 +16,8 @@ import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
 import { useMetisBalances } from "@/hooks/use-contract.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import StandardModal from "@/components/ui/velix/modal/StandartModal.tsx";
 
 export default function Redeem() {
   const { veMETISBalance } = useBalanceStore();
@@ -38,7 +40,7 @@ export default function Redeem() {
   const [showModal, setShowModal] = useState(false);
   const { getBalances } = useMetisBalances();
   const { address, isConnected: isWalletConnected } = useAccount();
-
+  const chain = useSupportedChain();
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
     queryKey: ["redeem-ticket"],
     queryFn: () =>
@@ -76,7 +78,18 @@ export default function Redeem() {
 
   return (
     <>
-      {showModal && (
+      {showModal && chain === "starknet" && (
+        <StandardModal
+          onClose={onClose}
+          error={rendemptionQueueError}
+          isSuccess={enterRedemptionQueueSuccess}
+          isLoading={enterRedemptionQueuePending}
+          title={enterRedemptionQueuePending ? "Processing..." : ""}
+          txHash={txHash}
+        />
+      )}
+
+      {showModal && chain !== "starknet" && (
         <TransactionModal
           onClose={onClose}
           step2Description="Enter redemption queue"
@@ -129,7 +142,14 @@ export default function Redeem() {
               <Button
                 disabled={!Number(amountToRedeem) || !isWalletConnected}
                 className="w-full font-space-grotesk bg-velix-blue dark:bg-velix-gray text-white dark:text-velix-claim-gray px-10"
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  if (chain === "starknet") {
+                    setShowModal(true);
+                    onEnterRedemptionQueue();
+                    return;
+                  }
+                  setShowModal(true);
+                }}
               >
                 Start Redeem Process
               </Button>

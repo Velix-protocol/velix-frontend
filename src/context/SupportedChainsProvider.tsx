@@ -6,7 +6,7 @@ import WagmiProviderContext from "./WagmiProvider";
 import useGetChain from "@/hooks/useGetChain";
 import { SupportedChains } from "@/types/index.ts";
 
-const SupportedChainsContext = createContext<SupportedChains | "">("");
+const SupportedChainsContext = createContext<SupportedChains>("metis");
 
 export const useSupportedChain = () => useContext(SupportedChainsContext);
 
@@ -20,13 +20,13 @@ export default function SupportedChainsProvider({
 
   useLayoutEffect(() => {
     if (!chain) return;
-    if (!Object.keys(supportedChains).includes(chain ?? "")) {
+    if (!Object.keys(supportedChains).includes(chain)) {
       navigate("/unsupported-chain", { relative: "route", replace: true });
     }
   }, [navigate, chain]);
 
   return (
-    <SupportedChainsContext.Provider value={chain ?? ""}>
+    <SupportedChainsContext.Provider value={chain ?? "metis"}>
       <StarknetProviderContext>
         <WagmiProviderContext>{children}</WagmiProviderContext>
       </StarknetProviderContext>

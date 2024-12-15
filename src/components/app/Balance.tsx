@@ -33,7 +33,7 @@ export default function Balance({
       case "stake":
         return `${chain === "starknet" ? veStrkBalance : veMETISBalance} ${chainToken.stakedToken}`;
       case "redeem":
-        return `${chain === "starknet" ? strkBalance : METISBalance} ${chainToken.nativeToken}`;
+        return `${chain === "starknet" ? prettifyBalance(strkBalance) : METISBalance} ${chainToken.nativeToken}`;
       default:
         "";
     }
