@@ -15,9 +15,8 @@ export type RedeemPointDto = {
   points: number;
 };
 
-export type ClaimStakingPointsDto = {
+export type SaveRedeemTicketDto = {
   walletAddress: string;
-  points: number;
   txHash: string;
 };
 

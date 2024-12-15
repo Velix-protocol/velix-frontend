@@ -4,8 +4,9 @@ import {
   GetAmountToRedeemFromPointDto,
   RedeemPointDto,
   saveActionDto,
+  SaveRedeemTicketDto,
   saveStakerDto
-} from "@/utils/dto";
+} from "@/types/dto.ts";
 import axios, { AxiosInstance } from "axios";
 import { ethers } from "ethers";
 
@@ -82,6 +83,14 @@ class VelixApi {
     return await this.api.get<RedeemTicket[]>(
       `/redeem/nft-tickets/${walletAddress}`
     );
+  }
+
+  async saveRedeemTicket({ walletAddress, txHash }: SaveRedeemTicketDto) {
+    if (!walletAddress) return;
+    return await this.api.post("/redeem/nft-tickets", {
+      walletAddress,
+      txHash
+    });
   }
 
   async saveRedeemTicketTransactionHash({

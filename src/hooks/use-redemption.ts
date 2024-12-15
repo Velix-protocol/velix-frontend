@@ -26,7 +26,6 @@ export const useApproveRedeem = () => {
       if (!contract) return;
       if (!address) return;
 
-      console.log({ amount });
       try {
         setIsPending(true);
         const tx = await contract.approve(
@@ -92,12 +91,14 @@ export const useEnterRedemptionQueue = () => {
           walletAddress,
           walletAddress
         );
+
         const txReceipt = (await tx.wait()) as ContractTransactionReceipt;
         setData(txReceipt.hash);
         setError(null);
+        setIsPending(false);
         setIsSuccess(true);
 
-        await velixApi.saveRedeemTicketTransactionHash({
+        await velixApi.saveRedeemTicket({
           walletAddress: address,
           txHash: txReceipt.hash
         });
@@ -109,11 +110,10 @@ export const useEnterRedemptionQueue = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
+        setIsPending(false);
         setError({
           message: e.shortMessage ?? "We could not process the call, try later!"
         });
-      } finally {
-        setIsPending(false);
       }
     },
     [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
