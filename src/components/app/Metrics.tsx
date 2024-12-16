@@ -10,6 +10,7 @@ import { velixApi } from "@/services/http";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import VelixReferralIcon1 from "../ui/velix/icons/VelixReferralIcon1";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 
 export default function Metrics() {
   const { isConnected, address } = useChainAccount();
@@ -17,6 +18,7 @@ export default function Metrics() {
   const { totalValueLocked } = useMetricsStore();
   useGetTotalVeMetisAssets();
   const chainToken = useChainTokens();
+  const chain = useSupportedChain();
 
   useEffect(() => {
     getStaker(address as string);
@@ -24,10 +26,11 @@ export default function Metrics() {
 
   useEffect(() => {
     (async () => {
-      const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
+      const { data: stakersNumber } =
+        await velixApi.retreiveStakersNumber(chain);
       setStakers(stakersNumber ?? 0);
     })();
-  }, [setStakers]);
+  }, [chain, setStakers]);
 
   return (
     <div

@@ -32,6 +32,8 @@ export default function StakingOperations() {
     useState(false);
   const [stakebridge, setStakeBrigde] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
+  const [amountToReceiveAfterStaking, setAmountToReceiveAfterStaking] =
+    useState("0.00");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const {
@@ -131,9 +133,10 @@ export default function StakingOperations() {
     await velixApi.saveStaker({
       walletAddress: walletAddress as `0x${string}`,
       amount: Number(amountToStake),
-      referralCode
+      referralCode,
+      chain
     });
-    const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
+    const { data: stakersNumber } = await velixApi.retreiveStakersNumber(chain);
     setStakers(stakersNumber ?? 0);
     removeReferralCodeFromStoreAndUrl();
   };
@@ -222,7 +225,8 @@ export default function StakingOperations() {
                 <div className="flex flex-col gap-5 w-full">
                   <div className="bg-velix-slate-blue dark:text-velix-dark-white p-5 text-velix-gray flex gap-2 items-center rounded-lg">
                     <MetisIcon className="w-6 h-6 fill-velix-primary dark:fill-velix-icon-dark" />
-                    Receive {amountToStake} {chainToken.stakedToken}
+                    Receive {amountToReceiveAfterStaking}{" "}
+                    {chainToken.stakedToken}
                   </div>
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
                     <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
@@ -274,6 +278,7 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
+        setAmountToReceiveAfterStaking={setAmountToReceiveAfterStaking}
         onSetMaxValue={() => setAmountToStake(totalBalanceToStake)}
         error={
           Number(amountToStake) > Number(totalBalanceToStake)

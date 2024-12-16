@@ -105,6 +105,7 @@ export const useApproveStaking = () => {
         let tx = null;
         if (chain === "starknet" && starknetAccount) {
           const starknetAmount = cairo.uint256(parseUnits(amountToStake));
+          console.log({ starknetAmount });
           tx = await starknetAccount?.execute(
             {
               contractAddress:
@@ -120,9 +121,12 @@ export const useApproveStaking = () => {
           tx = await contract.approve(spender, parseUnits(amountToStake));
         }
 
-        const txhash = await waitForTransaction(chain as SupportedChains, tx);
-        console.log({ txhash });
-        setData(txhash);
+        const { txHash } = await waitForTransaction(
+          chain as SupportedChains,
+          tx
+        );
+        console.log({ txHash });
+        setData(txHash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -213,15 +217,18 @@ export const useStaking = () => {
           tx = await contract.deposit(parseUnits(amountToStake), address);
         }
 
-        const txhash = await waitForTransaction(chain as SupportedChains, tx);
+        const { txHash } = await waitForTransaction(
+          chain as SupportedChains,
+          tx
+        );
         await velixApi.saveAction("stake", {
           amount: Number(amountToStake),
           walletAddress: address,
-          txHash: txhash,
+          txHash,
           chain: chain as SupportedChains
         });
 
-        setData(txhash);
+        setData(txHash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
@@ -285,7 +292,7 @@ export const useGetTotalVeMetisAssets = () => {
 
     try {
       const functionToGetTotalSupply =
-        chain === "starknet" ? "contract_total_supply" : "totalAssets";
+        chain === "starknet" ? "get_tvl" : "totalAssets";
       const totalValueLocked = await contract?.[functionToGetTotalSupply]();
       setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
     } catch (err) {
@@ -305,7 +312,10 @@ export const useGetTotalVeMetisAssets = () => {
  */
 export const useGetConvertToShareValue = () => {
   const { address } = useChainAccount();
-  const contractInstance = useContract("VELIX_VAULT");
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "VELIX_VAULT"
+  );
 
   return useCallback(
     async (assets: string) => {
@@ -314,14 +324,16 @@ export const useGetConvertToShareValue = () => {
       if (!address) return;
 
       try {
-        const shareValue = await contract.convertToShares(parseUnits(assets));
+        const shareValue = await contract?.[
+          chain === "starknet" ? "get_ve_strk_to_stake" : "convertToShares"
+        ](parseUnits(assets));
         return shareValue;
       } catch (err) {
         console.log(err);
         throw err;
       }
     },
-    [address, contractInstance]
+    [address, chain, contractInstance]
   );
 };
 

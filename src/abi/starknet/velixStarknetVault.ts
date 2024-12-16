@@ -307,28 +307,6 @@ export const STARKET_TESTNET_VAULT_ABI = [
   },
   {
     kind: "struct",
-    name: "velix_vault::vault::velix_vault_manager::velix_vault_manager::WithdrawlIntitatedFor",
-    type: "event",
-    members: [
-      {
-        kind: "key",
-        name: "user",
-        type: "core::starknet::contract_address::ContractAddress"
-      },
-      {
-        kind: "data",
-        name: "ve_strk_amount",
-        type: "core::integer::u256"
-      },
-      {
-        kind: "data",
-        name: "strk_amount",
-        type: "core::integer::u256"
-      }
-    ]
-  },
-  {
-    kind: "struct",
     name: "velix_vault::vault::velix_vault_manager::velix_vault_manager::IntitatedWithdrawl",
     type: "event",
     members: [
@@ -351,6 +329,11 @@ export const STARKET_TESTNET_VAULT_ABI = [
         kind: "data",
         name: "expected_amount",
         type: "core::integer::u256"
+      },
+      {
+        kind: "data",
+        name: "maturity_period",
+        type: "core::integer::u64"
       }
     ]
   },
@@ -438,11 +421,6 @@ export const STARKET_TESTNET_VAULT_ABI = [
         kind: "nested",
         name: "DepositedStrk",
         type: "velix_vault::vault::velix_vault_manager::velix_vault_manager::DepositedStrk"
-      },
-      {
-        kind: "nested",
-        name: "WithdrawlIntitatedFor",
-        type: "velix_vault::vault::velix_vault_manager::velix_vault_manager::WithdrawlIntitatedFor"
       },
       {
         kind: "nested",

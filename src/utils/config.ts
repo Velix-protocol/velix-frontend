@@ -60,12 +60,12 @@ export const supportedChains = {
       testnet: {
         VESTRK_TOKEN: {
           address:
-            "0x1e2aed46c5616779a3f4dffb1cf30c21857abe07a6507d9cdc280b93fed1a24",
+            "0x511529a0be082c68e701600c92b79e9562feb4be856be7ace9bbc7bd6b97856",
           abi: VESTRK_TOKEN_ABI
         },
         VAULT: {
           address:
-            "0xc6b2a6dfa9de939813e9daee6e0758e486aacaa17217e6aad4149d7dcf67ff",
+            "0x52bda5ac17720bd47d19a4779515a481c5dd7733733f1d4f9590a875d1af60b",
           abi: STARKET_TESTNET_VAULT_ABI
         },
         STRK_TOKEN: {

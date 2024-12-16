@@ -16,6 +16,7 @@ import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
+import { prettifyBalance } from "@/utils/utils.ts";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -26,6 +27,7 @@ type StakeLayoutProps = {
   error: string;
   onSetMaxValue: () => void;
   withConvertion?: boolean;
+  setAmountToReceiveAfterStaking?: (state: string) => void;
 };
 
 const StakeLayout = ({
@@ -36,7 +38,8 @@ const StakeLayout = ({
   role,
   error,
   onSetMaxValue,
-  withConvertion = true
+  withConvertion = true,
+  setAmountToReceiveAfterStaking
 }: StakeLayoutProps) => {
   const { isConnected } = useChainAccount();
   const navigate = useNavigate();
@@ -75,8 +78,12 @@ const StakeLayout = ({
     }, [getConvertToShareValue, role, value]);
 
   useEffect(() => {
-    (async () => setConvertedValue(await renderConvertedValue()))();
-  }, [renderConvertedValue]);
+    (async () => {
+      const value = await renderConvertedValue();
+      setConvertedValue(value);
+      setAmountToReceiveAfterStaking?.(prettifyBalance(value as string));
+    })();
+  }, [renderConvertedValue, setAmountToReceiveAfterStaking]);
 
   const icons = {
     veMETIS: (
@@ -134,7 +141,7 @@ const StakeLayout = ({
               </p>
               <div>
                 <p className="text-velix-primary dark:text-white font-bold text-base ml-2 mr-3">
-                  {convertedValue} {renderToTitles()}
+                  {prettifyBalance(convertedValue as string)} {renderToTitles()}
                 </p>
               </div>
             </div>

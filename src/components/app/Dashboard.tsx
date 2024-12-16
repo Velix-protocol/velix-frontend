@@ -12,7 +12,6 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
 import dayjs from "dayjs";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
@@ -22,6 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supportedChains } from "@/utils/config";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 type DashboardData = {
   id: string;
@@ -35,7 +35,7 @@ export default function Dashboard() {
   useMetisBalances();
   const { veMETISBalance, METISBalance, strkBalance, veStrkBalance } =
     useBalanceStore();
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const [actionToRetreive, setActionToRetreive] = useState<Action>("stake");
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
@@ -50,7 +50,8 @@ export default function Dashboard() {
     queryFn: async () => {
       const { data } = await velixApi.retreiveActionsActivity(
         actionToRetreive,
-        address as string
+        address as string,
+        chain
       );
       return data as DashboardData[];
     },
@@ -164,7 +165,7 @@ export default function Dashboard() {
                     <tr
                       onClick={() =>
                         window.open(
-                          `${supportedChains.metis.explorerUrls.testnet.txUrl}${data.txHash}`
+                          `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${data.txHash}`
                         )
                       }
                       key={`row-${index}`}

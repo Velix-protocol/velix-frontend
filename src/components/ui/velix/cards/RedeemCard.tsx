@@ -6,27 +6,30 @@ import {
   useCancelRedeemNftTicket,
   useRedeemRedemptionTicketNft
 } from "@/hooks/use-redemption";
-import { useAccount } from "wagmi";
 import ModalLayout from "../modal/ModalLayout";
 import Loader from "../icons/Loader";
-import { useCallback, useEffect, useState } from "react";
-import { EXPLORER_TX_URL } from "@/utils/constant";
+import { useCallback, useState } from "react";
 import SuccessModal from "../modal/SuccessModal";
 import Countdown from "react-countdown";
 import ReadyIcon from "../icons/ReadyIcon";
 import { FaClock } from "react-icons/fa";
 import classNames from "classnames";
+import useChainAccount from "@/hooks/useChainAccount.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import { supportedChains } from "@/utils/config.ts";
 
 const RedeemCard = ({
   redeemTicket,
-  refetchRedeemNfts
+  refetchRedeemNfts,
+  getBalances
 }: {
   redeemTicket: RedeemTicket;
   refetchRedeemNfts: () => void;
+  getBalances: () => void;
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [isCountdownFinished, setIsCountdownFinished] = useState(false); 
-  const { address } = useAccount();
+  const [isCountdownFinished, setIsCountdownFinished] = useState(false);
+  const { address } = useChainAccount();
   const {
     redeemRedemptionTicketNft,
     isPending,
@@ -35,18 +38,20 @@ const RedeemCard = ({
     data: txHash,
     reset
   } = useRedeemRedemptionTicketNft();
+  const chain = useSupportedChain();
 
   const {
     isPending: cancelRedeemNftPending,
     isSuccess: cancelRedeemNftSuccess,
-    data: cancelRedeemNftTxHash,
     reset: resetCancelRedeemNftStates,
     error: cancelRedeemNftError
   } = useCancelRedeemNftTicket();
 
   const onViewTransaction = useCallback(() => {
-    window.open(`${EXPLORER_TX_URL}${txHash || cancelRedeemNftTxHash}`);
-  }, [txHash, cancelRedeemNftTxHash]);
+    window.open(
+      `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${txHash}`
+    );
+  }, [chain, txHash]);
 
   const onClose = useCallback(() => {
     if (isPending) return;
@@ -61,12 +66,6 @@ const RedeemCard = ({
     if (error || cancelRedeemNftError) return "Error";
     return "";
   }, [isPending, error, cancelRedeemNftPending, cancelRedeemNftError]);
-
-  useEffect(() => {
-    if (isSuccess || cancelRedeemNftSuccess) {
-      refetchRedeemNfts();
-    }
-  }, [isSuccess, cancelRedeemNftSuccess, refetchRedeemNfts]);
 
   const onCountdownComplete = () => {
     setIsCountdownFinished(true);
@@ -98,19 +97,21 @@ const RedeemCard = ({
         </ModalLayout>
       )}
       <div className="rounded-lg px-8 py-1 xl:mt-0 sm:mt-2 xl:max-w-auto lg:w-full md:max-w-auto w-full">
-        <div   className={classNames(
-        "flex bg-velix-claim dark:bg-velix-claim-gray2 p-6 rounded-lg flex-col sm:flex-row", 
-        {
-          "border border-velix-claim-green p-6 gap-4": isCountdownFinished, 
-        }
-      )}>
+        <div
+          className={classNames(
+            "flex bg-velix-claim dark:bg-velix-claim-gray2 p-6 rounded-lg flex-col sm:flex-row",
+            {
+              "border border-velix-claim-green p-6 gap-4": isCountdownFinished
+            }
+          )}
+        >
           <div className="flex-1 sm:flex-none lg:flex-none xl:flex-none">
             <p className="text-velix-claim-grey dark:text-velix-claim text-sm lg:text-base font-space-grotesk">
               Redeem:{" "}
               <span className="font-bold text-black font-space-grotesk dark:text-velix-claim mr-1">
                 {redeemTicket.amount}
               </span>{" "}
-              METIS
+              {chain === "starknet" ? "STRK" : "METIS"}
             </p>
             <div className="flex flex-col md:flex-row sm:flex-row lg:flex-col xl:flex-row items-start xl:items-center gap-4 lg:-mt-4 xl:mt-2 -mt-2">
               <div className="flex md:flex-row items-center text-velix-claim-gray text-sm lg:text-base font-space-grotesk  dark:text-white">
@@ -122,10 +123,11 @@ const RedeemCard = ({
               </div>
               <div
                 className={classNames(
-                  "flex items-center text-gray-600 text-sm xl:mt-4 lg:mt-1 md:mt-3 sm:mt-3 dark:text-white", 
+                  "flex items-center text-gray-600 text-sm xl:mt-4 lg:mt-1 md:mt-3 sm:mt-3 dark:text-white",
                   {
-                    "bg-velix-claim-green rounded-md p-1 text-sm": isCountdownFinished, 
-                    "lg:text-base font-medium": !isCountdownFinished, 
+                    "bg-velix-claim-green rounded-md p-1 text-sm":
+                      isCountdownFinished,
+                    "lg:text-base font-medium": !isCountdownFinished
                   }
                 )}
               >
@@ -137,19 +139,24 @@ const RedeemCard = ({
                 {isCountdownFinished ? (
                   <span className="text-white">Ready to redeem</span>
                 ) : (
-                  <Countdown date={redeemTicket.maturity * 1000} onComplete={onCountdownComplete} />
+                  <Countdown
+                    date={redeemTicket.maturity * 1000}
+                    onComplete={onCountdownComplete}
+                  />
                 )}
               </div>
             </div>
           </div>
           <div className="flex sm:flex-row items-center justify-between lg:-mb-16 xl:-mb-0 sm:mt-0 w-full">
             <Button
-              onClick={() => {
+              onClick={async () => {
                 setShowModal(true);
-                redeemRedemptionTicketNft(
+                await redeemRedemptionTicketNft(
                   Number(redeemTicket.nftId),
                   address as `0x${string}`
                 );
+                await refetchRedeemNfts();
+                await getBalances();
               }}
               disabled={
                 dayjs(redeemTicket.maturity * 1000).diff(dayjs(), "seconds") >=
@@ -158,8 +165,9 @@ const RedeemCard = ({
               className={classNames(
                 "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
                 {
-                  "bg-velix-claim-green hover:velix-claim-green": isCountdownFinished, 
-                  "bg-velix-blue hover:bg-velix-blue-dark": !isCountdownFinished, 
+                  "bg-velix-claim-green hover:velix-claim-green":
+                    isCountdownFinished,
+                  "bg-velix-blue hover:bg-velix-blue-dark": !isCountdownFinished
                 }
               )}
             >

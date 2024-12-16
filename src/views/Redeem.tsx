@@ -11,16 +11,16 @@ import {
   useEnterRedemptionQueue
 } from "@/hooks/use-redemption";
 import TransactionModal from "@/components/ui/velix/modal";
-import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
-import { useMetisBalances } from "@/hooks/use-contract.ts";
+import { useMetisBalances, useStarknetBalances } from "@/hooks/use-contract.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 import StandardModal from "@/components/ui/velix/modal/StandartModal.tsx";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 export default function Redeem() {
-  const { veMETISBalance } = useBalanceStore();
+  const { veMETISBalance, veStrkBalance } = useBalanceStore();
   const {
     isPending: approvePending,
     isSuccess: approveSuccess,
@@ -39,8 +39,10 @@ export default function Redeem() {
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
   const { getBalances } = useMetisBalances();
-  const { address, isConnected: isWalletConnected } = useAccount();
+  const { getBalances: getStarknetBalances } = useStarknetBalances();
+  const { address, isConnected: isWalletConnected } = useChainAccount();
   const chain = useSupportedChain();
+
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
     queryKey: ["redeem-ticket"],
     queryFn: () =>
@@ -55,7 +57,11 @@ export default function Redeem() {
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
     await refetchRedeemTickets();
-    await getBalances();
+    if (chain === "metis") {
+      await getBalances();
+    } else {
+      await getStarknetBalances();
+    }
   };
 
   const onClose = () => {
@@ -73,7 +79,7 @@ export default function Redeem() {
   };
 
   const onSetMaxValue = () => {
-    setAmountToRedeem(veMETISBalance);
+    setAmountToRedeem(chain === "metis" ? veMETISBalance : veStrkBalance);
   };
 
   return (
@@ -165,13 +171,18 @@ export default function Redeem() {
             }`}
           >
             {redeemTickets?.data.length ? (
-              redeemTickets?.data.map((redeemTicket) => (
-                <RedeemCard
-                  key={redeemTicket.id}
-                  redeemTicket={redeemTicket}
-                  refetchRedeemNfts={refetchRedeemTickets}
-                />
-              ))
+              redeemTickets?.data
+                .map((redeemTicket) => (
+                  <RedeemCard
+                    key={redeemTicket.id}
+                    redeemTicket={redeemTicket}
+                    refetchRedeemNfts={refetchRedeemTickets}
+                    getBalances={
+                      chain === "starknet" ? getStarknetBalances : getBalances
+                    }
+                  />
+                ))
+                .reverse()
             ) : (
               <>
                 <img

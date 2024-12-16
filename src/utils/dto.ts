@@ -11,6 +11,7 @@ export type saveStakerDto = {
   walletAddress: string;
   amount: number;
   referralCode?: string;
+  chain?: SupportedChains;
 };
 
 export type RedeemPointDto = {

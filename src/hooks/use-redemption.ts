@@ -3,12 +3,16 @@ import { useCallback } from "react";
 import { useContract, useContractHookState } from "./use-contract";
 import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { ContractTransactionReceipt, parseEther, parseUnits } from "ethers";
-import { velixApi } from "@/services/http.ts";
 import axios from "axios";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 import { cairo, constants } from "starknet";
 import { supportedChains } from "@/utils/config.ts";
 import { useAccount } from "@starknet-react/core";
+import {
+  decodeIntitatedWithdrawlStarknetEvents,
+  waitForTransaction
+} from "@/utils/utils.ts";
+import { velixApi } from "@/services/http.ts";
 
 export const useApproveRedeem = () => {
   const {
@@ -109,21 +113,30 @@ export const useEnterRedemptionQueue = () => {
               version: constants.TRANSACTION_VERSION.V3
             }
           );
-
-          setData(tx.transaction_hash);
-          setError(null);
-          setIsSuccess(true);
         } else {
           tx = await contract.redeem(
             parseUnits(String(amount)),
             walletAddress,
             walletAddress
           );
-          const txReceipt = (await tx.wait()) as ContractTransactionReceipt;
-          setData(txReceipt.hash);
-          setError(null);
-          setIsSuccess(true);
+        }
 
+        const { txHash, txReceipt } = await waitForTransaction(chain, tx);
+        setData(txHash);
+        setError(null);
+        setIsSuccess(true);
+        if (chain === "starknet") {
+          const data = await decodeIntitatedWithdrawlStarknetEvents(txReceipt);
+          await velixApi.saveStarknetRedeemTicket({
+            amount: String(amount),
+            txHash,
+            walletAddress,
+            maturity: data.maturity,
+            nftId: data.requestIndex
+          });
+        }
+
+        if (chain === "metis") {
           await velixApi.saveRedeemTicketTransactionHash({
             walletAddress: address,
             txHash: txReceipt.hash
@@ -144,7 +157,16 @@ export const useEnterRedemptionQueue = () => {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess,
+      starknetAccount
+    ]
   );
 
   const reset = useCallback(() => {
@@ -176,7 +198,11 @@ export const useRedeemRedemptionTicketNft = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("REDEMPTION_QUEUE");
+  const { account: starknetAccount } = useAccount();
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "REDEMPTION_QUEUE"
+  );
 
   const redeemRedemptionTicketNft = useCallback(
     async (nftId: number, walletAddress: `0x${string}`) => {
@@ -184,25 +210,63 @@ export const useRedeemRedemptionTicketNft = () => {
       if (!contract) return;
       if (!address) return;
       try {
+        let tx = null;
         setIsPending(true);
-        const tx = await contract.redeemRedemptionTicketNft(
-          parseUnits(String(nftId)),
-          walletAddress
-        );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
+        if (chain === "starknet" && starknetAccount) {
+          tx = await starknetAccount.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.VAULT.address,
+              entrypoint: "complete_withdrawal",
+              calldata: [cairo.uint256(nftId)]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.redeemRedemptionTicketNft(
+            parseUnits(String(nftId)),
+            walletAddress
+          );
+        }
+        const { txHash } = await waitForTransaction(chain, tx);
+        setData(txHash);
         setError(null);
         setIsSuccess(true);
+        setIsPending(false);
+
+        await velixApi.completeRedeemTicket({
+          walletAddress,
+          chain,
+          nftId: String(nftId)
+        });
       } catch (e: any) {
+        if (e instanceof axios.AxiosError) {
+          console.log(e);
+          return;
+        }
+
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
-      } finally {
+        setError({
+          message:
+            e?.shortMessage ?? "We could not process the call, try later!"
+        });
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess,
+      starknetAccount
+    ]
   );
 
   const reset = useCallback(() => {
