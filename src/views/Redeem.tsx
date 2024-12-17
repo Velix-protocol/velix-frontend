@@ -145,13 +145,15 @@ export default function Redeem() {
             }`}
           >
             {redeemTickets?.data.length ? (
-              redeemTickets?.data.map((redeemTicket) => (
-                <RedeemCard
-                  key={redeemTicket.id}
-                  redeemTicket={redeemTicket}
-                  refetchRedeemNfts={refetchRedeemTickets}
-                />
-              ))
+              redeemTickets?.data
+                .map((redeemTicket) => (
+                  <RedeemCard
+                    key={redeemTicket.id}
+                    redeemTicket={redeemTicket}
+                    refetchRedeemNfts={refetchRedeemTickets}
+                  />
+                ))
+                .reverse()
             ) : (
               <>
                 <img
@@ -166,7 +168,7 @@ export default function Redeem() {
                 />
                 <p className="font-space-grotesk font-normal mt-5">
                   You have no ticket to redeem
-                </p> 
+                </p>
               </>
             )}
           </div>
