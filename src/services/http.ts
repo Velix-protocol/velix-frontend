@@ -28,7 +28,7 @@ class VelixApi {
   private actionEndpoint(action: Action) {
     switch (action) {
       case "stake":
-        return "/stake";
+        return "/stake/metis";
       case "redeem":
         return "/redeem/nft-tickets";
       default:
@@ -47,11 +47,11 @@ class VelixApi {
   }
 
   async saveStaker(data: saveStakerDto) {
-    return await this.api.put("/stake/stakers", data);
+    return await this.api.put("/stake/stakers/metis", data);
   }
 
   async retreiveStakersNumber() {
-    return await this.api.get("/stake/stakers/count");
+    return await this.api.get("/stake/stakers/count/matis");
   }
 
   async getStaker(walletAddress: string) {
