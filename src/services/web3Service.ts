@@ -10,7 +10,7 @@ import { RpcProvider, Contract, Abi, AccountInterface } from "starknet";
 import { SupportedChains } from "@/types/index.ts";
 
 export const STARKNET_RPC_PROVIDER =
-  "https://starknet-sepolia.infura.io/v3/860ca51e15d0418f9e49cc4a75f393f0";
+  "https://free-rpc.nethermind.io/sepolia-juno/v0_7";
 
 export default class Web3Service {
   public provider: JsonRpcProvider | BrowserProvider | RpcProvider | null;

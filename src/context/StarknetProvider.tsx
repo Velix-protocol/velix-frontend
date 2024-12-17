@@ -5,9 +5,8 @@ import {
   braavos,
   useInjectedConnectors,
   voyager,
-  infuraProvider
+  jsonRpcProvider
 } from "@starknet-react/core";
-import { INFURA_API_KEY } from "@/utils/constant.ts";
 
 export default function StarknetProviderContext({
   children
@@ -23,7 +22,9 @@ export default function StarknetProviderContext({
   return (
     <StarknetConfig
       chains={[sepolia]}
-      provider={infuraProvider({ apiKey: INFURA_API_KEY })}
+      provider={jsonRpcProvider({
+        rpc: (chain) => ({ ...chain, nodeUrl: "SN_SEPOLIA" })
+      })}
       connectors={connectors}
       autoConnect={true}
       explorer={voyager}

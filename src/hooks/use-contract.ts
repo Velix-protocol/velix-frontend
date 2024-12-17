@@ -17,6 +17,7 @@ import { SupportedChains } from "@/types/index.ts";
 import { useStarknetBalance } from "@/hooks/useStarknetBalance.ts";
 import { useAccount } from "@starknet-react/core";
 import { cairo, constants } from "starknet";
+import { useQuery } from "@tanstack/react-query";
 
 export const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
@@ -300,9 +301,13 @@ export const useGetTotalVeMetisAssets = () => {
     }
   }, [address, chain, contractInstance, setTotalValueLocked]);
 
-  useEffect(() => {
-    getTotalLocked();
-  }, [getTotalLocked]);
+  useQuery({
+    queryKey: ["getValueLocked"],
+    queryFn: () => getTotalLocked(),
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
+  });
 };
 
 /**
@@ -360,11 +365,17 @@ export const useStarknetBalances = () => {
     refetch();
   }, [address, chain, refetch, setveStrkBalance]);
 
-  useEffect(() => {
-    if (chain === "metis") return;
-    setStrkBalance(data?.formatted ?? "0.0");
-    getBalances();
-  }, [chain, data?.formatted, getBalances, setStrkBalance]);
+  useQuery({
+    queryKey: ["getstaknetBalances", chain],
+    queryFn: async () => {
+      if (chain === "metis") return;
+      setStrkBalance(data?.formatted ?? "0.0");
+      await getBalances();
+    },
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
+  });
 
   return {
     getBalances
