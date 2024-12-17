@@ -89,32 +89,46 @@ export const STARKET_TESTNET_VAULT_ABI = [
         state_mutability: "view"
       },
       {
-        name: "deposit_strk",
+        name: "get_total_amount_to_deposit",
         type: "function",
-        inputs: [
+        inputs: [],
+        outputs: [
           {
-            name: "assets",
-            type: "core::integer::u256"
-          },
-          {
-            name: "receiver",
-            type: "core::starknet::contract_address::ContractAddress"
+            type: "core::integer::u128"
           }
         ],
-        outputs: [],
-        state_mutability: "external"
+        state_mutability: "view"
       },
       {
-        name: "set_ve_strk_token",
+        name: "get_amount_to_withdraw",
+        type: "function",
+        inputs: [],
+        outputs: [
+          {
+            type: "core::integer::u128"
+          }
+        ],
+        state_mutability: "view"
+      },
+      {
+        name: "get_unclaimed_rewards",
         type: "function",
         inputs: [
           {
-            name: "ve_strk_token",
+            name: "staking_pool",
+            type: "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            name: "staker_address",
             type: "core::starknet::contract_address::ContractAddress"
           }
         ],
-        outputs: [],
-        state_mutability: "external"
+        outputs: [
+          {
+            type: "core::integer::u256"
+          }
+        ],
+        state_mutability: "view"
       },
       {
         name: "get_ve_strk_to_stake",
@@ -147,81 +161,6 @@ export const STARKET_TESTNET_VAULT_ABI = [
           }
         ],
         state_mutability: "view"
-      },
-      {
-        name: "initiate_withdrawal",
-        type: "function",
-        inputs: [
-          {
-            name: "ve_strk_amount",
-            type: "core::integer::u256"
-          }
-        ],
-        outputs: [],
-        state_mutability: "external"
-      },
-      {
-        name: "admin_enter_delegation_pool",
-        type: "function",
-        inputs: [
-          {
-            name: "strk_amount",
-            type: "core::integer::u128"
-          },
-          {
-            name: "staking_pool",
-            type: "core::starknet::contract_address::ContractAddress"
-          },
-          {
-            name: "staker_address",
-            type: "core::starknet::contract_address::ContractAddress"
-          }
-        ],
-        outputs: [],
-        state_mutability: "external"
-      },
-      {
-        name: "admin_claim_rewards",
-        type: "function",
-        inputs: [],
-        outputs: [],
-        state_mutability: "external"
-      },
-      {
-        name: "admin_initiate_exit",
-        type: "function",
-        inputs: [
-          {
-            name: "amount",
-            type: "core::integer::u128"
-          }
-        ],
-        outputs: [],
-        state_mutability: "external"
-      },
-      {
-        name: "admin_complete_exit",
-        type: "function",
-        inputs: [
-          {
-            name: "pool_member",
-            type: "core::starknet::contract_address::ContractAddress"
-          }
-        ],
-        outputs: [],
-        state_mutability: "external"
-      },
-      {
-        name: "complete_withdrawal",
-        type: "function",
-        inputs: [
-          {
-            name: "withdrawl_index",
-            type: "core::integer::u256"
-          }
-        ],
-        outputs: [],
-        state_mutability: "external"
       },
       {
         name: "get_request",
@@ -258,6 +197,100 @@ export const STARKET_TESTNET_VAULT_ABI = [
           }
         ],
         state_mutability: "view"
+      },
+      {
+        name: "set_ve_strk_token",
+        type: "function",
+        inputs: [
+          {
+            name: "ve_strk_token",
+            type: "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "deposit_strk",
+        type: "function",
+        inputs: [
+          {
+            name: "assets",
+            type: "core::integer::u256"
+          },
+          {
+            name: "receiver",
+            type: "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "initiate_withdrawal",
+        type: "function",
+        inputs: [
+          {
+            name: "ve_strk_amount",
+            type: "core::integer::u256"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "complete_withdrawal",
+        type: "function",
+        inputs: [
+          {
+            name: "withdrawl_index",
+            type: "core::integer::u256"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "admin_enter_delegation_pool",
+        type: "function",
+        inputs: [
+          {
+            name: "staking_pool",
+            type: "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            name: "staker_address",
+            type: "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "admin_claim_rewards",
+        type: "function",
+        inputs: [],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "admin_initiate_exit",
+        type: "function",
+        inputs: [],
+        outputs: [],
+        state_mutability: "external"
+      },
+      {
+        name: "admin_complete_exit",
+        type: "function",
+        inputs: [
+          {
+            name: "pool_member",
+            type: "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        outputs: [],
+        state_mutability: "external"
       }
     ]
   },
