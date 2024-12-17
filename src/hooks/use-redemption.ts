@@ -5,7 +5,7 @@ import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { ContractTransactionReceipt, parseEther, parseUnits } from "ethers";
 import axios from "axios";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
-import { cairo, constants } from "starknet";
+import { cairo, constants, GetTransactionReceiptResponse } from "starknet";
 import { supportedChains } from "@/utils/config.ts";
 import { useAccount } from "@starknet-react/core";
 import {
@@ -126,7 +126,9 @@ export const useEnterRedemptionQueue = () => {
         setError(null);
         setIsSuccess(true);
         if (chain === "starknet") {
-          const data = await decodeIntitatedWithdrawlStarknetEvents(txReceipt);
+          const data = await decodeIntitatedWithdrawlStarknetEvents(
+            txReceipt as GetTransactionReceiptResponse
+          );
           await velixApi.saveStarknetRedeemTicket({
             amount: String(amount),
             txHash,
@@ -139,7 +141,7 @@ export const useEnterRedemptionQueue = () => {
         if (chain === "metis") {
           await velixApi.saveRedeemTicketTransactionHash({
             walletAddress: address,
-            txHash: txReceipt.hash
+            txHash: txHash
           });
         }
       } catch (e: any) {

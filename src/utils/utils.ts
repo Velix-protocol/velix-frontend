@@ -12,7 +12,7 @@ import {
 } from "starknet";
 import { STARKNET_RPC_PROVIDER } from "@/services/web3Service.ts";
 import { STARKET_TESTNET_VAULT_ABI } from "@/abi/starknet/velixStarknetVault.ts";
-import { formatEther } from "ethers";
+import { formatEther, TransactionReceipt } from "ethers";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -97,33 +97,12 @@ export const waitForTransaction = async (chain: SupportedChains, res: any) => {
   if (chain === "starknet") {
     const provider = new RpcProvider({ nodeUrl: STARKNET_RPC_PROVIDER });
     const txReceipt = await provider.waitForTransaction(res.transaction_hash);
-    // /**
-    //  *
-    //  *
-    //  * expected_amount
-    //  * :
-    //  * 214285714285714286n
-    //  * request_index
-    //  * :
-    //  * 7n
-    //  * user
-    //  * :
-    //  * 1274746813044586899519278775921495402987955382357743238798858108532076016129n
-    //  * ve_strk_amount
-    //  * :
-    //  * 100000000000000000
-    //  * */
-    // console.log({
-    //   events: decodeStarknetEvents(txReceipt, provider)[0]?.[
-    //     "velix_vault::vault::velix_vault_manager::velix_vault_manager::IntitatedWithdrawl"
-    //   ]
-    // });
     return { txHash: res.transaction_hash, txReceipt };
   }
 
-  const txReceipt = await res.wait();
+  const txReceipt = (await res.wait()) as TransactionReceipt;
   return {
-    txHash: txReceipt.tx_hash,
+    txHash: txReceipt.hash,
     txReceipt
   };
 };

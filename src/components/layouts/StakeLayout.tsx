@@ -16,7 +16,6 @@ import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
-import { prettifyBalance } from "@/utils/utils.ts";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -71,7 +70,7 @@ const StakeLayout = ({
       if (!value) return "0.0";
       switch (role) {
         case "stake":
-          return Number(formatEther(await getConvertToShareValue(value))) * 1;
+          return Number(formatEther(await getConvertToShareValue(value)));
         default:
           return 0;
       }
@@ -81,7 +80,7 @@ const StakeLayout = ({
     (async () => {
       const value = await renderConvertedValue();
       setConvertedValue(value);
-      setAmountToReceiveAfterStaking?.(prettifyBalance(value as string));
+      setAmountToReceiveAfterStaking?.(value as string);
     })();
   }, [renderConvertedValue, setAmountToReceiveAfterStaking]);
 
@@ -141,7 +140,7 @@ const StakeLayout = ({
               </p>
               <div>
                 <p className="text-velix-primary dark:text-white font-bold text-base ml-2 mr-3">
-                  {prettifyBalance(convertedValue as string)} {renderToTitles()}
+                  {convertedValue} {renderToTitles()}
                 </p>
               </div>
             </div>

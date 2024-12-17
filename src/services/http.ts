@@ -107,7 +107,7 @@ class VelixApi {
   }) {
     if (!walletAddress) return;
     if (!txHash) return;
-    return await this.api.patch("/redeem/nft-tickets", {
+    return await this.api.post("/redeem/nft-tickets", {
       walletAddress,
       txHash
     });

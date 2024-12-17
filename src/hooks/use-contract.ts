@@ -105,7 +105,6 @@ export const useApproveStaking = () => {
         let tx = null;
         if (chain === "starknet" && starknetAccount) {
           const starknetAmount = cairo.uint256(parseUnits(amountToStake));
-          console.log({ starknetAmount });
           tx = await starknetAccount?.execute(
             {
               contractAddress:
@@ -327,6 +326,7 @@ export const useGetConvertToShareValue = () => {
         const shareValue = await contract?.[
           chain === "starknet" ? "get_ve_strk_to_stake" : "convertToShares"
         ](parseUnits(assets));
+
         return shareValue;
       } catch (err) {
         console.log(err);

@@ -54,15 +54,15 @@ export default function StakingOperations() {
   const { address: walletAddress, isConnected } = useChainAccount();
   const { getBalances: getMetisBalances } = useMetisBalances();
   const { getBalances: getStarknetBalances } = useStarknetBalances();
-  const { veMETISBalance, strkBalance } = useBalanceStore();
+  const { strkBalance, METISBalance } = useBalanceStore();
   const { setStakers, getStaker } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
 
   const totalBalanceToStake = useMemo(
-    () => (chain === "metis" ? veMETISBalance : strkBalance),
-    [chain, strkBalance, veMETISBalance]
+    () => (chain === "metis" ? METISBalance : strkBalance),
+    [METISBalance, chain, strkBalance]
   );
 
   useEffect(() => {
