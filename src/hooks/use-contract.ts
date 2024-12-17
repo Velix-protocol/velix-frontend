@@ -295,6 +295,7 @@ export const useGetTotalVeMetisAssets = () => {
         chain === "starknet" ? "get_tvl" : "totalAssets";
       const totalValueLocked = await contract?.[functionToGetTotalSupply]();
       setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
+      return totalValueLocked;
     } catch (err) {
       console.log(err);
       throw err;
@@ -366,15 +367,15 @@ export const useStarknetBalances = () => {
   }, [address, chain, refetch, setveStrkBalance]);
 
   useQuery({
-    queryKey: ["getstaknetBalances", chain],
+    queryKey: ["getstaknetBalances", chain, data?.formatted],
     queryFn: async () => {
-      if (chain === "metis") return;
       setStrkBalance(data?.formatted ?? "0.0");
       await getBalances();
+      return data?.formatted;
     },
-    retryOnMount: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false
+    refetchOnReconnect: false,
+    enabled: chain !== "metis"
   });
 
   return {
