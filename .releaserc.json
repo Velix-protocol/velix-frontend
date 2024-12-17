@@ -4,11 +4,6 @@
       "name": "main",
       "prerelease": false,
       "channel": false
-    },
-    {
-      "name": "releases/**",
-      "prerelease": false,
-      "channel": false
     }
   ],
   "repositoryUrl": "https://github.com/Velix-protocol/velix-frontend",
