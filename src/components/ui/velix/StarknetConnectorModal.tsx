@@ -4,11 +4,17 @@ import { useStarknetConnectorStore } from "@/store/starknetConnectorStore";
 import { Button } from "../button";
 import useChainAccount from "@/hooks/useChainAccount";
 import { truncateString } from "@/utils/utils";
+import { useTheme } from "@/context/theme-provider.tsx";
 
 export default function StarknetConnectorModal() {
   const { connect, connectors } = useConnect();
   const { isStarknetConnectorOpened, close } = useStarknetConnectorStore();
-  const { address, isConnected } = useChainAccount();
+  const {
+    address,
+    isConnected,
+    connector: connectedWallet
+  } = useChainAccount();
+  const { theme } = useTheme();
 
   if (!isStarknetConnectorOpened) return <></>;
   return (
@@ -21,13 +27,28 @@ export default function StarknetConnectorModal() {
         {connectors.map((connector) => (
           <li key={connector.id}>
             <Button
-              className="bg-velix-primary dark:bg-velix-dark-white hover:cursor-pointer justify-start lg:px-8 lg:py-5 hover:bg-velix-primary font-bold font-space-grotesk text-sm w-full"
+              data-connected={
+                connectedWallet?.name?.toLowerCase() ===
+                connector.name.toLowerCase()
+              }
+              className="group bg-velix-primary dark:bg-velix-dark-hover dark:text-velix-gray-200 hover:cursor-pointer flex items-center gap-2 cursor-pointer justify-start lg:px-4 lg:py-8 hover:bg-velix-primary font-bold font-space-grotesk text-sm w-full"
               onClick={() => {
                 connect({ connector });
                 close();
               }}
             >
+              <img
+                className="size-6"
+                src={
+                  typeof connector.icon === "string"
+                    ? connector.icon
+                    : connector.icon?.[theme === "system" ? "dark" : theme]
+                }
+              />
               {connector.name}
+              <small className="group-data-[connected=true]:block hidden border border-green-500 px-2 rounded-md">
+                Connected
+              </small>
             </Button>
           </li>
         ))}

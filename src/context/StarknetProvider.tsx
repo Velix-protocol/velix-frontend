@@ -15,7 +15,7 @@ export default function StarknetProviderContext({
 }) {
   const { connectors } = useInjectedConnectors({
     recommended: [argent(), braavos()],
-    includeRecommended: "onlyIfNoConnectors",
+    includeRecommended: "always",
     order: "alphabetical"
   });
 
