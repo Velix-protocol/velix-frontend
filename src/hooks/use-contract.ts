@@ -111,7 +111,7 @@ export const useApproveStaking = () => {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
               entrypoint: "approve",
-              calldata: [spender, starknetAmount]
+              calldata: [spender, starknetAmount.low, starknetAmount.high]
             },
             {
               version: constants.TRANSACTION_VERSION.V3
@@ -207,7 +207,11 @@ export const useStaking = () => {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.VAULT.address,
               entrypoint: "deposit_strk",
-              calldata: [starknetAmount, starknetAccount.address]
+              calldata: [
+                starknetAmount.low,
+                starknetAmount.high,
+                starknetAccount.address
+              ]
             },
             {
               version: constants.TRANSACTION_VERSION.V3

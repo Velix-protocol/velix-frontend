@@ -59,6 +59,7 @@
     "serve": "^14.2.3",
     "sonner": "^1.4.3",
     "starknet": "^6.12.1",
+    "starknetkit": "^2.6.1",
     "swr": "^2.2.5",
     "tailwind-accent-color": "^1.0.2",
     "tailwind-merge": "^2.2.1",

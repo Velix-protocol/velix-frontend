@@ -9,7 +9,7 @@ import useChainAccount from "@/hooks/useChainAccount";
 import useConnectWallet from "@/hooks/useConnectWallet";
 import { useBalance } from "wagmi";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useStarknetBalance } from "@/hooks/useStarknetBalance.ts";
 
 export default function AppHeader() {
@@ -22,9 +22,9 @@ export default function AppHeader() {
 
   const { data: starknetBalance } = useStarknetBalance();
 
-  const onConnectToWalletClick = async () => {
+  const onConnectToWalletClick = useCallback(async () => {
     await open();
-  };
+  }, [chain, isConnected, open]);
 
   const balance = useMemo(() => {
     return chain === "metis"

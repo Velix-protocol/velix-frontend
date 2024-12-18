@@ -107,7 +107,7 @@ export const useEnterRedemptionQueue = () => {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.VAULT.address,
               entrypoint: "initiate_withdrawal",
-              calldata: [starknetAmount]
+              calldata: [starknetAmount.low, starknetAmount.high]
             },
             {
               version: constants.TRANSACTION_VERSION.V3
@@ -125,6 +125,7 @@ export const useEnterRedemptionQueue = () => {
         setData(txHash);
         setError(null);
         setIsSuccess(true);
+        setIsPending(false);
         if (chain === "starknet") {
           const data = await decodeIntitatedWithdrawlStarknetEvents(
             txReceipt as GetTransactionReceiptResponse
@@ -152,11 +153,10 @@ export const useEnterRedemptionQueue = () => {
         console.log(e);
         setData(null);
         setIsSuccess(false);
+        setIsPending(false);
         setError({
           message: e.shortMessage ?? "We could not process the call, try later!"
         });
-      } finally {
-        setIsPending(false);
       }
     },
     [
@@ -215,12 +215,13 @@ export const useRedeemRedemptionTicketNft = () => {
         let tx = null;
         setIsPending(true);
         if (chain === "starknet" && starknetAccount) {
+          const formattedNftId = cairo.uint256(nftId);
           tx = await starknetAccount.execute(
             {
               contractAddress:
                 supportedChains.starknet.contracts.testnet.VAULT.address,
               entrypoint: "complete_withdrawal",
-              calldata: [cairo.uint256(nftId)]
+              calldata: [formattedNftId.low, formattedNftId.high]
             },
             {
               version: constants.TRANSACTION_VERSION.V3

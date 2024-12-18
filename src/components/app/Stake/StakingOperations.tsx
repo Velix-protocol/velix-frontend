@@ -114,7 +114,6 @@ export default function StakingOperations() {
   };
 
   const onApproveStaking = async () => {
-    console.log({ amountToStake });
     if (!amountToStake || !amountToStake.trim()) return;
     await approveStaking(amountToStake);
   };
