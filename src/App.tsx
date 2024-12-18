@@ -17,6 +17,7 @@ function App() {
       <Routes>
         <Route path="*" element={<Notfound />} />
         <Route path="/" element={<Page />}>
+          <Route index element={<StakePage />} />
           <Route path="vepoints" element={<VePoints />} />
           <Route path="stake" element={<StakePage />} />
           <Route path="dashboard" element={<DashboardPage />} />
