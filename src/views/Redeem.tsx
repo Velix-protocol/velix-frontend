@@ -32,7 +32,7 @@ export default function Redeem() {
     isPending: enterRedemptionQueuePending,
     isSuccess: enterRedemptionQueueSuccess,
     reset: setEnterRedemptionQueueStates,
-    error: rendemptionQueueError,
+    error: redemptionQueueError,
     data: txHash,
     enterRedemptionQueue
   } = useEnterRedemptionQueue();
@@ -87,7 +87,7 @@ export default function Redeem() {
       {showModal && chain === "starknet" && (
         <StandardModal
           onClose={onClose}
-          error={rendemptionQueueError}
+          error={redemptionQueueError}
           isSuccess={enterRedemptionQueueSuccess}
           isLoading={enterRedemptionQueuePending}
           title={enterRedemptionQueuePending ? "Processing..." : ""}
@@ -104,7 +104,7 @@ export default function Redeem() {
           onStep2Click={onEnterRedemptionQueue}
           renderButtonTitle={renderRedemptionQueueModalTitle}
           step1Error={approveError}
-          step2Error={rendemptionQueueError}
+          step2Error={redemptionQueueError}
           step1Pending={approvePending}
           step2Pending={enterRedemptionQueuePending}
           step1Success={approveSuccess}
