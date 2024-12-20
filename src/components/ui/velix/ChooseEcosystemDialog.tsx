@@ -51,15 +51,15 @@ export default function ChooseEcosystemDialog({
     >
       <div className="bg-velix-Ecosystem rounded-custom-sm lg:rounded-custom-lg shadow-lg p-10 w-80 h-auto lg:w-[37.5rem] lg:h-96 md:w-96 md:h-96 md:rounded-custom-md dark:bg-velix-form-input-dark ">
         <div className="flex items-center justify-between mb-[0.375rem]">
-          <h1 className="text-xl -mt-3 font-bold font-space-grotesk text-start weight-700 text-velix-black dark:text-velix-dark-white">
+          <h1 className="xl:text-xl lg:text-lg md:text-md xl:mt-4 xl:mb-3 mb-3 font-bold font-space-grotesk text-start weight-700 text-velix-black dark:text-velix-dark-white sm:text-xs">
             Choose Ecosystem
           </h1>
           <HiOutlineX
-            className="text-velix-black cursor-pointer p-1 rounded-md hover:bg-velix-gray-200 h-6 w-6 dark:text-velix-dark-white dark:hover:bg-velix-dark-hover lg:-mt-5 lg:-mr-3 md:-mt-10 md:-mr-5 -mt-12 -mr-6"
+            className="text-velix-black cursor-pointer p-1 rounded-md hover:bg-velix-gray-200 h-6 w-6 dark:text-velix-dark-white dark:hover:bg-velix-dark-hover lg:-mt-5 lg:-mr-1 md:-mt-10 md:-mr-5 -mt-12 -mr-3"
             onClick={onClose}
           />
         </div>
-        <p className="sm:text-sm md:text-md lg:text-lg -mt-2 font-space-grotesk text-start text-velix-black mb-5 lg:mb-9 md:mb-9 dark:text-velix-dark-white">
+        <p className="text-xs sm:text-xs md:text-md lg:text-lg -mt-2 font-space-grotesk text-start text-velix-black mb-5 lg:mb-9 md:mb-9 dark:text-velix-dark-white">
           Where would you like to stake?
         </p>
         <div className="space-y-[1.5rem]">
