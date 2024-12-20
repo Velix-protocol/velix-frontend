@@ -20,7 +20,7 @@ export default function StarknetConnectorModal() {
   return (
     <Modal onClose={close}>
       <ul className="w-full flex flex-col gap-5">
-        <h2 className="text-center border-b pb-5 font-bold">Connect Wallet</h2>
+        <h2 className="text-start pb-5 font-bold">Connect Wallet</h2>
         {isConnected && (
           <h3 className="text-center mb-5">{truncateString(address, 5, 5)}</h3>
         )}
@@ -31,7 +31,7 @@ export default function StarknetConnectorModal() {
                 connectedWallet?.name?.toLowerCase() ===
                 connector.name.toLowerCase()
               }
-              className="group bg-velix-primary dark:bg-velix-dark-hover dark:text-velix-gray-200 hover:cursor-pointer flex items-center gap-2 cursor-pointer justify-start lg:px-4 lg:py-8 hover:bg-velix-primary font-bold font-space-grotesk text-sm w-full"
+              className="group bg-velix-claim dark:bg-velix-claim-gray dark:hover:bg-velix-claim-gray2 hover:bg-velix-gray-200 text-velix-claim-gray dark:text-velix-gray-200 hover:cursor-pointer flex items-center gap-2 cursor-pointer justify-start lg:px-4 lg:py-8 font-bold font-space-grotesk text-sm w-full"
               onClick={() => {
                 connect({ connector });
                 close();
