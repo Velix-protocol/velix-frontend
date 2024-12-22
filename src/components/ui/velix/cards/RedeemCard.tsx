@@ -158,7 +158,7 @@ const RedeemCard = ({
               className={classNames(
                 "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
                 {
-                  "bg-velix-claim-green hover:velix-claim-green": isCountdownFinished, 
+                  "bg-velix-claim-green hover:velix-claim-green dark:text-white": isCountdownFinished, 
                   "bg-velix-blue hover:bg-velix-blue-dark dark:bg-velix-claim": !isCountdownFinished, 
                 }
               )}
