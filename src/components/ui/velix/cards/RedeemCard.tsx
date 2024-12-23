@@ -132,12 +132,12 @@ const RedeemCard = ({
                 {isCountdownFinished ? (
                   <ReadyIcon className="mr-1 w-4 h-4 fill-velix-claim " />
                 ) : (
-                  <FaClock className="mr-1 text-velix-blue dark:text-white" />
+                  <FaClock className="mr-1 text-velix-blue dark:text-white sm:mb-3 lg:mb-0 w-5 h-5" />
                 )}
                 {isCountdownFinished ? (
                   <span className="text-white">Ready to redeem</span>
                 ) : (
-                  <Countdown date={redeemTicket.maturity * 1000} onComplete={onCountdownComplete} />
+                  <Countdown className="sm:mb-3 lg:mb-0" date={redeemTicket.maturity * 1000} onComplete={onCountdownComplete} />
                 )}
               </div>
             </div>
@@ -156,10 +156,10 @@ const RedeemCard = ({
                   0 || !address
               }
               className={classNames(
-                "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
+                "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white sm:text-xs text-md dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
                 {
                   "bg-velix-claim-green hover:velix-claim-green dark:text-white": isCountdownFinished, 
-                  "bg-velix-blue hover:bg-velix-blue-dark dark:bg-velix-claim": !isCountdownFinished, 
+                  "bg-velix-blue hover:bg-velix-blue-dark dark:bg-velix-claim mt-3": !isCountdownFinished, 
                 }
               )}
             >
