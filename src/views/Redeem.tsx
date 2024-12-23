@@ -107,7 +107,7 @@ export default function Redeem() {
           </div>
         </StakeTitleWrapper>
         <AppContent>
-          <div className="w-full lg:hidden pt-32">
+          <div className="w-full lg:hidden pt-32 mt-3">
             <Title
               name="Redeem"
               subtitle="Only redeem with a counter of 3 to 5 days."
@@ -135,12 +135,12 @@ export default function Redeem() {
               </Button>
             </div>
           </RedeemLayout>
-          <div className="w-full lg:hidden">
+          <div className="w-full lg:hidden mt-3">
             <Title name="Reedem ticket" subtitle="You can now redeem." />
           </div>
 
           <div
-            className={`flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[5rem] rounded-xl bg-white justify-center items-center ${
+            className={`flex flex-col gap-2 dark:bg-velix-claim-gray w-full py-6 mt-[3rem] lg:mt-[5rem] md:mt-[5rem] rounded-xl bg-white justify-center items-center ${
               isWalletConnected ? "" : "h-auto"
             }`}
           >
