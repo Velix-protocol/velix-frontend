@@ -10,7 +10,7 @@ import Redeem from "./views/Redeem";
 import Reward from "./views/Reward";
 import { APP_MODE } from "./utils/constant";
 import VePoints from "./views/VePoints";
-
+import Crosschain from "./views/Crosschain";
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +23,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />
           <Route path="reward" element={<Reward />} />
+          <Route path="crosschain" element={<Crosschain />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -47,6 +48,7 @@ function LandingPage() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />
           <Route path="reward" element={<Reward />} />
+          <Route path="crosschain" element={<Crosschain />} />
         </Route>
       </Routes>
     </BrowserRouter>
