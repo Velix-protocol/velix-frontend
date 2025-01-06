@@ -5,9 +5,8 @@ import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
 import MetisCard from "@/components/ui/velix/cards/MetisCard";
 import StarknetCard from "@/components/ui/velix/cards/StarknetCard";
 import InputWalletAddress from "./InputWalletAddress";
-import React, { useState } from "react";
-
-const ClaimOnCrosschain: React.FC = () => {
+import { useState } from "react";
+export default function ClaimOnCrosschain(){
   const [walletSubmitted, setWalletSubmitted] = useState<boolean>(false);
 
   const handleClaim = (): void => {
@@ -77,6 +76,5 @@ const ClaimOnCrosschain: React.FC = () => {
       </Section>
     </div>
   );
-};
+}
 
-export default ClaimOnCrosschain;
