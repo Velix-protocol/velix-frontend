@@ -13,7 +13,7 @@ const InputWalletAddress: React.FC<InputWalletAddressProps> = ({ onClaim }) => {
   };
 
   return (
-    <div className="flex flex-col rounded-lg bg-white p-5 mt-12 w-full dark:bg-velix-claim-gray">
+    <div className="flex flex-col rounded-lg bg-white p-8 mt-12 w-full dark:bg-velix-claim-gray">
       <div className="flex bg-white dark:bg-velix-claim-gray2 rounded-lg flex-col sm:flex-row">
         <div className="flex-1">
           <div className="items-start xl:items-center mt-1">
