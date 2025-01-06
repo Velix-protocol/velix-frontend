@@ -33,7 +33,7 @@ const InputWalletAddress: React.FC<InputWalletAddressProps> = ({ onClaim }) => {
           className="lg:w-full w-full font-space-grotesk bg-velix-blue dark:bg-velix-gray text-white dark:text-velix-claim-gray px-10"
           disabled={!walletAddress} 
         >
-          Claim
+          Send
         </Button>
       </div>
     </div>
