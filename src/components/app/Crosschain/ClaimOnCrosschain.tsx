@@ -1,7 +1,6 @@
 import Section from "@/components/layouts/Section";
 import Title from "../../ui/velix/Title";
 import AppContent from "@/components/layouts/AppContent";
-import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
 import MetisCard from "@/components/ui/velix/cards/MetisCard";
 import StarknetCard from "@/components/ui/velix/cards/StarknetCard";
 import InputWalletAddress from "./InputWalletAddress";
@@ -14,9 +13,8 @@ export default function ClaimOnCrosschain(){
   };
 
   return (
-    <div>
       <Section className="pb-32 lg:pb-16">
-        <StakeTitleWrapper>
+        {/* <StakeTitleWrapper className="pt-20">
           <div className="w-full">
             {!walletSubmitted ? (
               <Title
@@ -38,10 +36,10 @@ export default function ClaimOnCrosschain(){
             />
             )}
           </div>
-        </StakeTitleWrapper>
+        </StakeTitleWrapper> */}
         <AppContent>
           <div className="w-full h-fit">
-            <div className="w-full block lg:hidden mt-32">
+            <div className="w-full block  mt-20">
             {!walletSubmitted ? (
               <Title
                 name="Paste your wallet address"
@@ -61,7 +59,7 @@ export default function ClaimOnCrosschain(){
             )}
           </div>
           <div className="w-full">
-            <div className="w-full block lg:hidden mt-10">
+            <div className="w-full block mt-20">
             {!walletSubmitted && (
             <Title
                 name="Claim crosschain rewards"
@@ -74,7 +72,6 @@ export default function ClaimOnCrosschain(){
           </div>
         </AppContent>
       </Section>
-    </div>
   );
 }
 
