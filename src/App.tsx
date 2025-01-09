@@ -10,7 +10,7 @@ import Redeem from "./views/Redeem";
 import Reward from "./views/Reward";
 import { APP_MODE } from "./utils/constant";
 import VePoints from "./views/VePoints";
-import Crosschain from "./views/Crosschain";
+// import Crosschain from "./views/Crosschain";
 function App() {
   return (
     <BrowserRouter>
