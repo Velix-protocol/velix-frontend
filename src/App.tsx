@@ -23,7 +23,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />
           <Route path="reward" element={<Reward />} />
-          <Route path="crosschain" element={<Crosschain />} />
+          {/*<Route path="crosschain" element={<Crosschain />} />*/}
         </Route>
       </Routes>
     </BrowserRouter>
@@ -48,7 +48,7 @@ function LandingPage() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="redeem" element={<Redeem />} />
           <Route path="reward" element={<Reward />} />
-          <Route path="crosschain" element={<Crosschain />} />
+          {/*<Route path="crosschain" element={<Crosschain />} />*/}
         </Route>
       </Routes>
     </BrowserRouter>
