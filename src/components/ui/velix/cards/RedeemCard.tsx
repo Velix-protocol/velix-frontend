@@ -14,7 +14,7 @@ import { EXPLORER_TX_URL } from "@/utils/constant";
 import SuccessModal from "../modal/SuccessModal";
 import Countdown from "react-countdown";
 import ReadyIcon from "../icons/ReadyIcon";
-import { FaClock } from "react-icons/fa";
+import CountDownIcon from "../icons/CountDownIcon";
 import classNames from "classnames";
 
 const RedeemCard = ({
@@ -132,10 +132,10 @@ const RedeemCard = ({
                 {isCountdownFinished ? (
                   <ReadyIcon className="mr-1 w-4 h-4 fill-velix-claim " />
                 ) : (
-                  <FaClock className="mr-1 text-velix-blue dark:text-white sm:mb-3 lg:mb-0 w-5 h-5" />
+                  <CountDownIcon className="mr-1 text-velix-blue dark:text-white sm:mb-3 lg:mb-0 w-5 h-5" />
                 )}
                 {isCountdownFinished ? (
-                  <span className="text-white">Ready to redeem</span>
+                  <span className="text-white text-xs">Ready to redeem</span>
                 ) : (
                   <Countdown className="sm:mb-3 lg:mb-0" date={redeemTicket.maturity * 1000} onComplete={onCountdownComplete} />
                 )}
@@ -156,7 +156,7 @@ const RedeemCard = ({
                   0 || !address
               }
               className={classNames(
-                "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white sm:text-xs text-md dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
+                "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white text-xs dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
                 {
                   "bg-velix-claim-green hover:velix-claim-green dark:text-white": isCountdownFinished, 
                   "bg-velix-blue hover:bg-velix-blue-dark dark:bg-velix-claim mt-3": !isCountdownFinished, 
