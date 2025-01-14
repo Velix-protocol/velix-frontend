@@ -56,7 +56,7 @@ class VelixApi {
 
   async getStaker(walletAddress: string) {
     if (!walletAddress) return;
-    return await this.api.get<Staker>(`/stake/stakers/${walletAddress}`);
+    return await this.api.get<Staker>(`/stake/staker/${walletAddress}`);
   }
 
   async redeemPoints(redeemData: RedeemPointDto) {

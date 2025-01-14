@@ -7,6 +7,9 @@ import FaucetIcon from "../ui/velix/icons/FaucetIcon";
 import ImageIcon from "../ui/velix/icons/ImageIcon";
 import { cn, isApp } from "@/utils/utils";
 import StartIcon from "../ui/velix/icons/StartIcon";
+import CrossChainIcon from "../ui/velix/icons/CrossChainIcon";
+import CloseIcon from "../ui/velix/icons/CloseIcon";
+import MoreIcon from "../ui/velix/icons/MoreIcon";
 
 interface NavigationMenuCardProps {
   isNotFound: boolean;
@@ -96,6 +99,11 @@ function NavigationMenuCard({
         className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
     ),
+    crosschain: (
+      <CrossChainIcon
+        className={applyActiveStyles(path, { className: defaultIconClassName })}
+      />
+    )
   } as const;
 
   const getTo = (path: string) => {
@@ -117,7 +125,7 @@ function NavigationMenuCard({
       <span>{menuIcons?.[path as keyof typeof menuIcons]}</span>
       <span
         className={applyActiveStyles(path, {
-          className: "lg:font-bold text-[0.625rem] xl:text-base lg:text-sm",
+          className: "lg:font-bold text-[0.625rem] xl:text-base lg:text-sm"
         })}
       >
         {label}
@@ -131,9 +139,28 @@ export default function NavigationMenus({
 }: {
   isNotFound?: boolean;
 }) {
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+
+  const toggleMore = () => {
+    setIsMoreOpen((prev) => !prev);
+  };
 
   return (
     <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
+      {isMoreOpen ? (
+        <>
+          <NavigationMenuCard
+            path="dashboard"
+            label="Dashboard"
+            isNotFound={isNotFound}
+          />
+          <NavigationMenuCard
+            path="crosschain"
+            label="Crosschain reward"
+            isNotFound={isNotFound}
+          />
+        </>
+      ) : (
         <>
           <NavigationMenuCard
             path="stake"
@@ -144,7 +171,6 @@ export default function NavigationMenus({
             path="redeem"
             label="Redeem"
             isNotFound={isNotFound}
-            className="lg:flex md:flex"
           />
           <NavigationMenuCard
             path="vepoints"
@@ -155,10 +181,31 @@ export default function NavigationMenus({
             path="dashboard"
             label="Dashboard"
             isNotFound={isNotFound}
-            className="lg:flex md:flex"
+            className="hidden lg:flex md:flex"
           />
+          {/*<NavigationMenuCard*/}
+          {/*  path="crosschain"*/}
+          {/*  label="Crosschain reward"*/}
+          {/*  isNotFound={isNotFound}*/}
+          {/*  className="hidden lg:flex md:flex"*/}
+          {/*/>*/}
         </>
-  
+      )}
+      <div className="lg:hidden md:hidden sm:flex flex-col items-center relative">
+        <button
+          onClick={toggleMore}
+          className="flex flex-col justify-center items-center gap-1 lg:gap-3 font-space-grotesk text-velix-gray dark:text-velix-icon-dark"
+        >
+          {isMoreOpen ? (
+            <CloseIcon className="w-5 h-5" />
+          ) : (
+            <MoreIcon className="w-5 h-5" />
+          )}
+          <span className="lg:font-bold text-[0.625rem] lg:text-base">
+            {isMoreOpen ? "Close" : "More"}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

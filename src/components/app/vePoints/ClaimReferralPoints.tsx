@@ -92,7 +92,7 @@ export default function ClaimReferralPoints() {
 
       <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
         <div className="flex items-center gap-8">
-          <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg lg:p-4 p-4 sm:p-3 flex items-center justify-center">
+          <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg mb-7 lg:p-4 sm:-mb-3 xl:mb-0 lg:mb-0 p-4 sm:p-3 flex items-center justify-center">
             <VelixReferralIcon className="w-6 h-6" />
           </div>
           <div className="font-space-grotesk">
