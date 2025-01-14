@@ -13,7 +13,7 @@ export default function HowItWorksCard({
   return (
     <div
       className={cn(
-        "flex flex-col items-center w-92 h-81 justify-center p-2 rounded-lg overflow-hidden relative bg-velix-icon-bg dark:bg-velix-claim-gray3",
+        "flex flex-col items-center w-92 h-81 justify-center p-2 rounded-lg overflow-hidden relative dark:bg-velix-claim-gray3",
         className
       )}
     >

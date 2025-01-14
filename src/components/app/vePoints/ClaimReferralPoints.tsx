@@ -152,7 +152,7 @@ export default function ClaimReferralPoints() {
                 ? "error"
                 : ""
             }
-            placeholder="Referral points to claim"
+            placeholder="0.00 Referral points"
             icon={
               <img src="/velix-icon.png" alt="velix-icon" className="w-5 h-5" />
             }
