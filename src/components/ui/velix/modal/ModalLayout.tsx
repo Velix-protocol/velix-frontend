@@ -25,7 +25,7 @@ export default function ModalLayout({
           <CancelIcon
             onClick={onClose}
             role="button"
-            className="w-7 h-7 absolute cursor-pointer fill-gray-400 dark:fill-white top-0 right-0 m-5"
+            className="w-7 h-7 absolute cursor-pointer fill-gray-400 dark:fill-white top-0 right-0 m-5 hover:fill-velix-claim-grey dark:hover:fill-velix-claim-grey"
           />
           {children}
         </div>
