@@ -41,5 +41,14 @@ export type RedeemTicket = {
   nftId: string;
 };
 
+export type SaveStarknetRedeemTicket = {
+  amount: string;
+  txHash: string;
+  nftId: string;
+  walletAddress: string;
+  maturity: number;
+};
+
 export type AppMode = "landingPage" | "app";
 export type Action = "stake" | "redeem";
+export type SupportedChains = "metis" | "starknet";

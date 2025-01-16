@@ -16,5 +16,6 @@ export const useStakersStore = create<BalanceStore>((set) => ({
   getStaker: async (walletAddress: string) => {
     const staker = await velixApi.getStaker(walletAddress);
     set(() => ({ staker: staker?.data }));
+    return staker;
   }
 }));

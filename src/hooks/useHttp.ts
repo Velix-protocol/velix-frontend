@@ -2,14 +2,14 @@
 import { claimFaucetToken, velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { useCallback, useState } from "react";
-import { useAccount } from "wagmi";
-import { useMetisBalance } from "./use-contract";
+import { useMetisBalances } from "./use-contract";
+import useChainAccount from "./useChainAccount";
 
 const useApiHookBaseState = () => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState<unknown>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const { address } = useChainAccount();
 
   return {
     isPending,
@@ -34,7 +34,7 @@ export const useClaimStakingPoints = () => {
   } = useApiHookBaseState();
   const { getStaker } = useStakersStore();
   const [txHash, setTxHash] = useState("");
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
 
   const claimStakingPoints = useCallback(
     async (points: number, txHash: string) => {
@@ -89,7 +89,7 @@ export const useClaimReferralPoints = () => {
   } = useApiHookBaseState();
   const { getStaker } = useStakersStore();
   const [txHash, setTxHash] = useState("");
-  const { getBalances } = useMetisBalance();
+  const { getBalances } = useMetisBalances();
 
   const redeemReferralPoints = useCallback(
     async (referralPoints: number) => {

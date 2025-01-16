@@ -11,14 +11,15 @@ import {
   useEnterRedemptionQueue
 } from "@/hooks/use-redemption";
 import TransactionModal from "@/components/ui/velix/modal";
-import { useAccount } from "wagmi";
 import { useQuery } from "@tanstack/react-query";
 import { velixApi } from "@/services/http";
 import { useBalanceStore } from "@/store/balanceState.ts";
-import { useMetisBalance } from "@/hooks/use-contract.ts";
+import { useMetisBalances, useStarknetBalances } from "@/hooks/use-contract.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 export default function Redeem() {
-  const { veMETISBalance } = useBalanceStore();
+  const { veMETISBalance, veStrkBalance } = useBalanceStore();
   const {
     isPending: approvePending,
     isSuccess: approveSuccess,
@@ -30,22 +31,23 @@ export default function Redeem() {
     isPending: enterRedemptionQueuePending,
     isSuccess: enterRedemptionQueueSuccess,
     reset: setEnterRedemptionQueueStates,
-    error: rendemptionQueueError,
+    error: redemptionQueueError,
     data: txHash,
     enterRedemptionQueue
   } = useEnterRedemptionQueue();
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
-  const { getBalances } = useMetisBalance();
-  const { address, isConnected: isWalletConnected } = useAccount();
+  const { getBalances } = useMetisBalances();
+  const { getBalances: getStarknetBalances } = useStarknetBalances();
+  const { address, isConnected: isWalletConnected } = useChainAccount();
+  const chain = useSupportedChain();
 
   const { data: redeemTickets, refetch: refetchRedeemTickets } = useQuery({
-    queryKey: ["redeem-ticket"],
+    queryKey: ["redeem-ticket", isWalletConnected],
     queryFn: () =>
       velixApi.getRedeemTicketsOwnedByWalletAddress(address as string),
     enabled: isWalletConnected,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false
+    refetchOnWindowFocus: false
   });
 
   const onEnterRedemptionQueue = async () => {
@@ -53,7 +55,11 @@ export default function Redeem() {
     if (Number(amountToRedeem) === 0) return;
     await enterRedemptionQueue(address, Number(amountToRedeem));
     await refetchRedeemTickets();
-    await getBalances();
+    if (chain === "metis") {
+      await getBalances();
+    } else {
+      await getStarknetBalances();
+    }
   };
 
   const onClose = () => {
@@ -71,7 +77,7 @@ export default function Redeem() {
   };
 
   const onSetMaxValue = () => {
-    setAmountToRedeem(veMETISBalance);
+    setAmountToRedeem(chain === "metis" ? veMETISBalance : veStrkBalance);
   };
 
   return (
@@ -85,7 +91,7 @@ export default function Redeem() {
           onStep2Click={onEnterRedemptionQueue}
           renderButtonTitle={renderRedemptionQueueModalTitle}
           step1Error={approveError}
-          step2Error={rendemptionQueueError}
+          step2Error={redemptionQueueError}
           step1Pending={approvePending}
           step2Pending={enterRedemptionQueuePending}
           step1Success={approveSuccess}
@@ -129,7 +135,9 @@ export default function Redeem() {
               <Button
                 disabled={!Number(amountToRedeem) || !isWalletConnected}
                 className="w-full font-space-grotesk bg-velix-blue dark:bg-velix-gray text-white dark:text-velix-claim-gray px-10"
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                  setShowModal(true);
+                }}
               >
                 Start Redeem Process
               </Button>
@@ -151,6 +159,9 @@ export default function Redeem() {
                     key={redeemTicket.id}
                     redeemTicket={redeemTicket}
                     refetchRedeemNfts={refetchRedeemTickets}
+                    getBalances={
+                      chain === "starknet" ? getStarknetBalances : getBalances
+                    }
                   />
                 ))
                 .reverse()

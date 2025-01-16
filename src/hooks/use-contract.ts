@@ -1,29 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useAccount, useBalance } from "wagmi";
+import { useBalance } from "wagmi";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  velixContracts,
-  VELIX_METIS_VAULT_CONTRACT_ADDRESS
-} from "@/utils/constant";
-import {
-  ContractTransactionReceipt,
-  ethers,
-  formatEther,
-  parseUnits
-} from "ethers";
+import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
+import { ethers, formatEther, parseUnits } from "ethers";
 import { useBalanceStore } from "@/store/balanceState";
 import Web3Service from "@/services/web3Service";
 import { useMetricsStore } from "@/store/velixMetrics";
 import { velixApi } from "@/services/http";
 import { AxiosError } from "axios";
-import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/metis/velixMetisVault.ts";
+import { supportedChains } from "@/utils/config.ts";
+import useChainAccount from "./useChainAccount";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import { converGweiToEth, waitForTransaction } from "@/utils/utils.ts";
+import { SupportedChains } from "@/types/index.ts";
+import { useStarknetBalance } from "@/hooks/useStarknetBalance.ts";
+import { useAccount } from "@starknet-react/core";
+import { cairo, constants } from "starknet";
+import { useQuery } from "@tanstack/react-query";
 
 export const useContractHookState = () => {
   const [data, setData] = useState<any>(null);
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<{ message: string } | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { address } = useAccount();
+  const { address } = useChainAccount();
 
   return {
     data,
@@ -38,18 +39,30 @@ export const useContractHookState = () => {
   };
 };
 
-export type ContractName = keyof typeof velixContracts;
+export type MetisContractName =
+  keyof typeof supportedChains.metis.contracts.testnet;
 
-export const useContract = (contactName: ContractName) => {
-  const { address } = useAccount();
+export type StarknetContractName =
+  keyof typeof supportedChains.starknet.contracts.testnet;
+
+export const useContract = (
+  contactName: MetisContractName | StarknetContractName
+) => {
+  const { address } = useChainAccount();
+  const chain = useSupportedChain();
+  if (!chain) return;
   if (!address) return;
-  const contractData = velixContracts[contactName];
-  if (!contractData.abi || !contractData.address) return;
 
-  return new Web3Service().contract(
-    contractData.address,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
+  const contractData = supportedChains[chain].contracts.testnet[contactName];
+  if (!contractData?.abi || !contractData?.address) return;
+
+  const web3Service = new Web3Service(chain);
+  return web3Service.contract(
+    contractData.address as `0x${string}`,
     contractData.abi,
-    address
+    address as `0x${string}`
   );
 };
 
@@ -71,8 +84,13 @@ export const useApproveStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("METIS_TOKEN");
+  const chain = useSupportedChain();
 
+  const contractInstance = useContract(
+    chain === "starknet" ? "STRK_TOKEN" : "METIS_TOKEN"
+  );
+
+  const { account: starknetAccount } = useAccount();
   const approveStaking = useCallback(
     async (amountToStake: string) => {
       const contract = await contractInstance;
@@ -80,24 +98,58 @@ export const useApproveStaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.approve(
-          VELIX_METIS_VAULT_CONTRACT_ADDRESS,
-          parseUnits(amountToStake)
+        const spender =
+          chain === "starknet"
+            ? supportedChains.starknet.contracts.testnet.VAULT.address
+            : supportedChains.metis.contracts.testnet.VELIX_VAULT.address;
+
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amountToStake));
+          tx = await starknetAccount?.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.STRK_TOKEN.address,
+              entrypoint: "approve",
+              calldata: [spender, starknetAmount.low, starknetAmount.high]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.approve(spender, parseUnits(amountToStake));
+        }
+
+        const { txHash } = await waitForTransaction(
+          chain as SupportedChains,
+          tx
         );
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
-        setData(txhash.hash);
+        console.log({ txHash });
+        setData(txHash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({ message: e.shortMessage ?? e });
+        if (chain !== "starknet") {
+          setError({ message: e.shortMessage ?? e });
+        }
       } finally {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess,
+      starknetAccount
+    ]
   );
 
   const reset = useCallback(() => {
@@ -133,7 +185,12 @@ export const useStaking = () => {
     isSuccess,
     setIsSuccess
   } = useContractHookState();
-  const contractInstance = useContract("VELIX_VAULT");
+  const chain = useSupportedChain();
+
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "VELIX_VAULT"
+  );
+  const { account: starknetAccount } = useAccount();
 
   const stake = useCallback(
     async (amountToStake: string) => {
@@ -142,28 +199,65 @@ export const useStaking = () => {
       if (!address) return;
       try {
         setIsPending(true);
-        const tx = await contract.deposit(parseUnits(amountToStake), address);
-        const txhash = (await tx.wait()) as ContractTransactionReceipt;
+        let tx = null;
+        if (chain === "starknet" && starknetAccount) {
+          const starknetAmount = cairo.uint256(parseUnits(amountToStake));
+          tx = await starknetAccount.execute(
+            {
+              contractAddress:
+                supportedChains.starknet.contracts.testnet.VAULT.address,
+              entrypoint: "deposit_strk",
+              calldata: [
+                starknetAmount.low,
+                starknetAmount.high,
+                starknetAccount.address
+              ]
+            },
+            {
+              version: constants.TRANSACTION_VERSION.V3
+            }
+          );
+        } else {
+          tx = await contract.deposit(parseUnits(amountToStake), address);
+        }
+
+        const { txHash } = await waitForTransaction(
+          chain as SupportedChains,
+          tx
+        );
         await velixApi.saveAction("stake", {
           amount: Number(amountToStake),
           walletAddress: address,
-          txHash: txhash.hash
+          txHash,
+          chain: chain as SupportedChains
         });
-        setData(txhash.hash);
+
+        setData(txHash);
         setError(null);
         setIsSuccess(true);
       } catch (e: any) {
         console.log(e);
         setData(null);
         setIsSuccess(false);
-        setError({
-          message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
-        });
+        if (chain !== "starknet") {
+          setError({
+            message: e instanceof AxiosError ? e.message : e.shortMessage ?? e
+          });
+        }
       } finally {
         setIsPending(false);
       }
     },
-    [address, contractInstance, setData, setError, setIsPending, setIsSuccess]
+    [
+      address,
+      chain,
+      contractInstance,
+      setData,
+      setError,
+      setIsPending,
+      setIsSuccess,
+      starknetAccount
+    ]
   );
 
   const reset = useCallback(() => {
@@ -188,8 +282,11 @@ export const useStaking = () => {
  *
  * */
 export const useGetTotalVeMetisAssets = () => {
-  const { address } = useAccount();
-  const contractInstance = useContract("VELIX_VAULT");
+  const { address } = useChainAccount();
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "VELIX_VAULT"
+  );
   const { setTotalValueLocked } = useMetricsStore();
 
   const getTotalLocked = useCallback(async () => {
@@ -198,17 +295,24 @@ export const useGetTotalVeMetisAssets = () => {
     if (!address) return;
 
     try {
-      const totalValueLocked = await contract.totalAssets();
+      const functionToGetTotalSupply =
+        chain === "starknet" ? "get_tvl" : "totalAssets";
+      const totalValueLocked = await contract?.[functionToGetTotalSupply]();
       setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
+      return totalValueLocked;
     } catch (err) {
       console.log(err);
       throw err;
     }
-  }, [address, contractInstance, setTotalValueLocked]);
+  }, [address, chain, contractInstance, setTotalValueLocked]);
 
-  useEffect(() => {
-    getTotalLocked();
-  }, [getTotalLocked]);
+  useQuery({
+    queryKey: ["getValueLocked"],
+    queryFn: () => getTotalLocked(),
+    retryOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false
+  });
 };
 
 /**
@@ -216,8 +320,11 @@ export const useGetTotalVeMetisAssets = () => {
  * @returns
  */
 export const useGetConvertToShareValue = () => {
-  const { address } = useAccount();
-  const contractInstance = useContract("VELIX_VAULT");
+  const { address } = useChainAccount();
+  const chain = useSupportedChain();
+  const contractInstance = useContract(
+    chain === "starknet" ? "VAULT" : "VELIX_VAULT"
+  );
 
   return useCallback(
     async (assets: string) => {
@@ -226,19 +333,61 @@ export const useGetConvertToShareValue = () => {
       if (!address) return;
 
       try {
-        const shareValue = await contract.convertToShares(parseUnits(assets));
+        const shareValue = await contract?.[
+          chain === "starknet" ? "get_ve_strk_to_mint" : "convertToShares"
+        ](parseUnits(assets));
         return shareValue;
       } catch (err) {
         console.log(err);
         throw err;
       }
     },
-    [address, contractInstance]
+    [address, chain, contractInstance]
   );
 };
 
-export const useMetisBalance = () => {
-  const { address } = useAccount();
+export const useStarknetBalances = () => {
+  const { address } = useChainAccount();
+  const { setStrkBalance, setveStrkBalance } = useBalanceStore();
+  const chain = useSupportedChain();
+  const { data, refetch } = useStarknetBalance();
+
+  const getBalances = useCallback(async () => {
+    if (!address) return;
+    if (chain === "metis") return;
+    const web3Service = new Web3Service("starknet");
+    const contract = await web3Service.contract(
+      supportedChains.starknet.contracts.testnet.VESTRK_TOKEN
+        .address as `0x${string}`,
+      supportedChains.starknet.contracts.testnet.VESTRK_TOKEN.abi,
+      address
+    );
+
+    const balance = await contract.balance_of(address);
+    const formattedBalance = converGweiToEth(balance);
+    setveStrkBalance(formattedBalance);
+    refetch();
+  }, [address, chain, refetch, setveStrkBalance]);
+
+  useQuery({
+    queryKey: ["getstaknetBalances", chain, data?.formatted],
+    queryFn: async () => {
+      setStrkBalance(data?.formatted ?? "0.0");
+      await getBalances();
+      return data?.formatted;
+    },
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    enabled: chain !== "metis"
+  });
+
+  return {
+    getBalances
+  };
+};
+
+export const useMetisBalances = () => {
+  const { address } = useChainAccount();
   const { setveMETISBalance, setMETISBalance } = useBalanceStore();
   const { data, refetch: fetchMETISBalance } = useBalance({
     address: address as `0x${string}`

@@ -1,17 +1,29 @@
-import { useMetisBalance } from "@/hooks/use-contract";
+import { useMetisBalances, useStarknetBalances } from "@/hooks/use-contract";
 import { useBalanceStore } from "@/store/balanceState";
 import { Role } from "@/types";
+import useChainTokens from "@/hooks/useChainTokens.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import { prettifyBalance } from "@/utils/utils.ts";
 
-export default function Balance({ role }: { role: Role }) {
-  useMetisBalance();
-  const { veMETISBalance, METISBalance } = useBalanceStore();
+export default function Balance({
+  role
+}: {
+  isConnected: boolean;
+  role: Role;
+}) {
+  useMetisBalances();
+  useStarknetBalances();
+  const { veMETISBalance, METISBalance, strkBalance, veStrkBalance } =
+    useBalanceStore();
+  const chainToken = useChainTokens();
+  const chain = useSupportedChain();
 
   const renderBalance = () => {
     if (role === "stake") {
-      return `${METISBalance} METIS`;
+      return `${chain === "starknet" ? prettifyBalance(strkBalance) : METISBalance} ${chainToken.nativeToken}`;
     }
     if (role === "redeem") {
-      return `${veMETISBalance} veMETIS`;
+      return `${chain === "starknet" ? veStrkBalance : veMETISBalance} ${chainToken.stakedToken}`;
     }
     return "0.0";
   };
@@ -19,10 +31,9 @@ export default function Balance({ role }: { role: Role }) {
   const renderVelixProtocolBalanceUnits = () => {
     switch (role) {
       case "stake":
-        return `${veMETISBalance} veMETIS`;
+        return `${chain === "starknet" ? veStrkBalance : veMETISBalance} ${chainToken.stakedToken}`;
       case "redeem":
-        return `${METISBalance} METIS`;
-      case "swap":
+        return `${chain === "starknet" ? prettifyBalance(strkBalance) : METISBalance} ${chainToken.nativeToken}`;
       default:
         "";
     }

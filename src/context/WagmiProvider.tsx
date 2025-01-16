@@ -14,7 +14,7 @@ createWeb3Modal({
   projectId
 });
 
-function ContextProvider({ children }: { children: ReactNode }) {
+function WagmiProviderContext({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -22,4 +22,4 @@ function ContextProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export default ContextProvider;
+export default WagmiProviderContext;
