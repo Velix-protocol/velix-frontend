@@ -1,4 +1,3 @@
-import { useAccount } from "wagmi";
 import Balance from "../app/Balance";
 import {
   ChangeEvent,
@@ -15,6 +14,8 @@ import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import { useGetConvertToShareValue } from "@/hooks/use-contract";
 import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
+import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -25,6 +26,7 @@ type StakeLayoutProps = {
   error: string;
   onSetMaxValue: () => void;
   withConvertion?: boolean;
+  setAmountToReceiveAfterStaking?: (state: string) => void;
 };
 
 const StakeLayout = ({
@@ -35,18 +37,20 @@ const StakeLayout = ({
   role,
   error,
   onSetMaxValue,
-  withConvertion = true
+  withConvertion = true,
+  setAmountToReceiveAfterStaking
 }: StakeLayoutProps) => {
-  const { isConnected } = useAccount();
+  const { isConnected } = useChainAccount();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [convertedValue, setConvertedValue] = useState<number | string>(0);
   const getConvertToShareValue = useGetConvertToShareValue();
+  const chainToken = useChainTokens();
 
   const renderFromTitles = () => {
     switch (role) {
       case "stake":
-        return "METIS";
+        return chainToken.nativeToken;
       default:
         return "";
     }
@@ -55,7 +59,7 @@ const StakeLayout = ({
   const renderToTitles = () => {
     switch (role) {
       case "stake":
-        return "veMETIS";
+        return chainToken.stakedToken;
       default:
         return "";
     }
@@ -66,15 +70,19 @@ const StakeLayout = ({
       if (!value) return "0.0";
       switch (role) {
         case "stake":
-          return Number(formatEther(await getConvertToShareValue(value))) * 1;
+          return Number(formatEther(await getConvertToShareValue(value)));
         default:
           return 0;
       }
     }, [getConvertToShareValue, role, value]);
 
   useEffect(() => {
-    (async () => setConvertedValue(await renderConvertedValue()))();
-  }, [renderConvertedValue]);
+    (async () => {
+      const value = await renderConvertedValue();
+      setConvertedValue(value);
+      setAmountToReceiveAfterStaking?.(value as string);
+    })();
+  }, [renderConvertedValue, setAmountToReceiveAfterStaking]);
 
   const icons = {
     veMETIS: (
@@ -89,7 +97,7 @@ const StakeLayout = ({
         isConnected && "bg-velix-primary"
       }`}
     >
-      <Balance role={role} />
+      <Balance isConnected={!!isConnected} role={role} />
       <div className="bg-white dark:-mt-5 dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
           <VeInput

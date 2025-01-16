@@ -4,22 +4,24 @@ import StakingOperations from "./StakingOperations";
 import AppContent from "@/components/layouts/AppContent";
 import Statitics from "../Statitics";
 import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 
 export default function Stake() {
+  const chainToken = useChainTokens();
   return (
     <div>
       <Section className="px-5 pb-32 lg:pb-16">
         <StakeTitleWrapper>
           <div className="w-full">
             <Title
-              name="Stake METIS"
-              subtitle="Stake METIS and receive veMETIS"
+              name={`Stake ${chainToken.nativeToken}`}
+              subtitle={`Stake ${chainToken.nativeToken} and receive ${chainToken.stakedToken}`}
             />
           </div>
           <div className="w-full">
             <Title
               name="Velix statistics"
-              subtitle="View your  veMETIS statistics."
+              subtitle={`View your ${chainToken.stakedToken} statistics.`}
             />
           </div>
         </StakeTitleWrapper>
@@ -27,8 +29,8 @@ export default function Stake() {
           <div className="w-full h-fit">
             <div className="w-full block lg:hidden mt-32">
               <Title
-                name="Stake METIS"
-                subtitle="Stake METIS and receive veMETIS"
+                name={`Stake ${chainToken.nativeToken}`}
+                subtitle={`Stake ${chainToken.nativeToken} and receive ${chainToken.stakedToken}`}
               />
             </div>
             <StakingOperations />
@@ -37,7 +39,7 @@ export default function Stake() {
             <div className="w-full block lg:hidden mt-10">
               <Title
                 name="Velix statistics"
-                subtitle="View your  veMETIS statistics."
+                subtitle={`View your ${chainToken.stakedToken} statistics.`}
               />
             </div>
             <Statitics />

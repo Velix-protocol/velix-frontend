@@ -1,16 +1,16 @@
 import { Card, CardContent } from "@/components/ui/DashboardCard.tsx";
 // import { Button } from "@/components/ui/button.tsx";
 import { useStakersStore } from "@/store/stakers.ts";
-import { useAccount } from "wagmi";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ClaimDialog from "@/components/ui/velix/ClaimDialog.tsx";
 import { velixApi } from "@/services/http.ts";
 import VelixStakingIcon from "@/components/ui/velix/icons/VelixStakingIcon";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 export default function ClaimStakingPoints() {
   const { getStaker } = useStakersStore();
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const { data: redeemableStakeTransactions } = useQuery({
@@ -29,7 +29,7 @@ export default function ClaimStakingPoints() {
     setIsDialogOpen(false);
   };
 
-  // const onClaimDialog = () => {
+  // const onClaimDialog = () => {redeemableStakeTransactions
   //   setIsDialogOpen(true);
   // };
 

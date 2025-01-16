@@ -3,17 +3,17 @@ import Section from "@/components/layouts/Section";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/ui/velix/modal/ModalLayout";
 import FaucetImage from "@/components/ui/velix/icons/FaucetImage";
-import { useWeb3Modal } from "@web3modal/wagmi/react";
 import { useCallback, useLayoutEffect, useState } from "react";
-import { useAccount } from "wagmi";
 import dayjs from "dayjs";
 import { useFaucet } from "@/hooks/useHttp";
 import SuccessModal from "@/components/ui/velix/modal/SuccessModal.tsx";
+import useChainAccount from "@/hooks/useChainAccount";
+import useConnectWallet from "@/hooks/useConnectWallet";
 
 export default function Faucet() {
   const { claim, isPending, isSuccess, reset } = useFaucet();
-  const { isConnected, address } = useAccount();
-  const { open } = useWeb3Modal();
+  const { isConnected, address } = useChainAccount();
+  const { open } = useConnectWallet();
   const [isAllowedToClaim, setIsAllowedToClaim] = useState(true);
 
   const checkIsAllowedToClaim = useCallback(() => {
