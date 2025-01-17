@@ -440,3 +440,35 @@ export const useMetisBalances = () => {
 
   return { getBalances };
 };
+
+export const useVaultReward = () => {
+  const { address } = useChainAccount();
+  const chain = useSupportedChain();
+  const contractInstance = useContract("STRK_TOKEN");
+
+  const getStarknetReward = useCallback(async () => {
+    const contract = await contractInstance;
+    if (!contract) return;
+    if (!address) return;
+    if (chain === "metis") return;
+
+    try {
+      const reward = await contract?.balance_of(
+        supportedChains.starknet.contracts.testnet.VAULT_WITHDRAWAL_MANEGER
+          .address
+      );
+      return Number(formatEther(reward)).toFixed(4);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
+  }, [address, chain, contractInstance]);
+
+  return useQuery({
+    queryKey: ["getReward"],
+    queryFn: () => getStarknetReward(),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    enabled: !!address
+  });
+};

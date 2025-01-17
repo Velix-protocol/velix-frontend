@@ -72,6 +72,11 @@ export const supportedChains = {
           address:
             "0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d",
           abi: TESTNET_STARKNET_TOKEN
+        },
+        VAULT_WITHDRAWAL_MANEGER: {
+          address:
+            "0x5a85268ee1a0c2f3b018fa1d94a394ae18eaa18405e3919cf62ba4a7688b8fb",
+          abi: []
         }
       }
     }

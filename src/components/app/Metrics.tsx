@@ -4,7 +4,7 @@ import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "../ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
-import { useGetTVL } from "@/hooks/use-contract";
+import { useGetTVL, useVaultReward } from "@/hooks/use-contract";
 import { velixApi } from "@/services/http";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
@@ -15,6 +15,7 @@ export default function Metrics() {
   const { isConnected, address } = useChainAccount();
   const { setStakers, stakers, staker, getStaker } = useStakersStore();
   const { data: totalValueLocked } = useGetTVL();
+  const { data: vaultReward } = useVaultReward();
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
 
@@ -83,6 +84,13 @@ export default function Metrics() {
         description="My Referral points"
         value={`${staker?.referralPoints?.toFixed(3) ?? "--"}`}
       />
+      {chain === "starknet" && (
+        <MetricsCard
+          icon={<></>}
+          description="Rewards"
+          value={`${vaultReward ?? "--"}`}
+        />
+      )}
     </div>
   );
 }
