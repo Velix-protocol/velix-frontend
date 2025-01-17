@@ -281,7 +281,7 @@ export const useStaking = () => {
  * This hook returns the total amount of underlying (veMetis) assets held by the vault.
  *
  * */
-export const useGetTotalVeMetisAssets = () => {
+export const useGetTVL = () => {
   const { address } = useChainAccount();
   const chain = useSupportedChain();
   const contractInstance = useContract(
@@ -299,19 +299,19 @@ export const useGetTotalVeMetisAssets = () => {
         chain === "starknet" ? "get_tvl" : "totalAssets";
       const totalValueLocked = await contract?.[functionToGetTotalSupply]();
       setTotalValueLocked(Number(formatEther(totalValueLocked)).toFixed(4));
-      return totalValueLocked;
+      return Number(formatEther(totalValueLocked)).toFixed(4);
     } catch (err) {
       console.log(err);
       throw err;
     }
   }, [address, chain, contractInstance, setTotalValueLocked]);
 
-  useQuery({
+  return useQuery({
     queryKey: ["getValueLocked"],
     queryFn: () => getTotalLocked(),
-    retryOnMount: false,
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false
+    refetchOnReconnect: false,
+    enabled: !!address
   });
 };
 

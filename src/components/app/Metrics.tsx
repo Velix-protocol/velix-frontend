@@ -4,8 +4,7 @@ import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "../ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
-import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
-import { useMetricsStore } from "@/store/velixMetrics";
+import { useGetTVL } from "@/hooks/use-contract";
 import { velixApi } from "@/services/http";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
@@ -15,8 +14,7 @@ import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 export default function Metrics() {
   const { isConnected, address } = useChainAccount();
   const { setStakers, stakers, staker, getStaker } = useStakersStore();
-  const { totalValueLocked } = useMetricsStore();
-  useGetTotalVeMetisAssets();
+  const { data: totalValueLocked } = useGetTVL();
   const chainToken = useChainTokens();
   const chain = useSupportedChain();
 
@@ -66,7 +64,7 @@ export default function Metrics() {
           />
         }
         description={`${chainToken.stakedToken} TVL`}
-        value={totalValueLocked}
+        value={totalValueLocked || "--"}
       />
       <MetricsCard
         icon={
