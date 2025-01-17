@@ -87,7 +87,7 @@ export default function Metrics() {
       {chain === "starknet" && (
         <MetricsCard
           icon={<></>}
-          description="Rewards"
+          description="Vault Rewards"
           value={`${vaultReward ?? "--"}`}
         />
       )}
