@@ -39,7 +39,7 @@ export default function ClaimOnCrosschain(){
         </StakeTitleWrapper> */}
         <AppContent>
           <div className="w-full h-fit">
-            <div className="w-full block  mt-20">
+            <div className="w-full block  lg:mt-20 mt-8">
             {!walletSubmitted ? (
               <Title
                 name="Paste your wallet address"
@@ -59,7 +59,7 @@ export default function ClaimOnCrosschain(){
             )}
           </div>
           <div className="w-full">
-            <div className="w-full block mt-20">
+            <div className="w-full block lg:mt-20 mt-8">
             {!walletSubmitted && (
             <Title
                 name="Claim crosschain rewards"
@@ -68,8 +68,8 @@ export default function ClaimOnCrosschain(){
             )}
             </div>
             {!walletSubmitted && <MetisCard />}
-            <StarknetCard />
-          </div>
+            <StarknetCard className={walletSubmitted ? 'mt-[13rem]' : ''} />
+            </div>
         </AppContent>
       </Section>
   );
