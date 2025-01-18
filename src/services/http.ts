@@ -1,4 +1,11 @@
-import { Action, RedeemTicket, Stake, Staker } from "@/types";
+import {
+  Action,
+  RedeemTicket,
+  SaveStarknetRedeemTicket,
+  Stake,
+  Staker,
+  SupportedChains
+} from "@/types";
 import { VELIX_API_URL } from "@/utils/constant";
 import {
   GetAmountToRedeemFromPointDto,
@@ -25,10 +32,10 @@ class VelixApi {
     this.api = api;
   }
 
-  private actionEndpoint(action: Action) {
+  private actionEndpoint(action: Action, chain: SupportedChains) {
     switch (action) {
       case "stake":
-        return "/stake/metis";
+        return `/stake/${chain}`;
       case "redeem":
         return "/redeem/nft-tickets";
       default:
@@ -37,26 +44,33 @@ class VelixApi {
   }
 
   async saveAction(action: Action, data: saveActionDto) {
-    return await this.api.put(this.actionEndpoint(action), data);
+    return await this.api.put(
+      this.actionEndpoint(action, data?.chain || "metis"),
+      data
+    );
   }
 
-  async retreiveActionsActivity(action: Action, walletAddress: string) {
+  async retreiveActionsActivity(
+    action: Action,
+    walletAddress: string,
+    chain: SupportedChains
+  ) {
     return await this.api.get(
-      `${this.actionEndpoint(action)}/${walletAddress}`
+      `${this.actionEndpoint(action, chain || "metis")}/${walletAddress}`
     );
   }
 
   async saveStaker(data: saveStakerDto) {
-    return await this.api.put("/stake/stakers/metis", data);
+    return await this.api.put(`/stake/stakers/${data.chain}`, data);
   }
 
-  async retreiveStakersNumber() {
-    return await this.api.get("/stake/stakers/count/matis");
+  async retreiveStakersNumber(network: SupportedChains) {
+    return await this.api.get(`/stake/stakers/count/${network}`);
   }
 
   async getStaker(walletAddress: string) {
     if (!walletAddress) return;
-    return await this.api.get<Staker>(`/stake/stakers/${walletAddress}`);
+    return await this.api.get<Staker>(`/stake/staker/${walletAddress}`);
   }
 
   async redeemPoints(redeemData: RedeemPointDto) {
@@ -102,9 +116,44 @@ class VelixApi {
   }) {
     if (!walletAddress) return;
     if (!txHash) return;
-    return await this.api.patch("/redeem/nft-tickets", {
+    return await this.api.post("/redeem/nft-tickets", {
       walletAddress,
       txHash
+    });
+  }
+
+  async completeRedeemTicket({
+    nftId,
+    walletAddress,
+    chain
+  }: {
+    nftId: string;
+    walletAddress: string;
+    chain: SupportedChains;
+  }) {
+    if (!nftId || !walletAddress) return;
+    return await this.api.patch(`/redeem/nft-tickets/${chain}/complete`, {
+      nftId,
+      walletAddress
+    });
+  }
+
+  async saveStarknetRedeemTicket({
+    walletAddress,
+    txHash,
+    amount,
+    nftId,
+    maturity
+  }: SaveStarknetRedeemTicket) {
+    if (!walletAddress) return;
+    if (!txHash) return;
+
+    return await this.api.post("/redeem/nft-tickets/starknet", {
+      walletAddress,
+      txHash,
+      amount,
+      nftId,
+      maturity
     });
   }
 }

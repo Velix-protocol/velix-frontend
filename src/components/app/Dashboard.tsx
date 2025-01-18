@@ -1,5 +1,5 @@
 import Section from "../layouts/Section";
-import { useMetisBalance } from "@/hooks/use-contract";
+import { useMetisBalances } from "@/hooks/use-contract";
 import {
   Table,
   TableBody,
@@ -12,14 +12,16 @@ import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import { useBalanceStore } from "@/store/balanceState";
 import { Card, CardContent } from "../ui/DashboardCard";
 import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
 import dayjs from "dayjs";
-import { EXPLORER_TX_URL } from "@/utils/constant";
 import { Skeleton } from "../ui/skeleton";
 import { velixApi } from "@/services/http";
 import { useStakersStore } from "@/store/stakers";
 import { Action } from "@/types/index.ts";
 import { useQuery } from "@tanstack/react-query";
+import { supportedChains } from "@/utils/config";
+import useChainTokens from "@/hooks/useChainTokens.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 type DashboardData = {
   id: string;
@@ -30,11 +32,13 @@ type DashboardData = {
 };
 
 export default function Dashboard() {
-  useMetisBalance();
-  const { veMETISBalance, METISBalance } = useBalanceStore();
-  const { address } = useAccount();
+  useMetisBalances();
+  const { veMETISBalance, METISBalance, strkBalance, veStrkBalance } =
+    useBalanceStore();
+  const { address } = useChainAccount();
   const [actionToRetreive, setActionToRetreive] = useState<Action>("stake");
-
+  const chainToken = useChainTokens();
+  const chain = useSupportedChain();
   const { staker, getStaker } = useStakersStore();
 
   useEffect(() => {
@@ -46,7 +50,8 @@ export default function Dashboard() {
     queryFn: async () => {
       const { data } = await velixApi.retreiveActionsActivity(
         actionToRetreive,
-        address as string
+        address as string,
+        chain
       );
       return data as DashboardData[];
     },
@@ -55,12 +60,12 @@ export default function Dashboard() {
 
   const velixBalances = [
     {
-      name: "METIS",
-      value: METISBalance
+      name: chainToken.nativeToken,
+      value: chain === "starknet" ? strkBalance : METISBalance
     },
     {
-      name: "veMETIS",
-      value: veMETISBalance
+      name: chainToken.stakedToken,
+      value: chain === "starknet" ? veStrkBalance : veMETISBalance
     },
     {
       name: "APR",
@@ -159,7 +164,9 @@ export default function Dashboard() {
                   return (
                     <tr
                       onClick={() =>
-                        window.open(`${EXPLORER_TX_URL}${data.txHash}`)
+                        window.open(
+                          `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${data.txHash}`
+                        )
                       }
                       key={`row-${index}`}
                       className="grid grid-cols-3 w-full justify-between cursor-pointer hover:bg-velix-slate-blue dark:hover:bg-velix-form-input-dark text-velix-primary dark:text-velix-dark-white rounded-xl"

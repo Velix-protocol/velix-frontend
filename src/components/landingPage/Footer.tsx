@@ -21,28 +21,42 @@ export default function Footer() {
           <div>
             <VelixBlackLogo className="dark:hidden" />
             <VelixLogo className="dark:block hidden w-[5.625rem] h-[1.4375rem]" />
-            <p className="text-velix-primary dark:text-white font-space-grotesk text-[1rem] mt-5">
+            <p className="text-velix-gray dark:text-white font-space-grotesk text-[1rem] mt-5">
               Simplifying Liquid Staking <br /> experience across networks
             </p>
           </div>
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-[1rem]">
-              Liquid staking
+              Learn
             </h2>
             <ul className="font-space-grotesk text-velix-gray text-[1rem]">
-              <li className="cursor-pointer">What’s liquid staking</li>
-              <li className="cursor-pointer">What can i earn</li>
-              <li className="cursor-pointer">What are the risks</li>
+            <li className="cursor-pointer">
+              <a href="https://velixprotocol.medium.com/unveiling-velix-a-new-era-of-liquid-staking-on-metis-2afe6537f3c5" target="_blank">
+              What is Velix Protocol</a>
+            </li>
+              <li className="cursor-pointer">
+                <a href="https://docs.velix.io/quick-guides/getting-started-on-metis" target="_blank">
+                What’s liquid staking</a>
+              </li>
+              <li className="cursor-pointer">
+                <a href="https://velixprotocol.medium.com/" target="_blank">News</a>
+                </li>
+              <li className="cursor-pointer">
+                <a href="https://docs.velix.io/" target="_blank">Docs</a> 
+                </li>
             </ul>
           </div>
           <div className="flex flex-col gap-6">
             <h2 className="font-bold font-space-grotesk text-[1rem]">
-              Protocol
+              About
             </h2>
             <ul className="font-space-grotesk text-velix-gray text-[1rem]">
-              <li className="cursor-pointer">About the protocol</li>
-              <li className="cursor-pointer">Why Velix?</li>
-              <li className="cursor-pointer">Security</li>
+              <li className="cursor-pointer">
+                <a href=" https://velixprotocol.medium.com/" target="_blank">Blog</a>
+              </li>
+              <li className="cursor-pointer">
+                <a href="https://docs.velix.io/contact-us/socials" target="_blank">Contact</a>               
+              </li>
             </ul>
           </div>
         </div>

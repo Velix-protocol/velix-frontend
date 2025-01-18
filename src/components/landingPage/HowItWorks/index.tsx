@@ -18,7 +18,7 @@ export default function HowItWorks() {
             <h2 className="font-space-grotesk text-black dark:text-white font-bold text-2xl lg:text-4xl text-center mt-5 md:mt-0 ">
               How Velix Works
             </h2>
-            <div className="lg:flex md:flex sm:flex-row gap-4 items-start">
+            <div className="lg:flex md:flex sm:flex-row gap-4 items-cent justify-center">
               <div className="flex lg:flex-col md:flex-col sm:flex-row justify-start md:mr-7 xl:mr-0 lg:-mr-0 mt-20 lg:w-1/3 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 p-2 rounded-lg w-fit h-fit flex items-start">
                   <StepsSpan
@@ -43,16 +43,16 @@ export default function HowItWorks() {
               <img
                 src="/svg/ArrowSteps1.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] -ml-[20.5rem] xl:block hidden lg:hidden dark:hidden"
+                className="-mt-[3rem] -ml-[20.5rem] xl:block hidden lg:hidden dark:hidden w-auto h-auto"
               />
               <img
                 src="/svg/BigArrow-yellow.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] w-auto h-auto -ml-[20.4rem] hidden dark:lg:hidden dark:md:hidden dark:sm:hidden dark:hidden dark:xl:block"
+                className="-mt-[3rem] w-auto h-auto -ml-[20.4rem] hidden dark:lg:hidden dark:md:hidden dark:sm:hidden dark:hidden dark:xl:block"
               />
 
               <SmallArrow className="ml-8 sm:block lg:hidden md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="-ml-[6rem] lg:-ml-[15rem] lg:mr-[0.2rem] mt-[7rem] w-[8rem]  md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
+              <MeduimArrow className="-ml-[6rem] lg:-ml-[15rem] lg:mr-[0.2rem] mt-[-9rem] w-[8rem]  md:block lg:block xl:hidden h-[auto] fill-velix-blue hidden dark:fill-velix-yellow" />
 
               <div className="flex lg:flex-col md:flex-col md:mr-2 lg:mr-0 sm:flex-row lg:mt-[rem] xl:mt-[15rem] md:mt-20 mb-5 gap-4">
                 <div className="bg-velix-icon-bg dark:bg-velix-claim-gray2 lg:-ml-4 md:-ml-4 p-2 rounded-lg w-fit h-fit flex items-start">
@@ -60,7 +60,7 @@ export default function HowItWorks() {
                     number={2}
                     className="lg:ml-12 -ml-4 mr-16 -mt-4 lg:mt-[-1.3rem]"
                   />
-                  <HowItWorksCard className="flex-shrink-0 px">
+                  <HowItWorksCard className="flex-shrink-0 px mb-">
                     <img src="/svg/recieve.svg" alt="Receive" />
                   </HowItWorksCard>
                 </div>
@@ -79,16 +79,16 @@ export default function HowItWorks() {
               <img
                 src="/svg/receive-arrow.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] w-auto h-auto -ml-[7.8rem] xl:block hidden lg:hidden dark:hidden"
+                className="-mt-[3rem] -ml-[7.8rem] xl:block hidden lg:hidden dark:hidden w-auto h-auto"
               />
               <img
                 src="/svg/BigArrow-receive.svg"
                 alt="Receive arrow"
-                className="mt-[7.5rem] w-auto h-auto -ml-[7.7rem] hidden dark:lg:hidden dark:md:hidden dark:hidden dark:xl:block"
+                className="-mt-[3rem] w-auto h-auto -ml-[7.7rem] hidden dark:lg:hidden dark:md:hidden dark:hidden dark:xl:block"
               />
 
               <SmallArrow className="ml-8 sm:block lg:hidden -mt-[1.2rem] md:hidden fill-velix-blue dark:fill-velix-yellow" />
-              <MeduimArrow className="ml-[-5.4rem] lg:-ml-[7.6rem] mt-[7rem]  md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
+              <MeduimArrow className="ml-[-5.4rem] lg:-ml-[7.6rem] mt-[-9rem]  md:block xl:hidden lg:block w-[8rem] hidden fill-velix-blue dark:fill-velix-yellow" />
 
               <div className="flex lg:flex-col md:flex-col sm:flex-row items-center lg:mt-20 md:mt-20 md:-ml-4 lg:-ml-[1.3rem]">
                 <StepsSpan

@@ -18,6 +18,11 @@ const config = {
       }
     },
     extend: {
+      fontSize: {
+        'sm': '0.875rem',
+        'md': '1rem',
+        'lg': '1.125rem',
+      },
       fontFamily: {
         "space-grotesk": "space-grotesk",
         sans: "space-grotesk"
@@ -37,6 +42,10 @@ const config = {
         "velix-claim-blue-bg": "#ECFBFD",
         "velix-claim-grey-bg": "#F7F7F7",
         "velix-claim-red-bg": "#FFF3F0",
+        "velix-Ecosystem": "#F5F7FF",
+        "velix-gray-100":"#FFFFFF",
+        "velix-gray-200":"#E9ECFF",
+        "velix-dark-hover": "#414040",
         "velix-blue": "#0000fe",
         "velix-primary": "var(--velix-primary)",
         "velix-yellow": "var(--velix-yellow)",
@@ -90,9 +99,10 @@ const config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        "custom-lg": "60px",
-        "custom-md": "30px",
-        "custom-sm": "16px"
+        // Adding the custom values for ChooseEcosystemDialog
+        "custom-lg": "3.75rem",
+        "custom-md": "2.25rem",
+        "custom-sm": "1.25rem"
       },
       keyframes: {
         "accordion-down": {

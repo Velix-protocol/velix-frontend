@@ -21,12 +21,15 @@ export default function ClaimReferralPoints() {
     useClaimReferralPoints();
   const { address } = useAccount();
   const [showModal, setShowModal] = useState(false);
-  const [referralPointsToRedeem, setReferralPointsToRedeem] = useState("");
+  const [referralPointsToRedeem, setReferralPointsToRedeem] = useState("0");
   const [pointToToken, setPointToToken] = useState(0);
 
   useQuery({
     queryKey: ["getStaker", address],
-    queryFn: () => getStaker(address as string),
+    queryFn: () => {
+      getStaker(address as string);
+      return null;
+    },
     refetchOnWindowFocus: false
   });
 
@@ -142,7 +145,6 @@ export default function ClaimReferralPoints() {
           <VeInput
             className="w-full max-lg:-mb-3"
             value={referralPointsToRedeem}
-            defaultValue={referralPointsToRedeem}
             onChange={throttledClaimReferralPointChange}
             onMaxButtonClicked={onSetMaxValue}
             withMaxButton
@@ -152,7 +154,7 @@ export default function ClaimReferralPoints() {
                 ? "error"
                 : ""
             }
-            placeholder="Referral points to claim"
+            placeholder="0.00 Referral points"
             icon={
               <img src="/velix-icon.png" alt="velix-icon" className="w-5 h-5" />
             }

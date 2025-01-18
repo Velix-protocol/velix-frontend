@@ -103,7 +103,7 @@ function NavigationMenuCard({
       <CrossChainIcon
         className={applyActiveStyles(path, { className: defaultIconClassName })}
       />
-    ),
+    )
   } as const;
 
   const getTo = (path: string) => {
@@ -125,7 +125,7 @@ function NavigationMenuCard({
       <span>{menuIcons?.[path as keyof typeof menuIcons]}</span>
       <span
         className={applyActiveStyles(path, {
-          className: "lg:font-bold text-[0.625rem] xl:text-base lg:text-sm",
+          className: "lg:font-bold text-[0.625rem] xl:text-base lg:text-sm"
         })}
       >
         {label}
@@ -139,7 +139,6 @@ export default function NavigationMenus({
 }: {
   isNotFound?: boolean;
 }) {
-
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   const toggleMore = () => {
@@ -148,7 +147,7 @@ export default function NavigationMenus({
 
   return (
     <div className="flex justify-evenly lg:justify-normal items-center xl:space-x-10 lg:space-x-6 text-base">
-              {isMoreOpen ? (
+      {isMoreOpen ? (
         <>
           <NavigationMenuCard
             path="dashboard"
@@ -184,12 +183,12 @@ export default function NavigationMenus({
             isNotFound={isNotFound}
             className="hidden lg:flex md:flex"
           />
-          <NavigationMenuCard
-            path="crosschain"
-            label="Crosschain reward"
-            isNotFound={isNotFound}
-            className="hidden lg:flex md:flex"
-          />
+          {/*<NavigationMenuCard*/}
+          {/*  path="crosschain"*/}
+          {/*  label="Crosschain reward"*/}
+          {/*  isNotFound={isNotFound}*/}
+          {/*  className="hidden lg:flex md:flex"*/}
+          {/*/>*/}
         </>
       )}
       <div className="lg:hidden md:hidden sm:flex flex-col items-center relative">

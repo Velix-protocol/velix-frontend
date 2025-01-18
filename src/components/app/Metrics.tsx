@@ -4,17 +4,20 @@ import Copy from "@/components/ui/velix/icons/Copy";
 import MetricsCard from "../ui/velix/cards/MetricsCard";
 import { useEffect } from "react";
 import { useStakersStore } from "@/store/stakers";
-import { useAccount } from "wagmi";
-import { useGetTotalVeMetisAssets } from "@/hooks/use-contract";
-import { useMetricsStore } from "@/store/velixMetrics";
+import { useGetTVL, useVaultReward } from "@/hooks/use-contract";
 import { velixApi } from "@/services/http";
+import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
 import VelixReferralIcon1 from "../ui/velix/icons/VelixReferralIcon1";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 
 export default function Metrics() {
-  const { isConnected, address } = useAccount();
+  const { isConnected, address } = useChainAccount();
   const { setStakers, stakers, staker, getStaker } = useStakersStore();
-  const { totalValueLocked } = useMetricsStore();
-  useGetTotalVeMetisAssets();
+  const { data: totalValueLocked } = useGetTVL();
+  const { data: vaultReward } = useVaultReward();
+  const chainToken = useChainTokens();
+  const chain = useSupportedChain();
 
   useEffect(() => {
     getStaker(address as string);
@@ -22,10 +25,11 @@ export default function Metrics() {
 
   useEffect(() => {
     (async () => {
-      const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
+      const { data: stakersNumber } =
+        await velixApi.retreiveStakersNumber(chain);
       setStakers(stakersNumber ?? 0);
     })();
-  }, [setStakers]);
+  }, [chain, setStakers]);
 
   return (
     <div
@@ -50,7 +54,7 @@ export default function Metrics() {
             aria-label="ChatIcon Icon"
           />
         }
-        description="veMETIS market cap"
+        description={`${chainToken.stakedToken} market cap`}
         value="--"
       />
       <MetricsCard
@@ -60,8 +64,8 @@ export default function Metrics() {
             aria-label="ChatIcon Icon"
           />
         }
-        description="veMetis TVL"
-        value={totalValueLocked}
+        description={`${chainToken.stakedToken} TVL`}
+        value={totalValueLocked || "--"}
       />
       <MetricsCard
         icon={
@@ -80,6 +84,13 @@ export default function Metrics() {
         description="My Referral points"
         value={`${staker?.referralPoints?.toFixed(3) ?? "--"}`}
       />
+      {chain === "starknet" && (
+        <MetricsCard
+          icon={<></>}
+          description="Vault Rewards"
+          value={`${vaultReward ?? "--"}`}
+        />
+      )}
     </div>
   );
 }

@@ -5,29 +5,39 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import StakeLayout from "@/components/layouts/StakeLayout";
 import {
   useApproveStaking,
-  useMetisBalance,
-  useStaking
+  useGetConvertToShareValue,
+  useMetisBalances,
+  useStaking,
+  useStarknetBalances
 } from "@/hooks/use-contract";
-import { useAccount } from "wagmi";
 import Modal from "@/components/ui/velix/modal/ModalLayout";
 import SuccessIcon from "@/components/ui/velix/icons/SuccessIcon";
 import MetisIcon from "@/components/ui/velix/icons/MetisIcon";
 import { Clock4 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useBalanceStore } from "@/store/balanceState";
-import { EXPLORER_TX_URL, MAX_INPUT_LENGTH } from "@/utils/constant";
 import ModalButtons from "@/components/ui/velix/modal/ModalButtons";
+import { MAX_INPUT_LENGTH } from "@/utils/constant";
 import WaitingForApprovalModal from "../WaitingForApprovalModal";
 import { useStakersStore } from "@/store/stakers";
 import { velixApi } from "@/services/http";
 import useReferralCode from "@/hooks/useReferralCode";
+import { supportedChains } from "@/utils/config";
+import useChainAccount from "@/hooks/useChainAccount";
+import useChainTokens from "@/hooks/useChainTokens.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 import SuccessModal from "@/components/ui/velix/modal/SuccessModal";
+import { formatEther } from "ethers";
+import { useQuery } from "@tanstack/react-query";
+import { prettifyBalance } from "@/utils/utils.ts";
 
 export default function StakingOperations() {
   const [isProtocolDisclaimerOpened, setIsProtocolDisclaimerOpened] =
     useState(false);
   const [stakebridge, setStakeBrigde] = useState(false);
   const [amountToStake, setAmountToStake] = useState("");
+  const [amountToReceiveAfterStaking, setAmountToReceiveAfterStaking] =
+    useState("0.00");
   const [showModal, setShowModal] = useState(false);
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
   const {
@@ -45,12 +55,20 @@ export default function StakingOperations() {
     reset: resetStakeState,
     txhash
   } = useStaking();
-  const { address: walletAddress, isConnected } = useAccount();
-  const { getBalances } = useMetisBalance();
-  const { METISBalance } = useBalanceStore();
-  const { setStakers } = useStakersStore();
+  const { address: walletAddress, isConnected } = useChainAccount();
+  const { getBalances: getMetisBalances } = useMetisBalances();
+  const { getBalances: getStarknetBalances } = useStarknetBalances();
+  const { strkBalance, METISBalance } = useBalanceStore();
+  const { setStakers, getStaker } = useStakersStore();
   const { referralCode, removeReferralCodeFromStoreAndUrl } = useReferralCode();
-  const { getStaker } = useStakersStore();
+  const chainToken = useChainTokens();
+  const chain = useSupportedChain();
+  const getConvertToShareValue = useGetConvertToShareValue();
+
+  const totalBalanceToStake = useMemo(
+    () => (chain === "metis" ? METISBalance : strkBalance),
+    [METISBalance, chain, strkBalance]
+  );
 
   useEffect(() => {
     if (isSuccess) {
@@ -58,7 +76,11 @@ export default function StakingOperations() {
     }
     if (isStaked) {
       setAmountToStake("");
-      getBalances();
+      if (chain === "metis") {
+        getMetisBalances();
+      } else {
+        getStarknetBalances();
+      }
       getStaker(walletAddress as string);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,9 +94,12 @@ export default function StakingOperations() {
     document.body.style.overflow = "auto";
   }, [showModal]);
 
-  const onViewTransaction = async () => {
-    window.open(`${EXPLORER_TX_URL}${txhash}`);
-  };
+  const onViewTransaction = useCallback(async () => {
+    if (!chain) return;
+    window.open(
+      `${supportedChains?.[chain].explorerUrls.testnet.txUrl}${txhash}`
+    );
+  }, [chain, txhash]);
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const value =
@@ -94,7 +119,6 @@ export default function StakingOperations() {
   };
 
   const onApproveStaking = async () => {
-    console.log({ amountToStake });
     if (!amountToStake || !amountToStake.trim()) return;
     await approveStaking(amountToStake);
   };
@@ -103,12 +127,20 @@ export default function StakingOperations() {
     if (!amountToStake || !amountToStake.trim() || !walletAddress) return;
     resetStakeState();
     await stake(amountToStake);
+
+    if (chain === "starknet") {
+      getStarknetBalances();
+    } else {
+      getMetisBalances();
+    }
+
     await velixApi.saveStaker({
       walletAddress: walletAddress as `0x${string}`,
       amount: Number(amountToStake),
-      referralCode
+      referralCode,
+      chain
     });
-    const { data: stakersNumber } = await velixApi.retreiveStakersNumber();
+    const { data: stakersNumber } = await velixApi.retreiveStakersNumber(chain);
     setStakers(stakersNumber ?? 0);
     removeReferralCodeFromStoreAndUrl();
   };
@@ -140,6 +172,14 @@ export default function StakingOperations() {
     setCurrentStep(1);
   }, [resetApproveState, resetStakeState]);
 
+  const { data: rate } = useQuery({
+    queryKey: ["conversationRate", chain, isConnected],
+    queryFn: () => getConvertToShareValue("1"),
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+    enabled: chain === "starknet" && isConnected
+  });
+
   useEffect(() => {
     if (isStaked) {
       setShowModal(false);
@@ -153,9 +193,9 @@ export default function StakingOperations() {
       stakePending ||
       !amountToStake ||
       !Number(amountToStake) ||
-      Number(amountToStake) > Number(METISBalance)
+      Number(amountToStake) > Number(totalBalanceToStake)
     );
-  }, [amountToStake, isPending, stakePending, METISBalance]);
+  }, [amountToStake, isPending, stakePending, totalBalanceToStake]);
 
   const renderStakeButtonTitle = () => {
     if (stakePending) return "Staking...";
@@ -197,12 +237,14 @@ export default function StakingOperations() {
                 <div className="flex flex-col gap-5 w-full">
                   <div className="bg-velix-slate-blue dark:text-velix-dark-white p-5 text-velix-gray flex gap-2 items-center rounded-lg">
                     <MetisIcon className="w-6 h-6 fill-velix-primary dark:fill-velix-icon-dark" />
-                    Receive {amountToStake} veMETIS
+                    Receive {amountToReceiveAfterStaking}{" "}
+                    {chainToken.stakedToken}
                   </div>
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">
                     <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
-                      Start earning after 7 days
+                      Start earning after{" "}
+                      {chain === "starknet" ? "15 minutes" : "7 days"}.
                     </p>
                   </div>
                 </div>
@@ -213,7 +255,8 @@ export default function StakingOperations() {
                       className="w-5 h-5 accent-velix-primary dark:accent-velix-dark-white"
                     />
                     <p className="-mt-1">
-                      I understand that Staking rewards start after 7 days.
+                      I understand that Staking rewards start after{" "}
+                      {chain === "starknet" ? "15 minutes" : "7 days"}.
                     </p>
                   </div>
                 </div>
@@ -249,10 +292,11 @@ export default function StakingOperations() {
         </Modal>
       )}
       <StakeLayout
-        onSetMaxValue={() => setAmountToStake(METISBalance)}
+        setAmountToReceiveAfterStaking={setAmountToReceiveAfterStaking}
+        onSetMaxValue={() => setAmountToStake(totalBalanceToStake)}
         error={
-          Number(amountToStake) > Number(METISBalance)
-            ? "Entered amount exceeds your veMETIS balance"
+          Number(amountToStake) > Number(totalBalanceToStake)
+            ? `Entered amount exceeds your ${chainToken.nativeToken} balance`
             : ""
         }
         value={amountToStake}
@@ -284,7 +328,12 @@ export default function StakingOperations() {
               value="Be aware of both staking and redeeming fees that will be deducted when the transaction is done."
             />
           )}
-          <StakingDetails title="Exchange Rate" value="1 METIS = 1 veMETIS" />
+          {isConnected && (
+            <StakingDetails
+              title="Exchange Rate"
+              value={`1 ${chainToken.nativeToken} = ${chain === "starknet" ? prettifyBalance(formatEther(rate || "1"), 3) : "1"}  ${chainToken.stakedToken}`}
+            />
+          )}
         </div>
         <StakingFormButtom
           isLoading={isPending || stakePending}

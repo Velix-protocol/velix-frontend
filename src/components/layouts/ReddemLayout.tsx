@@ -5,6 +5,7 @@ import { ChangeEvent, ReactNode } from "react";
 import { Role } from "@/types";
 import VelixBlueLogo from "../ui/velix/icons/VelixBlueLogo";
 import VeInput from "../ui/velix/VeInput";
+import useChainTokens from "@/hooks/useChainTokens";
 
 type RedeemLayoutProps = {
   children: ReactNode;
@@ -16,7 +17,6 @@ type RedeemLayoutProps = {
   onSetMaxValue: () => void;
   withConvertion?: boolean;
 };
-
 const RedeemLayout = ({
   children,
   onFromValueChange,
@@ -26,14 +26,22 @@ const RedeemLayout = ({
   onSetMaxValue
 }: RedeemLayoutProps) => {
   const { isConnected } = useAccount();
-
+  const chainToken = useChainTokens()
+  const renderToTitles = () => {
+    switch (role) {
+      case "redeem":
+        return chainToken.stakedToken;
+      default:
+        return "";
+    }
+  };
   return (
     <div
       className={`mt-10 w-full lg:mt-20 lg:sticky lg:top-36 rounded-2xl ${
         isConnected && "bg-velix-primary"
       }`}
     >
-      <Balance role={role} />
+      <Balance isConnected={isConnected} role={role} />
       <div className="bg-white dark:-mt-5  dark:bg-velix-form-dark-background p-5 lg:p-11 rounded-xl h-full">
         <div className="flex flex-col relative gap-3">
           <VeInput
@@ -44,8 +52,8 @@ const RedeemLayout = ({
             icon={
               <VelixBlueLogo className="w-5 h-5 fill-velix-blue dark:fill-white" />
             }
-            tokenName="veMETIS Amount"
-            placeholder="0.00 veMETIS"
+            tokenName={`${renderToTitles()} Amount`}
+            placeholder={`0.00 ${renderToTitles()}`}
             error={error}
           />
           {error && (

@@ -1,10 +1,10 @@
-import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metisToken";
-import { VELIX_NFT_CONTRACT_ABI } from "@/abi/velixNft";
-import { CONFIG_CONTRACT_ABI } from "@/abi/config";
-import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/RewardDispatcher";
-import { FAUCET_CONTRACT_ABI } from "@/abi/faucet";
-import { REDEMPTION_QUEUE_ABI } from "@/abi/redemptionQueue";
-import { VELIX_METIS_VAULT_ABI } from "@/abi/velixMetisVault.ts";
+import { METIS_TOKEN_CONTRACT_ABI } from "@/abi/metis/metisToken.ts";
+import { VELIX_NFT_CONTRACT_ABI } from "@/abi/metis/velixNft.ts";
+import { CONFIG_CONTRACT_ABI } from "@/abi/metis/config.ts";
+import { REWARD_DISPATCHER_CONTRACT_ABI } from "@/abi/metis/RewardDispatcher.ts";
+import { FAUCET_CONTRACT_ABI } from "@/abi/metis/faucet.ts";
+import { REDEMPTION_QUEUE_ABI } from "@/abi/metis/redemptionQueue.ts";
+import { VELIX_METIS_VAULT_ABI } from "@/abi/metis/velixMetisVault.ts";
 
 export const INFURA_API_KEY = import.meta.env.VITE_INFURA_API_KEY;
 export const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;

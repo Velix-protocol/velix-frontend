@@ -1,16 +1,16 @@
 import { Card, CardContent } from "@/components/ui/DashboardCard.tsx";
 // import { Button } from "@/components/ui/button.tsx";
 import { useStakersStore } from "@/store/stakers.ts";
-import { useAccount } from "wagmi";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ClaimDialog from "@/components/ui/velix/ClaimDialog.tsx";
 import { velixApi } from "@/services/http.ts";
 import VelixStakingIcon from "@/components/ui/velix/icons/VelixStakingIcon";
+import useChainAccount from "@/hooks/useChainAccount.ts";
 
 export default function ClaimStakingPoints() {
   const { getStaker } = useStakersStore();
-  const { address } = useAccount();
+  const { address } = useChainAccount();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const { data: redeemableStakeTransactions } = useQuery({
@@ -21,7 +21,10 @@ export default function ClaimStakingPoints() {
 
   useQuery({
     queryKey: ["getStaker", address],
-    queryFn: () => getStaker(address as string),
+    queryFn: () => {
+      getStaker(address as string);
+      return null;
+    },
     refetchOnWindowFocus: false
   });
 
@@ -29,7 +32,7 @@ export default function ClaimStakingPoints() {
     setIsDialogOpen(false);
   };
 
-  // const onClaimDialog = () => {
+  // const onClaimDialog = () => {redeemableStakeTransactions
   //   setIsDialogOpen(true);
   // };
 
@@ -60,15 +63,6 @@ export default function ClaimStakingPoints() {
         )}
 
       <div className="flex flex-col gap-10">
-        {/*<div className="flex justify-between max-lg:flex-col items-center bg-velix-primary dark:bg-[#171616] mt-20 p-24 max-lg:p-5 max-lg:py-10 rounded-2xl">*/}
-        {/*  <h2 className="text-5xl max-lg:text-2xl max-lg:text-center max-w-[650px] text-white font-space-grotesk font-bold">*/}
-        {/*    Stake and Maximize Rewards with Velix Points, Earn & Refer*/}
-        {/*  </h2>*/}
-        {/*  <div className="w-fit mr-24 max-lg:mr-0 max-lg:w-32 max-lg:h-32 max-lg:my-10">*/}
-        {/*    <img src="/vepoint-illustration.png" alt="vepoints" />*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-
         <div className="bg-white dark:bg-velix-form-dark-background p-11 max-lg:p-5 rounded-2xl space-y-10">
           <div className="flex items-center gap-8">
             <div className="bg-velix-blue dark:bg-velix-claim-gray2 rounded-lg mb-7 lg:p-4 sm:-mb-3 xl:mb-0 lg:mb-0 p-4 sm:p-3 flex items-center justify-center">

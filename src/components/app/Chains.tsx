@@ -1,8 +1,5 @@
 import VelixBlueLogo from "@/components/ui/velix/icons/VelixBlueLogo";
-import {
-  EXPLORER_ADDRESS_URL,
-  VELIX_METIS_VAULT_CONTRACT_ADDRESS
-} from "@/utils/constant";
+import { VELIX_METIS_VAULT_CONTRACT_ADDRESS } from "@/utils/constant";
 import { truncateString } from "@/utils/utils";
 import {
   ArrowUpRightFromSquare,
@@ -14,6 +11,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useStakersStore } from "@/store/stakers";
+import { supportedChains } from "@/utils/config.ts";
+import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 
 export default function Chains() {
   const [isAddingAChaintoMetamask, setIsAddingAChaintoMetamask] =
@@ -24,6 +23,7 @@ export default function Chains() {
   const [copied, setCopied] = useState(false);
   const [copiedAddress, setCopiedAddress] = useState("");
   const { staker } = useStakersStore();
+  const chain = useSupportedChain();
 
   const addMetisToMetamaskBrowserWallet = async (
     options: (typeof avalableChains)[0]
@@ -59,8 +59,8 @@ export default function Chains() {
     setCopied(true);
     setCopiedAddress(address);
     const urlWithRefferalCode = location.port
-      ? `${location.protocol}//${location.hostname}:${location.port}/app/stake/?referralCode=${address}`
-      : `${location.protocol}//${location.hostname}/app/stake/?referralCode=${address}`;
+      ? `${location.protocol}//${location.hostname}:${location.port}/app/${chain}/stake/?referralCode=${address}`
+      : `${location.protocol}//${location.hostname}/app/${chain}/stake/?referralCode=${address}`;
     const addressToCopy = isRefferalCode ? urlWithRefferalCode : address;
     await navigator.clipboard.writeText(addressToCopy);
     setTimeout(() => {
@@ -70,7 +70,9 @@ export default function Chains() {
   };
 
   const onViewChainOnExplorer = (address: string) => {
-    window.open(`${EXPLORER_ADDRESS_URL}${address}`);
+    window.open(
+      `${supportedChains.metis.explorerUrls.testnet.addressUrl}${address}`
+    );
   };
 
   const avalableChains = [
@@ -108,53 +110,55 @@ export default function Chains() {
           )}
         </div>
       )}
-      {avalableChains.map((chain) => {
-        return (
-          <div
-            key={chain.address}
-            className="bg-velix-slate-blue dark:bg-velix-form-input-dark flex justify-between items-center p-2 rounded-lg"
-          >
-            <div className="bg-velix-blue/5 dark:text-velix-dark-white dark:bg-velix-light-dark px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
-              {chain.logo}
-              <p className="lg:text-sm text-[0.625rem] font-bold">
-                {chain.name}
-              </p>
-              <p className="lg:text-sm text-[0.625rem] text-velix-primary dark:text-velix-dark-white">
-                {truncateString(chain.address)}
-              </p>
-            </div>
-            {chainToAdd?.address.toLowerCase() ===
-              chain.address.toLowerCase() && isAddingAChaintoMetamask ? (
-              <>
-                <Loader className="w-7 h-7 animate-spin mr-5 text-velix-primary" />
-              </>
-            ) : (
-              <div className="flex gap-3 items-center mr-5">
-                <PlusCircle
-                  role="button"
-                  onClick={() => addMetisToMetamaskBrowserWallet(chain)}
-                  className="text-velix-primary dark:text-velix-icon-dark w-5 h-5 cursor-pointer"
-                />
-                {copied &&
-                chain.address.toLowerCase() === copiedAddress.toLowerCase() ? (
-                  <Check className="text-velix-primary w-5 h-5 dark:text-velix-icon-dark" />
-                ) : (
-                  <Copy
+      {chain === "metis" &&
+        avalableChains.map((chain) => {
+          return (
+            <div
+              key={chain.address}
+              className="bg-velix-slate-blue dark:bg-velix-form-input-dark flex justify-between items-center p-2 rounded-lg"
+            >
+              <div className="bg-velix-blue/5 dark:text-velix-dark-white dark:bg-velix-light-dark px-3 py-2 flex items-center gap-3 font-space-grotesk rounded-lg">
+                {chain.logo}
+                <p className="lg:text-sm text-[0.625rem] font-bold">
+                  {chain.name}
+                </p>
+                <p className="lg:text-sm text-[0.625rem] text-velix-primary dark:text-velix-dark-white">
+                  {truncateString(chain.address)}
+                </p>
+              </div>
+              {chainToAdd?.address.toLowerCase() ===
+                chain.address.toLowerCase() && isAddingAChaintoMetamask ? (
+                <>
+                  <Loader className="w-7 h-7 animate-spin mr-5 text-velix-primary" />
+                </>
+              ) : (
+                <div className="flex gap-3 items-center mr-5">
+                  <PlusCircle
                     role="button"
-                    onClick={() => onCopyToClickboard(chain.address)}
+                    onClick={() => addMetisToMetamaskBrowserWallet(chain)}
+                    className="text-velix-primary dark:text-velix-icon-dark w-5 h-5 cursor-pointer"
+                  />
+                  {copied &&
+                  chain.address.toLowerCase() ===
+                    copiedAddress.toLowerCase() ? (
+                    <Check className="text-velix-primary w-5 h-5 dark:text-velix-icon-dark" />
+                  ) : (
+                    <Copy
+                      role="button"
+                      onClick={() => onCopyToClickboard(chain.address)}
+                      className="text-velix-primary w-5 h-5 cursor-pointer dark:text-velix-icon-dark"
+                    />
+                  )}
+                  <ArrowUpRightFromSquare
+                    onClick={() => onViewChainOnExplorer(chain.address)}
+                    role="button"
                     className="text-velix-primary w-5 h-5 cursor-pointer dark:text-velix-icon-dark"
                   />
-                )}
-                <ArrowUpRightFromSquare
-                  onClick={() => onViewChainOnExplorer(chain.address)}
-                  role="button"
-                  className="text-velix-primary w-5 h-5 cursor-pointer dark:text-velix-icon-dark"
-                />
-              </div>
-            )}
-          </div>
-        );
-      })}
+                </div>
+              )}
+            </div>
+          );
+        })}
     </div>
   );
 }
