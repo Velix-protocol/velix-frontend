@@ -19,7 +19,7 @@ const InputWalletAddress: React.FC<InputWalletAddressProps> = ({ onClaim }) => {
           <div className="items-start xl:items-center mt-1">
             <input
               type="text"
-              className="w-full h-11 p-2 bg-velix-claim dark:bg-velix-claim-gray2 rounded-md text-sm text-white focus:outline-none"
+              className="w-full h-11 p-2 bg-velix-claim dark:bg-velix-claim-gray2 rounded-md text-sm text-black focus:outline-none dark:text-velix-claim"
               placeholder="Paste your wallet address"
               value={walletAddress}
               onChange={handleInputChange}

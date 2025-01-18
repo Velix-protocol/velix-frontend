@@ -6,6 +6,7 @@ import Title from "@/components/ui/velix/Title";
 import { Button } from "@/components/ui/button";
 import RedeemLayout from "@/components/layouts/ReddemLayout";
 import RedeemCard from "@/components/ui/velix/cards/RedeemCard";
+import AddWalletCard from "@/components/ui/velix/cards/AddWalletCard";
 import {
   useApproveRedeem,
   useEnterRedemptionQueue
@@ -100,8 +101,9 @@ export default function Redeem() {
         />
       )}
 
-      <Section className="px-5 pb-32 lg:pb-16">
-        <StakeTitleWrapper>
+      <Section className="px-5 pb-32 lg:pb-16 mt-5">
+        <AddWalletCard />
+        <StakeTitleWrapper className="lg:pt-20">
           <div className="w-full">
             <Title
               name="Redeem"
@@ -113,7 +115,7 @@ export default function Redeem() {
           </div>
         </StakeTitleWrapper>
         <AppContent>
-          <div className="w-full lg:hidden pt-32 mt-3">
+          <div className="w-full lg:hidden pt-10 mt-3">
             <Title
               name="Redeem"
               subtitle="Only redeem with a counter of 3 to 5 days."
