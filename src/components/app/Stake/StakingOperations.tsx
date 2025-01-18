@@ -237,7 +237,7 @@ export default function StakingOperations() {
                 <div className="flex flex-col gap-5 w-full">
                   <div className="bg-velix-slate-blue dark:text-velix-dark-white p-5 text-velix-gray flex gap-2 items-center rounded-lg">
                     <MetisIcon className="w-6 h-6 fill-velix-primary dark:fill-velix-icon-dark" />
-                    Receive {amountToReceiveAfterStaking}{" "}
+                    Receive {prettifyBalance(amountToReceiveAfterStaking)}{" "}
                     {chainToken.stakedToken}
                   </div>
                   <div className="flex max-sm:flex-col gap-5 text-velix-gray">

@@ -85,7 +85,6 @@ export const decodeIntitatedWithdrawlStarknetEvents = async (
       "velix_vault::vault::velix_vault_manager::velix_vault_manager::IntitatedWithdrawl"
     ];
 
-  console.log({ data });
   return {
     requestIndex: data.request_index.toString(),
     amount: formatEther(data.expected_amount as BigNumberish),

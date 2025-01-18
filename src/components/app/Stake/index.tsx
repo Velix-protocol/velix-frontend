@@ -4,15 +4,15 @@ import StakingOperations from "./StakingOperations";
 import AppContent from "@/components/layouts/AppContent";
 import Statitics from "../Statitics";
 import StakeTitleWrapper from "@/components/layouts/StakeTitleWrapper";
-import AddWalletCard from "@/components/ui/velix/cards/AddWalletCard";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 
 export default function Stake() {
   const chainToken = useChainTokens();
   return (
     <div>
-      <Section className="px-5 pb-32 lg:pb-16 mt-5">
-        <AddWalletCard/>
+      <Section className="px-5 pb-32 lg:pb-16 mt-20">
+        {/* TODO: commented because of we don't need it for test */}
+        {/* <AddWalletCard/> */}
         <StakeTitleWrapper className="lg:pt-20">
           <div className="w-full">
             <Title

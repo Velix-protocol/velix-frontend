@@ -22,6 +22,7 @@ import { supportedChains } from "@/utils/config";
 import useChainTokens from "@/hooks/useChainTokens.ts";
 import { useSupportedChain } from "@/context/SupportedChainsProvider.tsx";
 import useChainAccount from "@/hooks/useChainAccount.ts";
+import { prettifyBalance } from "@/utils/utils";
 
 type DashboardData = {
   id: string;
@@ -87,7 +88,7 @@ export default function Dashboard() {
                   {balance.name} balance
                 </div>
                 <div className="text-lg font-semibold text-velix-primary dark:text-velix-dark-white">
-                  {balance.value} {balance.name}
+                  {prettifyBalance(balance.value, 3)} {balance.name}
                 </div>
               </CardContent>
             </Card>

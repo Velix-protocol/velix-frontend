@@ -366,14 +366,14 @@ export const useStarknetBalances = () => {
     const balance = await contract.balance_of(address);
     const formattedBalance = converGweiToEth(balance);
     setveStrkBalance(formattedBalance);
-    refetch();
+    await refetch();
   }, [address, chain, refetch, setveStrkBalance]);
 
-  useQuery({
+  const { refetch: refetchBalances } = useQuery({
     queryKey: ["getstaknetBalances", chain, data?.formatted],
     queryFn: async () => {
-      setStrkBalance(data?.formatted ?? "0.0");
       await getBalances();
+      setStrkBalance(data?.formatted ?? "0.0");
       return data?.formatted;
     },
     refetchOnWindowFocus: false,
@@ -382,7 +382,8 @@ export const useStarknetBalances = () => {
   });
 
   return {
-    getBalances
+    getBalances,
+    refetchBalances
   };
 };
 

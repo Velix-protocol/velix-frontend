@@ -6,7 +6,6 @@ import Title from "@/components/ui/velix/Title";
 import { Button } from "@/components/ui/button";
 import RedeemLayout from "@/components/layouts/ReddemLayout";
 import RedeemCard from "@/components/ui/velix/cards/RedeemCard";
-import AddWalletCard from "@/components/ui/velix/cards/AddWalletCard";
 import {
   useApproveRedeem,
   useEnterRedemptionQueue
@@ -39,7 +38,7 @@ export default function Redeem() {
   const [amountToRedeem, setAmountToRedeem] = useState("0");
   const [showModal, setShowModal] = useState(false);
   const { getBalances } = useMetisBalances();
-  const { getBalances: getStarknetBalances } = useStarknetBalances();
+  const { refetchBalances: getStarknetBalances } = useStarknetBalances();
   const { address, isConnected: isWalletConnected } = useChainAccount();
   const chain = useSupportedChain();
 
@@ -101,8 +100,9 @@ export default function Redeem() {
         />
       )}
 
-      <Section className="px-5 pb-32 lg:pb-16 mt-5">
-        <AddWalletCard />
+      <Section className="px-5 pb-32 lg:pb-16 mt-5 pt-16">
+        {/* TODO: commented because we don't want this feature on starknet */}
+        {/* <AddWalletCard /> */}
         <StakeTitleWrapper className="lg:pt-20">
           <div className="w-full">
             <Title

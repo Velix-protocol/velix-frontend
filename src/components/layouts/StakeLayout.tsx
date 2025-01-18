@@ -16,6 +16,7 @@ import { formatEther } from "ethers";
 import VeInput from "../ui/velix/VeInput";
 import useChainAccount from "@/hooks/useChainAccount";
 import useChainTokens from "@/hooks/useChainTokens.ts";
+import { prettifyBalance } from "@/utils/utils";
 
 type StakeLayoutProps = {
   children: ReactNode;
@@ -140,7 +141,8 @@ const StakeLayout = ({
               </p>
               <div>
                 <p className="text-velix-primary dark:text-white font-bold text-base ml-2 mr-3">
-                  {convertedValue} {renderToTitles()}
+                  {prettifyBalance(String(convertedValue), 3)}{" "}
+                  {renderToTitles()}
                 </p>
               </div>
             </div>
