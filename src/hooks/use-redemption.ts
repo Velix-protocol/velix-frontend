@@ -167,7 +167,8 @@ export const useEnterRedemptionQueue = () => {
             amount: String(amount),
             txHash,
             walletAddress,
-            maturity: data.maturity,
+            // NOTE: Adding 5min (300 secs) to avoid collecting the ticket when the admin withdrwal process is not fully done yet
+            maturity: data.maturity + 300,
             nftId: data.requestIndex
           });
         }

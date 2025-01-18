@@ -244,7 +244,7 @@ export default function StakingOperations() {
                     <p className="flex w-full items-center gap-2 dark:text-velix-dark-white bg-velix-slate-blue p-5 rounded-lg">
                       <Clock4 className="fill-velix-primary w-7 h-7 stroke-white dark:stroke-velix-icon-dark" />
                       Start earning after{" "}
-                      {chain === "starknet" ? "15 minutes" : "7 days"}.
+                      {chain === "starknet" ? "20 minutes" : "7 days"}.
                     </p>
                   </div>
                 </div>
@@ -256,7 +256,7 @@ export default function StakingOperations() {
                     />
                     <p className="-mt-1">
                       I understand that Staking rewards start after{" "}
-                      {chain === "starknet" ? "15 minutes" : "7 days"}.
+                      {chain === "starknet" ? "20 minutes" : "7 days"}.
                     </p>
                   </div>
                 </div>
