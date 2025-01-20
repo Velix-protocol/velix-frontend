@@ -1,7 +1,6 @@
 import TicketLogo from "../icons/TicketLogo";
 import { Button } from "../../button";
 import { RedeemTicket } from "@/types";
-import dayjs from "dayjs";
 import {
   useCancelRedeemNftTicket,
   useRedeemRedemptionTicketNft
@@ -159,10 +158,7 @@ const RedeemCard = ({
                 await refetchRedeemNfts();
                 await getBalances();
               }}
-              disabled={
-                dayjs(redeemTicket.maturity * 1000).diff(dayjs(), "seconds") >=
-                  0 || !address
-              }
+              disabled={!isCountdownFinished || !address}
               className={classNames(
                 "xl:mt-9 lg:-mt-2 sm:mt-3 xl:w-auto lg:w-auto disabled:cursor-not-allowed disabled:opacity-50 text-white text-xs dark:text-velix-claim-gray font-medium rounded-md w-full md:w-auto sm:w-auto ml-auto",
                 {
