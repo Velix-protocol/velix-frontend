@@ -25,7 +25,7 @@ export default function StarknetProviderContext({
       return [
         BraavosMobileConnector.init({
           inAppBrowserOptions: {
-            name: "Velix"
+            name: "Braavos (mobile)"
           }
         })
       ];

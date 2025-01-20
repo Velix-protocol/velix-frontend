@@ -136,6 +136,7 @@ export const useApproveStaking = () => {
         if (chain !== "starknet") {
           setError({ message: e.shortMessage ?? e });
         }
+        setError({ message: JSON.stringify(e) });
       } finally {
         setIsPending(false);
       }
