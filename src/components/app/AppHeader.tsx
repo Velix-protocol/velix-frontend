@@ -46,7 +46,7 @@ export default function AppHeader() {
         }`}
       >
         <div className="flex items-center justify-between space-x-16 text-base">
-          <Link to="/">
+          <Link to={`/${chain}/stake`}>
             <VelixPrimaryBlackLogo
               className="fill-black dark:fill-velix-dark-white w-[4.25rem] h-4"
               aria-label="VelixPrimaryBlackLogo"
