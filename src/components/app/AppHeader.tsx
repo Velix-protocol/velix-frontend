@@ -2,7 +2,7 @@ import Section from "@/components/layouts/Section";
 import { Button } from "../ui/button";
 import NavigationMenus from "./NavigationMenus";
 import VelixPrimaryBlackLogo from "../ui/velix/icons/VelixPrimaryBlackLogo";
-import { prettifyBalance, truncateString } from "@/utils/utils";
+import { isApp, prettifyBalance, truncateString } from "@/utils/utils";
 import { Link } from "react-router-dom";
 import ThemeButton from "../ui/velix/ThemeButton";
 import useChainAccount from "@/hooks/useChainAccount";
@@ -46,7 +46,7 @@ export default function AppHeader() {
         }`}
       >
         <div className="flex items-center justify-between space-x-16 text-base">
-          <Link to={`/${chain}/stake`}>
+          <Link to={isApp() ? `/${chain}/stake` : `/app/${chain}/stake`}>
             <VelixPrimaryBlackLogo
               className="fill-black dark:fill-velix-dark-white w-[4.25rem] h-4"
               aria-label="VelixPrimaryBlackLogo"
