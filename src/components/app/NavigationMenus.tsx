@@ -154,11 +154,11 @@ export default function NavigationMenus({
             label="Dashboard"
             isNotFound={isNotFound}
           />
-          <NavigationMenuCard
+          {/* <NavigationMenuCard
             path="crosschain"
             label="Crosschain reward"
             isNotFound={isNotFound}
-          />
+          /> */}
         </>
       ) : (
         <>
