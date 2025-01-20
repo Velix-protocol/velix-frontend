@@ -5,10 +5,27 @@ import Number from "@/components/ui/velix/icons/404";
 import Dark404 from "@/components/ui/velix/icons/Dark404";
 import VelixPrimaryBlackLogo from "@/components/ui/velix/icons/VelixPrimaryBlackLogo";
 import { Link, useNavigate } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import { useSupportedChain } from "@/context/SupportedChainsProvider";
+import { isInArgentMobileAppBrowser } from "starknetkit/argentMobile";
+import { isInBraavosMobileAppBrowser } from "starknetkit/braavosMobile";
+import { isApp } from "@/utils/utils";
 
 export default function Notfound({ isNested = false }: { isNested?: boolean }) {
   const navigate = useNavigate();
+  const chain = useSupportedChain();
 
+  useLayoutEffect(() => {
+    if (window.location.pathname === "/" && isApp()) {
+      if (isInArgentMobileAppBrowser() || isInBraavosMobileAppBrowser()) {
+        window.location.href = `/starknet/stake`;
+        return;
+      }
+      window.location.href = `/${chain}/stake`;
+    }
+  }, [chain]);
+
+  if (window.location.pathname === "/") return <></>;
   return (
     <Section className="px-5 fixed top-0 left-0 right-0 h-screen bg-[#F5F7FF] dark:bg-velix-page-dark">
       {!isNested && (
