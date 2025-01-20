@@ -35,6 +35,13 @@ export default function StarknetConnectorModal() {
       );
       return extractConnectorIconUrl(argentXConnector?.icon || connector.icon);
     }
+    if (connector.name.toLowerCase().includes("braavos")) {
+      const braavosConnector = connectors.find(
+        (connector) => connector.name.toLowerCase() === "braavos"
+      );
+      return extractConnectorIconUrl(braavosConnector?.icon || connector.icon);
+      2;
+    }
     return extractConnectorIconUrl(connector.icon);
   };
 
@@ -56,7 +63,7 @@ export default function StarknetConnectorModal() {
             key={connector.id}
           >
             <Button
-              className="w-full dark:text-velix-gray-200 text-velix-blue hover:cursor-pointer flex items-start justify-start gap-2 cursor-pointer bg-transparent"
+              className="w-full dark:text-velix-gray-200 text-velix-blue hover:cursor-pointer flex items-center justify-start gap-2 cursor-pointer bg-transparent"
               onClick={() => {
                 connect({ connector });
                 close();

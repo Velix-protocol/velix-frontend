@@ -10,24 +10,28 @@ import {
   ArgentMobileConnector,
   isInArgentMobileAppBrowser
 } from "starknetkit/argentMobile";
+import {
+  BraavosMobileConnector,
+  isInBraavosMobileAppBrowser
+} from "starknetkit/braavosMobile";
 
 export default function StarknetProviderContext({
   children
 }: {
   children: React.ReactNode;
 }) {
-  const connectors = isInArgentMobileAppBrowser()
-    ? [
-        ArgentMobileConnector.init({
-          options: {
-            url: window.location.hostname,
-            dappName: "Velix"
+  const connectors = () => {
+    if (isInBraavosMobileAppBrowser()) {
+      return [
+        BraavosMobileConnector.init({
+          inAppBrowserOptions: {
+            name: "Velix"
           }
         })
-      ]
-    : [
-        braavos(),
-        argent(),
+      ];
+    }
+    if (isInArgentMobileAppBrowser()) {
+      return [
         ArgentMobileConnector.init({
           options: {
             url: window.location.hostname,
@@ -35,6 +39,18 @@ export default function StarknetProviderContext({
           }
         })
       ];
+    }
+
+    return [
+      argent(),
+      braavos(),
+      BraavosMobileConnector.init({
+        inAppBrowserOptions: {
+          name: "Velix"
+        }
+      })
+    ];
+  };
 
   return (
     <StarknetConfig
@@ -42,7 +58,7 @@ export default function StarknetProviderContext({
       provider={jsonRpcProvider({
         rpc: (chain) => ({ ...chain, nodeUrl: "SN_SEPOLIA" })
       })}
-      connectors={connectors}
+      connectors={connectors()}
       autoConnect={true}
       explorer={voyager}
     >
