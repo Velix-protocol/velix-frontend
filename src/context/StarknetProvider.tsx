@@ -23,6 +23,7 @@ export default function StarknetProviderContext({
   const connectors = () => {
     if (isInBraavosMobileAppBrowser()) {
       return [
+        braavos(),
         BraavosMobileConnector.init({
           inAppBrowserOptions: {
             name: "Braavos (mobile)"
