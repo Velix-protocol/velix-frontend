@@ -52,3 +52,9 @@ export type SaveStarknetRedeemTicket = {
 export type AppMode = "landingPage" | "app";
 export type Action = "stake" | "redeem";
 export type SupportedChains = "metis" | "starknet";
+
+export type ApiError = {
+  error: string;
+  message: string;
+  statusCode: number;
+};

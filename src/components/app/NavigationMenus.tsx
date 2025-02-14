@@ -154,11 +154,11 @@ export default function NavigationMenus({
             label="Dashboard"
             isNotFound={isNotFound}
           />
-          {/* <NavigationMenuCard
+          <NavigationMenuCard
             path="crosschain"
             label="Crosschain reward"
             isNotFound={isNotFound}
-          /> */}
+          />
         </>
       ) : (
         <>
@@ -183,12 +183,12 @@ export default function NavigationMenus({
             isNotFound={isNotFound}
             className="hidden lg:flex md:flex"
           />
-          {/*<NavigationMenuCard*/}
-          {/*  path="crosschain"*/}
-          {/*  label="Crosschain reward"*/}
-          {/*  isNotFound={isNotFound}*/}
-          {/*  className="hidden lg:flex md:flex"*/}
-          {/*/>*/}
+          <NavigationMenuCard
+            path="crosschain"
+            label="Crosschain reward"
+            isNotFound={isNotFound}
+            className="hidden lg:flex md:flex"
+          />
         </>
       )}
       <div className="lg:hidden md:hidden sm:flex flex-col items-center relative">

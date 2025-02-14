@@ -1,16 +1,30 @@
 import { Button } from "@/components/ui/button";
-import React, { useState, ChangeEvent } from "react";
+import { useSupportedChain } from "@/context/SupportedChainsProvider";
+import { velixApi } from "@/services/http";
+import { ApiError } from "@/types";
+import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { useState, ChangeEvent } from "react";
 
-interface InputWalletAddressProps {
-  onClaim: () => void;
-}
-
-const InputWalletAddress: React.FC<InputWalletAddressProps> = ({ onClaim }) => {
+export default function InputWalletAddress() {
   const [walletAddress, setWalletAddress] = useState<string>("");
-
+  const chain = useSupportedChain();
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setWalletAddress(event.target.value);
   };
+
+  const { mutateAsync, isPending, error } = useMutation({
+    mutationKey: ["saveCrossChainWalletAddress"],
+    mutationFn: async (data: { chain: string; walletAddress: string }) =>
+      velixApi.saveCrossChainWalletAddress(data),
+    onSuccess: () => {
+      setWalletAddress("");
+    },
+    onError: (error: AxiosError<ApiError>) => {
+      setWalletAddress("");
+      console.error(error);
+    }
+  });
 
   return (
     <div className="flex flex-col rounded-lg bg-white p-8 mt-12 w-full dark:bg-velix-claim-gray">
@@ -27,17 +41,20 @@ const InputWalletAddress: React.FC<InputWalletAddressProps> = ({ onClaim }) => {
           </div>
         </div>
       </div>
+      {error && (
+        <div className="mt-4 text-sm text-center text-red-600">
+          {error?.response?.data.message}
+        </div>
+      )}
       <div className="mt-4 w-full">
         <Button
-          onClick={onClaim} 
+          onClick={() => mutateAsync({ chain, walletAddress })}
           className="lg:w-full w-full font-space-grotesk bg-velix-blue dark:bg-velix-gray text-white dark:text-velix-claim-gray px-10"
-          disabled={!walletAddress} 
+          disabled={!walletAddress}
         >
-          Send
+          {isPending ? "Saving..." : "Save"}
         </Button>
       </div>
     </div>
   );
-};
-
-export default InputWalletAddress;
+}

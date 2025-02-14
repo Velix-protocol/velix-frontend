@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { NextPage } from 'next';
-import { Line } from 'react-chartjs-2';
+import { useState, useEffect } from "react";
+import { NextPage } from "next";
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,7 +8,7 @@ import {
   PointElement,
   LineElement,
   Tooltip
-} from 'chart.js';
+} from "chart.js";
 
 ChartJS.register(
   CategoryScale,
@@ -25,7 +25,7 @@ const AreaChart: NextPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setChartData([100, 200]);
-      setChartLabels(['Metis', 'Starknet']);
+      setChartLabels(["Metis", "Starknet"]);
     }, 1000);
   }, []);
 
@@ -36,11 +36,11 @@ const AreaChart: NextPage = () => {
       {
         data: chartData,
         fill: true,
-        borderColor: 'rgb(75, 192, 192)',
-        backgroundColor: 'rgba(75, 192, 192, 0.9)',
-        tension: 0.3,
-      },
-    ],
+        borderColor: "rgb(75, 192, 192)",
+        backgroundColor: "rgba(75, 192, 192, 0.9)",
+        tension: 0.3
+      }
+    ]
   };
 
   // Chart options
@@ -50,21 +50,21 @@ const AreaChart: NextPage = () => {
     scales: {
       x: {
         title: {
-          display: true,
+          display: true
         },
         grid: {
-          display: false,
-        },
+          display: false
+        }
       },
       y: {
         title: {
-          display: true,
+          display: true
         },
         grid: {
-          display: false,
-        },
-      },
-    },
+          display: false
+        }
+      }
+    }
   };
 
   return (
@@ -76,7 +76,7 @@ const AreaChart: NextPage = () => {
         </p>
         <div className="flex gap-3 justify-center"></div>
       </div>
-      
+
       <div className="w-full h-80 bg-white rounded-lg p-4 dark:bg-velix-claim-gray">
         {chartData.length > 0 && chartLabels.length > 0 ? (
           <div className="w-full h-full">

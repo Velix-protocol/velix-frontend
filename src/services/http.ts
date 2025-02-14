@@ -156,6 +156,20 @@ class VelixApi {
       maturity
     });
   }
+
+  async saveCrossChainWalletAddress({
+    chain,
+    walletAddress
+  }: {
+    chain: string;
+    walletAddress: string;
+  }) {
+    if (!walletAddress || !chain) return;
+    return await this.api.put("/cross-chain", {
+      chain,
+      walletAddress
+    });
+  }
 }
 
 export const velixApi = new VelixApi(velixApiInstance);

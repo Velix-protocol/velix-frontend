@@ -29,11 +29,7 @@ export default function ClaimOnCrosschain() {
               />
             )}
           </div>
-          {!walletSubmitted ? (
-            <InputWalletAddress onClaim={handleClaim} />
-          ) : (
-            <MetisCard />
-          )}
+          {!walletSubmitted ? <InputWalletAddress /> : <MetisCard />}
         </div>
         <div className="w-full">
           <div className="w-full block lg:mt-20 mt-8">
@@ -45,7 +41,7 @@ export default function ClaimOnCrosschain() {
             )}
           </div>
           {!walletSubmitted && <MetisCard />}
-          <StarknetCard className={walletSubmitted ? "mt-[13rem]" : ""} />
+          <StarknetCard className={walletSubmitted ? "mt-52" : ""} />
         </div>
       </AppContent>
     </Section>
