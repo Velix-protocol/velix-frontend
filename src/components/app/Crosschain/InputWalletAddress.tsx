@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useSupportedChain } from "@/context/SupportedChainsProvider";
+import useChainAccount from "@/hooks/useChainAccount";
+import useConnectWallet from "@/hooks/useConnectWallet";
 import { velixApi } from "@/services/http";
 import { ApiError } from "@/types";
 import { useMutation } from "@tanstack/react-query";
@@ -7,24 +9,50 @@ import { AxiosError } from "axios";
 import { useState, ChangeEvent } from "react";
 
 export default function InputWalletAddress() {
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const { address: connectedWalletAddress, isConnected } = useChainAccount();
+  const { open: openConnectorModal } = useConnectWallet();
+  const [crossChainAddress, setCrossChainAddress] = useState<string>("");
   const chain = useSupportedChain();
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setWalletAddress(event.target.value);
+    setCrossChainAddress(event.target.value);
   };
 
   const { mutateAsync, isPending, error } = useMutation({
-    mutationKey: ["saveCrossChainWalletAddress"],
-    mutationFn: async (data: { chain: string; walletAddress: string }) =>
-      velixApi.saveCrossChainWalletAddress(data),
+    mutationKey: ["saveCrossChainWalletAddress", connectedWalletAddress],
+    mutationFn: async (data: {
+      chain: string;
+      walletAddress: string;
+      crossChainAddress: string;
+    }) => velixApi.saveCrossChainWalletAddress(data),
     onSuccess: () => {
-      setWalletAddress("");
+      setCrossChainAddress("");
     },
     onError: (error: AxiosError<ApiError>) => {
-      setWalletAddress("");
+      setCrossChainAddress("");
       console.error(error);
     }
   });
+
+  const onSaveCrossChainAddress = () => {
+    if (!isConnected) {
+      return openConnectorModal();
+    }
+    mutateAsync({
+      chain,
+      walletAddress: connectedWalletAddress as string,
+      crossChainAddress
+    });
+  };
+
+  const buttonTitle = () => {
+    if (!isConnected) {
+      return "Connect Wallet";
+    }
+    if (isPending) {
+      return "Saving...";
+    }
+    return "Save";
+  };
 
   return (
     <div className="flex flex-col rounded-lg bg-white p-8 mt-12 w-full dark:bg-velix-claim-gray">
@@ -35,7 +63,7 @@ export default function InputWalletAddress() {
               type="text"
               className="w-full h-11 p-2 bg-velix-claim dark:bg-velix-claim-gray2 rounded-md text-sm text-black focus:outline-none dark:text-velix-claim"
               placeholder="Paste your wallet address"
-              value={walletAddress}
+              value={crossChainAddress}
               onChange={handleInputChange}
             />
           </div>
@@ -48,11 +76,11 @@ export default function InputWalletAddress() {
       )}
       <div className="mt-4 w-full">
         <Button
-          onClick={() => mutateAsync({ chain, walletAddress })}
+          onClick={onSaveCrossChainAddress}
           className="lg:w-full w-full font-space-grotesk bg-velix-blue dark:bg-velix-gray text-white dark:text-velix-claim-gray px-10"
-          disabled={!walletAddress}
+          disabled={!crossChainAddress}
         >
-          {isPending ? "Saving..." : "Save"}
+          {buttonTitle()}
         </Button>
       </div>
     </div>

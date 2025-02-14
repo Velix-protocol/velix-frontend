@@ -159,15 +159,18 @@ class VelixApi {
 
   async saveCrossChainWalletAddress({
     chain,
-    walletAddress
+    walletAddress,
+    crossChainAddress
   }: {
     chain: string;
     walletAddress: string;
+    crossChainAddress: string;
   }) {
     if (!walletAddress || !chain) return;
     return await this.api.put("/cross-chain", {
       chain,
-      walletAddress
+      walletAddress,
+      crossChainAddress
     });
   }
 }
