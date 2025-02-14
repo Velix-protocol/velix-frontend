@@ -6,11 +6,7 @@ import StarknetCard from "@/components/ui/velix/cards/StarknetCard";
 import InputWalletAddress from "./InputWalletAddress";
 import { useState } from "react";
 export default function ClaimOnCrosschain() {
-  const [walletSubmitted, setWalletSubmitted] = useState<boolean>(false);
-
-  const handleClaim = (): void => {
-    setWalletSubmitted(true);
-  };
+  const [walletSubmitted] = useState<boolean>(false);
 
   return (
     <Section className="pb-32 lg:pb-16">
