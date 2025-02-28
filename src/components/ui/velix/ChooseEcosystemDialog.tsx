@@ -64,7 +64,7 @@ export default function ChooseEcosystemDialog({
         </p>
         <div className="space-y-[1.5rem]">
           <button
-            disabled
+            // disabled
             onClick={() => handleNavigate("metis")}
             className="w-full flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 hover:bg-velix-gray-200 rounded-lg transition dark:bg-velix-light-dark dark:hover:bg-velix-dark-hover"
           >

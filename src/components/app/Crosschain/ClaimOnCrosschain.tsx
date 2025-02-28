@@ -5,8 +5,12 @@ import MetisCard from "@/components/ui/velix/cards/MetisCard";
 import StarknetCard from "@/components/ui/velix/cards/StarknetCard";
 import InputWalletAddress from "./InputWalletAddress";
 import { useState } from "react";
+import { SupportedChains } from "@/types"; 
+
 export default function ClaimOnCrosschain() {
   const [walletSubmitted] = useState<boolean>(false);
+  const currentEcosystem: SupportedChains = walletSubmitted ? "starknet" : "metis"; 
+  const targetEcosystem: SupportedChains = walletSubmitted ? "metis" : "starknet"; 
 
   return (
     <Section className="pb-32 lg:pb-16">
@@ -25,7 +29,9 @@ export default function ClaimOnCrosschain() {
               />
             )}
           </div>
-          {!walletSubmitted ? <InputWalletAddress /> : <MetisCard />}
+          {!walletSubmitted ? <InputWalletAddress /> : (
+            <MetisCard currentEcosystem={currentEcosystem} 
+            targetEcosystem={targetEcosystem}/>)}
         </div>
         <div className="w-full">
           <div className="w-full block lg:mt-20 mt-8">
@@ -36,8 +42,12 @@ export default function ClaimOnCrosschain() {
               />
             )}
           </div>
-          {!walletSubmitted && <MetisCard />}
-          <StarknetCard className={walletSubmitted ? "mt-52" : ""} />
+          {!walletSubmitted && (
+            <MetisCard currentEcosystem={currentEcosystem} 
+            targetEcosystem={targetEcosystem}/>)}
+          <StarknetCard className={walletSubmitted ? "mt-52" : ""} 
+            currentEcosystem={currentEcosystem} 
+            targetEcosystem={targetEcosystem} />
         </div>
       </AppContent>
     </Section>
