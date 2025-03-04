@@ -10,14 +10,15 @@ import { Button } from "../button";
 type SwitchEcosystemDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  currentEcosystem: SupportedChains; 
-  targetEcosystem: SupportedChains; 
+  currentEcosystem: SupportedChains;
+  targetEcosystem: SupportedChains;
 };
 
 export default function SwitchEcosystemDialog({
   isOpen,
   onClose,
-  targetEcosystem
+  targetEcosystem,
+  currentEcosystem
 }: SwitchEcosystemDialogProps) {
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ export default function SwitchEcosystemDialog({
   useToggleBodyScroll(isOpen);
 
   const navigateToApp = (ecosystem: SupportedChains) => {
-    const crosschainPath = "/crosschain"; 
+    const crosschainPath = "/crosschain";
     switch (VELIX_APP_ENVIRONMENT) {
       case "production":
         return (window.location.href = `${velixEnvironmentUrls.production.app}/${ecosystem}${crosschainPath}`);
@@ -50,15 +51,17 @@ export default function SwitchEcosystemDialog({
 
   if (!isOpen) return null;
 
-  const ecosystemLogo = targetEcosystem === "metis" ? "/svg/metis.svg" : "/svg/starknet.svg";
-  const ecosystemName = targetEcosystem === "metis" ? "Metis" : "Starknet";
+  const ecosystemLogo =
+    currentEcosystem === "metis" ? "/svg/metis.svg" : "/svg/starknet.svg";
+
+  const ecosystemName = currentEcosystem === "metis" ? "Metis" : "Starknet";
 
   return (
     <div
       className="fixed inset-0 flex items-center justify-center min-h-screen bg-gray-500 bg-opacity-50 z-50"
       onClick={handleOutsideClick}
     >
-      <div className="bg-velix-Ecosystem rounded-2xl shadow-lg p-10 w-80 h-auto lg:w-[37.5rem] lg:h-72 md:w-96 md:h-96 dark:bg-velix-form-input-dark ">
+      <div className="bg-velix-Ecosystem rounded-2xl shadow-lg p-10 w-full mx-5 h-auto lg:w-[37.5rem] lg:h-72 md:w-96 md:h-96 dark:bg-velix-form-input-dark ">
         <div className="flex items-center justify-between mb-[0.375rem]">
           <h1 className="xl:text-xl lg:text-lg md:text-md xl:mt-4 xl:mb-3 mb-3 font-bold font-space-grotesk text-start weight-700 text-velix-black dark:text-velix-dark-white sm:text-xs">
             Switch Ecosystem
@@ -72,18 +75,21 @@ export default function SwitchEcosystemDialog({
           To claim the crosschain reward
         </p>
         <div className="space-y-[1.5rem]">
-          <div
-            className="w-full flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 rounded-lg transition dark:bg-velix-light-dark"
-          >
+          <div className="w-full flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-between px-3 py-4 sm:px-3 sm:py-5 bg-velix-gray-100 rounded-lg transition dark:bg-velix-light-dark">
             <div className="flex items-center space-x-2">
-              <img src={ecosystemLogo} alt="ecosystemLogo" className="w-8 h-8"/>
+              <img
+                src={ecosystemLogo}
+                alt="ecosystemLogo"
+                className="w-8 h-8"
+              />
               <h1 className="font-bold font-space-grotesk text-velix-black dark:text-velix-dark-white">
                 {ecosystemName}
               </h1>
             </div>
-            <Button 
-              onClick={() => handleNavigate(targetEcosystem)} 
-              className="text-white dark:text-black bg-velix-blue dark:bg-velix-claim">
+            <Button
+              onClick={() => handleNavigate(targetEcosystem)}
+              className="text-white dark:text-black bg-velix-blue dark:bg-velix-claim"
+            >
               Switch
             </Button>
           </div>
